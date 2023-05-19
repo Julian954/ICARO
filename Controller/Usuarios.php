@@ -142,10 +142,10 @@ class Usuarios extends Controllers
                     $_SESSION['rol'] = $data['rol'];
                     $_SESSION['perfil'] = $data['perfil'];
                     $_SESSION['activo'] = true;
-                    header('location: '.base_url(). 'Dashboard/Listar');
+                    header('location: '.base_url(). 'Ejemplo/Listar');
             } else {
                 $error = 0;
-                header("location: ".base_url(). 'Login/loginprof'."?msg=$error");
+                header("location: ".base_url(). 'Login'."?msg=$error");
             }
         }
     }
