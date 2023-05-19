@@ -1,39 +1,92 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es"> 
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="Assets/img/icon.png">
-    <title>Enfermería UCOL | Login</title>
+    <link rel="shortcut icon" href="Assets/img/favicon.ico">
+    <title>Login | MARYS OOARD Colima</title>
+    
+    <!-- FontAwesome JS-->
+    <script defer src="Assets/css/fontawesome/js/all.min.js"></script>
 
-    <!-- Custom fonts for this template-->
+    <!-- App CSS -->  
+    <link id="theme-style" rel="stylesheet" href="Assets/css/portal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="Assets/css/main.css">
-  </head>
 
-  <body>
-    <div style="background-image: url(Assets/img/fondo.png); background-repeat: no-repeat; background-size: cover; min-height: 100vh; background-position: center">
-      <div class="container">
-        <form id="user" action="<?php echo base_url(); ?>Alumnos/login" class="user" method="POST" autocomplete="off">
-          <p><img src="Assets/img/logo2.png"></p>
-          <p>Bienvenido Alumno</p><br>
-          <input type="email"  name="usuario" placeholder="Correo" id="usuario"  required><br>
-          <input type="password" name="clave" placeholder="Contraseña"  id="clave" required><br>
+  </head> 
+
+<body class="app app-login p-0">    	
+    <div class="row g-0 app-auth-wrapper">
+	    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
+		    <div class="d-flex flex-column align-content-end">
+			    <div class="app-auth-body mx-auto">	
+				    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon mr-2" src="Assets/img/app-logo.svg" alt="logo"></a></div>
+					<h2 class="auth-heading text-center mb-5">Log in to Portal</h2>
+			        <div class="auth-form-container text-left">
+
+
+						<form class="auth-form login-form" id="user" action="<?php echo base_url(); ?>Usuarios/login" method="POST" autocomplete="off">         
+							<div class="email mb-3">
+								<label class="sr-only" for="usuario">Email</label>
+								<input id="usuario" name="usuario" type="email" class="form-control signin-email" placeholder="Email address" required="required">
+							</div><!--//form-group-->
+							<div class="password mb-3">
+								<label class="sr-only" for="clave">Password</label>
+								<input id="clave" name="clave" type="password" class="form-control signin-password" placeholder="Password" required="required">
+								<div class="extra mt-3 row justify-content-between">
+									<div class="col-6">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value="" id="RememberPassword">
+											<label class="form-check-label" for="RememberPassword">
+											Remember me
+											</label>
+										</div>
+									</div><!--//col-6-->
+									<div class="col-6">
+										<div class="forgot-password text-right">
+											<a href="reset-password.html">Forgot password?</a>
+										</div>
+									</div><!--//col-6-->
+								</div><!--//extra-->
+							</div><!--//form-group-->
+							<div class="text-center">
+								<button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto" >Log In</button>
+							</div>
+						</form>
             <?php if (isset($_GET['msg'])) { ?>
               <div class="alert alert-danger" role="alert">
                 <strong>Usuario o Contraseña Incorrecta</strong>
               </div>
             <?php } ?>
-          <input type="submit" value="Entrar"/><br>
-          <a href="Login/recuperar">¿Olvidaste tu contraseña?</a><br><br>
-          <a href="Login/loginprof">Soy Administrador</a>
-        </form>     
-      </div>
-    </div>
-  </body>
-</html>
+						<div class="auth-option text-center pt-5">No Account? Sign up <a class="text-link" href="signup.html" >here</a>.</div>
+					</div><!--//auth-form-container-->	
+
+			    </div><!--//auth-body-->
+		    
+
+		    </div><!--//flex-column-->   
+	    </div><!--//auth-main-col-->
+	    <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+		    <div class="auth-background-holder">
+		    </div>
+		    <div class="auth-background-mask"></div>
+		    <div class="auth-background-overlay p-3 p-lg-5">
+			    <div class="d-flex flex-column align-content-end h-100">
+				    <div class="h-100"></div>
+
+				</div>
+		    </div><!--//auth-background-overlay-->
+	    </div><!--//auth-background-col-->
+    
+    </div><!--//row-->
+
+
+</body>
+</html> 
