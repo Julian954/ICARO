@@ -10,32 +10,13 @@
                 <h5 class="card-title">Error: No tienes acceso a esta página.</h5>
             </div>
             <div class="card-footer text-muted">
-              <a href="<?php echo base_url() ?>Dashboard/Alumnos" class="btn btn-primary">Ir al inicio</a>
+              <a href="<?php echo base_url() ?>login" class="btn btn-primary">Ir al inicio</a>
             </div>
         </div>
     </section>
 </div>
 <?php }  else { ?> <!-- En caso de ser valido -->
 
-<head>
-    <title>MARYS OOARD Colima</title>
-
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="MARYS - Portal de Abastecimiento y Contratos del IMSS en Colima">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
-    <link rel="shortcut icon" href="favicon.ico">
-
-    <!-- FontAwesome JS-->
-    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
-
-    <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
-
-</head>
 <div>
     <header class="app-header fixed-top">
         <div class="app-header-inner">
