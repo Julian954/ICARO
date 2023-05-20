@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="Assets/img/favicon.ico">
-    <title>Login | MARYS OOARD Colima</title>
+    <title>Login | MARYS BOARD Colima</title>
     
     <!-- FontAwesome JS-->
     <script defer src="Assets/css/fontawesome/js/all.min.js"></script>
