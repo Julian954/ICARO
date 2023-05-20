@@ -16,6 +16,11 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $this->views->getView($this, "Home", "");
     }
 
+    public function Compras()
+    {
+        $this->views->getView($this, "Compras", "");
+    }
+
     //POR CADA CONTROLADOR QUE SE CREE SE TIENE QUE CREAR UN MODEL
 }
 ?>
