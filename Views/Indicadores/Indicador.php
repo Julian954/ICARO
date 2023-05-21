@@ -177,7 +177,6 @@
             			</div><!--//app-card-->
             		</div><!--//col-->
            		</div>
-
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
 	</div><!--//app-wrapper-->
@@ -192,7 +191,6 @@
 
    			 <!-- Page Specific JS -->
    				 <script src="Assets/js/app.js"></script>
-
 <?php } ?>
 
 <?php pie() ?>

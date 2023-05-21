@@ -54,7 +54,6 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
         $res = $this->select($sql); //selectç es para seleccionar cuando el resultado solo arroja una fila
         return $res;
     }
-
     //Elimina los datos de un usuario
     public function eliminarUsuarios(int $id)
     {

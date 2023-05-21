@@ -15,7 +15,6 @@ class Indicadores extends Controllers //Aquí se debe llamas igual que el archiv
     {
         $this->views->getView($this, "Indicador", "");
     }
-
     //POR CADA CONTROLADOR QUE SE CREE SE TIENE QUE CREAR UN MODEL
 }
 ?>
