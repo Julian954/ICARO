@@ -1,36 +1,22 @@
-<?php encabezado() ?>
-<!-- Begin Page Content -->
 
-<?php if($_SESSION['rol'] <= 1){ ?> 
-<div class="page-content2">
-    <section>
-        <div class="card container-fluid2 text-center">
-            <div class="card-header"><i class="fas fa-exclamation-circle"></i> ERROR</div>
-            <div class="card-body">
-                <img src="../Assets/img/unicornio.png" style="height: 400px; ">
-                <h5 class="card-title">Error404: Página no encontrada.</h5>
-            </div>
-            <div class="card-footer text-muted">
-              <a href="<?php echo base_url() ?>Dashboard/Alumnos" class="btn btn-primary">Ir al inicio</a>
-            </div>
-        </div>
-    </section>
-</div>
-<?php }  else { ?>
-<div class="page-content">
-   <section>
-        <div class="card container-fluid2 text-center">
-            <div class="card-header"><i class="fas fa-exclamation-circle"></i> ERROR</div>
-            <div class="card-body">
-                <img src="../Assets/img/unicornio.png" style="height: 400px; ">
-                <h5 class="card-title">Error 404: Página no encontrada.</h5>
-            </div>
-            <div class="card-footer text-muted">
-              <a href="<?php echo base_url() ?>Dashboard/Listar" class="btn btn-primary">Ir al inicio</a>
-            </div>
-        </div>
-    </section>
-</div>
-<?php } ?>
+<?php links() ?>
 
+<body class="app app-404-page">   	
+    <div class="container mb-5">
+	    <div class="row">
+		    <div class="col-12 col-md-11 col-lg-7 col-xl-6 mx-auto">
+			    <div class="app-branding text-center mb-5">
+		            <a class="app-logo" href="<?php echo base_url(); ?>Inicio/Home"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/app-logo.svg" alt="logo"><span class="logo-text">MARYS</span></a>
+		        </div><!--//app-branding-->  
+			    <div class="app-card p-5 text-center shadow-sm">
+				    <h1 class="page-title mb-4">404<br><span class="font-weight-light">Página No Encontrada</span></h1>
+				    <div class="mb-4">
+					    Lo sentimos, no se pudo encontrar la página solicitada. 
+				    </div>
+				    <a class="btn app-btn-primary" href="<?php echo base_url(); ?>Inicio/Home">Ir al Inicio</a>
+			    </div>
+		    </div><!--//col-->
+	    </div><!--//row-->
+    </div><!--//container-->
+   
 <?php pie() ?>

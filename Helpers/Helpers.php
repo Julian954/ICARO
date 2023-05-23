@@ -8,6 +8,11 @@ function encabezado($data="")
     $VistaH = "Views/Template/header.php";
     require_once($VistaH);
 }
+function links($data="")
+{
+    $VistaH = "Views/Template/links.php";
+    require_once($VistaH);
+}
 function pie($data="")
 {
     $VistaP = "Views/Template/footer.php";

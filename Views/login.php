@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="Assets/img/favicon.ico">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>Assets/img/favicon.ico">
     <title>Login | MARYS BOARD Colima</title>
     
     <!-- FontAwesome JS-->
-    <script defer src="Assets/css/fontawesome/js/all.min.js"></script>
+    <script defer src="<?php echo base_url(); ?>Assets/css/fontawesome/js/all.min.js"></script>
 
     <!-- App CSS -->  
-    <link id="theme-style" rel="stylesheet" href="Assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&display=swap" rel="stylesheet">
@@ -49,7 +49,7 @@
   			    				</div><!--//col-6-->
   			    				<div class="col-6">
   			    					<div class="forgot-password text-right">
-  			    						<a href="reset-password.html">¿Olvidate la contraseña?</a>
+  			    						<a href="<?php echo base_url(); ?>Login/reset">¿Olvidate la contraseña?</a>
   			    					</div>
   			    				</div><!--//col-6-->
   			    			</div><!--//extra-->

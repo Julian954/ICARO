@@ -142,7 +142,7 @@ class Usuarios extends Controllers
                     $_SESSION['rol'] = $data['rol'];
                     $_SESSION['perfil'] = $data['perfil'];
                     $_SESSION['activo'] = true;
-                    header('location: '.base_url(). 'Ejemplo/Listar');
+                    header('location: '.base_url(). 'Inicio/Home');
             } else {
                 $error = 0;
                 header("location: ".base_url(). 'Login'."?msg=$error");
@@ -168,7 +168,7 @@ class Usuarios extends Controllers
         } else {
             $alert =  'noigual';
         }
-        header('location: ' . base_url() . "Dashboard/Listar?msg=$alert");  
+        header('location: ' . base_url() . "Inicio/Home?msg=$alert");  
     }
 
     //restablecer contraseña
@@ -198,10 +198,10 @@ class Usuarios extends Controllers
         $tmaximo = 20 * 1024 * 1024;
         if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "png" || $name["extension"] == "jpg" || $name["extension"] == "jpeg")){
             if ($error_archivo == UPLOAD_ERR_OK) {
-                if($imgactual != "perfil.jpg"){
-                    unlink("Assets/img/perfiles/".$imgactual);
+                if($imgactual != "user.png"){
+                    unlink("Assets/img/users/".$imgactual);
                 }
-                $ruta_destino = "Assets/img/perfiles/".$nombre_nuevo;
+                $ruta_destino = "Assets/img/users/".$nombre_nuevo;
                 if (move_uploaded_file($ruta_temporal, $ruta_destino)) {
                     $id = $_SESSION['id'];
                     $this->model->img($nombre_nuevo, $id);
@@ -215,7 +215,7 @@ class Usuarios extends Controllers
         } else {
             $alert =  'noimagen';
         }
-        header('location: ' . base_url() . "Dashboard/Listar?msg=$alert");
+        header('location: ' . base_url() . "Inicio/Home?msg=$alert");
         die();
     }
 

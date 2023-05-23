@@ -10,9 +10,16 @@
             }
             parent::__construct();
         }
-        public function login()
+
+        public function Login()
         {
             $this->views->getView($this, "login");
         }
+
+        public function Reset()
+        {
+            $this->views->getView($this, "reset");
+        }
+
     }
 ?>
