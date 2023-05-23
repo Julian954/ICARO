@@ -239,7 +239,7 @@ pre {
   position: relative;
   background: var(--graylight);
   min-height: 100vh;
-  width: calc(100% - 230px);
+  width: calc(100% - 250px);
   padding: 0;
   padding-bottom: 70px;
 }

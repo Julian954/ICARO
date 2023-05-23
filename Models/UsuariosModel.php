@@ -23,7 +23,7 @@ class UsuariosModel extends Mysql{
     }
 
     //Registra un nuevo usuario
-    public function insertarUsuarios(string $nombre, string $usuario, string $clave, string $rol, string $correo)
+    public function insertarUsuarios(string $nombre, string $usuario, string $clave, string $rol, string $correo, string $telefono)
     {
         $return = "";
         $this->nombre = $nombre;
@@ -31,11 +31,12 @@ class UsuariosModel extends Mysql{
         $this->clave = $clave;
         $this->rol = $rol;
         $this->correo = $correo;
+        $this->telefono = $telefono;
         $sql = "SELECT * FROM usuarios WHERE correo = '{$this->correo}'";
         $result = $this->selecT($sql);
         if (empty($result)) {
-            $query = "INSERT INTO usuarios(nombre, usuario, clave, rol, correo) VALUES (?,?,?,?,?)";
-            $data = array($this->nombre, $this->usuario, $this->clave, $this->rol, $this->correo);
+            $query = "INSERT INTO usuarios(nombre, usuario, clave, rol, correo, telefono) VALUES (?,?,?,?,?,?)";
+            $data = array($this->nombre, $this->usuario, $this->clave, $this->rol, $this->correo, $this->telefono);
             $resul = $this->insert($query, $data);
             $return = $resul;
         }else {
@@ -69,7 +70,7 @@ class UsuariosModel extends Mysql{
     }
 
     //Edita los datos de un usuario
-    public function actualizarUsuarios(string $nombre, string $usuario, string $rol, int $id, string $correo)
+    public function actualizarUsuarios(string $nombre, string $usuario, string $rol, int $id, string $correo, string $telefono)
     {
         $return = "";
         $this->nombre = $nombre;
@@ -77,8 +78,9 @@ class UsuariosModel extends Mysql{
         $this->rol = $rol;
         $this->id = $id;
         $this->correo = $correo;
-        $query = "UPDATE usuarios SET nombre=?, usuario=?, rol=?, correo=? WHERE id=?";
-        $data = array($this->nombre, $this->usuario, $this->rol, $this->correo, $this->id);
+        $this->telefono = $telefono;
+        $query = "UPDATE usuarios SET nombre=?, usuario=?, rol=?, correo=?, telefono=? WHERE id=?";
+        $data = array($this->nombre, $this->usuario, $this->rol, $this->correo, $this->telefono, $this->id);
         $resul = $this->update($query, $data);
         $return = $resul;
         return $return;

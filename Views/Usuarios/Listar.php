@@ -33,7 +33,7 @@
 <?php }  else { ?>
 
 <!-- Begin Page Content -->
-<div class="page-content">
+<div class="app-wrapper">
     <section>
         <div class="card container-fluid2">
             <h5 class="card-header"><i class="fas fa-users"></i> <strong>Usuarios Registrados</strong></h5>
@@ -65,10 +65,6 @@
                                             <div class="alert alert-success" role="alert">
                                                 <strong>Usuario modificado.</strong>
                                             </div>
-                                        <?php } else if ($alert == "rest") { ?>
-                                            <div class="alert alert-success" role="alert">
-                                                <strong>La contraseña del usuario se restableció.</strong>
-                                            </div>
                                         <?php } else if ($alert == "inactivo") { ?>
                                             <div class="alert alert-success" role="alert">
                                                 <strong>El usuario fue inactivado.</strong>
@@ -86,8 +82,9 @@
                                     <thead class="thead-personality">
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>No. Trabajador</th>
+                                            <th>Matrícula</th>
                                             <th>Correo</th>
+                                            <th>Teléfono</th>
                                             <th>Rol</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -99,24 +96,26 @@
                                                 <td><?php echo $us['nombre']; ?></td>
                                                 <td><?php echo $us['usuario']; ?></td>
                                                 <td><?php echo $us['correo']; ?></td>
+                                                <td><?php echo $us['telefono']; ?></td>
                                                 <td><?php
-                                                    if ($us['rol'] == 5) {
+                                                    if ($us['rol'] == 6) {
                                                         echo "Administrador";
-                                                    } elseif ($us['rol'] == 4) {
+                                                    } elseif ($us['rol'] == 5) {
                                                         echo "Gestor";
+                                                    } elseif ($us['rol'] == 4) {
+                                                        echo "Gerente";
                                                     } elseif ($us['rol'] == 3) {
-                                                        echo "Vendedor";
+                                                        echo "Externo Jurídico";
                                                     } elseif ($us['rol'] == 2) {
-                                                        echo "Responsable";
+                                                        echo "Externo Ad";
+                                                    } elseif ($us['rol'] == 1) {
+                                                        echo "Almacén";
                                                     } ?> </td>
                                                 <td>
                                                     <a title="Editar" href="<?php echo base_url() ?>Usuarios/editar?id=<?php echo $us['id']; ?>" class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
                                                     <form action="<?php echo base_url() ?>Usuarios/eliminar?id=<?php echo $us['id']; ?>" method="post" class="d-inline elim">
                                                         <button title="Inactivar" type="submit" class="btn btn-dark mb-2"><i class="fas fa-user-slash"></i></button>
-                                                    </form>
-                                                    <form action="<?php echo base_url() ?>Usuarios/restablecer?id=<?php echo $us['id']; ?>" method="post" class="d-inline rest">
-                                                        <button title="Restablecer Contraseña" title="Restablecer contraseña" type="submit" class="btn btn-secondary mb-2"><i class="fas fa-unlock-alt"></i></button>
-                                                    </form>              
+                                                    </form>            
                                                 </td>
                                             </tr>
                                         <?php } }?>
@@ -152,17 +151,25 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="usuario">No. Trabajador</label>
-                                <input id="usuario" class="form-control" type="number" min="10000000" max="99999999" name="usuario" placeholder="No. Trabajador" required>
+                                <label for="usuario">Matrícula</label>
+                                <input id="usuario" class="form-control" type="text" name="usuario" placeholder="Matrícula" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input id="telefono" class="form-control" type="number" min="1000000000" max="9999999999" name="telefono" placeholder="Teléfono" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
                             <label for="rol">Rol</label>
                             <select id="rol" class="form-control" name="rol" required>
-                                <?php if($_SESSION['rol'] >= 5){ ?><option value="5">Administrador</option> <?php } ?>
-                                <?php if($_SESSION['rol'] >= 4){ ?><option value="4">Gestor</option> <?php } ?>
-                                <?php if($_SESSION['rol'] >= 3){ ?><option value="3">Vendedor</option> <?php } ?>
-                                <option value="2">Responsable</option>
+                                <?php if($_SESSION['rol'] >= 6){ ?><option value="6">Administrador</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 5){ ?><option value="4">Gestor</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 4){ ?><option value="4">Gerente</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 3){ ?><option value="3">Externo Jurídico</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 2){ ?><option value="2">Externo Administrativo</option> <?php } ?>
+                                <option value="1">Almacen</option>
                             </select>
                         </div>
                     </div>

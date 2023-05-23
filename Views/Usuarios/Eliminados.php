@@ -33,7 +33,7 @@
 <?php }  else { ?>
 
 <!-- Begin Page Content -->
-<div class="page-content">
+<div class="app-wrapper">
     <section>
         <div class="card container-fluid2">
             <h5 class="card-header"><i class="fas fa-users-slash"></i> <strong>Usuarios Inactivos</strong></h5>

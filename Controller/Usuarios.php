@@ -23,16 +23,17 @@ class Usuarios extends Controllers
         $nombre = $_POST['nombre'];
         $usuario = $_POST['usuario'];
         $correo = $_POST['correo'];
+        $telefono = $_POST['telefono'];
         $clave = $usuario; //Por defecto de pone número de usuario
         $rol = $_POST['rol'];
         $hash = hash("SHA256", $clave);
-        $insert = $this->model->insertarUsuarios($nombre, $usuario, $hash, $rol, $correo);
+        $insert = $this->model->insertarUsuarios($nombre, $usuario, $hash, $rol, $correo, $telefono);
         if ($insert == 'existe') {
             $data1 = $this->model->editarUsuariosC($correo);
             if ($data1['estado'] == 2) {
                 $estado = 1;
                 $id = $data1['id'];
-                $actualizar = $this->model->actualizarUsuarios($nombre, $usuario, $rol, $id, $correo);
+                $actualizar = $this->model->actualizarUsuarios($nombre, $usuario, $rol, $id, $correo, $telefono);
                 $cambio =$this->model->cambiarContra($hash, $id);
                 $eliminar = $this->model->eliminarUsuarios($id, $estado);
                     if ($actualizar == 1) {
@@ -73,7 +74,8 @@ class Usuarios extends Controllers
         $usuario = $_POST['usuario'];
         $rol = $_POST['rol'];
         $correo = $_POST['correo'];
-        $actualizar = $this->model->actualizarUsuarios($nombre, $usuario, $rol, $id, $correo);     
+        $telefono = $_POST['telefono'];
+        $actualizar = $this->model->actualizarUsuarios($nombre, $usuario, $rol, $id, $correo, $telefono);     
             if ($actualizar == 1) {
                 $alert = 'modificado';
             } else {
@@ -141,6 +143,7 @@ class Usuarios extends Controllers
                     $_SESSION['usuario'] = $data['usuario'];
                     $_SESSION['rol'] = $data['rol'];
                     $_SESSION['perfil'] = $data['perfil'];
+                    $_SESSION['telefono'] = $data['telefono'];
                     $_SESSION['activo'] = true;
                     header('location: '.base_url(). 'Inicio/Home');
             } else {
@@ -169,18 +172,6 @@ class Usuarios extends Controllers
             $alert =  'noigual';
         }
         header('location: ' . base_url() . "Inicio/Home?msg=$alert");  
-    }
-
-    //restablecer contraseña
-    public function restablecer()
-    {
-        $id = $_GET['id'];
-        $data = $this->model->editarUsuarios($id);
-        $hash = hash("SHA256", $data['usuario']);
-        $cambio = $this->model->cambiarContra($hash, $id);
-        $alert =  'rest';
-        header('location: ' . base_url() . "Usuarios/Listar?msg=$alert");
-        die();  
     }
 
     //Cambiar Imagen Perfil

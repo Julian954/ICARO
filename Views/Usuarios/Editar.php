@@ -33,7 +33,7 @@
 <?php }  else { ?>
     
 <!-- Begin Page Content -->
-<div class="page-content">
+<div class="app-wrapper">
     <section>
         <div class="row">
             <div class="col-lg-3 mt-auto">
@@ -55,21 +55,31 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="usuario">No. Trabajador</label>
-                                        <input id="usuario" min="10000000" max="99999999" class="form-control" type="number" name="usuario" placeholder="No. Trabajador" value="<?php echo $data1['usuario']; ?>" required>
+                                        <label for="usuario">Matrícula</label>
+                                        <input id="usuario" min="10000000" max="99999999" class="form-control" type="number" name="usuario" placeholder="Matrícula" value="<?php echo $data1['usuario']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="telefono">Teléfono</label>
+                                        <input id="telefono" min="1000000000" max="9999999999" class="form-control" type="number" name="telefono" placeholder="Teléfono" value="<?php echo $data1['telefono']; ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
                                     <label for="rol">Rol</label>
                                     <select id="rol" class="form-control" name="rol" required>
-                                        <?php if ($_SESSION['rol'] >= 5) {?>
+                                        <?php if ($_SESSION['rol'] >= 6) {?>
                                             <option value="5" <?php if ($data1['rol'] == "5") {echo "selected";} ?>>Administrador</option> <?php } ?>
-                                        <?php if ($_SESSION['rol'] >= 4) {?>
+                                        <?php if ($_SESSION['rol'] >= 5) {?>
                                             <option value="4" <?php if ($data1['rol'] == "4") {echo "selected";} ?>>Gestor</option> <?php } ?>
+                                        <?php if ($_SESSION['rol'] >= 4) {?>
+                                            <option value="4" <?php if ($data1['rol'] == "4") {echo "selected";} ?>>Gerente</option> <?php } ?>
                                         <?php if ($_SESSION['rol'] >= 3) {?>
-                                            <option value="3" <?php if ($data1['rol'] == "3") {echo "selected";} ?>>Vendedor</option> <?php } ?>
+                                            <option value="3" <?php if ($data1['rol'] == "3") {echo "selected";} ?>>Externo Jurídico</option> <?php } ?>
                                         <?php if ($_SESSION['rol'] >= 2) {?>
-                                            <option value="2" <?php if ($data1['rol'] == "2") {echo "selected";} ?>>Responsable</option>
+                                            <option value="2" <?php if ($data1['rol'] == "2") {echo "selected";} ?>>Externo Administrativo</option>
+                                        <?php if ($_SESSION['rol'] >= 3) {?>
+                                            <option value="3" <?php if ($data1['rol'] == "3") {echo "selected";} ?>>Almacén</option> <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
