@@ -244,17 +244,17 @@
     });
     </script>
 
-    //<!-- Javascript -->
+    <!-- Javascript -->
     <script src="<?php echo base_url(); ?>Assets/js/popper.min.js"></script>
     <script src="Assets/js/bootstrap.min.js"></script>
 
-    //<!-- Charts JS -->
+    <!-- Charts JS -->
     <script src="<?php echo base_url(); ?>Assets/js/chart.min.js"></script>
     <script src="<?php echo base_url(); ?>Assets/js/index-charts.js"></script>
     <script src="<?php echo base_url(); ?>Assets/js/charts-demo.js"></script>
     <script src="<?php echo base_url(); ?>Assets/js/chart_indica.js"></script>
 
-    //<!-- Page Specific JS -->
+    <!-- Page Specific JS -->
     <script src="<?php echo base_url(); ?>Assets/js/app.js"></script>
 
 
