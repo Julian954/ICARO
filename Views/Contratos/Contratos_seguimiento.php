@@ -58,394 +58,85 @@
 
 <div><span><span style="font-weight:bold;">Total</span> de Instrumentos:</span>&nbsp<span style="font-weight:bold; text-decoration:solid underline #5B99EA 3px;">
 
-  <?php
-  $link = mysqli_connect("localhost", "root");
-  mysqli_select_db($link, "maryscae");
-  $tildes = $link->query("SET NAMES 'utf8'");
-  $pTotalContratos = "SELECT COUNT(no_contrato) as TC FROM info_contratos";
-  $resultadoX = mysqli_query($link, $pTotalContratos);
-    while ($fila = mysqli_fetch_assoc($resultadoX))
-    {
-      $pTotalContratos2 = $fila['TC'];
-    }
-
-echo ($pTotalContratos2);
-?>
-
-
 </span>&nbsp<span>a un ascendente de&nbsp</span><span style="font-weight:bold;">
 
-<?php
-  $link = mysqli_connect("localhost", "root");
-  mysqli_select_db($link, "maryscae");
-  $tildes = $link->query("SET NAMES 'utf8'");
-  $pTotalContratos = "SELECT SUM(monto_contrato) as MTC FROM info_contratos";
-  $resultadoX = mysqli_query($link, $pTotalContratos);
-    while ($fila = mysqli_fetch_assoc($resultadoX))
-    {
-      $pTotalContratos2 = $fila['MTC'];
-    }
-echo '$ '.number_format($pTotalContratos2, 2);
-?>
 </span></div>
 <div>
   <span>
-    <?php
-      $link = mysqli_connect("localhost", "root");
-      mysqli_select_db($link, "maryscae");
-      $tildes = $link->query("SET NAMES 'utf8'");
-      $pTotalContratos = "SELECT COUNT(no_contrato) as TIC FROM info_contratos WHERE (tipo_contrato!='Por Monto') AND (tipo_contrato!='Por Vigencia')";
-      $resultadoX = mysqli_query($link, $pTotalContratos);
-        while ($fila = mysqli_fetch_assoc($resultadoX))
-        {
-          $pTotalContratos2 = $fila['TIC'];
-        }
-    echo ($pTotalContratos2);
-    ?>
   </span>&nbsp<span style="font-weight:bold;">Convenios</span>&nbsp
   <span style="font-weight:lighter; color:#ff0000; font-size:10px;">SAI</span>&nbsp<span style="font-weight:lighter; font-size:10px;">
-    <?php
-      $link = mysqli_connect("localhost", "root");
-      mysqli_select_db($link, "maryscae");
-      $tildes = $link->query("SET NAMES 'utf8'");
-      $pTotalContratos = "SELECT COUNT(no_contrato) as TIC FROM info_contratos WHERE (tipo_contrato='Conv. Vigencia' OR tipo_contrato='Conv. Monto') AND (sistema_contrato='SAI')";
-      $resultadoX = mysqli_query($link, $pTotalContratos);
-        while ($fila = mysqli_fetch_assoc($resultadoX))
-        {
-          $pTotalContratos2 = $fila['TIC'];
-        }
-    echo ($pTotalContratos2);
-    ?>
   </span>&nbsp
   <span style="font-weight:lighter; color:#ff0000; font-size:10px;">PREI</span>&nbsp<span style="font-weight:lighter; font-size:10px;">
-    <?php
-      $link = mysqli_connect("localhost", "root");
-      mysqli_select_db($link, "maryscae");
-      $tildes = $link->query("SET NAMES 'utf8'");
-      $pTotalContratos = "SELECT COUNT(no_contrato) as TIC FROM info_contratos WHERE (tipo_contrato='Conv. Vigencia' OR tipo_contrato='Conv. Monto') AND (sistema_contrato='PREI')";
-      $resultadoX = mysqli_query($link, $pTotalContratos);
-        while ($fila = mysqli_fetch_assoc($resultadoX))
-        {
-          $pTotalContratos2 = $fila['TIC'];
-        }
-    echo ($pTotalContratos2);
-    ?>
   </span>&nbsp
-  <?php
-    $link = mysqli_connect("localhost", "root");
-    mysqli_select_db($link, "maryscae");
-    $tildes = $link->query("SET NAMES 'utf8'");
-    $pTotalContratos = "SELECT COUNT(no_contrato) as TIC FROM info_contratos WHERE (tipo_contrato='Por Monto' OR tipo_contrato='Por Vigencia')";
-    $resultadoX = mysqli_query($link, $pTotalContratos);
-      while ($fila = mysqli_fetch_assoc($resultadoX))
-      {
-        $pTotalContratos2 = $fila['TIC'];
-      }
-  echo ($pTotalContratos2);
-  ?>
   <span style="font-weight:bold;">Contratos</span>&nbsp
   <span style="font-weight:lighter; color:#ff0000; font-size:10px;">SAI</span>&nbsp<span style="font-weight:lighter; font-size:10px;">
-    <?php
-      $link = mysqli_connect("localhost", "root");
-      mysqli_select_db($link, "maryscae");
-      $tildes = $link->query("SET NAMES 'utf8'");
-      $pTotalContratos = "SELECT COUNT(no_contrato) as TIC FROM info_contratos WHERE (tipo_contrato='Por Monto' OR tipo_contrato='Por Vigencia') AND (sistema_contrato='SAI')";
-      $resultadoX = mysqli_query($link, $pTotalContratos);
-        while ($fila = mysqli_fetch_assoc($resultadoX))
-        {
-          $pTotalContratos2 = $fila['TIC'];
-        }
-    echo ($pTotalContratos2);
-    ?>
+
   </span>&nbsp
   <span style="font-weight:lighter; color:#ff0000; font-size:10px;">PREI</span>&nbsp<span style="font-weight:lighter; font-size:10px;">
-    <?php
-      $link = mysqli_connect("localhost", "root");
-      mysqli_select_db($link, "maryscae");
-      $tildes = $link->query("SET NAMES 'utf8'");
-      $pTotalContratos = "SELECT COUNT(no_contrato) as TIC FROM info_contratos WHERE (tipo_contrato='Por Monto' OR tipo_contrato='Por Vigencia') AND (sistema_contrato='PREI')";
-      $resultadoX = mysqli_query($link, $pTotalContratos);
-        while ($fila = mysqli_fetch_assoc($resultadoX))
-        {
-          $pTotalContratos2 = $fila['TIC'];
-        }
-    echo ($pTotalContratos2);
-    ?>
   </span>&nbsp
 </div>
 
 <div style="padding-top:15px;">
+<?php  foreach ($data2 as $cn) {
+        if ($cn['estado'] == 4) {?>
+                                                          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                                          <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/></svg>
+                                                          <span style="font-weight:bold;">
+                                                          </span><span style="">Formalizado</span>&nbsp<strong> <?php echo $cn['total'] ?></strong>
+                                                        <?php } elseif ($cn['estado'] == 2) {?>
+                                                          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                                          <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>
+                                                          <span style="font-weight:bold;">
+                                                          </span><span style="">Validacion</span>&nbsp<strong> <?php echo $cn['total'] ?></strong>
+                                                        <?php  } elseif ($cn['estado'] == 3) {?>
+                                                          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
+                                                          <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"/></svg>
+                                                          <span style="font-weight:bold;">
+                                                          </span><span style="">Elaboracion</span>&nbsp<strong> <?php echo $cn['total'] ?></strong>
+                                                        <?php  } elseif ($cn['estado'] == 1) {?>
+                                                          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                                          <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"/></svg>
+                                                          <span style="font-weight:bold;">
+                                                          </span><span style="">Contratación</span>&nbsp<strong> <?php echo $cn['total'] ?></strong>
+                                                        <?php }
+                                                        }
+                                                        ?>
 
-<!-- En Contratación -->
-<svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-  <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"/></svg>
-  <span style="font-weight:bold;">
-  <?php
-  $link = mysqli_connect("localhost", "root");
-  mysqli_select_db($link, "maryscae");
-  $tildes = $link->query("SET NAMES 'utf8'");
-  $pTotalContratos = "SELECT COUNT(no_contrato) as TC FROM info_contratos";
-  $resultadoX = mysqli_query($link, $pTotalContratos);
-    while ($fila = mysqli_fetch_assoc($resultadoX))
-    {
-      $pTotalContratos2 = $fila['TC'];
-    }
-  $pTotalContratosC = "SELECT COUNT(no_contrato) as TAA FROM info_contratos WHERE (status_contrato='AA')";
-  $resultadoZ = mysqli_query($link, $pTotalContratosC);
-    while ($fila = mysqli_fetch_assoc($resultadoZ))
-    {
-      $pTotalContratosC2 = $fila['TAA'];
-    }
-  $pTotalDatoFormalizado =($pTotalContratosC2/$pTotalContratos2)*100;
-  echo number_format($pTotalDatoFormalizado, 2).'%';
-  ?>
-</span>&nbsp<span style="">contratación</span>
-
-
-<!-- En Eleaboración -->
-<svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-<path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/></svg>
-<span span style="font-weight:bold;">
-  <?php
-  $link = mysqli_connect("localhost", "root");
-  mysqli_select_db($link, "maryscae");
-  $tildes = $link->query("SET NAMES 'utf8'");
-  $pTotalContratos = "SELECT COUNT(no_contrato) as TC FROM info_contratos";
-  $resultadoX = mysqli_query($link, $pTotalContratos);
-    while ($fila = mysqli_fetch_assoc($resultadoX))
-    {
-      $pTotalContratos2 = $fila['TC'];
-    }
-  $pTotalContratosA = "SELECT COUNT(no_contrato) as TCA FROM info_contratos WHERE (status_contrato='A')";
-  $resultadoX = mysqli_query($link, $pTotalContratosA);
-    while ($fila = mysqli_fetch_assoc($resultadoX))
-    {
-      $pTotalContratosA2 = $fila['TCA'];
-    }
-  $pTotalDatoElabora =($pTotalContratosA2/$pTotalContratos2)*100;
-  echo number_format($pTotalDatoElabora, 2).'%';
-  ?>
-</span>&nbsp<span style="">elaboración&nbsp</span>&nbsp<br>
-
-<!-- En Validación -->
-<svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-<path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>
-<span style="font-weight:bold;">
-  <?php
-  $link = mysqli_connect("localhost", "root");
-  mysqli_select_db($link, "maryscae");
-  $tildes = $link->query("SET NAMES 'utf8'");
-  $pTotalContratos = "SELECT COUNT(no_contrato) as TC FROM info_contratos";
-  $resultadoX = mysqli_query($link, $pTotalContratos);
-    while ($fila = mysqli_fetch_assoc($resultadoX))
-    {
-      $pTotalContratos2 = $fila['TC'];
-    }
-  $pTotalContratosB = "SELECT COUNT(no_contrato) as TCB FROM info_contratos WHERE (status_contrato='B')";
-  $resultadoY = mysqli_query($link, $pTotalContratosB);
-
-    while ($fila = mysqli_fetch_assoc($resultadoY))
-    {
-      $pTotalContratosB2 = $fila['TCB'];
-    }
-  $pTotalDatoValida =($pTotalContratosB2/$pTotalContratos2)*100;
-  echo number_format($pTotalDatoValida, 2).'%';
-  ?>
-</span>&nbsp<span style="">en validación</span>&nbsp&nbsp
-
-<!-- Formalizado -->
-  <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
-  <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"/></svg>
-  <span style="font-weight:bold;">
-  <?php
-  $link = mysqli_connect("localhost", "root");
-  mysqli_select_db($link, "maryscae");
-  $tildes = $link->query("SET NAMES 'utf8'");
-  $pTotalContratos = "SELECT COUNT(no_contrato) as TC FROM info_contratos";
-  $resultadoX = mysqli_query($link, $pTotalContratos);
-    while ($fila = mysqli_fetch_assoc($resultadoX))
-    {
-      $pTotalContratos2 = $fila['TC'];
-    }
-  $pTotalContratosC = "SELECT COUNT(no_contrato) as TCC FROM info_contratos WHERE (status_contrato='C')";
-  $resultadoZ = mysqli_query($link, $pTotalContratosC);
-    while ($fila = mysqli_fetch_assoc($resultadoZ))
-    {
-      $pTotalContratosC2 = $fila['TCC'];
-    }
-  $pTotalDatoFormalizado =($pTotalContratosC2/$pTotalContratos2)*100;
-  echo number_format($pTotalDatoFormalizado, 2).'%';
-  ?>
-</span>&nbsp<span style="">formalizados</span>
 <div style="padding-top:30px; padding-right:30px;">
 <canvas id="chart-pie0"></canvas>
 </div>
 </div>
-
                   </div><!--//col-->
                   <div class="col-12 col-lg-6">
 <div style="padding-bottom:20px; font-weight:bold; font-size:14px; color:#F39C12;">Flujo de Formalización</div>
 <div><span style="color:#000000;">Prestaciones Médicas</span></div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:
-<?php
-$link = mysqli_connect("localhost", "root");
-mysqli_select_db($link, "maryscae");
-$tildes = $link->query("SET NAMES 'utf8'");
-$pTotalContratosArea = "SELECT COUNT(no_contrato) as TCA FROM info_contratos WHERE(area_contrato='Jefatura de Prestaciones Medicas')";
-$resultadoX = mysqli_query($link, $pTotalContratosArea);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosArea2 = $fila['TCA'];
-  }
-$pTotalContratosAreaF = "SELECT COUNT(no_contrato) as TCAF FROM info_contratos WHERE(area_contrato='Jefatura de Prestaciones Medicas' AND status_contrato='C')";
-$resultadoX = mysqli_query($link, $pTotalContratosAreaF);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosAreaF = $fila['TCAF'];
-  }
-$pTotalDatoBarra = ($pTotalContratosAreaF/$pTotalContratosArea2)*100;
-echo $pTotalDatoBarra;
-?>%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 <div style="padding-top:10px;"><span style="color:#000000;">Servicios Prestaciones Económicas</span></div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:
-<?php
-$link = mysqli_connect("localhost", "root");
-mysqli_select_db($link, "maryscae");
-$tildes = $link->query("SET NAMES 'utf8'");
-$pTotalContratosArea = "SELECT COUNT(no_contrato) as TCA FROM info_contratos WHERE(area_contrato='Jefatura de Servicios Prestaciones Economicas')";
-$resultadoX = mysqli_query($link, $pTotalContratosArea);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosArea2 = $fila['TCA'];
-  }
-$pTotalContratosAreaF = "SELECT COUNT(no_contrato) as TCAF FROM info_contratos WHERE(area_contrato='Jefatura de Servicios Prestaciones Economicas' AND status_contrato='C')";
-$resultadoX = mysqli_query($link, $pTotalContratosAreaF);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosAreaF = $fila['TCAF'];
-  }
-$pTotalDatoBarra = ($pTotalContratosAreaF/$pTotalContratosArea2)*100;
-echo $pTotalDatoBarra;
-?>%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 
 <div style="padding-top:10px;"><span style="color:#000000;">Comuniación Social</span></div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:
-<?php
-$link = mysqli_connect("localhost", "root");
-mysqli_select_db($link, "maryscae");
-$tildes = $link->query("SET NAMES 'utf8'");
-$pTotalContratosArea = "SELECT COUNT(no_contrato) as TCA FROM info_contratos WHERE(area_contrato='Comunicacion Social')";
-$resultadoX = mysqli_query($link, $pTotalContratosArea);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosArea2 = $fila['TCA'];
-  }
-$pTotalContratosAreaF = "SELECT COUNT(no_contrato) as TCAF FROM info_contratos WHERE(area_contrato='Comunicacion Social' AND status_contrato='C')";
-$resultadoX = mysqli_query($link, $pTotalContratosAreaF);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosAreaF = $fila['TCAF'];
-  }
-$pTotalDatoBarra = ($pTotalContratosAreaF/$pTotalContratosArea2)*100;
-echo $pTotalDatoBarra;
-?>%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 <div style="padding-top:10px;"><span style="color:#000000;">Conservación</span></div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:
-<?php
-$link = mysqli_connect("localhost", "root");
-mysqli_select_db($link, "maryscae");
-$tildes = $link->query("SET NAMES 'utf8'");
-$pTotalContratosArea = "SELECT COUNT(no_contrato) as TCA FROM info_contratos WHERE(area_contrato='Conservacion')";
-$resultadoX = mysqli_query($link, $pTotalContratosArea);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosArea2 = $fila['TCA'];
-  }
-$pTotalContratosAreaF = "SELECT COUNT(no_contrato) as TCAF FROM info_contratos WHERE(area_contrato='Conservacion' AND status_contrato='C')";
-$resultadoX = mysqli_query($link, $pTotalContratosAreaF);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosAreaF = $fila['TCAF'];
-  }
-$pTotalDatoBarra = ($pTotalContratosAreaF/$pTotalContratosArea2)*100;
-echo $pTotalDatoBarra;
-?>%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 <div style="padding-top:10px;"><span style="color:#000000;">Servicios Generales</span></div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:
-<?php
-$link = mysqli_connect("localhost", "root");
-mysqli_select_db($link, "maryscae");
-$tildes = $link->query("SET NAMES 'utf8'");
-$pTotalContratosArea = "SELECT COUNT(no_contrato) as TCA FROM info_contratos WHERE(area_contrato='Generales')";
-$resultadoX = mysqli_query($link, $pTotalContratosArea);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosArea2 = $fila['TCA'];
-  }
-$pTotalContratosAreaF = "SELECT COUNT(no_contrato) as TCAF FROM info_contratos WHERE(area_contrato='Generales' AND status_contrato='C')";
-$resultadoX = mysqli_query($link, $pTotalContratosAreaF);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosAreaF = $fila['TCAF'];
-  }
-$pTotalDatoBarra = ($pTotalContratosAreaF/$pTotalContratosArea2)*100;
-echo $pTotalDatoBarra;
-?>%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 <div style="padding-top:10px;"><span style="color:#000000;">Informática</span></div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:
-<?php
-$link = mysqli_connect("localhost", "root");
-mysqli_select_db($link, "maryscae");
-$tildes = $link->query("SET NAMES 'utf8'");
-$pTotalContratosArea = "SELECT COUNT(no_contrato) as TCA FROM info_contratos WHERE(area_contrato='Informatica')";
-$resultadoX = mysqli_query($link, $pTotalContratosArea);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosArea2 = $fila['TCA'];
-  }
-$pTotalContratosAreaF = "SELECT COUNT(no_contrato) as TCAF FROM info_contratos WHERE(area_contrato='Informatica' AND status_contrato='C')";
-$resultadoX = mysqli_query($link, $pTotalContratosAreaF);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosAreaF = $fila['TCAF'];
-  }
-$pTotalDatoBarra = ($pTotalContratosAreaF/$pTotalContratosArea2)*100;
-echo $pTotalDatoBarra;
-?>%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
 <div style="padding-top:10px;"><span style="color:#000000;">Biomédica</span></div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:
-<?php
-$link = mysqli_connect("localhost", "root");
-mysqli_select_db($link, "maryscae");
-$tildes = $link->query("SET NAMES 'utf8'");
-$pTotalContratosArea = "SELECT COUNT(no_contrato) as TCA FROM info_contratos WHERE(area_contrato='Coordinación Biomédica')";
-$resultadoX = mysqli_query($link, $pTotalContratosArea);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosArea2 = $fila['TCA'];
-  }
-$pTotalContratosAreaF = "SELECT COUNT(no_contrato) as TCAF FROM info_contratos WHERE(area_contrato='Coordinación Biomédica' AND status_contrato='C')";
-$resultadoX = mysqli_query($link, $pTotalContratosAreaF);
-  while ($fila = mysqli_fetch_assoc($resultadoX))
-  {
-    $pTotalContratosAreaF = $fila['TCAF'];
-  }
-$pTotalDatoBarra = ($pTotalContratosAreaF/$pTotalContratosArea2)*100;
-echo $pTotalDatoBarra;
-?>%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
 </div>
                   </div><!--//col-->
               </div><!--//row-->
@@ -532,7 +223,7 @@ echo $pTotalDatoBarra;
           </div><!--//app-card-body-->
         </div><!--//inner-->
       </div><!--//app-card-->
-          <table class="table table-head-bg-success table-striped table-hover">
+          <table class="table table-head-bg-success table-striped table-hover" id="Table">
             <thead style="background-color:#59d05d !important; font-size: 0.875rem !important; color:#ffffff !important; vertical-align: middle !important; border:1px !important; font-size:14px; border-color:#ebedf2 !important; padding:0.75rem !important;">
               <tr>
                 <th scope="col"></th>
@@ -545,66 +236,35 @@ echo $pTotalDatoBarra;
               </tr>
             </thead>
             <tbody style="font-size: 0.875rem !important;">
-              <?php
-              $link = mysqli_connect("localhost", "root");
-              mysqli_select_db($link, "maryscae");
-              $tildes = $link->query("SET NAMES 'utf8'"); //Para que se muestren las tildes correctamente
 
-$result = mysqli_query($link, "SELECT ro.status_contrato, ro.no_contrato, ro.desc_contrato, ro.area_contrato, ro.termino_contrato, ro.monto_contrato, SUM(ac.devengo_contrato) as Devengo FROM info_contratos ro, administra_contrato ac WHERE ro.no_contrato = ac.no_contrato GROUP BY ro.no_contrato");
-              while ($fila = mysqli_fetch_assoc($result)){
-              echo "<tr>";
-if($fila['status_contrato'] == 'A'):
-     echo '<td>
-     <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-     <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/></svg>
-     </td>';
-elseif ($fila['status_contrato'] == 'B'):
-     echo '<td>
-     <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-     <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>
-     </td>';
-elseif ($fila['status_contrato'] == 'C'):
-     echo
-     '<td>
-     <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
-     <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"/></svg></td>';
-elseif ($fila['status_contrato'] == 'AA'):
-          echo
-          '<td>
-          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-          <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"/></svg>
-          </td>';
-elseif ($fila['status_contrato'] == 'CC'):
-          echo
-          '<td>
-          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-          <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"/></svg>
-          </td>';
-else:
-     echo 'not specified';
-endif;
-//Termina aqui buscarContrato(this); data-toggle='modal' data-target='#myModal'
-              echo "<td class='numeroDeContrato' style='font-weight:bold; cursor: pointer;'><a onClick='limpiarCampos();buscarContrato(this);' data-toggle='modal' data-target='#myModal'>".$fila['no_contrato']."</a>
-              </td>";
-              if($fila['status_contrato'] == 'B'):
-                   echo '<td class="proveedor desDeContrato">'.$fila['desc_contrato'].'<a href="contratos_rev.php#'.$fila['no_contrato'].'">
-                   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
-                   <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                   <path fill-rule="evenodd" d="M5.172 10.828a.5.5 0 0 0 .707 0l4.096-4.096V9.5a.5.5 0 1 0 1 0V5.525a.5.5 0 0 0-.5-.5H6.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
-                   </svg>
-                   </a></td>';
-              elseif ($fila['status_contrato'] != 'B'):
-                   echo '<td class="proveedor desDeContrato">'.$fila['desc_contrato'].'</td>';
-              endif;
-              echo "<td class='proveedor'>".$fila['area_contrato']."</td>";
-              echo "<td class='proveedor'>".$fila['termino_contrato']."</a></td>";
-              echo "<td>$".number_format($fila['monto_contrato'],2)."</td>";
-              echo "<td>$".number_format($fila['Devengo'],2)."</td>";
-              echo "</tr>";
-              }
-              mysqli_free_result($result);
-              mysqli_close($link);
-              ?>
+        
+                                        <?php foreach ($data1 as $us) { ?>
+                                            <tr>
+                                            <td><?php
+                                                    if ($us['estado'] == 4) {?>
+                                                          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                                          <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/></svg>
+                                                        <?php } elseif ($us['estado'] == 2) {?>
+                                                          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                                          <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>
+                                                        <?php  } elseif ($us['estado'] == 3) {?>
+                                                          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
+                                                          <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"/></svg>
+                                                        <?php  } elseif ($us['estado'] == 1) {?>
+                                                          <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                                          <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"/></svg>
+                                                        <?php } 
+                                                        ?> </td>
+                                                <td><?php echo $us['numero']; ?></td>
+                                                <td><?php echo $us['descripcion']; ?></td>
+                                                <td><?php echo $us['administrador']; ?></td>
+                                                <td><?php echo $us['termino']; ?></td>
+                                                <td><?php echo $us['maximo']; ?></td>
+                                                <td><?php echo $us['devengo']; ?></td>
+                                              
+                                            </tr>
+                                        <?php }?>
+                                    
             </tbody>
           </table>
         </div>
@@ -761,7 +421,7 @@ endif;
 <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
 <circle cx="8" cy="4.5" r="1"/>
 </svg></span></label>
-                    <input type="number" class="form-control" id="monto_contrato" name="monto_contrato" value="" required>
+                    <input type="number" class="form-control" id="maximo" name="maximo" value="" required>
                 </div>
                 <div class="mb-3" style="margin-bottom:25px !important;">
                     <label for="setting-input-3" class="form-label">Contacto Proveedor</label>

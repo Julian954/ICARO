@@ -38,5 +38,20 @@ class ContratosModel extends Mysql{
         return $return;
     }
 
+    public function selectContrato()
+    {
+        $sql = "SELECT * FROM contratos";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    public function porcentajesCont()
+    {
+        $sql = "SELECT estado, COUNT(*) AS total FROM contratos GROUP BY estado;";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    
 }
 ?>

@@ -13,7 +13,9 @@ class Contratos extends Controllers //Aquí se debe llamas igual que el archivo
     //llamado de las vistas
     public function Contratos_seguimiento()
     {
-        $this->views->getView($this, "Contratos_seguimiento", "");
+        $data1 =$this->model->selectContrato();
+        $data2 =$this->model->porcentajesCont();
+        $this->views->getView($this, "Contratos_seguimiento", "",$data1, $data2);
     }
 
     public function Contratos_Revision()
@@ -42,12 +44,14 @@ class Contratos extends Controllers //Aquí se debe llamas igual que el archivo
         $fecha = $_POST['fecha'];
 
         $insert = $this->model->agregarContrato($numero, $descripcion, $administrador, $area, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha);
-    
+        $alert='Registrado';
+        header("location: " . base_url() . "Contratos/Contratos_Registro?msg=$alert");
+        die();
     } 
 
     public function mostrar()
     {
-        
+
     }
 }
 ?>
