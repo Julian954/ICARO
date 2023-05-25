@@ -38,6 +38,5 @@ class ContratosModel extends Mysql{
         return $return;
     }
 
-    public function 
 }
 ?>
