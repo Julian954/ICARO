@@ -10,6 +10,8 @@
     <meta name="author" content="">
     <meta name="robots" content="all,follow">
 
+	
+
     <title>MARYS OOARD Colima</title>
     <!-- Bootstrap CSS-->
     <!-- theme stylesheet-->
