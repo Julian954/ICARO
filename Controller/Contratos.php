@@ -24,8 +24,10 @@ class Contratos extends Controllers {
         $data3 = $this->model->totalcontratos();
         $data4 = $this->model->tipocontrato();
         $data5 = $this->model->tipoplatformaconv();
+        $data6 = $this->model->datosuser();
+        $data7 = $this->model->PgsBarContr();
 
-        $this->views->getView($this, "Contratos_seguimiento", "", $data1, $data2, $data3, $data4, $data5);
+        $this->views->getView($this, "Contratos_seguimiento", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
     }
 
     /**
@@ -60,7 +62,7 @@ class Contratos extends Controllers {
         $devengo = 0; // default
         $fecha = $_POST['fecha'];
 
-        $insert = $this->model->agregarContrato($numero, $descripcion, $administrador, $area, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha);
+        $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha);
         $alert = 'Registrado';
         header("location: " . base_url() . "Contratos/Contratos_Registro?msg=$alert");
         die();
