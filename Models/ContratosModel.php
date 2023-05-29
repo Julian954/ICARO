@@ -1,14 +1,24 @@
 <?php
-class ContratosModel extends Mysql{
 
+class ContratosModel extends Mysql {
+
+    /**
+     * Propiedades de la clase ContratosModel
+     */
     public $numero, $descripcion, $administrador, $area, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha;
-    public function __construct()
-    {
+
+    /**
+     * Constructor de la clase ContratosModel
+     * Llama al constructor de la clase padre (Mysql) para establecer la conexión con la base de datos.
+     */
+    public function __construct() {
         parent::__construct();
     }
 
-    public function agregarContrato(string $numero, string $administrador, string $descripcion, string $area, string $tipo, string $termino, string $maximo, string $fianza, string $estado, string $plataforma, string $devengo, string $fecha)
-    {
+    /**
+     * Agrega un nuevo contrato a la base de datos.
+     */
+    public function agregarContrato(string $numero, string $descripcion, string $area, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $estado, string $plataforma, string $devengo, string $fecha) {
         $return = "";
         $this->numero = $numero;
         $this->descripcion = $descripcion;
@@ -23,31 +33,39 @@ class ContratosModel extends Mysql{
         $this->plataforma = $plataforma;
         $this->fecha = $fecha;
 
+        // Verifica si el contrato ya existe en la base de datos
         $sql = "SELECT * FROM contratos WHERE numero = '{$this->numero}'";
-        $result = $this->selecT($sql);
+        $result = $this->select($sql);
+
         if (empty($result)) {
+            // Si el contrato no existe, se inserta en la base de datos
             $query = "INSERT INTO contratos(numero, descripcion, area, administrador, tipo, termino, maximo, devengo, fianza, estado, plataforma, fecha) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            $data = array($this->numero, $this->administrador, $this->area, $this->descripcion, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->estado, $this->plataforma, $this->fecha);
+            $data = array($this->numero, $this->descripcion, $this->area, $this->administrador, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->estado, $this->plataforma, $this->fecha);
             $resul = $this->insert($query, $data);
-            
+
             $return = $resul;
         } else {
-                $return = "Contrato existente";
+            // Si el contrato ya existe, se devuelve un mensaje indicando que el contrato ya existe
+            $return = "Contrato existente";
         }
-        
+
         return $return;
     }
 
-    public function selectContrato()
-    {
+    /**
+     * Selecciona todos los contratos de la base de datos.
+     */
+    public function selectContrato() {
         $sql = "SELECT * FROM contratos";
         $res = $this->select_all($sql);
         return $res;
     }
 
-    public function porcentajesCont()
-    {
-        $sql = "SELECT estado, COUNT(*) AS total FROM contratos GROUP BY estado;";
+    /**
+     * Obtiene los porcentajes de contratos agrupados por estado.
+     */
+    public function porcentajesCont() {
+        $sql = "SELECT estado, COUNT(*) AS total FROM contratos GROUP BY estado";
         $res = $this->select_all($sql);
         return $res;
     }
@@ -66,6 +84,7 @@ class ContratosModel extends Mysql{
         $this->yo = $yo;
         $this->fecha = $fecha;      
 
+<<<<<<< HEAD
         $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
         $result = $this->selecT($sql);
         if (empty($result)) {
@@ -111,5 +130,90 @@ class ContratosModel extends Mysql{
         $res = $this->select_all($sql);
         return $res;
     }
+=======
+    /**
+     * Obtiene el total de contratos y la suma de los máximos de los contratos.
+     */
+    public function totalcontratos() {
+        $sql = "SELECT COUNT(*) as total, SUM(maximo) as maximo FROM contratos";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    /**
+     * Obtiene el número de contratos agrupados por tipo.
+     */
+    public function tipocontrato() {
+        $sql = "SELECT COUNT(numero) as cont FROM contratos WHERE (tipo!='Conv. Monto') AND (tipo!='Conv. Vigencia')
+                UNION
+                SELECT COUNT(numero) as cont FROM contratos WHERE (tipo!='Por Monto') AND (tipo!='Por Vigencia')";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    /**
+     * Obtiene la cantidad de contratos por plataforma y tipo de contrato (convocatoria o contrato).
+     */
+    public function tipoplatformaconv() {
+        $sql = "SELECT plataforma, 
+        SUM(CASE WHEN tipo IN ('Conv. Vigencia', 'Conv. Monto') THEN 1 ELSE 0 END) AS conv_count,
+        SUM(CASE WHEN tipo IN ('Por Vigencia', 'Por Monto') THEN 1 ELSE 0 END) AS contr_count
+        FROM contratos
+        WHERE plataforma IN ('SAI', 'PREI')
+        GROUP BY plataforma";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    public function datosuser()
+    {
+        $ID = $_SESSION['id'];
+        $sql="SELECT nombre as nom,correo as correo,telefono as phone,perfil as foto FROM usuarios WHERE id = $ID";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+    
+    public function PgsBarContr()
+    {
+        $sql = "SELECT COUNT(numero) as TCM FROM contratos WHERE area = 'Jefatura de Prestaciones Medicas'
+                UNION ALL
+                SELECT COUNT(numero) as TCM2 FROM contratos WHERE area = 'Jefatura de Prestaciones Medicas' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM3 FROM contratos WHERE area = 'Jefatura de Servicios Administrativos'
+                UNION ALL
+                SELECT COUNT(numero) as TCM4 FROM contratos WHERE area = 'Jefatura de Servicios Administrativos' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM5 FROM contratos WHERE area = 'Jefatura de Servicios Prestaciones Económicas'
+                UNION ALL
+                SELECT COUNT(numero) as TCM6 FROM contratos WHERE area = 'Jefatura de Servicios Prestaciones Económicas' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM7 FROM contratos WHERE area = 'Coordinación de Comuniación Social'
+                UNION ALL
+                SELECT COUNT(numero) as TCM8 FROM contratos WHERE area = 'Coordinación de Comuniación Social' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM9 FROM contratos WHERE area = 'Departamento de Conservación'
+                UNION ALL
+                SELECT COUNT(numero) as TCM10 FROM contratos WHERE area = 'Departamento de Conservación' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM11 FROM contratos WHERE area = 'Departamento de Servicios Generales'
+                UNION ALL
+                SELECT COUNT(numero) as TCM12 FROM contratos WHERE area = 'Departamento de Servicios Generales' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM13 FROM contratos WHERE area = 'Coordinación de Informática'
+                UNION ALL
+                SELECT COUNT(numero) as TCM14 FROM contratos WHERE area = 'Coordinación de Informática' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM15 FROM contratos WHERE area = 'Coordinación Biomédica'
+                UNION ALL
+                SELECT COUNT(numero) as TCM16 FROM contratos WHERE area = 'Coordinación Biomédica' AND estado = '4'";
+        $res = $this->select_all($sql);
+        return $res;
+        
+    }
+
+    
+
+>>>>>>> d03e81aad8cb8814dc8bf4d6146d9ec572bfd289
 }
 ?>
+

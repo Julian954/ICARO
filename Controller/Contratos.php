@@ -1,37 +1,62 @@
 <?php
-class Contratos extends Controllers //Aquí se debe llamas igual que el archivo
-{
-    public function __construct()
-    {
+
+class Contratos extends Controllers {
+
+    /**
+     * Inicia la sesión y verifica si el usuario está activo.
+     * Si el usuario no está activo, redirige al inicio de sesión.
+     * Llama al constructor de la clase padre (Controllers).
+     */
+    public function __construct() {
         session_start();
         if (empty($_SESSION['activo'])) {
-            header("location: ".base_url());
+            header("location: " . base_url());
         }
         parent::__construct();
     }
 
-    //llamado de las vistas
-    public function Contratos_seguimiento()
-    {
-        $data1 =$this->model->selectContrato();
-        $data2 =$this->model->porcentajesCont();
-        $this->views->getView($this, "Contratos_seguimiento", "",$data1, $data2);
+    /**
+     * Muestra la vista "Contratos_seguimiento" con los datos obtenidos de los modelos.
+     */
+    public function Contratos_seguimiento() {
+        $data1 = $this->model->selectContrato();
+        $data2 = $this->model->porcentajesCont();
+        $data3 = $this->model->totalcontratos();
+        $data4 = $this->model->tipocontrato();
+        $data5 = $this->model->tipoplatformaconv();
+        $data6 = $this->model->datosuser();
+        $data7 = $this->model->PgsBarContr();
+
+        $this->views->getView($this, "Contratos_seguimiento", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
     }
 
+<<<<<<< HEAD
     public function Contratos_Revision()
     {        
         $data10 =$this->model->validar_cont();
         $data1 =$this->model->selectContrato();
         $this->views->getView($this, "Contratos_Revision", "",$data10,$data1);
+=======
+    /**
+     * Muestra la vista "Contratos_Revision".
+     */
+    public function Contratos_Revision() {
+        $this->views->getView($this, "Contratos_Revision", "");
+>>>>>>> d03e81aad8cb8814dc8bf4d6146d9ec572bfd289
     }
 
-    public function Contratos_Registro(){
+    /**
+     * Muestra la vista "Contratos_Registro".
+     */
+    public function Contratos_Registro() {
         $this->views->getView($this, "Contratos_Registro", "");
     }
 
-    //agrega nuevo contrato
-    public function agregar()
-    {
+    /**
+     * Agrega un nuevo contrato a la base de datos con los datos proporcionados mediante el formulario.
+     * Redirige a la vista "Contratos_Registro" con un mensaje de alerta.
+     */
+    public function agregar() {
         $numero = $_POST['numero'];
         $descripcion = $_POST['descripcion'];
         $area = $_POST['area'];
@@ -41,21 +66,17 @@ class Contratos extends Controllers //Aquí se debe llamas igual que el archivo
         $maximo = $_POST['maximo'];
         $fianza = $_POST['fianza'];
         $plataforma = $_POST['plataforma'];
-        $estado = 1; //POR DEFAULT SE CREAN CON 1 (En Contratacion)
-        $devengo = 0; //default\
+        $estado = 1; // POR DEFAULT SE CREAN CON 1 (En Contratacion)
+        $devengo = 0; // default
         $fecha = $_POST['fecha'];
 
-        $insert = $this->model->agregarContrato($numero, $descripcion, $administrador, $area, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha);
-        $alert='Registrado';
+        $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha);
+        $alert = 'Registrado';
         header("location: " . base_url() . "Contratos/Contratos_Registro?msg=$alert");
         die();
-    } 
-
-    public function mostrar()
-    {
-
     }
 
+<<<<<<< HEAD
     public function agregar_validadcont()
     {
         $name = pathinfo($_FILES["archivo"]["name"]);
@@ -96,5 +117,7 @@ class Contratos extends Controllers //Aquí se debe llamas igual que el archivo
         die();
     }
 
+=======
+>>>>>>> d03e81aad8cb8814dc8bf4d6146d9ec572bfd289
 }
 ?>

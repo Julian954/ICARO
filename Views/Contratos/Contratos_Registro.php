@@ -44,7 +44,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="setting-input-3" class="form-label">Area Requirente</label>
-                    <select class="form-control" id="area" name="area">
+                    <select class="form-control" id="area" name="area" required>
                       <option>Jefatura de Prestaciones Médicas</option>
                         <option>Jefatura de Servicios Administrativos</option>
                         <option>Jefatura de Servicios Prestaciones Económicas</option>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="setting-input-3" class="form-label">Tipo del Contrato</label>
-                    <select class="form-control" id="tipo" name="tipo">
+                    <select class="form-control" id="tipo" name="tipo" required>
                       <option value="Por Monto">Por Monto</option>
                       <option value="Por Vigencia">Por Vigencia</option>
                       <option value="Conv. Vigencia">Conv. Vigencia</option>
@@ -65,27 +65,28 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="setting-input-3" class="form-label" style="color:#000000;">Término</label>
-                    <input type="date" class="form-control" id="termino" name="termino" value="">
+                 <label for="setting-input-3" class="form-label" style="color:#000000;">Término</label>
+                 <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="termino" name="termino" value="" require>
                 </div>
+
                 <div class="mb-3">
                     <label for="setting-input-3" class="form-label" style="color:#000000;">Máximo $</label>
-                    <input type="text" class="form-control" id="maximo" name="maximo" value="">
+                    <input type="number" min="0" class="form-control" id="maximo" name="maximo" value="" required>
                 </div>
                 <div class="mb-3">
                     <label for="setting-input-3" class="form-label" style="color:#000000;">No. Fianza</label>
-                    <input type="text" class="form-control" id="fianza" name="fianza" value="">
+                    <input type="text" class="form-control" id="fianza" name="fianza" value="" required>
                 </div>
                 <div class="mb-3">
                     <label for="setting-input-3" class="form-label" style="color:#000000;">Plataforma de carga</label>
-                    <select class="form-control" id="plataforma" name="plataforma">
+                    <select class="form-control" id="plataforma" name="plataforma" required>
                       <option value="SAI">SAI</option>
                       <option value="PREI">PREI</option>
                     </select>
                   </div>
                   <div class="mb-3">
                     <label for="setting-input-3" class="form-label" style="display: none;">Término</label>
-                    <input type="hidden" id="fecha" name="fecha" value="<?php echo date('Y-m-d'); ?>">
+                    <input type="hidden" id="fecha" name="fecha" value="<?php echo date('Y-m-d'); ?>" required>
                   </div>
                   <button type="submit" class="btn app-btn-primary">Cargar</button>
                 </form>
