@@ -1,6 +1,6 @@
 <?php
 class Views{
-    function getView($controller, $view, $alert="", $data1 = "", $data2 = "", $data3 = "", $data4 = "", $data5 = "")
+    function getView($controller, $view, $alert="", $data1 = "", $data2 = "", $data3 = "", $data4 = "", $data5 = "", $data10 = "")
     {
         $controller = get_class($controller);
         if ($controller == "Login") {

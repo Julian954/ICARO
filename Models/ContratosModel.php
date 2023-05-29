@@ -51,7 +51,65 @@ class ContratosModel extends Mysql{
         $res = $this->select_all($sql);
         return $res;
     }
+//query de validar_cont
+    public function validar_cont(){
+        $sql = "SELECT * FROM validar_cont";
+        $res=$this->select_all($sql);
+        return $res;
+    }
+    public function agregar_validar(string $number, string $descripcion, string $yo, string $tu, string $fecha)
+    {
+        $return = "";
+        $this->tu = $tu;
+        $this->number = $number;
+        $this->descripcion = $descripcion;        
+        $this->yo = $yo;
+        $this->fecha = $fecha;      
 
-    
+        $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
+        $result = $this->selecT($sql);
+        if (empty($result)) {
+            $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador, fecha) VALUES (?,?,?,?,?)";
+            $data = array($this->number, $this->descripcion, $this->yo, $this->tu, $this->fecha);
+            $resul = $this->insert($query, $data);
+            
+            $return = $resul;
+        } else {
+                $return = "Contrato existente";
+        }
+        
+        return $return;
+    }
+
+    //Subir el archivo PDF a BD
+    public function agregar_pdf(string $number, string $descripcion, string $yo, string $tu, string $nombre_archivo, string $fecha)
+    {
+        $return = "";
+        $this->tu = $tu;
+        $this->number = $number;
+        $this->descripcion = $descripcion;        
+        $this->yo = $yo;
+        $this->fecha = $fecha;       
+        $this->nombre_archivo = $nombre_archivo;
+        $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
+        $result = $this->selecT($sql);
+        if (empty($result)) {
+            $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador, archivo, fecha) VALUES (?,?,?,?,?,?)";
+            $data = array($this->number, $this->descripcion, $this->yo, $this->tu, $this->nombre_archivo, $this->fecha);
+            $resul = $this->insert($query, $data);
+            
+            $return = $resul;
+        } else {
+                $return = "Contrato existente";
+        }
+        
+        return $return;
+    }
+    public function pedir_datos()
+    {
+        $sql = "SELECT * FROM validar_cont";
+        $res = $this->select_all($sql);
+        return $res;
+    }
 }
 ?>
