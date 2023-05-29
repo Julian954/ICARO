@@ -18,7 +18,7 @@ class ContratosModel extends Mysql {
     /**
      * Agrega un nuevo contrato a la base de datos.
      */
-    public function agregarContrato(string $numero, string $administrador, string $descripcion, string $area, string $tipo, string $termino, string $maximo, string $fianza, string $estado, string $plataforma, string $devengo, string $fecha) {
+    public function agregarContrato(string $numero, string $descripcion, string $area, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $estado, string $plataforma, string $devengo, string $fecha) {
         $return = "";
         $this->numero = $numero;
         $this->descripcion = $descripcion;
@@ -103,6 +103,55 @@ class ContratosModel extends Mysql {
         $res = $this->select_all($sql);
         return $res;
     }
+
+    public function datosuser()
+    {
+        $ID = $_SESSION['id'];
+        $sql="SELECT nombre as nom,correo as correo,telefono as phone,perfil as foto FROM usuarios WHERE id = $ID";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+    
+    public function PgsBarContr()
+    {
+        $sql = "SELECT COUNT(numero) as TCM FROM contratos WHERE area = 'Jefatura de Prestaciones Medicas'
+                UNION ALL
+                SELECT COUNT(numero) as TCM2 FROM contratos WHERE area = 'Jefatura de Prestaciones Medicas' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM3 FROM contratos WHERE area = 'Jefatura de Servicios Administrativos'
+                UNION ALL
+                SELECT COUNT(numero) as TCM4 FROM contratos WHERE area = 'Jefatura de Servicios Administrativos' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM5 FROM contratos WHERE area = 'Jefatura de Servicios Prestaciones Económicas'
+                UNION ALL
+                SELECT COUNT(numero) as TCM6 FROM contratos WHERE area = 'Jefatura de Servicios Prestaciones Económicas' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM7 FROM contratos WHERE area = 'Coordinación de Comuniación Social'
+                UNION ALL
+                SELECT COUNT(numero) as TCM8 FROM contratos WHERE area = 'Coordinación de Comuniación Social' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM9 FROM contratos WHERE area = 'Departamento de Conservación'
+                UNION ALL
+                SELECT COUNT(numero) as TCM10 FROM contratos WHERE area = 'Departamento de Conservación' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM11 FROM contratos WHERE area = 'Departamento de Servicios Generales'
+                UNION ALL
+                SELECT COUNT(numero) as TCM12 FROM contratos WHERE area = 'Departamento de Servicios Generales' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM13 FROM contratos WHERE area = 'Coordinación de Informática'
+                UNION ALL
+                SELECT COUNT(numero) as TCM14 FROM contratos WHERE area = 'Coordinación de Informática' AND estado = '4'
+                UNION ALL
+                SELECT COUNT(numero) as TCM15 FROM contratos WHERE area = 'Coordinación Biomédica'
+                UNION ALL
+                SELECT COUNT(numero) as TCM16 FROM contratos WHERE area = 'Coordinación Biomédica' AND estado = '4'";
+        $res = $this->select_all($sql);
+        return $res;
+        
+    }
+
+    
+
 }
 ?>
 

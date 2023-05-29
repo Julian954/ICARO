@@ -33,15 +33,18 @@
                     <div class="app-card-header px-4 py-3">
                         <div class="row g-3 align-items-center">
                             <div class="col-12 col-lg-auto text-center text-lg-left">
-                                <img class="profile-image" src="assets/images/profiles/profile-1.png" alt="">
+                                <img class="profile-image" src="<?php echo base_url(); ?>Assets/img/users/<?php echo $_SESSION['perfil'] ?>" alt="user profile">
                                 </div><!--//col-->
                                   <div class="col-12 col-lg-auto text-center text-lg-left">
                                   <div class="notification-type mb-2"><span class="badge bg-info">Oficina de Contratos</span></div>
-                                  <h4 class="notification-title mb-1">Mtro. Luis Godínez Cruz</h4>
+                                  <?php $nombre = $data6[0]['nom']; ?>
+                                  <h4 class="notification-title mb-1"><?php echo $nombre; ?> </h4>
+                                  <?php $correo = $data6[0]['correo']; ?>
+                                  <?php $phone = $data6[0]['phone']; ?>
                                   <ul class="notification-meta list-inline mb-0">
-                                    <li class="list-inline-item">luis.godinezœimss.gob.mx</li>
+                                    <li class="list-inline-item"><?php echo $correo; ?></li>
                                     <li class="list-inline-item">|</li>
-                                    <li class="list-inline-item">312 111 22 33</li>
+                                    <li class="list-inline-item"><?php echo $phone; ?></li>
                                   </ul>
                             </div><!--//col-->
                         </div><!--//row-->
@@ -58,7 +61,7 @@
     <?php $tot = $data3[0]['total']; ?>
     <span style="font-weight:bold;"></span><span style="">Total de Instrumentos:</span>&nbsp<strong><span style="font-weight:bold; text-decoration:solid underline #5B99EA 2px;"> <?php echo $tot; ?> </strong> </span>
     <?php $max = $data3[0]['maximo']; ?>                                      
-    </span>&nbsp<span>a un ascendente de :</span>&nbsp<span style="font-weight:bold;"><strong>$<?php echo number_format($max, 2); ?> </strong>
+    </span>&nbsp<span>a un ascendente de :</span>&nbsp<span style="font-weight:bold;">$<?php echo number_format($max, 2); ?>
     </span>
   </div>
 <div>
@@ -83,21 +86,21 @@
 <div style="padding-top:15px;">
 <?php foreach ($data2 as $cn) {
   if ($cn['estado'] == 4) { ?>
-    <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-      <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z" /></svg>
-    <span style="font-weight:bold;"></span><span style="">Formalizado</span>&nbsp<strong> <?php echo $cn['total'] ?></strong>
+  <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
+      <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z" /></svg>
+    <span style="font-weight:bold;"></span><span style="">Formalizado: </span>&nbsp<strong> <?php echo $cn['total'] ?>&nbsp</strong>
   <?php } elseif ($cn['estado'] == 2) { ?>
     <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-      <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z" /></svg>
-    <span style="font-weight:bold;"></span><span style="">Validacion</span>&nbsp<strong> <?php echo $cn['total'] ?></strong>
+      <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z" /></svg>
+    <span style="font-weight:bold;"></span><span style="">Elaboracion:</span>&nbsp<strong> <?php echo $cn['total'] ?>&nbsp</strong>
   <?php } elseif ($cn['estado'] == 3) { ?>
-    <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
-      <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z" /></svg>
-    <span style="font-weight:bold;"></span><span style="">Elaboracion</span>&nbsp<strong> <?php echo $cn['total'] ?></strong>
+    <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+      <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z" /></svg>
+    <span style="font-weight:bold;"></span><span style="">Validacion:</span>&nbsp<strong> <?php echo $cn['total'] ?>&nbsp</strong>
   <?php } elseif ($cn['estado'] == 1) { ?>
     <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
       <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" /></svg>
-    <span style="font-weight:bold;"></span><span style="">Contratación</span>&nbsp<strong> <?php echo $cn['total'] ?></strong>
+    <span style="font-weight:bold;"></span><span style="">Contratación: </span>&nbsp<strong> <?php echo $cn['total'] ?>&nbsp</strong>
   <?php }
 } ?>
 
@@ -107,35 +110,104 @@
 </div>
                   </div><!--//col-->
                   <div class="col-12 col-lg-6">
-<div style="padding-bottom:20px; font-weight:bold; font-size:14px; color:#F39C12;">Flujo de Formalización</div>
-<div><span style="color:#000000;">Prestaciones Médicas</span></div>
+<div style="padding-bottom:20px; font-weight:bold; font-size:16px; color:#F39C12;">Flujo de Formalización</div>
+  <div style="padding-top:10px;"><span style="color:#000000;">Prestaciones Médicas</span></div>
+  <div>
+    <?php 
+      // Verificar la existencia de los valores y asignar cero en caso de no estar definidos
+      $pTotalContratosArea2 = isset($data7[0]['TCM']) ? $data7[0]['TCM'] : 0;
+      $pTotalContratosAreaF = isset($data7[1]['TCM']) ? $data7[1]['TCM'] : 0;
+      // Calcular el porcentaje de la barra de progreso
+      $pTotalDatoBarra = ($pTotalContratosArea2 != 0) ? ($pTotalContratosAreaF / $pTotalContratosArea2) * 100 : 0;
+    ?>
+  </div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
-<div style="padding-top:10px;"><span style="color:#000000;">Servicios Prestaciones Económicas</span></div>
-<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra, 2);?>%</div>
 </div>
 
-<div style="padding-top:10px;"><span style="color:#000000;">Comuniación Social</span></div>
+<div style="padding-top:10px;"><span style="color:#000000;">Jefatura de Servicios Administrativos</span></div>
+  <div>
+    <?php 
+      $pTotalContratosAreaAdm = isset($data7[2]['TCM']) ? $data7[2]['TCM'] : 0;
+      $pTotalContratosAreaAD = isset($data7[3]['TCM']) ? $data7[3]['TCM'] : 0;
+      $pTotalDatoBarra2 = ($pTotalContratosAreaAdm != 0) ? ($pTotalContratosAreaAD / $pTotalContratosAreaAdm) * 100 : 0;
+    ?>
+  </div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra2;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra2;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra2, 2);?>%</div>
 </div>
-<div style="padding-top:10px;"><span style="color:#000000;">Conservación</span></div>
+
+
+<div style="padding-top:10px;"><span style="color:#000000;">Servicios Prestaciones Económicas</span></div>
+<div>
+    <?php 
+      $pTotalContratosAreaEcm = isset($data7[4]['TCM']) ? $data7[4]['TCM'] : 0;
+      $pTotalContratosAreaEC = isset($data7[5]['TCM']) ? $data7[5]['TCM'] : 0;
+      $pTotalDatoBarra3 = ($pTotalContratosAreaEcm != 0) ? ($pTotalContratosAreaEC / $pTotalContratosAreaEcm) * 100 : 0;
+    ?>
+  </div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra3;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra3;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra3, 2);?>%</div>
 </div>
-<div style="padding-top:10px;"><span style="color:#000000;">Servicios Generales</span></div>
+
+<div style="padding-top:10px;"><span style="color:#000000;">Coordinación de Comuniación Social</span></div>
+<div>
+    <?php 
+      $pTotalContratosAreaCsl = isset($data7[6]['TCM']) ? $data7[6]['TCM'] : 0;
+      $pTotalContratosAreaCS = isset($data7[7]['TCM']) ? $data7[7]['TCM'] : 0;
+      $pTotalDatoBarra4 = ($pTotalContratosAreaCsl != 0) ? ($pTotalContratosAreaCS / $pTotalContratosAreaCsl) * 100 : 0;
+    ?>
+  </div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra4;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra4;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra4, 2);?>%</div>
 </div>
-<div style="padding-top:10px;"><span style="color:#000000;">Informática</span></div>
+
+<div style="padding-top:10px;"><span style="color:#000000;">Departamento de Conservación</span></div>
+<div>
+    <?php 
+      $pTotalContratosAreaDcn = isset($data7[8]['TCM']) ? $data7[8]['TCM'] : 0;
+      $pTotalContratosAreaDC = isset($data7[9]['TCM']) ? $data7[9]['TCM'] : 0;
+      $pTotalDatoBarra5 = ($pTotalContratosAreaDcn != 0) ? ($pTotalContratosAreaDC / $pTotalContratosAreaDcn) * 100 : 0;
+    ?>
+  </div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra5;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra5;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra5, 2);?>%</div>
 </div>
-<div style="padding-top:10px;"><span style="color:#000000;">Biomédica</span></div>
+
+<div style="padding-top:10px;"><span style="color:#000000;">Departamento de Servicios Generales</span></div>
+<div>
+    <?php 
+      $pTotalContratosAreaSgn = isset($data7[10]['TCM'])? $data7[10]['TCM'] : 0;
+      $pTotalContratosAreaSG = isset($data7[11]['TCM'])? $data7[11]['TCM'] : 0;
+      $pTotalDatoBarra6 = ($pTotalContratosAreaSgn != 0) ? ($pTotalContratosAreaSG / $pTotalContratosAreaSgn) * 100 : 0;
+    ?>
+  </div>
 <div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:%;" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra6;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra6;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra6, 2);?>%</div>
+</div>
+
+<div style="padding-top:10px;"><span style="color:#000000;">Coordinación de Informática</span></div>
+<div>
+<?php 
+$pTotalContratosAreaInf = isset($data7[12]['TCM']) ? $data7[12]['TCM'] : 0;
+$pTotalContratosAreaIN = isset($data7[13]['TCM']) ? $data7[13]['TCM'] : 0;
+$pTotalDatoBarra7 = ($pTotalContratosAreaInf != 0) ? ($pTotalContratosAreaIN / $pTotalContratosAreaInf) * 100 : 0;
+    ?>
+  </div>
+<div class="progress">
+<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra7;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra7;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra7, 2);?>%</div>
+</div>
+
+<div style="padding-top:10px;"><span style="color:#000000;">Coordinación Biomédica</span></div>
+<div>
+    <?php
+      $pTotalContratosAreaBmd = isset($data7[14]['TCM']) ? $data7[14]['TCM'] : 0;
+      $pTotalContratosAreaBI = isset($data7[15]['TCM']) ? $data7[15]['TCM'] : 0;
+      $pTotalDatoBarra1 = ($pTotalContratosAreaBmd != 0) ? ($pTotalContratosAreaBI / $pTotalContratosAreaBmd) * 100 : 0;
+    ?>
+  </div>
+<div class="progress">
+<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra1;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra1;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra1, 2);?>%</div>
 </div>
                   </div><!--//col-->
               </div><!--//row-->
@@ -222,7 +294,7 @@
           </div><!--//app-card-body-->
         </div><!--//inner-->
       </div><!--//app-card-->
-      <table class="table table-head-bg-success table-striped table-hover" id="Table">
+      <table class="table table-striped table-hover" id="Table">
   <thead style="background-color:#59d05d !important; font-size: 0.875rem !important; color:#ffffff !important; vertical-align: middle !important; border:1px !important; font-size:14px; border-color:#ebedf2 !important; padding:0.75rem !important;">
     <tr>
       <th scope="col"></th>
@@ -375,62 +447,6 @@
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
 
-      <div id="myModal" class="modal" role="dialog" style="overflow-y: auto !important;">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <div class="" style="color:##2E4053; font-weight:bold;" id="resultadoNombreServicio"></div>
-              <div class="" style="color:#5cb377; font-size:20px;" id="resultadoNumeroContrato"></div>
-            </div>
-            <div class="modal-body">
-              <div class="app-card-body">
-                <form class="settings-form" id="formulario_actualiza_contrato" method="POST" action="php/modificaElContrato.php">
-                  <div class="mb-3">
-                    <label for="setting-input-1" class="form-label">Status del Instrumento<span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="El nuevo registro se sobre escribe sobre el campo actual de 'Status'"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="red" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-<circle cx="8" cy="4.5" r="1"/>
-</svg></span></label>
-                    <select type="text" class="form-control" id="status_contrato" name="status_contrato" required>
-                        <option></option>
-                        <option value="AA">En Contrtación</option>
-                        <option value="A">En Elaboración</option>
-                        <option value="B">En Validación</option>
-                        <option value="CC">Firma del TOOADR</option>
-                        <option value="C">Formalizado</option>
-                    </select>
-                </div>
-                <div class="form-check form-switch mb-3">
-                <input class="form-check-input" type="checkbox" id="settings-switch-1" onclick="myFunction()">
-                <label class="form-check-label" for="settings-switch-1">
-                Aplica Fianza<span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="En caso de 'NO' Aplicar la Fianza, deberá contar con la evidencia por parte del administrador del contrato respectoa a la entrega en un plazo 'NO MAYOR' a 10 (diez) días"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="red" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-<circle cx="8" cy="4.5" r="1"/>
-</svg></span></label>
-                </div>
-                <div id="fianza_contrato_modulo" class="mb-3" style="display:none">
-                    <label for="setting-input-2" class="form-label">Registro de Fianza</label>
-                    <input type="text" class="form-control" id="fianza_contrato" name="fianza_contrato" value="" required>
-                </div>
-                <div class="mb-3">
-                    <label for="setting-input-3" class="form-label">Modificar el Monto Máximo del Contrato<span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Modificar el 'Monto Máximo' en caso de un Topamiento y/o Destopamiento"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="green" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-<circle cx="8" cy="4.5" r="1"/>
-</svg></span></label>
-                    <input type="number" class="form-control" id="maximo" name="maximo" value="" required>
-                </div>
-                <div class="mb-3" style="margin-bottom:25px !important;">
-                    <label for="setting-input-3" class="form-label">Contacto Proveedor</label>
-                    <input type="email" class="form-control" id="contacto_contrato" name="contacto_contrato" value="proveedor@razonsocial.com">
-                </div>
-                <div class="mb-3" style="margin-bottom:25px !important;">
-                    <input hidden="" readonly disable="disable" class="form-control" id="cajaNumeroContrato" name="no_contrato" value="" placeholder="no_contrato">
-                </div>
-                <button type="submit" class="btn app-btn-primary">Guadar Cambios</button>
-                <a class="btn" style="background: #E74C3C !important; color: #fff !important; border-color: #E74C3C !important;" data-dismiss="modal" id="btnLimpiar">Salir</a>
-                </form>
               </div><!--//app-card-body-->
             </div>
           </div>
