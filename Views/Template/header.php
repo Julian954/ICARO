@@ -164,7 +164,7 @@
 						    </li><!--//nav-item-->
 
 							<li class="nav-item has-submenu">
-						        <a class="nav-link submenu-toggle" href="#" data-toggle="collapse" data-target="#submenu-1" aria-expanded="<?php if ($linkShort == "/IMSS/Contratos") { echo "true"; } else { echo "false";} ?>" aria-controls="submenu-1">
+						        <a class="nav-link submenu-toggle <?php if ($linkShort == "/IMSS/Contratos") { echo 'active" aria-expanded="true"'; } else { echo '" aria-expanded="false"';} ?> href="#" data-toggle="collapse" data-target="#submenu-1"  aria-controls="submenu-1">
 							        <span class="nav-icon">
 							        	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 										  	<path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
@@ -178,7 +178,7 @@
 										</svg>
 		                            </span><!--//submenu-arrow-->
 						        </a><!--//nav-link-->
-						        <div id="submenu-1" class="collapse submenu submenu-1" data-parent="#menu-accordion">
+						        <div id="submenu-1" class="collapse submenu submenu-1 <?php if ($linkShort == "/IMSS/Contratos") { echo "show"; } ?>" data-parent="#menu-accordion">
 							        <ul class="submenu-list list-unstyled">
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/General">Seguimiento</a></li>
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Validando">Flujo de Revisión</a></li>

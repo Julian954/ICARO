@@ -1,20 +1,109 @@
 <?php
-class InicioModel extends Mysql{ //El archivo se debe llamar igual que el controller + MODEL
-    public $id, $usuario, $nombre, $correo, $rol, $clave, $estado, $perfil; //Aquí van las variables que están en la base de datos, podemos dejarlas en blanco pero ponerlas aquí facilita el trabajo
+class InicioModel extends Mysql{ 
+    public $id, $area, $usuario, $tipo, $plataforma;
     public function __construct()
     {
         parent::__construct();
     }
 
-    //Se pueden hacer 5 tipo de consultas
-    public function selectUsuarios()
+    //Selecciona las áreas
+    public function SelectAreas()
     {
-        $sql = "SELECT * FROM usuarios";
-        $res = $this->select_all($sql); //select_all es para seleccionar cuando el resultado puede arrojar muchas filas
+        $sql = "SELECT * FROM areas";
+        $res = $this->select_all($sql);
         return $res;
     }
 
-    //Registra un nuevo usuario
+    //Selecciona los tipos
+    public function SelectTipo()
+    {
+        $sql = "SELECT * FROM tipos";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Selecciona las plataformas
+    public function SelectPlataforma()
+    {
+        $sql = "SELECT * FROM plataformas";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Agrega Area
+    public function agregarArea(string $Area, string $Usuario)
+    {
+        $return = "";
+        $this->Area = $Area;
+        $this->Usuario = $Usuario;
+        $query = "INSERT INTO areas(area, usuario) VALUES (?,?)";
+        $data = array($this->Area, $this->Usuario);
+        $resul = $this->insert($query, $data);
+        return $resul;
+    }
+
+    //Elimina Area
+    public function eliminarArea(int $id)
+    {
+        $return = "";
+        $this->id = $id;
+        $query = "DELETE FROM areas WHERE id='{$this->id}' ";
+        $resul = $this->delete($query);
+        $return = $resul;
+        return $return;
+    }
+
+    //Agrega Tipo
+    public function AgregarTipo(string $Tipo, string $Usuario)
+    {
+        $return = "";
+        $this->Tipo = $Tipo;
+        $this->Usuario = $Usuario;
+        $query = "INSERT INTO tipos(tipo, usuario) VALUES (?,?)";
+        $data = array($this->Tipo, $this->Usuario);
+        $resul = $this->insert($query, $data);
+        return $resul;
+    }
+
+    //Elimina Tipo
+    public function EliminarTipo(int $id)
+    {
+        $return = "";
+        $this->id = $id;
+        $query = "DELETE FROM tipos WHERE id= '{$this->id}'";
+        $resul = $this->delete($query);
+        $return = $resul;
+        return $return;
+    }
+
+    //Agrega Plataforma
+    public function AgregarPlataforma(string $Plataforma, string $Usuario)
+    {
+        $return = "";
+        $this->Plataforma = $Plataforma;
+        $this->Usuario = $Usuario;
+        $query = "INSERT INTO plataformas(plataforma, usuario) VALUES (?,?)";
+        $data = array($this->Plataforma, $this->Usuario);
+        $resul = $this->insert($query, $data);
+        return $resul;
+    }
+
+    //Elimina Plataforma
+    public function EliminarPlataforma(int $id)
+    {
+        $return = "";
+        $this->id = $id;
+        $query = "DELETE FROM plataformas WHERE id= '{$this->id}'";
+        $resul = $this->delete($query);
+        $return = $resul;
+        return $return;
+    }
+
+
+
+
+
+
     public function insertarUsuarios(string $nombre, string $usuario, string $clave, string $rol, string $correo)
     {
         $return = "";

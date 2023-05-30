@@ -1,31 +1,15 @@
-<?php encabezado() ?> <!-- Poner el header -->
-
 <?php if($_SESSION['rol'] <= 1){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
-<div class="page-content2">
-    <section>
-        <div class="card container-fluid2 text-center">
-            <div class="card-header"><i class="fas fa-exclamation-circle"></i> ERROR</div>
-            <div class="card-body">
-                <img src="../Assets/img/unicornio.png" style="height: 400px; ">
-                <h5 class="card-title">Error: No tienes acceso a esta página.</h5>
-            </div>
-            <div class="card-footer text-muted">
-              <a href="<?php echo base_url() ?>login" class="btn btn-primary">Ir al inicio</a>
-            </div>
-        </div>
-    </section>
-</div>
+  <?php permisos() ?> <!-- Poner el mensaje de erro -->
 <?php }  else { ?> <!-- En caso de ser valido -->
+  <?php encabezado() ?> <!-- Poner el header -->
 
     <div class="app-wrapper">
-
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
-
 			    <h1 class="app-page-title">Contratos</h1>
 			    <div class="app-card app-card-accordion shadow-sm mb-4">
 				    <div class="app-card-header p-3">
-				       <h4 class="app-card-title">Cargar Instrumento</h4>
+				      <h4 class="app-card-title">Nuevo Contrato</h4>
 				    </div><!--//app-card-header-->
 				    <div class="app-card-body p-4" style="padding-top:20px; important!">
               <div class="app-card-body">
@@ -45,23 +29,17 @@
                   <div class="mb-3">
                     <label for="setting-input-3" class="form-label">Area Requirente</label>
                     <select class="form-control" id="area" name="area" required>
-                      <option>Jefatura de Prestaciones Médicas</option>
-                        <option>Jefatura de Servicios Administrativos</option>
-                        <option>Jefatura de Servicios Prestaciones Económicas</option>
-                        <option>Coordinación de Comuniación Social</option>
-                        <option>Departamento de Conservación</option>
-                        <option>Departamento de Servicios Generales</option>
-                        <option>Coordinación de Informática</option>
-                        <option>Coordinación Biomédica</option>
+                      <?php foreach ($data1 as $area) { ?>
+                        <option> <?php echo $area['area'] ?></option>
+                       <?php } ?>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="setting-input-3" class="form-label">Tipo del Contrato</label>
                     <select class="form-control" id="tipo" name="tipo" required>
-                      <option value="Por Monto">Por Monto</option>
-                      <option value="Por Vigencia">Por Vigencia</option>
-                      <option value="Conv. Vigencia">Conv. Vigencia</option>
-                      <option value="Conv. Monto">Conv. Monto</option>
+                      <?php foreach ($data2 as $tipo) { ?>
+                        <option> <?php echo $tipo['tipo'] ?></option>
+                       <?php } ?>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -80,8 +58,9 @@
                 <div class="mb-3">
                     <label for="setting-input-3" class="form-label" style="color:#000000;">Plataforma de carga</label>
                     <select class="form-control" id="plataforma" name="plataforma" required>
-                      <option value="SAI">SAI</option>
-                      <option value="PREI">PREI</option>
+                      <?php foreach ($data3 as $plataforma) { ?>
+                        <option> <?php echo $plataforma['plataforma'] ?></option>
+                       <?php } ?>
                     </select>
                   </div>
                   <div class="mb-3">

@@ -15,6 +15,62 @@ class ContratosModel extends Mysql {
         parent::__construct();
     }
 
+
+    // Selecciona todos los contratos de la base de datos.
+    public function selectContratos() {
+        $sql = "SELECT * FROM contratos";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Selecciona las áreas
+    public function SelectAreas()
+    {
+        $sql = "SELECT * FROM areas";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Selecciona los tipos
+    public function SelectTipo()
+    {
+        $sql = "SELECT * FROM tipos";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Selecciona las plataformas
+    public function SelectPlataforma()
+    {
+        $sql = "SELECT * FROM plataformas";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    // Selecciona todos los contratos de la base de datos.
+    public function selectContratosVal() {
+        $sql = "SELECT * FROM validar_cont";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    // Selecciona todos los usuarios externos juridicos
+    public function selectExternoJ() {
+        $sql = "SELECT * FROM usuarios WHERE rol = 3";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    // Selecciona todos los contratos en estado 1
+    public function selectContratosEdo1() {
+        $sql = "SELECT * FROM contratos WHERE estado = 1";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+
+
+
     /**
      * Agrega un nuevo contrato a la base de datos.
      */
@@ -52,14 +108,6 @@ class ContratosModel extends Mysql {
         return $return;
     }
 
-    /**
-     * Selecciona todos los contratos de la base de datos.
-     */
-    public function selectContrato() {
-        $sql = "SELECT * FROM contratos";
-        $res = $this->select_all($sql);
-        return $res;
-    }
 
     /**
      * Obtiene los porcentajes de contratos agrupados por estado.
@@ -75,20 +123,19 @@ class ContratosModel extends Mysql {
         $res=$this->select_all($sql);
         return $res;
     }
-    public function agregar_validar(string $number, string $descripcion, string $yo, string $tu, string $fecha)
+    public function agregar_validar(string $number, string $descripcion, string $yo, string $tu)
     {
         $return = "";
         $this->tu = $tu;
         $this->number = $number;
         $this->descripcion = $descripcion;        
-        $this->yo = $yo;
-        $this->fecha = $fecha;      
+        $this->yo = $yo; 
 
         $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
         $result = $this->selecT($sql);
         if (empty($result)) {
-            $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador, fecha) VALUES (?,?,?,?,?)";
-            $data = array($this->number, $this->descripcion, $this->yo, $this->tu, $this->fecha);
+            $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador, fecha) VALUES (?,?,?,?)";
+            $data = array($this->number, $this->descripcion, $this->yo, $this->tu);
             $resul = $this->insert($query, $data);
             
             $return = $resul;
@@ -100,20 +147,19 @@ class ContratosModel extends Mysql {
     }
 
     //Subir el archivo PDF a BD
-    public function agregar_pdf(string $number, string $descripcion, string $yo, string $tu, string $nombre_archivo, string $fecha)
+    public function agregar_pdf(string $number, string $descripcion, string $yo, string $tu, string $nombre_archivo)
     {
         $return = "";
         $this->tu = $tu;
         $this->number = $number;
         $this->descripcion = $descripcion;        
-        $this->yo = $yo;
-        $this->fecha = $fecha;       
+        $this->yo = $yo;    
         $this->nombre_archivo = $nombre_archivo;
         $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
         $result = $this->selecT($sql);
         if (empty($result)) {
-            $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador, archivo, fecha) VALUES (?,?,?,?,?,?)";
-            $data = array($this->number, $this->descripcion, $this->yo, $this->tu, $this->nombre_archivo, $this->fecha);
+            $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador, archivo) VALUES (?,?,?,?,?)";
+            $data = array($this->number, $this->descripcion, $this->yo, $this->tu, $this->nombre_archivo);
             $resul = $this->insert($query, $data);
             
             $return = $resul;

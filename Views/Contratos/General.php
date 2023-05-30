@@ -1,24 +1,9 @@
-<?php encabezado() ?> <!-- Poner el header -->
-
 <?php if($_SESSION['rol'] <= 1){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
-    <div class="page-content2">
-        <section>
-            <div class="card container-fluid2 text-center">
-                <div class="card-header"><i class="fas fa-exclamation-circle"></i> ERROR</div>
-                <div class="card-body">
-                    <img src="../Assets/img/unicornio.png" style="height: 400px; ">
-                    <h5 class="card-title">Error: No tienes acceso a esta página.</h5>
-                </div>
-                <div class="card-footer text-muted">
-                  <a href="<?php echo base_url() ?>login" class="btn btn-primary">Ir al inicio</a>
-                </div>
-            </div>
-        </section>
-    </div>
+  <?php permisos() ?> <!-- Poner el header -->
 <?php } else { ?> <!-- En caso de ser válido -->
-
+  <?php encabezado() ?> <!-- Poner el header -->
+  
     <div class="app-wrapper">
-
         <div class="app-content pt-3 p-lg-4">
             <div class="container-xl">
                 <div class="position-relative mb-3">
@@ -36,26 +21,30 @@
                                 <img class="profile-image" src="<?php echo base_url(); ?>Assets/img/users/<?php echo $_SESSION['perfil'] ?>" alt="user profile">
                                 </div><!--//col-->
                                   <div class="col-12 col-lg-auto text-center text-lg-left">
-                                  <div class="notification-type mb-2"><span class="badge bg-info">Oficina de Contratos</span></div>
-                                  <?php $nombre = $data6[0]['nom']; ?>
-                                  <h4 class="notification-title mb-1"><?php echo $nombre; ?> </h4>
-                                  <?php $correo = $data6[0]['correo']; ?>
-                                  <?php $phone = $data6[0]['phone']; ?>
+                                  <div class="notification-type mb-2">
+                                    <span class="badge bg-info"><?php echo $_SESSION['nrol'] ?></span>
+                                  </div>
+                                  <h4 class="notification-title mb-1"><?php echo $_SESSION['nombre'] ?></h4>
                                   <ul class="notification-meta list-inline mb-0">
-                                    <li class="list-inline-item"><?php echo $correo; ?></li>
+                                    <li class="list-inline-item"><?php echo $_SESSION['correo'] ?></li>
                                     <li class="list-inline-item">|</li>
-                                    <li class="list-inline-item"><?php echo $phone; ?></li>
+                                    <li class="list-inline-item"><?php echo $_SESSION['telefono'] ?></li>
                                   </ul>
-                            </div><!--//col-->
-                        </div><!--//row-->
-                    </div><!--//app-card-header-->
-                    <div class="app-card-body p-4">
-                        <div style="">
-                            <span><svg width="0.5em" height="0.5em"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="red"><path d="M396.8 352h22.4c6.4 0 12.8-6.4 12.8-12.8V108.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v230.4c0 6.4 6.4 12.8 12.8 12.8zm-192 0h22.4c6.4 0 12.8-6.4 12.8-12.8V140.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v198.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h22.4c6.4 0 12.8-6.4 12.8-12.8V204.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v134.4c0 6.4 6.4 12.8 12.8 12.8zM496 400H48V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16zm-387.2-48h22.4c6.4 0 12.8-6.4 12.8-12.8v-70.4c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v70.4c0 6.4 6.4 12.8 12.8 12.8z"/></svg>
-                            &nbsp&nbsp<span style="font-weight: bold;">Estadísticas de la Oficina</span></span>
-                        </div>
-                        <div class="row g-4 mb-4" style="padding-top:10px; font-size:14px;">
-                            <div class="col-12 col-lg-6" style="color:#000000;">
+                                </div><!--//col-->
+                              </div><!--//row-->
+                            </div><!--//app-card-header-->
+                            <div class="app-card-body p-4">
+                              <div style="">
+                                <span>
+                                  <svg width="0.5em" height="0.5em"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="red">
+                                    <path d="M396.8 352h22.4c6.4 0 12.8-6.4 12.8-12.8V108.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v230.4c0 6.4 6.4 12.8 12.8 12.8zm-192 0h22.4c6.4 0 12.8-6.4 12.8-12.8V140.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v198.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h22.4c6.4 0 12.8-6.4 12.8-12.8V204.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v134.4c0 6.4 6.4 12.8 12.8 12.8zM496 400H48V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16zm-387.2-48h22.4c6.4 0 12.8-6.4 12.8-12.8v-70.4c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v70.4c0 6.4 6.4 12.8 12.8 12.8z"/>
+                                  </svg>
+                                  &nbsp&nbsp
+                                  <span style="font-weight: bold;">Estadísticas de la Oficina</span>
+                                </span>
+                              </div>
+                            <div class="row g-4 mb-4" style="padding-top:10px; font-size:14px;">
+                              <div class="col-12 col-lg-6" style="color:#000000;">
 
   <div>
     <?php $tot = $data3[0]['total']; ?>

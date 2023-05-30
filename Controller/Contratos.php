@@ -15,33 +15,35 @@ class Contratos extends Controllers {
         parent::__construct();
     }
 
-    /**
-     * Muestra la vista "Contratos_seguimiento" con los datos obtenidos de los modelos.
-     */
-    public function Contratos_seguimiento() {
-        $data1 = $this->model->selectContrato();
+    // Muestra la vista "Contratos_seguimiento" con los datos obtenidos de los modelos.
+    public function General() {
+        $data1 = $this->model->selectContratos();
         $data2 = $this->model->porcentajesCont();
         $data3 = $this->model->totalcontratos();
         $data4 = $this->model->tipocontrato();
         $data5 = $this->model->tipoplatformaconv();
-        $data6 = $this->model->datosuser();
+
         $data7 = $this->model->PgsBarContr();
 
-        $this->views->getView($this, "Contratos_seguimiento", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
+        $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, "", $data7);
     }
 
-    public function Contratos_Revision()
+    public function Validando()
     {        
-        $data10 =$this->model->validar_cont();
-        $data1 =$this->model->selectContrato();
-        $this->views->getView($this, "Contratos_Revision", "",$data10,$data1);
+        $data1 =$this->model->selectContratosVal();
+        $data2 =$this->model->selectExternoJ();
+        $data3 =$this->model->selectContratosEdo1();
+        $this->views->getView($this, "Validando", "",$data1, $data2, $data3);
     }
 
     /**
-     * Muestra la vista "Contratos_Registro".
+     * Muestra la vista "Registro".
      */
-    public function Contratos_Registro() {
-        $this->views->getView($this, "Contratos_Registro", "");
+    public function Registro() {
+        $data1 = $this->model->SelectAreas();
+        $data2 = $this->model->SelectTipo();
+        $data3 = $this->model->SelectPlataforma();
+        $this->views->getView($this, "Registro", "", $data1, $data2, $data3);
     }
 
     /**
@@ -64,7 +66,7 @@ class Contratos extends Controllers {
 
         $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha);
         $alert = 'Registrado';
-        header("location: " . base_url() . "Contratos/Contratos_Registro?msg=$alert");
+        header("location: " . base_url() . "Contratos/Registro?msg=$alert");
         die();
     }
 
@@ -82,8 +84,7 @@ class Contratos extends Controllers {
         $descripcion = $_POST['descripcion'];        
         $yo = $_SESSION['usuario'];
         $number =$_POST['miSelect2'];
-        //$nombre_archi=$_POST['archivo'];
-        $fecha = $_POST['fecha'];       
+        //$nombre_archi=$_POST['archivo'];   
         //$estado = +1; //POR DEFAULT SE CREAN CON 1 (En Contratacion)
         if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf")){
             if ($error_archivo == UPLOAD_ERR_OK ) {
@@ -91,20 +92,20 @@ class Contratos extends Controllers {
                 $ruta_destino = 'Assets/Documentos/'.$nombre_nuevo;
                 if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
                     $alert='Registrado';            
-                    $agregar= $this->model->agregar_pdf($number, $descripcion, $yo, $tu, $nombre_archivo, $fecha);
+                    $agregar= $this->model->agregar_pdf($number, $descripcion, $yo, $tu, $nombre_archivo);
                 } else {
                     $alert =  'No Se Adjunto Archivo';
-                    $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu, $fecha);
+                    $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
                 }
             } else {
             $alert =  'No Se Adjunto Archivo';
-            $insert = $this->model->agregar_validar( $number, $descripcion, $yo, $tu, $fecha);
+            $insert = $this->model->agregar_validar( $number, $descripcion, $yo, $tu);
             }
         } else {
             $alert =  'No Se Adjunto Archivo';
-            $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu, $fecha);
+            $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
         }                        
-        header("location: " . base_url() . "Contratos/Contratos_Revision?msg=$alert");
+        header("location: " . base_url() . "Contratos/Validacion?msg=$alert");
         die();
     }
 

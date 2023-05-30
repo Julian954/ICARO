@@ -8,10 +8,15 @@ function encabezado($data="")
     $VistaH = "Views/Template/header.php";
     require_once($VistaH);
 }
+function permisos($data="")
+{
+    $VistaPe = "Views/Errors/Permisos.php";
+    require_once($VistaPe);
+}
 function links($data="")
 {
-    $VistaH = "Views/Template/links.php";
-    require_once($VistaH);
+    $VistaL = "Views/Template/links.php";
+    require_once($VistaL);
 }
 function pie($data="")
 {
