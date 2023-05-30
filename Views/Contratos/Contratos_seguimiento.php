@@ -182,10 +182,9 @@
         }
     }
   };
-
-    // Crear la instancia de la gráfica
     new Chart($grafica, config);
 </script>
+
 </div>
                   </div><!--//col-->
                   <div class="col-12 col-lg-6">
