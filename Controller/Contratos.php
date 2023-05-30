@@ -30,19 +30,11 @@ class Contratos extends Controllers {
         $this->views->getView($this, "Contratos_seguimiento", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
     }
 
-<<<<<<< HEAD
     public function Contratos_Revision()
     {        
         $data10 =$this->model->validar_cont();
         $data1 =$this->model->selectContrato();
         $this->views->getView($this, "Contratos_Revision", "",$data10,$data1);
-=======
-    /**
-     * Muestra la vista "Contratos_Revision".
-     */
-    public function Contratos_Revision() {
-        $this->views->getView($this, "Contratos_Revision", "");
->>>>>>> d03e81aad8cb8814dc8bf4d6146d9ec572bfd289
     }
 
     /**
@@ -76,7 +68,6 @@ class Contratos extends Controllers {
         die();
     }
 
-<<<<<<< HEAD
     public function agregar_validadcont()
     {
         $name = pathinfo($_FILES["archivo"]["name"]);
@@ -117,7 +108,5 @@ class Contratos extends Controllers {
         die();
     }
 
-=======
->>>>>>> d03e81aad8cb8814dc8bf4d6146d9ec572bfd289
 }
 ?>

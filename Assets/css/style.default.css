@@ -312,12 +312,15 @@ pre {
 }
 
 .dropdown-toggle::after {
-  border: none !important;
-  content: "\f107";
-  vertical-align: baseline;
-  font-family: "FontAwesome";
-  margin-left: 0.25rem;
-  margin-right: 0.5rem;
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid rgba(0,0,0,0);
+  border-bottom: 0;
+  border-left: 0.3em solid rgba(0,0,0,0);
+  
 }
 
 i[class*="icon-"] {

@@ -84,7 +84,6 @@ class ContratosModel extends Mysql {
         $this->yo = $yo;
         $this->fecha = $fecha;      
 
-<<<<<<< HEAD
         $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
         $result = $this->selecT($sql);
         if (empty($result)) {
@@ -130,7 +129,6 @@ class ContratosModel extends Mysql {
         $res = $this->select_all($sql);
         return $res;
     }
-=======
     /**
      * Obtiene el total de contratos y la suma de los máximos de los contratos.
      */
@@ -213,7 +211,6 @@ class ContratosModel extends Mysql {
 
     
 
->>>>>>> d03e81aad8cb8814dc8bf4d6146d9ec572bfd289
 }
 ?>
 
