@@ -28,6 +28,7 @@
     
     <!-- FontAwesome JS-->
     <script defer src="<?php echo base_url(); ?>Assets/css/fontawesome/js/all.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">

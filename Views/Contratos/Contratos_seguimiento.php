@@ -1,5 +1,4 @@
 <?php encabezado() ?> <!-- Poner el header -->
-
 <?php if($_SESSION['rol'] <= 1){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
     <div class="page-content2">
         <section>
@@ -103,10 +102,90 @@
     <span style="font-weight:bold;"></span><span style="">Contratación: </span>&nbsp<strong> <?php echo $cn['total'] ?>&nbsp</strong>
   <?php }
 } ?>
-
-<div style="padding-top:30px; padding-right:30px;">
-<canvas id="chart-pie0"></canvas>
+<?php
+  $contratacion = $data2[0]['total'];
+  $elaboracion = $data2[1]['total'];
+  $validacion = $data2[2]['total'];
+  $formalizado = $data2[3]['total'];
+  $etiquetas = ["Contratacion", "Elaboracion", "Validacion", "Formalizado"];
+  $datosContratos = [$contratacion, $elaboracion, $validacion, $formalizado];
+?>
+<div style="width: 400px; height: 400px;">
+<canvas id="grafica" style="width: 100px; height: 100px;"></canvas>
 </div>
+
+<script>
+  'use strict';
+
+/* Chart.js docs: https://www.chartjs.org/ */
+
+  window.chartColors = {
+	  color1: '#A8E6CE',
+	  color2: '#DCEDC2',
+	  color3: '#FFD3B5',
+	  color4: '#FFAAA6',
+	  color5: '#FF8C94',
+	  color6: '#00A8C6',
+	  color7: '#FF9C00',
+	  gray: '#a9b5c9',
+	  text: '#252930',
+	  border: '#e7e9ed'
+    };
+
+    // Obtener una referencia al elemento canvas del DOM
+    const $grafica = document.querySelector("#grafica");
+    // Obtener los datos desde PHP
+    const etiquetas = <?php echo json_encode($etiquetas) ?>;
+    const datosContratos = <?php echo json_encode($datosContratos) ?>;
+
+    // Crear la configuración de la gráfica
+    const config = {
+        type: 'pie',
+        data: {
+            labels: etiquetas,
+            datasets: [{
+                label: 'Contratos',
+                data: datosContratos,
+                backgroundColor: [window.chartColors.color1,
+				                          window.chartColors.color2,
+				                          window.chartColors.color3,
+				                          window.chartColors.color4,
+				                          window.chartColors.color5,
+				                          window.chartColors.color6,
+				                          window.chartColors.color7,
+                                ],
+                borderColor: ['rgba(255, 255, 255, 1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+		          responsive: true,
+		          legend: {
+			        display: true,
+			        position: 'right',
+			        align: 'center',
+		        }
+          },
+          plugins: {
+        tooltip: {
+            callbacks: {
+              titleMarginBottom: 5,
+			        bodySpacing: 5,
+			        xPadding: 8,
+			        yPadding: 8,
+			        borderColor: window.chartColors.border,
+			        borderWidth: 1,
+			        backgroundColor: '#fff',
+			        bodyFontColor: window.chartColors.text,
+			        titleFontColor: window.chartColors.text,
+            }
+        }
+    }
+  };
+
+    // Crear la instancia de la gráfica
+    new Chart($grafica, config);
+</script>
 </div>
                   </div><!--//col-->
                   <div class="col-12 col-lg-6">
@@ -464,6 +543,16 @@ $pTotalDatoBarra7 = ($pTotalContratosAreaInf != 0) ? ($pTotalContratosAreaIN / $
 
     <!-- Charts JS -->
     <script src="assets/plugins/chart.js/chart.min.js"></script>
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/chart.js/chart.min.js"></script>
+    <script src="assets/js/index-charts.js"></script>
+    <script src="assets/js/charts-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+    <!-- Page Specific JS -->
+    <script src="assets/js/app.js"></script>
 
  <?php } ?>
 
