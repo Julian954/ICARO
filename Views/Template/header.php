@@ -29,6 +29,8 @@
 
 	    <!-- App CSS -->
 	    <link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 	</head>
 
@@ -180,9 +182,9 @@
 						        </a><!--//nav-link-->
 						        <div id="submenu-1" class="collapse submenu submenu-1 <?php if ($linkShort == "/IMSS/Contratos") { echo "show"; } ?>" data-parent="#menu-accordion">
 							        <ul class="submenu-list list-unstyled">
-								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/General">Seguimiento</a></li>
-								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Validando">Flujo de Revisión</a></li>
-								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Registro">Registro de Contratos</a></li>
+								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Contratos_seguimiento">Seguimiento</a></li>
+								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Contratos_Revision">Flujo de Revisión</a></li>
+								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Contratos_Registro">Registro de Contratos</a></li>
 							        </ul>
 						        </div>
 						    </li><!--//nav-item-->

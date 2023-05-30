@@ -73,25 +73,6 @@ var pieChartConfig = {
 			bodyFontColor: window.chartColors.text,
 			titleFontColor: window.chartColors.text,
 
-			/* Display % in tooltip - https://stackoverflow.com/questions/37257034/chart-js-2-0-doughnut-tooltip-percentages */
-			callbacks: {
-                label: function(tooltipItem, data) {
-					//get the concerned dataset
-					var dataset = data.datasets[tooltipItem.datasetIndex];
-					//calculate the total of this data set
-					var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
-					return previousValue + currentValue;
-					});
-					//get the current items value
-					var currentValue = dataset.data[tooltipItem.index];
-					//calculate the precentage based on the total and current item, also this does a rough rounding to give a whole number
-					var percentage = Math.floor(((currentValue/total) * 100)+0.5);
-
-					return percentage + " recetas";
-			    },
-            },
-
-
 		},
 	}
 };
@@ -193,6 +174,26 @@ var barChartConfig = {
 	}
 }
 
+var ChartContratos = {
+    labels: [
+        "Saudi Arabia",
+        "Russia",
+        "Iraq",
+        "United Arab Emirates",
+        "Canada"
+    ],
+    datasets: [
+        {
+            data: [133.3, 86.2, 52.2, 51.2, 50.2],
+            backgroundColor: [
+                "#FF6384",
+                "#63FF84",
+                "#84FF63",
+                "#8463FF",
+                "#6384FF"
+            ]
+        }]
+};
 // Generate charts on load
 window.addEventListener('load', function(){
 
