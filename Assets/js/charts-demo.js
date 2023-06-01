@@ -77,6 +77,8 @@ var pieChartConfig = {
 	}
 };
 
+
+
 //Bar Chart Demo
 // Barras
 var barChartConfig = {
