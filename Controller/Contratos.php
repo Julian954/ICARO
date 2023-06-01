@@ -36,6 +36,13 @@ class Contratos extends Controllers {
         $this->views->getView($this, "Validando", "",$data1, $data2, $data3);
     }
 
+    public function Foro()
+    {
+        $contrato = $_GET['contrato'];       
+        $data1 =$this->model->selectContrato($contrato);
+        $this->views->getView($this, "Foro", "", $data1);
+    }
+
     /**
      * Muestra la vista "Registro".
      */
@@ -105,7 +112,7 @@ class Contratos extends Controllers {
             $alert =  'No Se Adjunto Archivo';
             $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
         }                        
-        header("location: " . base_url() . "Contratos/Validacion?msg=$alert");
+        header("location: " . base_url() . "Contratos/Validando?msg=$alert");
         die();
     }
 

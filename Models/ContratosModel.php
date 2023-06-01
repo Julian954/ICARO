@@ -68,6 +68,15 @@ class ContratosModel extends Mysql {
         return $res;
     }
 
+    // Selecciona todos los contratos en estado 1
+    public function selectContrato(string $contrato) {
+        $this->contrato = $contrato;
+        $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->contrato}'";
+        $res = $this->select($sql);
+        return $res;
+    }
+    
+
 
 
 
@@ -134,7 +143,7 @@ class ContratosModel extends Mysql {
         $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
         $result = $this->selecT($sql);
         if (empty($result)) {
-            $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador, fecha) VALUES (?,?,?,?)";
+            $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador) VALUES (?,?,?,?)";
             $data = array($this->number, $this->descripcion, $this->yo, $this->tu);
             $resul = $this->insert($query, $data);
             

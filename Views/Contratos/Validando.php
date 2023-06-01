@@ -62,7 +62,7 @@
                                 <td><?php echo $validar['id_creador']; ?></td>
                                 <td><?php echo $validar['id_validador']; ?></td>
                                 <td>2</td>
-                                <td></td>
+                                <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $validar['id_contrato']; ?>">VER</a></td>
 				    						    	</tr>
                             <?php }?>
 				    						  </tbody>

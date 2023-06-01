@@ -93,9 +93,88 @@
   <?php }
 } ?>
 
-<div style="padding-top:30px; padding-right:30px;">
-<canvas id="chart-pie0"></canvas>
+<?php
+  $contratacion = $data2[0]['total'];
+  $elaboracion = $data2[1]['total'];
+  $validacion = $data2[2]['total'];
+  $formalizado = $data2[3]['total'];
+  $etiquetas = ["Contratacion", "Elaboracion", "Validacion", "Formalizado"];
+  $datosContratos = [$contratacion, $elaboracion, $validacion, $formalizado];
+?>
+<div style="width: 400px; height: 400px;">
+<canvas id="grafica" style="width: 100px; height: 100px;"></canvas>
 </div>
+
+<script>
+  'use strict';
+
+/* Chart.js docs: https://www.chartjs.org/ */
+
+  window.chartColors = {
+	  color1: '#A8E6CE',
+	  color2: '#DCEDC2',
+	  color3: '#FFD3B5',
+	  color4: '#FFAAA6',
+	  color5: '#FF8C94',
+	  color6: '#00A8C6',
+	  color7: '#FF9C00',
+	  gray: '#a9b5c9',
+	  text: '#252930',
+	  border: '#e7e9ed'
+    };
+
+    // Obtener una referencia al elemento canvas del DOM
+    const $grafica = document.querySelector("#grafica");
+    // Obtener los datos desde PHP
+    const etiquetas = <?php echo json_encode($etiquetas) ?>;
+    const datosContratos = <?php echo json_encode($datosContratos) ?>;
+
+    // Crear la configuración de la gráfica
+    const config = {
+        type: 'pie',
+        data: {
+            labels: etiquetas,
+            datasets: [{
+                label: 'Contratos',
+                data: datosContratos,
+                backgroundColor: [window.chartColors.color1,
+				                          window.chartColors.color2,
+				                          window.chartColors.color3,
+				                          window.chartColors.color4,
+				                          window.chartColors.color5,
+				                          window.chartColors.color6,
+				                          window.chartColors.color7,
+                                ],
+                borderColor: ['rgba(255, 255, 255, 1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+		          responsive: true,
+		          legend: {
+			        display: true,
+			        position: 'right',
+			        align: 'center',
+		        }
+          },
+          plugins: {
+        tooltip: {
+            callbacks: {
+              titleMarginBottom: 5,
+			        bodySpacing: 5,
+			        xPadding: 8,
+			        yPadding: 8,
+			        borderColor: window.chartColors.border,
+			        borderWidth: 1,
+			        backgroundColor: '#fff',
+			        bodyFontColor: window.chartColors.text,
+			        titleFontColor: window.chartColors.text,
+            }
+        }
+    }
+  };
+    new Chart($grafica, config);
+</script>
 </div>
                   </div><!--//col-->
                   <div class="col-12 col-lg-6">
@@ -205,7 +284,7 @@ $pTotalDatoBarra7 = ($pTotalContratosAreaInf != 0) ? ($pTotalContratosAreaIN / $
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
 
-
+      
 
       <div class="app-content p-lg-4" style="margin-top:-25px !important; padding-top:-25px !important;">
 
@@ -274,7 +353,7 @@ $pTotalDatoBarra7 = ($pTotalContratosAreaInf != 0) ? ($pTotalContratosAreaIN / $
                    </div>
               </div><!--//col-->
               <div class="col-12 col-lg-3">
-                <a class="btn app-btn-primary" href="Contratos_Revision.php" target="_blank"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <a class="btn app-btn-primary" href="<?php echo base_url(); ?>Contratos/Validando" target="_blank"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
 <path fill-rule="evenodd" d="M5.172 10.828a.5.5 0 0 0 .707 0l4.096-4.096V9.5a.5.5 0 1 0 1 0V5.525a.5.5 0 0 0-.5-.5H6.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
 </svg>Flujo de Revisión</a>
