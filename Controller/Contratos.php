@@ -39,8 +39,9 @@ class Contratos extends Controllers {
     public function Foro()
     {
         $contrato = $_GET['contrato'];       
-        $data1 =$this->model->selectContrato($contrato);
-        $this->views->getView($this, "Foro", "", $data1);
+    $data1 =$this->model->selectContrato($contrato);
+        $data2 =$this->model->datos_foro();
+        $this->views->getView($this, "Foro", "", $data1,$data2);
     }
 
     /**
@@ -87,9 +88,10 @@ class Contratos extends Controllers {
         $error_archivo = $_FILES["archivo"]["error"];
         $tmaximo = 20 * 1024 * 1024;
         $tu = $_POST['miSelect1'];
+        //$me=$_POST['yo'];
         //$numero = $_POST['miSelect2'];
         $descripcion = $_POST['descripcion'];        
-        $yo = $_SESSION['usuario'];
+        $yo = $_SESSION['nombre'];
         $number =$_POST['miSelect2'];
         //$nombre_archi=$_POST['archivo'];   
         //$estado = +1; //POR DEFAULT SE CREAN CON 1 (En Contratacion)
@@ -100,21 +102,75 @@ class Contratos extends Controllers {
                 if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
                     $alert='Registrado';            
                     $agregar= $this->model->agregar_pdf($number, $descripcion, $yo, $tu, $nombre_archivo);
+                    //ingreso los datos de contraro, interno y externo para referenciar en el foro
+                    $agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
                 } else {
                     $alert =  'No Se Adjunto Archivo';
                     $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
+                    $agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
                 }
             } else {
             $alert =  'No Se Adjunto Archivo';
             $insert = $this->model->agregar_validar( $number, $descripcion, $yo, $tu);
+            $agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
             }
         } else {
             $alert =  'No Se Adjunto Archivo';
             $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
+            $agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
         }                        
         header("location: " . base_url() . "Contratos/Validando?msg=$alert");
         die();
     }
-
+//descargar el pdf del historial en la conversacion del Foro
+    public function get_pdf(){
+     
+    }
+    public function agregar_comentario(string $contrato)
+    {
+        //$contrato = $_POST['number']; 
+        $name = pathinfo($_FILES["archivo"]["name"]);
+        $nombre_archivo = $_FILES["archivo"]["name"];        
+        $tipo_archivo = $_FILES["archivo"]["type"];
+        $tamano_archivo = $_FILES["archivo"]["size"];
+        $ruta_temporal = $_FILES["archivo"]["tmp_name"];
+        $error_archivo = $_FILES["archivo"]["error"];
+        $tmaximo = 20 * 1024 * 1024;
+        $tu = $_POST['tu'];
+        $number =$_POST['number'];
+        //$me=$_POST['yo'];
+        //$numero = $_POST['miSelect2'];
+        $descripcion = $_POST['descripcion'];        
+        $yo = $_POST['yo'];   
+        $rol=$_SESSION['rol'];
+        //$nombre_archi=$_POST['archivo'];   
+        //$estado = +1; //POR DEFAULT SE CREAN CON 1 (En Contratacion)
+        if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf")){
+            if ($error_archivo == UPLOAD_ERR_OK ) {
+                $nombre_nuevo = $_SESSION['id'].".".$name["extension"];                                
+                $ruta_destino = 'Assets/Documentos/'.$nombre_nuevo;
+                if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
+                    $alert='Registrado';            
+                    $agregar= $this->model->agregar_comentarios_pdf($tu,$yo,$number, $descripcion, $nombre_archivo,$rol);
+                    //ingreso los datos de contraro, interno y externo para referenciar en el foro
+                    //$agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
+                } else {
+                    $alert =  'No Se Adjunto Archivo';
+                    $insert = $this->model->agregar_validar_comentarios($tu,$yo,$number, $descripcion,$rol);
+                    //$agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
+                }
+            } else {
+            $alert =  'No Se Adjunto Archivo';
+            $insert = $this->model->agregar_validar_comentarios( $tu,$yo,$number, $descripcion,$rol);
+            //$agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
+            }
+        } else {
+            $alert =  'No Se Adjunto Archivo';
+            $insert = $this->model->agregar_validar_comentarios($tu,$yo,$number, $descripcion,$rol);
+            //$agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
+        }                        
+        header("location: " . base_url() . "Contratos/Foro?msg=$alert");
+        die();
+    }
 }
 ?>

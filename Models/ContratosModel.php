@@ -56,7 +56,7 @@ class ContratosModel extends Mysql {
 
     // Selecciona todos los usuarios externos juridicos
     public function selectExternoJ() {
-        $sql = "SELECT * FROM usuarios WHERE rol = 3";
+        $sql = "SELECT * FROM usuarios";
         $res = $this->select_all($sql);
         return $res;
     }
@@ -69,14 +69,18 @@ class ContratosModel extends Mysql {
     }
 
     // Selecciona todos los contratos en estado 1
-    public function selectContrato(string $contrato) {
+    public function selectContrato(string $contrato) { //me marca error cuando agrego comentarios en el modal de Foro.php
         $this->contrato = $contrato;
         $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->contrato}'";
         $res = $this->select($sql);
         return $res;
     }
     
-
+ public function datos_foro(){
+    $sql = "SELECT * FROM detalle_cont";
+    $res = $this->select_all($sql);
+        return $res;
+ }
 
 
 
@@ -264,8 +268,67 @@ class ContratosModel extends Mysql {
         
     }
 
-    
+    public function agregar_foro(string $number, string $yo, string $tu)
+    {
+        $return = "";
+        $this->tu = $tu;
+        $this->number = $number;               
+        $this->yo = $yo;                         
+            $query = "INSERT INTO detalle_cont(observacion, id_validacion, id_responde,nombre_interno, nombre_externo) VALUES (?,?,?,?,?)";
+            $data = array($this->number, $this->yo, $this->tu, $this->yo, $this->tu);
+            $resul = $this->insert($query, $data);                        
+    }
 
+    public function agregar_comentarios_pdf(string $tu, string $yo, string $number, string $descripcion, string $nombre_archivo,string $rol)
+    {
+        $return = "";        
+        $this->tu = $tu;                      
+        $this->yo = $yo;    
+        $this->number = $number;
+        $this->descripcion = $descripcion; 
+        $this->nombre_archivo = $nombre_archivo;
+        $this->rol=$rol;
+        if($rol==3){   
+            $query = "INSERT INTO detalle_cont(id_responde, id_validacion, observacion, descripcion, archivo, nombre_interno, nombre_externo) VALUES (?,?,?,?,?,?,?)";
+            $data = array($this->tu, $this->yo,$this->number,$this->descripcion, $this->nombre_archivo,$this->yo, $this->tu);
+            $resul = $this->insert($query, $data);                 
+        return $resul;
+    }
+    else if($rol!=3){       
+            $query = "INSERT INTO detalle_cont(id_responde, id_validacion, observacion, respuesta, archivo, nombre_interno, nombre_externo) VALUES (?,?,?,?,?,?,?)";
+            $data = array($this->tu, $this->yo,$this->number,$this->descripcion, $this->nombre_archivo,$this->yo, $this->tu);
+            $resul = $this->insert($query, $data);  
+        return $resul;
+    }
+}
+    /*public function pedir_datos()
+    {
+        $sql = "SELECT * FROM validar_cont";
+        $res = $this->select_all($sql);
+        return $res;
+    }*/
+
+    public function agregar_validar_comentarios(string $tu, string $yo, string $number, string $descripcion,string $rol)
+    {
+        $return = "";        
+        $this->tu = $tu;
+        $this->yo = $yo; 
+        $this->number = $number;
+        $this->descripcion = $descripcion;        
+        $this->rol=$rol;
+        if($rol==3){            
+                $query = "INSERT INTO detalle_cont(id_responde, id_validacion, observacion, descripcion, nombre_interno, nombre_externo) VALUES (?,?,?,?,?,?)";
+                $data = array($this->tu, $this->yo,$this->number,$this->descripcion,$this->yo, $this->tu);
+                $resul = $this->insert($query, $data);                          
+            return $resul;
+        }
+else if($rol!=3){      
+            $query = "INSERT INTO detalle_cont(id_responde, id_validacion, observacion, respuesta, nombre_interno, nombre_externo) VALUES (?,?,?,?,?,?)";
+            $data = array($this->tu, $this->yo,$this->number,$this->descripcion,$this->yo, $this->tu);
+            $resul = $this->insert($query, $data);       
+        return $resul;
+    }
+}
 }
 ?>
 

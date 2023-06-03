@@ -49,7 +49,7 @@
                               <th scope="col">Fecha de creacion</th>
                               <th scope="col">Interno Juridico</th>
                               <th scope="col">Externo Juridico</th>                
-                              <th scope="col">Estado</th>
+                              <th scope="col">No. Intentos</th>
                               <th scope="col">Ver</th>
 				    							  </tr>
 				    						  </thead>
@@ -61,7 +61,7 @@
                                 <td><?php echo $validar['fecha']; ?></td>
                                 <td><?php echo $validar['id_creador']; ?></td>
                                 <td><?php echo $validar['id_validador']; ?></td>
-                                <td>2</td>
+                                <td><?php echo $validar['intentos'];?></td>
                                 <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $validar['id_contrato']; ?>">VER</a></td>
 				    						    	</tr>
                             <?php }?>
@@ -93,7 +93,7 @@
                       <select class="form-control" name="miSelect1" id="miSelect1">
                           <?php foreach ($data2 as $fila): ?>
                             <?php if($fila['rol']==3){ ?>
-                              <option value="<?php echo $fila['usuario']; ?>"><?php echo $fila['usuario'] ." - ". $fila['nombre']; ?></option>     
+                              <option value="<?php echo $fila['nombre']; ?>"><?php echo $fila['usuario']." - ".$fila['nombre']; ?></option>     
                               <?php } ?>                
                           <?php endforeach; ?>
                       </select>   
@@ -107,7 +107,7 @@
                     </div>
                     <div class="form-group">
                       <label for="setting-input-2" class="form-label">Solicitante</label><!--utilizo el nombre de usuario que se encuentra logeado y lo uso en el campo solicitante--> 
-                      <input type="text" class="form-control" id="yo" name="yo" value="<?php echo $_SESSION['usuario'] . " - ". $_SESSION['nombre'];?>" required disabled>   
+                      <input type="text" class="form-control" id="yo" name="yo" value="<?php echo $_SESSION['nombre'];?>" required disabled>   
                     </div>
                     <div class="form-group">
                       <label for="setting-input-2" class="form-label">Descripción del Contrato</label>
