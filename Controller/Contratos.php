@@ -22,7 +22,6 @@ class Contratos extends Controllers {
         $data3 = $this->model->totalcontratos();
         $data4 = $this->model->tipocontrato();
         $data5 = $this->model->tipoplatformaconv();
-
         $data7 = $this->model->PgsBarContr();
 
         $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, "", $data7);
