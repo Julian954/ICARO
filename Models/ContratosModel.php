@@ -49,7 +49,9 @@ class ContratosModel extends Mysql {
 
     // Selecciona todos los contratos de la base de datos.
     public function selectContratosVal() {
-        $sql = "SELECT * FROM validar_cont";
+        $sql = "SELECT validar_cont.id, validar_cont.id_contrato, validar_cont.descripcion, validar_cont.archivo, validar_cont.intentos, validar_cont.fecha, validar_cont.id_validador AS id_validador, validar_cont.id_creador AS id_creador, u1.nombre as id_creador, u2.nombre as id_validador FROM validar_cont
+                JOIN usuarios u1 ON validar_cont.id_creador = u1.id
+                JOIN usuarios u2 ON validar_cont.id_validador = u2.id;";
         $res = $this->select_all($sql);
         return $res;
     }
@@ -71,13 +73,14 @@ class ContratosModel extends Mysql {
     // Selecciona todos los contratos en estado 1
     public function selectContrato(string $contrato) { //me marca error cuando agrego comentarios en el modal de Foro.php
         $this->contrato = $contrato;
-        $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->contrato}'";
+        $sql = "SELECT * FROM validar_cont, usuarios WHERE validar_cont.id_contrato = '{$this->contrato}' AND validar_cont.id_creador = usuarios.id;";
         $res = $this->select($sql);
         return $res;
     }
     
- public function datos_foro(){
-    $sql = "SELECT * FROM detalle_cont";
+ public function datos_foro(string $contrato){
+    $this->contrato = $contrato;
+    $sql = "SELECT * FROM detalle_cont WHERE observacion = '{$this->contrato}'";
     $res = $this->select_all($sql);
         return $res;
  }
@@ -87,7 +90,7 @@ class ContratosModel extends Mysql {
     /**
      * Agrega un nuevo contrato a la base de datos.
      */
-    public function agregarContrato(string $numero, string $descripcion, string $area, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $estado, string $plataforma, string $devengo, string $fecha) {
+    public function agregarContrato(string $numero, string $descripcion, string $area, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $plataforma, string $devengo) {
         $return = "";
         $this->numero = $numero;
         $this->descripcion = $descripcion;
@@ -98,9 +101,7 @@ class ContratosModel extends Mysql {
         $this->maximo = $maximo;
         $this->devengo = $devengo;
         $this->fianza = $fianza;
-        $this->estado = $estado;
         $this->plataforma = $plataforma;
-        $this->fecha = $fecha;
 
         // Verifica si el contrato ya existe en la base de datos
         $sql = "SELECT * FROM contratos WHERE numero = '{$this->numero}'";
@@ -108,8 +109,8 @@ class ContratosModel extends Mysql {
 
         if (empty($result)) {
             // Si el contrato no existe, se inserta en la base de datos
-            $query = "INSERT INTO contratos(numero, descripcion, area, administrador, tipo, termino, maximo, devengo, fianza, estado, plataforma, fecha) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            $data = array($this->numero, $this->descripcion, $this->area, $this->administrador, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->estado, $this->plataforma, $this->fecha);
+            $query = "INSERT INTO contratos(numero, descripcion, area, administrador, tipo, termino, maximo, devengo, fianza, plataforma) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            $data = array($this->numero, $this->descripcion, $this->area, $this->administrador, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->plataforma);
             $resul = $this->insert($query, $data);
 
             $return = $resul;
@@ -277,6 +278,19 @@ class ContratosModel extends Mysql {
         $res = $this->select_all($sql);
         return $res;
     }*/
+
+    //actualizar estado de contrato
+    public function actualizaEstado(int $estado, string $id)
+    {
+        $return = "";
+        $this->id = $id;
+        $this->estado = $estado;
+        $query = "UPDATE contratos SET estado = ? WHERE numero=?";
+        $data = array($this->estado, $this->id);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;
+    }
 
     public function agregar_validar_comentarios(string $tu, string $yo, string $number, string $descripcion,string $rol)
     {
