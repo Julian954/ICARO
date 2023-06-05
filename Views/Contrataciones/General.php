@@ -47,9 +47,9 @@
                               <div class="col-12 col-lg-6" style="color:#000000;">
 
   <div>
-    <?php $tot = $data1[0]['total']; ?>
+    <?php $tot = $data6[0]['total']; ?>
     <span style="font-weight:bold;"></span><span style="">Total de Instrumentos:</span>&nbsp<strong><span style="font-weight:bold; text-decoration:solid underline #5B99EA 2px;"> <?php echo $tot; ?> </strong> </span>
-    <?php $max = $data1[0]['maximo']; ?>                                      
+    <?php $max = $data6[0]['maximo']; ?>                                      
     </span>&nbsp<span>a un ascendente de :</span>&nbsp<span style="font-weight:bold;">$<?php echo number_format($max, 2); ?>
     </span>
   </div>
@@ -73,218 +73,134 @@
 </div>
 
 <div style="padding-top:15px;">
-<?php foreach ($data2 as $cn) {
-  if ($cn['estado'] == 4) { ?>
-  <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
-      <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z" /></svg>
-    <span style="font-weight:bold;"></span><span style="">Formalizado: </span>&nbsp<strong> <?php echo $cn['total'] ?>&nbsp</strong>
-  <?php } elseif ($cn['estado'] == 2) { ?>
-    <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-      <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z" /></svg>
-    <span style="font-weight:bold;"></span><span style="">Elaboracion:</span>&nbsp<strong> <?php echo $cn['total'] ?>&nbsp</strong>
-  <?php } elseif ($cn['estado'] == 3) { ?>
-    <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-      <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z" /></svg>
-    <span style="font-weight:bold;"></span><span style="">Validacion:</span>&nbsp<strong> <?php echo $cn['total'] ?>&nbsp</strong>
-  <?php } elseif ($cn['estado'] == 1) { ?>
-    <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-      <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" /></svg>
-    <span style="font-weight:bold;"></span><span style="">Contratación: </span>&nbsp<strong> <?php echo $cn['total'] ?>&nbsp</strong>
-  <?php }
-} ?>
+                  <?php foreach ($data4 as $cn) {
+                    if ($cn['estado'] == 1) { ?>
+                      <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" />
+                      </svg>
+                      <span style="font-weight:bold;">En Contratación:</span>&nbsp
+                      <span style="font-weight:bold; text-decoration:solid underline #5B99EA 2px;""><?php echo $cn['total'] ?></span>&nbsp
+                      <span style="font-weight:semibold; color:#ff0000; font-size:12px;">(<?php echo number_format($cn['total']*100/$data6[0]['total'],2); ?>%)</span>&nbsp
+                    <?php } elseif ($cn['estado'] == 2) { ?>
+                      <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z" />
+                      </svg>
+                      <span style="font-weight:bold;">En Elaboración:</span>&nbsp
+                      <span style="font-weight:bold; text-decoration:solid underline #5B99EA 2px;""><?php echo $cn['total'] ?></span>&nbsp
+                      <span style="font-weight:semibold; color:#ff0000; font-size:12px;">(<?php echo number_format($cn['total']*100/$data6[0]['total'],2); ?>%)</span><br>
+                    <?php } elseif ($cn['estado'] == 3) { ?>
+                      <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z" />
+                      </svg>
+                      <span style="font-weight:bold;">En Validación:</span>&nbsp
+                      <span style="font-weight:bold; text-decoration:solid underline #5B99EA 2px;""><?php echo $cn['total'] ?></span>&nbsp
+                      <span style="font-weight:semibold; color:#ff0000; font-size:12px;">(<?php echo number_format($cn['total']*100/$data6[0]['total'],2); ?>%)</span>&nbsp
+                    <?php } elseif ($cn['estado'] == 4) { ?>
+                      <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z" />
+                      </svg>
+                      <span style="font-weight:bold;">Formalizados:</span>&nbsp
+                      <span style="font-weight:bold; text-decoration:solid underline #5B99EA 2px;""><?php echo $cn['total'];?></span>&nbsp
+                      <span style="font-weight:semibold; color:#ff0000; font-size:12px;">(<?php echo number_format($cn['total']*100/$data6[0]['total'],2); ?>%)</span>&nbsp
+                    <?php }
+                  } ?>
 
 <?php
-  $contratacion = $data2[0]['total'];
-  $elaboracion = $data2[1]['total'];
-  $validacion = $data2[2]['total'];
-  $formalizado = $data2[3]['total'];
+  $contratacion = $data4[0]['total'];
+  $elaboracion = $data4[1]['total'];
+  $validacion = $data4[2]['total'];
+  $formalizado = $data4[3]['total'];
   $etiquetas = ["Contratacion", "Elaboracion", "Validacion", "Formalizado"];
   $datosContratos = [$contratacion, $elaboracion, $validacion, $formalizado];
 ?>
 <div style="width: 400px; height: 400px;">
-<canvas id="grafica" style="width: 100px; height: 100px;"></canvas>
-</div>
-
-<script>
-  'use strict';
-
-/* Chart.js docs: https://www.chartjs.org/ */
-
-  window.chartColors = {
-	  color1: '#A8E6CE',
-	  color2: '#DCEDC2',
-	  color3: '#FFD3B5',
-	  color4: '#FFAAA6',
-	  color5: '#FF8C94',
-	  color6: '#00A8C6',
-	  color7: '#FF9C00',
-	  gray: '#a9b5c9',
-	  text: '#252930',
-	  border: '#e7e9ed'
-    };
-
-    // Obtener una referencia al elemento canvas del DOM
-    const $grafica = document.querySelector("#grafica");
-    // Obtener los datos desde PHP
-    const etiquetas = <?php echo json_encode($etiquetas) ?>;
-    const datosContratos = <?php echo json_encode($datosContratos) ?>;
-
-    // Crear la configuración de la gráfica
-    const config = {
-        type: 'pie',
-        data: {
-            labels: etiquetas,
-            datasets: [{
-                label: 'Contratos',
-                data: datosContratos,
-                backgroundColor: [window.chartColors.color1,
-				                          window.chartColors.color2,
-				                          window.chartColors.color3,
-				                          window.chartColors.color4,
-				                          window.chartColors.color5,
-				                          window.chartColors.color6,
-				                          window.chartColors.color7,
-                                ],
-                borderColor: ['rgba(255, 255, 255, 1)'],
-                borderWidth: 1
-            }]
-        },
-        options: {
-		          responsive: true,
-		          legend: {
-			        display: true,
-			        position: 'right',
-			        align: 'center',
-		        }
-          },
-          plugins: {
-        tooltip: {
-            callbacks: {
-              titleMarginBottom: 5,
-			        bodySpacing: 5,
-			        xPadding: 8,
-			        yPadding: 8,
-			        borderColor: window.chartColors.border,
-			        borderWidth: 1,
-			        backgroundColor: '#fff',
-			        bodyFontColor: window.chartColors.text,
-			        titleFontColor: window.chartColors.text,
-            }
-        }
-    }
-  };
-    new Chart($grafica, config);
-</script>
-</div>
-                  </div><!--//col-->
-                  <div class="col-12 col-lg-6">
-<div style="padding-bottom:20px; font-weight:bold; font-size:16px; color:#F39C12;">Flujo de Formalización</div>
-  <div style="padding-top:10px;"><span style="color:#000000;">Prestaciones Médicas</span></div>
-  <div>
-    <?php 
-      // Verificar la existencia de los valores y asignar cero en caso de no estar definidos
-      $pTotalContratosArea2 = isset($data7[0]['TCM']) ? $data7[0]['TCM'] : 0;
-      $pTotalContratosAreaF = isset($data7[1]['TCM']) ? $data7[1]['TCM'] : 0;
-      // Calcular el porcentaje de la barra de progreso
-      $pTotalDatoBarra = ($pTotalContratosArea2 != 0) ? ($pTotalContratosAreaF / $pTotalContratosArea2) * 100 : 0;
-    ?>
-  </div>
-<div class="progress">
-  <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra, 2);?>%</div>
-</div>
-
-<div style="padding-top:10px;"><span style="color:#000000;">Jefatura de Servicios Administrativos</span></div>
-  <div>
-    <?php 
-      $pTotalContratosAreaAdm = isset($data7[2]['TCM']) ? $data7[2]['TCM'] : 0;
-      $pTotalContratosAreaAD = isset($data7[3]['TCM']) ? $data7[3]['TCM'] : 0;
-      $pTotalDatoBarra2 = ($pTotalContratosAreaAdm != 0) ? ($pTotalContratosAreaAD / $pTotalContratosAreaAdm) * 100 : 0;
-    ?>
-  </div>
-<div class="progress">
-  <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra2;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra2;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra2, 2);?>%</div>
-</div>
-
-
-<div style="padding-top:10px;"><span style="color:#000000;">Servicios Prestaciones Económicas</span></div>
-<div>
-    <?php 
-      $pTotalContratosAreaEcm = isset($data7[4]['TCM']) ? $data7[4]['TCM'] : 0;
-      $pTotalContratosAreaEC = isset($data7[5]['TCM']) ? $data7[5]['TCM'] : 0;
-      $pTotalDatoBarra3 = ($pTotalContratosAreaEcm != 0) ? ($pTotalContratosAreaEC / $pTotalContratosAreaEcm) * 100 : 0;
-    ?>
-  </div>
-<div class="progress">
-  <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra3;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra3;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra3, 2);?>%</div>
-</div>
-
-<div style="padding-top:10px;"><span style="color:#000000;">Coordinación de Comuniación Social</span></div>
-<div>
-    <?php 
-      $pTotalContratosAreaCsl = isset($data7[6]['TCM']) ? $data7[6]['TCM'] : 0;
-      $pTotalContratosAreaCS = isset($data7[7]['TCM']) ? $data7[7]['TCM'] : 0;
-      $pTotalDatoBarra4 = ($pTotalContratosAreaCsl != 0) ? ($pTotalContratosAreaCS / $pTotalContratosAreaCsl) * 100 : 0;
-    ?>
-  </div>
-<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra4;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra4;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra4, 2);?>%</div>
-</div>
-
-<div style="padding-top:10px;"><span style="color:#000000;">Departamento de Conservación</span></div>
-<div>
-    <?php 
-      $pTotalContratosAreaDcn = isset($data7[8]['TCM']) ? $data7[8]['TCM'] : 0;
-      $pTotalContratosAreaDC = isset($data7[9]['TCM']) ? $data7[9]['TCM'] : 0;
-      $pTotalDatoBarra5 = ($pTotalContratosAreaDcn != 0) ? ($pTotalContratosAreaDC / $pTotalContratosAreaDcn) * 100 : 0;
-    ?>
-  </div>
-<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra5;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra5;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra5, 2);?>%</div>
-</div>
-
-<div style="padding-top:10px;"><span style="color:#000000;">Departamento de Servicios Generales</span></div>
-<div>
-    <?php 
-      $pTotalContratosAreaSgn = isset($data7[10]['TCM'])? $data7[10]['TCM'] : 0;
-      $pTotalContratosAreaSG = isset($data7[11]['TCM'])? $data7[11]['TCM'] : 0;
-      $pTotalDatoBarra6 = ($pTotalContratosAreaSgn != 0) ? ($pTotalContratosAreaSG / $pTotalContratosAreaSgn) * 100 : 0;
-    ?>
-  </div>
-<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra6;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra6;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra6, 2);?>%</div>
-</div>
-
-<div style="padding-top:10px;"><span style="color:#000000;">Coordinación de Informática</span></div>
-<div>
-<?php 
-$pTotalContratosAreaInf = isset($data7[12]['TCM']) ? $data7[12]['TCM'] : 0;
-$pTotalContratosAreaIN = isset($data7[13]['TCM']) ? $data7[13]['TCM'] : 0;
-$pTotalDatoBarra7 = ($pTotalContratosAreaInf != 0) ? ($pTotalContratosAreaIN / $pTotalContratosAreaInf) * 100 : 0;
-    ?>
-  </div>
-<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra7;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra7;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra7, 2);?>%</div>
-</div>
-
-<div style="padding-top:10px;"><span style="color:#000000;">Coordinación Biomédica</span></div>
-<div>
-    <?php
-      $pTotalContratosAreaBmd = isset($data7[14]['TCM']) ? $data7[14]['TCM'] : 0;
-      $pTotalContratosAreaBI = isset($data7[15]['TCM']) ? $data7[15]['TCM'] : 0;
-      $pTotalDatoBarra1 = ($pTotalContratosAreaBmd != 0) ? ($pTotalContratosAreaBI / $pTotalContratosAreaBmd) * 100 : 0;
-    ?>
-  </div>
-<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo $pTotalDatoBarra1;?>%;" aria-valuenow="<?php echo $pTotalDatoBarra1;?>" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($pTotalDatoBarra1, 2);?>%</div>
-</div>
-                  </div><!--//col-->
-              </div><!--//row-->
-            </div><!--//app-card-body-->
-				</div><!--//app-card-->
-		    </div><!--//container-fluid-->
-	    </div><!--//app-content-->
-
-      
+                    <canvas id="grafica" style="width: 100px; height: 100px;"></canvas>
+                  </div>
+                                                  
+                  <script>
+                    'use strict';
+                                                  
+                  /* Chart.js docs: https://www.chartjs.org/ */
+                                                  
+                    window.chartColors = {
+                  	  color1: '#A8E6CE',
+                  	  color2: '#DCEDC2',
+                  	  color3: '#FFD3B5',
+                  	  color4: '#FFAAA6',
+                  	  color5: '#FF8C94',
+                  	  color6: '#00A8C6',
+                  	  color7: '#FF9C00',
+                  	  gray: '#a9b5c9',
+                  	  text: '#252930',
+                  	  border: '#e7e9ed'
+                      };
+                    
+                      // Obtener una referencia al elemento canvas del DOM
+                      const $grafica = document.querySelector("#grafica");
+                      // Obtener los datos desde PHP
+                      const etiquetas = <?php echo json_encode($etiquetas) ?>;
+                      const datosContratos = <?php echo json_encode($datosContratos) ?>;
+                    
+                      // Crear la configuración de la gráfica
+                      const config = {
+                          type: 'pie',
+                          data: {
+                              labels: etiquetas,
+                              datasets: [{
+                                  label: 'Contratos',
+                                  data: datosContratos,
+                                  backgroundColor: [window.chartColors.color1,
+                  				                          window.chartColors.color2,
+                  				                          window.chartColors.color3,
+                  				                          window.chartColors.color4,
+                  				                          window.chartColors.color5,
+                  				                          window.chartColors.color6,
+                  				                          window.chartColors.color7,
+                                                  ],
+                                  borderColor: ['rgba(255, 255, 255, 1)'],
+                                  borderWidth: 1
+                              }]
+                          },
+                          options: {
+                  		          responsive: true,
+                  		          legend: {
+                  			        display: true,
+                  			        position: 'right',
+                  			        align: 'center',
+                  		        }
+                            },
+                            plugins: {
+                          tooltip: {
+                              callbacks: {
+                                titleMarginBottom: 5,
+                  			        bodySpacing: 5,
+                  			        xPadding: 8,
+                  			        yPadding: 8,
+                  			        borderColor: window.chartColors.border,
+                  			        borderWidth: 1,
+                  			        backgroundColor: '#fff',
+                  			        bodyFontColor: window.chartColors.text,
+                  			        titleFontColor: window.chartColors.text,
+                              }
+                          }
+                      }
+                    };
+                      new Chart($grafica, config);
+                  </script>
+                </div>
+              </div><!--//col-->
+              <div class="col-12 col-lg-6">
+                <div style="padding-bottom:10px; font-weight:bold; font-size:16px; color:#F39C12;">Flujo de Formalización</div>
+                  <?php foreach ($data5 as $bar) { ?>
+                    <div style="padding-top:10px;"><span style="color:#000000;"><?php echo $bar['Area'].' ('.$bar['form'].'/'.$bar['total'].')';?></span></div>
+                    <div class="progress">
+                      <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($bar['form']*100/$bar['total'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($bar['form']*100/$bar['total'],2);?>%</div> 
+                    </div>
+                  <?php } ?>
+                </div><!--//col-->
+              </div><!--//app-card-body-->
+			      </div><!--//app-card-->
+          </div>
 
       <div class="app-content p-lg-4" style="margin-top:-25px !important; padding-top:-25px !important;">
 
@@ -362,16 +278,16 @@ $pTotalDatoBarra7 = ($pTotalContratosAreaInf != 0) ? ($pTotalContratosAreaIN / $
           </div><!--//app-card-body-->
         </div><!--//inner-->
       </div><!--//app-card-->
-      <table class="table table-striped table-hover" id="Table">
-  <thead style="background-color:#59d05d !important; font-size: 0.875rem !important; color:#ffffff !important; vertical-align: middle !important; border:1px !important; font-size:14px; border-color:#ebedf2 !important; padding:0.75rem !important;">
+      <table class="table app-table-hover mb-0 text-left" id="Table">
+  <thead>
     <tr>
       <th scope="col"></th>
-      <th scope="col">Número</th>
+      <th scope="col">Número de Oficio</th>
       <th scope="col">Descripción</th>
       <th scope="col">Administrador</th>
       <th scope="col">Termino</th>
       <th scope="col">Máximo</th>
-      <th scope="col">Devengado</th>
+      <th scope="col">Creacion</th>
     </tr>
   </thead>
   <tbody style="font-size: 0.875rem !important;">
@@ -379,26 +295,26 @@ $pTotalDatoBarra7 = ($pTotalContratosAreaInf != 0) ? ($pTotalContratosAreaIN / $
     <?php foreach ($data1 as $us) { ?>
       <tr>
         <td>
-          <?php if ($us['estado'] == 4) { ?>
+          <?php if ($us['Estado'] == 2) { ?>
             <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
               <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z" /></svg>
-          <?php } elseif ($us['estado'] == 2) { ?>
+          <?php } elseif ($us['Estado'] == 3) { ?>
             <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z" /></svg>
-          <?php } elseif ($us['estado'] == 3) { ?>
+          <?php } elseif ($us['Estado'] == 4) { ?>
             <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
               <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z" /></svg>
-          <?php } elseif ($us['estado'] == 1) { ?>
+          <?php } elseif ($us['Estado'] == 1) { ?>
             <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" /></svg>
           <?php } ?>
         </td>
-        <td><?php echo $us['numero']; ?></td>
-        <td><?php echo $us['descripcion']; ?></td>
-        <td><?php echo $us['administrador']; ?></td>
-        <td><?php echo $us['termino']; ?></td>
-        <td><?php echo $us['maximo']; ?></td>
-        <td><?php echo $us['devengo']; ?></td>
+        <td><?php echo $us['NoOficio']; ?></td>
+        <td><?php echo $us['Descripcion']; ?></td>
+        <td><?php echo $us['Administrador']; ?></td>
+        <td><?php echo $us['Termino']; ?></td>
+        <td><?php echo $us['Maximo']; ?></td>
+        <td><?php echo $us['Inicio']; ?></td>
       </tr>
     <?php } ?>
 

@@ -15,12 +15,26 @@ class ContratacionesModel extends Mysql {
         parent::__construct();
     }
 
+    public function selectContrataciones() {
+        $sql = "SELECT * FROM contrataciones";
+        $res = $this->select_all($sql);
+        return $res;
+    }
 
     // Selecciona todos los contratos de la base de datos.
-    public function totalContrataciones() {
+    public function totalContrataciones()
+    {
         $sql = "SELECT COUNT(*) as total, SUM(Maximo) as maximo FROM contrataciones";
         $res = $this->select_all($sql); 
         return $res;
+    }
+
+    public function PgsBarContrata()
+    {
+        $sql = "SELECT Area, COUNT(*) AS total, SUM(CASE WHEN Estado = 4 THEN 1 ELSE 0 END) AS form FROM contrataciones GROUP BY Area";
+        $res = $this->select_all($sql);
+        return $res;
+        
     }
 
     public function tipocontratoCns() {
@@ -38,6 +52,12 @@ class ContratacionesModel extends Mysql {
         FROM contrataciones
         WHERE Contratacion IN ('Alineamiento', 'Disposicion')
         GROUP BY Contratacion";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    public function porcentajesContrataciones() {
+        $sql = "SELECT estado, COUNT(*) AS total FROM contrataciones GROUP BY estado";
         $res = $this->select_all($sql);
         return $res;
     }
