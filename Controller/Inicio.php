@@ -28,8 +28,9 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data1 = $this->model->SelectAreas();
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
+        $data4 = $this->model->SelectTipoContratacion();
 
-        $this->views->getView($this, "Configuracion", "", $data1, $data2, $data3);
+        $this->views->getView($this, "Configuracion", "", $data1, $data2, $data3, $data4);
         die();
     }
 
@@ -43,6 +44,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data1 = $this->model->SelectAreas();
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
+        $data4 = $this->model->SelectTipoContratacion();
         header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
         die();
     }
@@ -56,6 +58,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data1 = $this->model->SelectAreas();
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
+        $data4 = $this->model->SelectTipoContratacion();
         header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
         die();
     }
@@ -70,6 +73,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data1 = $this->model->SelectAreas();
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
+        $data4 = $this->model->SelectTipoContratacion();
         header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
         die();
     }
@@ -83,6 +87,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data1 = $this->model->SelectAreas();
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
+        $data4 = $this->model->SelectTipoContratacion();
         header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
         die();
     }
@@ -97,6 +102,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data1 = $this->model->SelectAreas();
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
+        $data4 = $this->model->SelectTipoContratacion();
         header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
         die();
     }
@@ -110,10 +116,39 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data1 = $this->model->SelectAreas();
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
+        $data4 = $this->model->SelectTipoContratacion();
         header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
         die();
     }
    
+        //Agregar Plataforma
+        public function AgregarTipoContratacion()
+        {
+            $TipoContrata = $_POST['tipocontrata'];
+            $Usuario = $_SESSION['id'];
+            $Agregar = $this->model->agregarTipoContratacion($TipoContrata, $Usuario);
+            $alert =  'TipoContratacionAgregada';
+            $data1 = $this->model->SelectAreas();
+            $data2 = $this->model->SelectTipo();
+            $data3 = $this->model->SelectPlataforma();
+            $data4 = $this->model->SelectTipoContratacion();
+            header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
+            die();
+        }
+    
+        //Eliminar Plataforma
+        public function EliminarTipoContratacion()
+        {
+            $id = $_GET['id'];
+            $eliminar = $this->model->eliminarTipoContratacion($id);
+            $alert =  'TipoContratacionEliminada';
+            $data1 = $this->model->SelectAreas();
+            $data2 = $this->model->SelectTipo();
+            $data3 = $this->model->SelectPlataforma();
+            $data4 = $this->model->SelectTipoContratacion();
+            header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
+            die();
+        }
 
     public function subir_archivo() {
         // Verificar si se ha enviado un archivo

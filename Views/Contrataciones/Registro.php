@@ -27,12 +27,11 @@
                     <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="" required>
                   </div>
 
-
                   <div class="form-group">
                     <label for="setting-input-3" class="form-label">Tipo de Contratacion</label>
-                    <select class="form-control" id="TipoCn" name="TipoCn" required>
-                      <?php foreach ($data2 as $tipo) { ?>
-                        <option> <?php echo $tipo['tipo'] ?></option>
+                    <select class="form-control" id="tipocontrata" name="tipocontrata" required>
+                      <?php foreach ($data4 as $tipocontrata) { ?>
+                        <option> <?php echo $tipocontrata['tipoco'] ?></option>
                        <?php } ?>
                     </select>
                   </div>

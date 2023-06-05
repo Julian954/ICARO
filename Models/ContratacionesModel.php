@@ -48,6 +48,13 @@ class ContratacionesModel extends Mysql {
         return $res;
     }
 
+    public function SelectTipoContratacion()
+    {
+        $sql = "SELECT * FROM tipos_contratacion";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
     // Selecciona todos los contratos de la base de datos.
     public function selectContratosVal() {
         $sql = "SELECT * FROM validar_cont";

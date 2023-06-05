@@ -1,6 +1,6 @@
 <?php
 class InicioModel extends Mysql{ 
-    public $id, $area, $usuario, $tipo, $plataforma;
+    public $id, $area, $usuario, $tipo, $plataforma, $tipocontrata  ;
     public function __construct()
     {
         parent::__construct();
@@ -26,6 +26,13 @@ class InicioModel extends Mysql{
     public function SelectPlataforma()
     {
         $sql = "SELECT * FROM plataformas";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+    //Seleccionar el tipo de contratacion
+    public function SelectTipoContratacion()
+    {
+        $sql = "SELECT * FROM tipocontrata";
         $res = $this->select_all($sql);
         return $res;
     }
@@ -94,6 +101,28 @@ class InicioModel extends Mysql{
         $return = "";
         $this->id = $id;
         $query = "DELETE FROM plataformas WHERE id= '{$this->id}'";
+        $resul = $this->delete($query);
+        $return = $resul;
+        return $return;
+    }
+    //Agregar contratacion tipo
+    public function AgregarTipoContratacion(string $TipoContrata, string $Usuario)
+    {
+        $return = "";
+        $this->Contrataciones = $TipoContrata;
+        $this->Usuario = $Usuario;
+        $query = "INSERT INTO tipocontrata(tipoco, usuario) VALUES (?,?)";
+        $data = array($this->Contrataciones, $this->Usuario);
+        $resul = $this->insert($query, $data);
+        return $resul;
+    }
+
+    //Elimina Tipo de contratacion
+    public function EliminarTipoContratacion(int $id)
+    {
+        $return = "";
+        $this->id = $id;
+        $query = "DELETE FROM tipocontrata WHERE id= '{$this->id}'";
         $resul = $this->delete($query);
         $return = $resul;
         return $return;
