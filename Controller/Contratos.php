@@ -39,7 +39,7 @@ class Contratos extends Controllers {
     {
         $contrato = $_GET['contrato'];       
         $data1 =$this->model->selectContrato($contrato);
-        $data2 =$this->model->datos_foro();
+        $data2 =$this->model->datos_foro($contrato);
         $this->views->getView($this, "Foro", "", $data1,$data2);
     }
 
@@ -61,17 +61,15 @@ class Contratos extends Controllers {
         $numero = $_POST['numero'];
         $descripcion = $_POST['descripcion'];
         $area = $_POST['area'];
-        $administrador = $_SESSION['nombre'];
+        $administrador = $_SESSION['id'];
         $tipo = $_POST['tipo'];
         $termino = $_POST['termino'];
         $maximo = $_POST['maximo'];
         $fianza = $_POST['fianza'];
         $plataforma = $_POST['plataforma'];
-        $estado = 1; // POR DEFAULT SE CREAN CON 1 (En Contratacion)
         $devengo = 0; // default
-        $fecha = $_POST['fecha'];
 
-        $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha);
+        $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $plataforma, $devengo);
         $alert = 'Registrado';
         header("location: " . base_url() . "Contratos/Registro?msg=$alert");
         die();
@@ -90,34 +88,32 @@ class Contratos extends Controllers {
         //$me=$_POST['yo'];
         //$numero = $_POST['miSelect2'];
         $descripcion = $_POST['descripcion'];        
-        $yo = $_SESSION['nombre'];
+        $yo = $_SESSION['id'];
         $number =$_POST['miSelect2'];
         //$nombre_archi=$_POST['archivo'];   
         //$estado = +1; //POR DEFAULT SE CREAN CON 1 (En Contratacion)
         if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf")){
             if ($error_archivo == UPLOAD_ERR_OK ) {
-                $nombre_nuevo = $_SESSION['id'].".".$name["extension"];                                
-                $ruta_destino = 'Assets/Documentos/'.$nombre_nuevo;
+                $nombre_nuevo = $number.".".$name["extension"];                                
+                $ruta_destino = 'Assets/Documentos/Peticiones/'.$nombre_nuevo;
                 if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
                     $alert='Registrado';            
-                    $agregar= $this->model->agregar_pdf($number, $descripcion, $yo, $tu, $nombre_archivo);
-                    //ingreso los datos de contraro, interno y externo para referenciar en el foro
-                    $agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
+                    $agregar= $this->model->agregar_pdf($number, $descripcion, $yo, $tu, $nombre_nuevo);
+
                 } else {
                     $alert =  'No Se Adjunto Archivo';
                     $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
-                    $agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
                 }
             } else {
             $alert =  'No Se Adjunto Archivo';
             $insert = $this->model->agregar_validar( $number, $descripcion, $yo, $tu);
-            $agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
             }
         } else {
             $alert =  'No Se Adjunto Archivo';
             $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
-            $agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
-        }                        
+        }
+        $estado = 2;
+        $actualizar = $this->model->actualizaEstado($estado, $number);                        
         header("location: " . base_url() . "Contratos/Validando?msg=$alert");
         die();
     }
@@ -135,19 +131,19 @@ class Contratos extends Controllers {
         $ruta_temporal = $_FILES["archivo"]["tmp_name"];
         $error_archivo = $_FILES["archivo"]["error"];
         $tmaximo = 20 * 1024 * 1024;
-        $tu = $_POST['tu'];
+        $tu = 2;
         $number =$_POST['number'];
         //$me=$_POST['yo'];
         //$numero = $_POST['miSelect2'];
         $descripcion = $_POST['descripcion'];        
-        $yo = $_POST['yo'];   
+        $yo = $_SESSION['id'];   
         $rol=$_SESSION['rol'];
         //$nombre_archi=$_POST['archivo'];   
         //$estado = +1; //POR DEFAULT SE CREAN CON 1 (En Contratacion)
         if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf")){
             if ($error_archivo == UPLOAD_ERR_OK ) {
                 $nombre_nuevo = $_SESSION['id'].".".$name["extension"];                                
-                $ruta_destino = 'Assets/Documentos/'.$nombre_nuevo;
+                $ruta_destino = 'Assets/Documentos/Foro/'.$nombre_nuevo;
                 if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
                     $alert='Registrado';            
                     $agregar= $this->model->agregar_comentarios_pdf($tu,$yo,$number, $descripcion, $nombre_archivo,$rol);
@@ -168,7 +164,7 @@ class Contratos extends Controllers {
             $insert = $this->model->agregar_validar_comentarios($tu,$yo,$number, $descripcion,$rol);
             //$agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
         }                        
-        header("location: " . base_url() . "Contratos/Foro?msg=$alert");
+        header("location: " . base_url() . "Contratos/Foro?contrato=$number&=msg=$alert");
         die();
     }
 }

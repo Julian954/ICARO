@@ -93,7 +93,7 @@
                       <select class="form-control" name="miSelect1" id="miSelect1">
                           <?php foreach ($data2 as $fila): ?>
                             <?php if($fila['rol']==3){ ?>
-                              <option value="<?php echo $fila['nombre']; ?>"><?php echo $fila['usuario']." - ".$fila['nombre']; ?></option>     
+                              <option value="<?php echo $fila['id']; ?>"><?php echo $fila['usuario']." - ".$fila['nombre']; ?></option>     
                               <?php } ?>                
                           <?php endforeach; ?>
                       </select>   
@@ -107,7 +107,7 @@
                     </div>
                     <div class="form-group">
                       <label for="setting-input-2" class="form-label">Solicitante</label><!--utilizo el nombre de usuario que se encuentra logeado y lo uso en el campo solicitante--> 
-                      <input type="text" class="form-control" id="yo" name="yo" value="<?php echo $_SESSION['nombre'];?>" required disabled>   
+                      <input type="text" class="form-control" id="yo" name="yo" value="<?php echo $_SESSION['id'];?>" required disabled>   
                     </div>
                     <div class="form-group">
                       <label for="setting-input-2" class="form-label">Descripción del Contrato</label>
