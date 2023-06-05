@@ -99,11 +99,6 @@ class InicioModel extends Mysql{
         return $return;
     }
 
-
-
-
-
-
     public function insertarUsuarios(string $nombre, string $usuario, string $clave, string $rol, string $correo)
     {
         $return = "";
@@ -154,5 +149,30 @@ class InicioModel extends Mysql{
         $return = $resul;
         return $return;
     }
+
+    public function insertar_datos($datos) {
+        array_shift($datos);
+        foreach ($datos as $fila) {
+          $GPO = $fila[0] ?? ''; // Valor de la columna "GPO" en el archivo CSV
+          $ESP = $fila[1] ?? ''; // Valor de la columna "ESP" en el archivo CSV
+          $DIG = $fila[2] ?? ''; // Valor de la columna "DIG" en el archivo CSV
+          $VAR = $fila[3] ?? ''; // Valor de la columna "VAR" en el archivo CSV
+          $CPMtotal = $fila[4] ?? ''; // Valor de la columna "CPMtotal" en el archivo CSV
+          $Unidades = $fila[5] ?? ''; // Valor de la columna "Unidades" en el archivo CSV
+          $Almacen = $fila[6] ?? ''; // Valor de la columna "Almacen" en el archivo CSV
+          $PromConsumo = $fila[7] ?? ''; // Valor de la columna "PromConsumo" en el archivo CSV
+          $CantPiezas = $fila[8] ?? ''; // Valor de la columna "CantPiezas" en el archivo CSV
+          $CantReceta = $fila[9] ?? ''; // Valor de la columna "CantRecetas" en el archivo CSV
+          $Stat = $fila[10] ?? ''; // Valor de la columna "Status" en el archivo CSV
+          $ETA = $fila[11] ?? ''; // Valor de la columna "ETA" en el archivo CSV
+          $Cumplimiento = $fila[12] ?? ''; // Valor de la columna "Cumplimiento" en el archivo CSV
+
+          // Insertar los datos en la base de datos
+          $query = "INSERT INTO negadas(GPO, ESP, DIG, VAR, CPMtotal, Unidades, Almacen, PromConsumo, CantPiezas, CantRecetas, Stat, ETA, Cumplimiento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          $data = array($GPO, $ESP, $DIG, $VAR, $CPMtotal, $Unidades, $Almacen, $PromConsumo, $CantPiezas, $CantReceta, $Stat, $ETA, $Cumplimiento);
+          $resul = $this->insert($query, $data); //insert es para agregar un registro
+        }
+      }      
+    
 }
 ?>

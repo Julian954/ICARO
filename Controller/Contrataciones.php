@@ -1,6 +1,6 @@
 <?php
 
-class Contratos extends Controllers {
+class Contrataciones extends Controllers {
 
     /**
      * Inicia la sesión y verifica si el usuario está activo.

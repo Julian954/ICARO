@@ -9,8 +9,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         }
         parent::__construct();
     }
-
-    //Aquí se debe llamar igual que la vista
+//Aquí se debe llamar igual que la vista
     public function Home()
     {
         $this->views->getView($this, "Home", "");
@@ -29,6 +28,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data1 = $this->model->SelectAreas();
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
+
         $this->views->getView($this, "Configuracion", "", $data1, $data2, $data3);
         die();
     }
@@ -113,5 +113,33 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
         die();
     }
-}
+   
+
+    public function subir_archivo() {
+        // Verificar si se ha enviado un archivo
+        if (!empty($_FILES['archivo_csv']['name'])) {
+          $archivo_tmp = $_FILES['archivo_csv']['tmp_name'];
+          
+          // Procesar el archivo CSV y obtener los datos
+          $datos = [];
+          if (($gestor = fopen($archivo_tmp, 'r')) !== false) {
+            while (($fila = fgetcsv($gestor, 1000, ',')) !== false) {
+              $datos[] = $fila;
+            }
+            fclose($gestor);
+          }
+      
+          // Pasar los datos al modelo para su inserción en la base de datos
+          $this->model->insertar_datos($datos);
+          $alert =  'DocumentoActualizado';
+        }
+        
+        // Redirigir a la página deseada después de la carga del archivo
+        header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
+        die();
+      }
+      
+    
+}                       
 ?>
+
