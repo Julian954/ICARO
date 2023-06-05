@@ -17,7 +17,7 @@ class Contrataciones extends Controllers {
 
     // Muestra la vista "Contratos_seguimiento" con los datos obtenidos de los modelos.
     public function General() {
-        $data1 = $this->model->selectContratos();
+        $data1 = $this->model->totalContrataciones();
         $data2 = $this->model->porcentajesCont();
         $data3 = $this->model->totalcontratos();
         $data4 = $this->model->tipocontrato();
@@ -58,22 +58,41 @@ class Contrataciones extends Controllers {
      * Redirige a la vista "Contratos_Registro" con un mensaje de alerta.
      */
     public function agregar() {
-        $numero = $_POST['numero'];
-        $descripcion = $_POST['descripcion'];
-        $area = $_POST['area'];
+        
+        $name = pathinfo($_FILES['archivo_cont']['name']);
+        $nombre_archivo = $_FILES['archivo_cont']['name'];        
+        $tipo_archivo = $_FILES['archivo_cont']['type'];
+        $tamano_archivo = $_FILES['archivo_cont']['size'];
+        $ruta_temporal = $_FILES['archivo_cont']['tmp_name'];
+        $error_archivo = $_FILES['archivo_cont']['error'];
+        $tmaximo = 20 * 1024 * 1024;
+        $oficio = $_POST['NoOficio'];
         $administrador = $_SESSION['nombre'];
-        $tipo = $_POST['tipo'];
-        $termino = $_POST['termino'];
-        $maximo = $_POST['maximo'];
-        $fianza = $_POST['fianza'];
-        $plataforma = $_POST['plataforma'];
-        $estado = 1; // POR DEFAULT SE CREAN CON 1 (En Contratacion)
-        $devengo = 0; // default
-        $fecha = $_POST['fecha'];
+        $descripcion = $_POST['Descripcion'];
+        $contratacion = $_POST['TipoCn'];
+        $area = $_POST['Area'];
+        $contrato = $_POST['Contrato'];
+        $termino = $_POST['Termino'];
+        $maximo = $_POST['Maximo'];
+        $dictamen = $_POST['Dictamen'];
+        $inicio = $_POST['fecha'];
 
-        $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha);
-        $alert = 'Registrado';
-        header("location: " . base_url() . "Contratos/Registro?msg=$alert");
+        if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf")){
+            if ($error_archivo == UPLOAD_ERR_OK ) {
+                $nombre_nuevo = $oficio.".".$name["extension"];                                
+                $ruta_destino = 'Assets/Documentos/Peticiones/'.$nombre_nuevo;
+                if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
+                    $alert='Registrado';            
+                    $agregar= $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $nombre_archivo, $inicio);
+
+                } else {
+                    $alert =  'No Se Adjunto Archivo';
+                    $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $nombre_archivo, $inicio);
+                }
+            } 
+        }
+        $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $nombre_archivo, $inicio);
+        header("location: " . base_url() . "Contrataciones/Registro?msg=$alert");
         die();
     }
 

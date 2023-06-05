@@ -182,9 +182,9 @@
 						        </a><!--//nav-link-->
 						        <div id="submenu-1" class="collapse submenu submenu-1 <?php if ($linkShort == "/IMSS/Contratos") { echo "show"; } ?>" data-parent="#menu-accordion">
 							        <ul class="submenu-list list-unstyled">
+									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Registro">Registro de Contratos</a></li>
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/General">Seguimiento</a></li>
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Validando">Flujo de Revisión</a></li>
-								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Registro">Registro de Contratos</a></li>
 							        </ul>
 						        </div>
 						    </li><!--//nav-item-->
@@ -206,9 +206,9 @@
 						        </a><!--//nav-link-->
 						        <div id="submenu-2" class="collapse submenu submenu-2 <?php if ($linkShort == "/IMSS/Contrataciones") { echo "show"; } ?>" data-parent="#menu-accordion">
 							        <ul class="submenu-list list-unstyled">
+									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/Registro">Registro de Contrataciones</a></li>
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/General">Seguimiento</a></li>
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/Validando">Flujo de Revisión</a></li>
-								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/Registro">Registro de Contratos</a></li>
 							        </ul>
 						        </div>
 						    </li><!--//nav-item-->
