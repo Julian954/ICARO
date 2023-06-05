@@ -9,7 +9,7 @@
                 <div class="position-relative mb-3">
                     <div class="row g-3 justify-content-between">
                         <div class="col-auto">
-                            <h1 class="app-page-title mb-0">Contratos y Convenios</h1>
+                            <h1 class="app-page-title mb-0">Contrataciones</h1>
                         </div>
                     </div>
                 </div>
@@ -47,29 +47,29 @@
                               <div class="col-12 col-lg-6" style="color:#000000;">
 
   <div>
-    <?php $tot = $data3[0]['total']; ?>
+    <?php $tot = $data1[0]['total']; ?>
     <span style="font-weight:bold;"></span><span style="">Total de Instrumentos:</span>&nbsp<strong><span style="font-weight:bold; text-decoration:solid underline #5B99EA 2px;"> <?php echo $tot; ?> </strong> </span>
-    <?php $max = $data3[0]['maximo']; ?>                                      
+    <?php $max = $data1[0]['maximo']; ?>                                      
     </span>&nbsp<span>a un ascendente de :</span>&nbsp<span style="font-weight:bold;">$<?php echo number_format($max, 2); ?>
     </span>
   </div>
 <div>
   <span style="text-decoration:solid underline #5B99EA 2px;">
-  <?php $conV = $data4[1]['cont']; ?>
+  <?php $conV = $data2[1]['cont']; ?>
   <?php echo $conV; ?>
   </span>&nbsp<span style="font-weight:bold;">Convenios:</span>&nbsp
-  <?php $sai = $data5[1]['conv_count']; ?>
-  <span style="font-weight:lighter; color:#ff0000; font-size:10px;">SAI:</span>&nbsp<span style="font-weight:lighter; font-size:10px;"><strong><?php echo $sai; ?> </strong></span>&nbsp
-  <?php $prei = $data5[0]['conv_count']; ?>
-  <span style="font-weight:lighter; color:#ff0000; font-size:10px;">PREI:</span>&nbsp<span style="font-weight:lighter; font-size:10px;"><?php echo $prei; ?></span>&nbsp&nbsp
+  <?php $sai = $data3[1]['conv_count']; ?>
+  <span style="font-weight:lighter; color:#ff0000; font-size:10px;">Disposicion:</span>&nbsp<span style="font-weight:lighter; font-size:10px;"><strong><?php echo $sai; ?> </strong></span>&nbsp
+  <?php $prei = $data3[0]['conv_count']; ?>
+  <span style="font-weight:lighter; color:#ff0000; font-size:10px;">Alineamiento:</span>&nbsp<span style="font-weight:lighter; font-size:10px;"><?php echo $prei; ?></span>&nbsp&nbsp
   <span style="text-decoration:solid underline #5B99EA 2px;">
-  <?php $contr = $data4[0]['cont']; ?>
+  <?php $contr = $data2[0]['cont']; ?>
   <?php echo $contr; ?>
   </span>&nbsp<span style="font-weight:bold;">Contratos:</span>&nbsp
-  <?php $sai2 = $data5[1]['contr_count']; ?>
-  <span style="font-weight:lighter; color:#ff0000; font-size:10px;">SAI:</span>&nbsp<span style="font-weight:lighter; font-size:10px;"> <?php echo $sai2; ?>
-  <?php $prei2 = $data5[0]['contr_count']; ?>
-  <span style="font-weight:lighter; color:#ff0000; font-size:10px;">PREI:</span>&nbsp<span style="font-weight:lighter; font-size:10px;"> <?php echo $prei2; ?>
+  <?php $sai2 = $data3[1]['contr_count']; ?>
+  <span style="font-weight:lighter; color:#ff0000; font-size:10px;">Disposicion:</span>&nbsp<span style="font-weight:lighter; font-size:10px;"> <?php echo $sai2; ?>
+  <?php $prei2 = $data3[0]['contr_count']; ?>&nbsp
+  <span style="font-weight:lighter; color:#ff0000; font-size:10px;">Alineamiento:</span>&nbsp<span style="font-weight:lighter; font-size:10px;"> <?php echo $prei2; ?>
 </div>
 
 <div style="padding-top:15px;">

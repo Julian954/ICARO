@@ -18,13 +18,9 @@ class Contrataciones extends Controllers {
     // Muestra la vista "Contratos_seguimiento" con los datos obtenidos de los modelos.
     public function General() {
         $data1 = $this->model->totalContrataciones();
-        $data2 = $this->model->porcentajesCont();
-        $data3 = $this->model->totalcontratos();
-        $data4 = $this->model->tipocontrato();
-        $data5 = $this->model->tipoplatformaconv();
-        $data7 = $this->model->PgsBarContr();
-
-        $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, "", $data7);
+        $data2 = $this->model->tipocontratoCns();
+        $data3 = $this->model->tipocontratacion();
+        $this->views->getView($this, "General", "", $data1, $data2, $data3, "", "", "", "");
     }
 
     public function Validando()

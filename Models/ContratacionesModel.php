@@ -18,11 +18,29 @@ class ContratacionesModel extends Mysql {
 
     // Selecciona todos los contratos de la base de datos.
     public function totalContrataciones() {
-        $sql = "SELECT * FROM contrataciones";
+        $sql = "SELECT COUNT(*) as total, SUM(Maximo) as maximo FROM contrataciones";
+        $res = $this->select_all($sql); 
+        return $res;
+    }
+
+    public function tipocontratoCns() {
+        $sql = "SELECT COUNT(NoOficio) as cont FROM contrataciones WHERE (contrato!='Conv. Monto') AND (contrato!='Conv. Vigencia')
+                UNION
+                SELECT COUNT(NoOficio) as cont FROM contrataciones WHERE (contrato!='Por Monto') AND (contrato!='Por Vigencia')";
         $res = $this->select_all($sql);
         return $res;
     }
 
+    public function tipocontratacion() {
+        $sql = "SELECT Contratacion, 
+        SUM(CASE WHEN Contrato IN ('Conv. Vigencia', 'Conv. Monto') THEN 1 ELSE 0 END) AS conv_count,
+        SUM(CASE WHEN Contrato IN ('Por Vigencia', 'Por Monto') THEN 1 ELSE 0 END) AS contr_count
+        FROM contrataciones
+        WHERE Contratacion IN ('Alineamiento', 'Disposicion')
+        GROUP BY Contratacion";
+        $res = $this->select_all($sql);
+        return $res;
+    }
 
     //Selecciona las áreas
     public function SelectAreas()
@@ -131,11 +149,6 @@ class ContratacionesModel extends Mysql {
     /**
      * Obtiene los porcentajes de contratos agrupados por estado.
      */
-    public function porcentajesCont() {
-        $sql = "SELECT estado, COUNT(*) AS total FROM contratos GROUP BY estado";
-        $res = $this->select_all($sql);
-        return $res;
-    }
 //query de validar_cont
     public function validar_cont(){
         $sql = "SELECT * FROM validar_cont";
