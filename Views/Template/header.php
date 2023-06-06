@@ -16,7 +16,7 @@
 	    <!-- Custom stylesheet - for your changes-->
 	    <link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/dataTables.bootstrap4.min.css">
 	    <!-- Favicon-->
-	    <link rel="shortcut icon" href="../Assets/img/favicon.ico">
+	    <link rel="shortcut icon" href="<?php echo base_url(); ?>Assets/img/favicon.ico">
 
 		<!-- Time Zone y URL-->
 		<?php date_default_timezone_set('America/Mexico_City'); 

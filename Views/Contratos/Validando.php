@@ -62,7 +62,12 @@
                                 <td><?php echo $validar['id_creador']; ?></td>
                                 <td><?php echo $validar['id_validador']; ?></td>
                                 <td><?php echo $validar['intentos'];?></td>
-                                <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $validar['id_contrato']; ?>">VER</a></td>
+                                <td>
+                                  <a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $validar['id_contrato']; ?>">VER</a>
+                                  <form action="<?php echo base_url() ?>Contratos/formalizar?contrato=<?php echo $validar['id_contrato']; ?>" method="post" class="d-inline elim">
+                                    <button title="Validar" type="submit" class="btn btn-primary mb-2">Formalizar</button>
+                                  </form>
+                                </td>
 				    						    	</tr>
                             <?php }?>
 				    						  </tbody>
@@ -115,7 +120,7 @@
                     </div>
                     <div class="form-group">
                       <span>Subir Archivo:</span>
-                      <input type="file" name="archivo" value=""/>
+                      <input type="file" name="archivo[]" value="" multiple/>
                     </div>
                 </div>
                 <div class="card-footer">

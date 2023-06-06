@@ -2,19 +2,13 @@
 
 class ContratosModel extends Mysql {
 
-    /**
-     * Propiedades de la clase ContratosModel
-     */
+    // Propiedades de la clase ContratosModel
     public $numero, $descripcion, $administrador, $area, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha;
 
-    /**
-     * Constructor de la clase ContratosModel
-     * Llama al constructor de la clase padre (Mysql) para establecer la conexión con la base de datos.
-     */
+    //Llama al constructor de la clase padre (Mysql) para establecer la conexión con la base de datos.
     public function __construct() {
         parent::__construct();
     }
-
 
     // Selecciona todos los contratos de la base de datos.
     public function selectContratos() {
@@ -49,7 +43,7 @@ class ContratosModel extends Mysql {
 
     // Selecciona todos los contratos de la base de datos.
     public function selectContratosVal() {
-        $sql = "SELECT validar_cont.id, validar_cont.id_contrato, validar_cont.descripcion, validar_cont.archivo, validar_cont.intentos, validar_cont.fecha, validar_cont.id_validador AS id_validador, validar_cont.id_creador AS id_creador, u1.nombre as id_creador, u2.nombre as id_validador FROM validar_cont
+        $sql = "SELECT validar_cont.id, validar_cont.id_contrato, validar_cont.descripcion, validar_cont.intentos, validar_cont.fecha, validar_cont.id_validador AS id_validador, validar_cont.id_creador AS id_creador, u1.nombre as id_creador, u2.nombre as id_validador FROM validar_cont
                 JOIN usuarios u1 ON validar_cont.id_creador = u1.id
                 JOIN usuarios u2 ON validar_cont.id_validador = u2.id;";
         $res = $this->select_all($sql);
@@ -73,17 +67,31 @@ class ContratosModel extends Mysql {
     // Selecciona todos los contratos en estado 1
     public function selectContrato(string $contrato) { //me marca error cuando agrego comentarios en el modal de Foro.php
         $this->contrato = $contrato;
-        $sql = "SELECT * FROM validar_cont, usuarios WHERE validar_cont.id_contrato = '{$this->contrato}' AND validar_cont.id_creador = usuarios.id;";
+        $sql = "SELECT * FROM validar_cont, usuarios WHERE validar_cont.id_contrato = '{$this->contrato}' AND validar_cont.id_creador = usuarios.id";
         $res = $this->select($sql);
         return $res;
     }
     
- public function datos_foro(string $contrato){
-    $this->contrato = $contrato;
-    $sql = "SELECT * FROM detalle_cont WHERE observacion = '{$this->contrato}'";
-    $res = $this->select_all($sql);
+    public function datos_foro(string $contrato){
+       $this->contrato = $contrato;
+       $sql = "SELECT * FROM detalle_cont, usuarios WHERE detalle_cont.contrato = '{$this->contrato}' AND detalle_cont.id_responde = usuarios.id";
+       $res = $this->select_all($sql);
+           return $res;
+    }
+
+     public function archivos_foro(string $contrato){
+        $this->contrato = $contrato;
+        $sql = "SELECT * FROM formatos WHERE contrato = '{$this->contrato}' AND tipo = 1";
+        $res = $this->select_all($sql);
         return $res;
- }
+    }
+
+     public function contarintento(string $contrato){
+        $this->contrato = $contrato;
+        $sql = "SELECT COUNT(*) AS intentos FROM detalle_cont WHERE contrato = '{$this->contrato}'";
+        $res = $this->select($sql);
+        return $res;
+    }
 
 
 
@@ -161,26 +169,18 @@ class ContratosModel extends Mysql {
     }
 
     //Subir el archivo PDF a BD
-    public function agregar_pdf(string $number, string $descripcion, string $yo, string $tu, string $nombre_archivo)
+    public function agregar_pdf(string $contrato, string $nombre, string $intento, string $tipo)
     {
         $return = "";
-        $this->tu = $tu;
-        $this->number = $number;
-        $this->descripcion = $descripcion;        
-        $this->yo = $yo;    
-        $this->nombre_archivo = $nombre_archivo;
-        $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
-        $result = $this->selecT($sql);
-        if (empty($result)) {
-            $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador, archivo) VALUES (?,?,?,?,?)";
-            $data = array($this->number, $this->descripcion, $this->yo, $this->tu, $this->nombre_archivo);
-            $resul = $this->insert($query, $data);
-            
-            $return = $resul;
-        } else {
-                $return = "Contrato existente";
-        }
-        
+        $this->contrato = $contrato;
+        $this->nombre = $nombre;
+        $this->intento = $intento;        
+        $this->tipo = $tipo;    
+
+        $query = "INSERT INTO formatos(contrato, nombre, intento, tipo) VALUES (?,?,?,?)";
+        $data = array($this->contrato, $this->nombre, $this->intento, $this->tipo);
+        $resul = $this->insert($query, $data);
+        $return = $resul;
         return $return;
     }
     public function pedir_datos()
@@ -250,28 +250,6 @@ class ContratosModel extends Mysql {
             $resul = $this->insert($query, $data);                        
     }
 
-    public function agregar_comentarios_pdf(string $tu, string $yo, string $number, string $descripcion, string $nombre_archivo,string $rol)
-    {
-        $return = "";        
-        $this->tu = $tu;                      
-        $this->yo = $yo;    
-        $this->number = $number;
-        $this->descripcion = $descripcion; 
-        $this->nombre_archivo = $nombre_archivo;
-        $this->rol=$rol;
-        if($rol==3){   
-            $query = "INSERT INTO detalle_cont(id_responde, id_validacion, observacion, descripcion, archivo, nombre_interno, nombre_externo) VALUES (?,?,?,?,?,?,?)";
-            $data = array($this->tu, $this->yo,$this->number,$this->descripcion, $this->nombre_archivo,$this->yo, $this->tu);
-            $resul = $this->insert($query, $data);                 
-        return $resul;
-    }
-    else if($rol!=3){       
-            $query = "INSERT INTO detalle_cont(id_responde, id_validacion, observacion, respuesta, archivo, nombre_interno, nombre_externo) VALUES (?,?,?,?,?,?,?)";
-            $data = array($this->tu, $this->yo,$this->number,$this->descripcion, $this->nombre_archivo,$this->yo, $this->tu);
-            $resul = $this->insert($query, $data);  
-        return $resul;
-    }
-}
     /*public function pedir_datos()
     {
         $sql = "SELECT * FROM validar_cont";
@@ -292,26 +270,30 @@ class ContratosModel extends Mysql {
         return $return;
     }
 
-    public function agregar_validar_comentarios(string $tu, string $yo, string $number, string $descripcion,string $rol)
+    //actualizar intento de validar
+    public function actualizarintento(int $intentos, string $id)
+    {
+        $return = "";
+        $this->id = $id;
+        $this->intentos = $intentos;
+        $query = "UPDATE validar_cont SET intentos = ? WHERE id_contrato=?";
+        $data = array($this->intento, $this->id);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;
+    }
+
+    public function agregar_validar_comentarios(string $id_responde, string $contrato, string $respuesta, string $intento)
     {
         $return = "";        
-        $this->tu = $tu;
-        $this->yo = $yo; 
-        $this->number = $number;
-        $this->descripcion = $descripcion;        
-        $this->rol=$rol;
-        if($rol==3){            
-                $query = "INSERT INTO detalle_cont(id_responde, id_validacion, observacion, descripcion, nombre_interno, nombre_externo) VALUES (?,?,?,?,?,?)";
-                $data = array($this->tu, $this->yo,$this->number,$this->descripcion,$this->yo, $this->tu);
-                $resul = $this->insert($query, $data);                          
-            return $resul;
-        }
-else if($rol!=3){      
-            $query = "INSERT INTO detalle_cont(id_responde, id_validacion, observacion, respuesta, nombre_interno, nombre_externo) VALUES (?,?,?,?,?,?)";
-            $data = array($this->tu, $this->yo,$this->number,$this->descripcion,$this->yo, $this->tu);
-            $resul = $this->insert($query, $data);       
+        $this->id_responde = $id_responde;
+        $this->contrato = $contrato;
+        $this->respuesta = $respuesta;        
+        $this->intento=$intento;           
+        $query = "INSERT INTO detalle_cont(id_responde, contrato, respuesta, intento) VALUES (?,?,?,?)";
+        $data = array($this->id_responde, $this->contrato,$this->respuesta,$this->intento);
+        $resul = $this->insert($query, $data);                          
         return $resul;
-    }
 }
 }
 ?>

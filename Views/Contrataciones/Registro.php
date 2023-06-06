@@ -30,17 +30,17 @@
                   <div class="form-group">
                     <label for="setting-input-3" class="form-label">Tipo de Contratacion</label>
                     <select class="form-control" id="tipocontrata" name="tipocontrata" required>
-                      <?php foreach ($data4 as $tipocontrata) { ?>
-                        <option> <?php echo $tipocontrata['tipoco'] ?></option>
-                       <?php } ?>
+                      <?php //foreach ($data4 as $tipocontrata) { ?>
+                        <option> Por Adjudicacion Directa</option>
+                       <?php// } ?>
                     </select>
                   </div>
-                  
+
                   <div class="form-group">
                     <label for="setting-input-3" class="form-label">Area Requirente</label>
                     <select class="form-control" id="Area" name="Area" required>
                       <?php foreach ($data1 as $area) { ?>
-                        <option> <?php echo $area['area'] ?></option>
+                        <option> <?php echo $area['area']; ?></option>
                        <?php } ?>
                     </select>
                   </div>
@@ -49,7 +49,7 @@
                     <label for="setting-input-3" class="form-label">Tipo de Contrato</label>
                     <select class="form-control" id="Contrato" name="Contrato" required>
                       <?php foreach ($data2 as $tipo) { ?>
-                        <option> <?php echo $tipo['tipo'] ?></option>
+                        <option> <?php echo $tipo['tipo']; ?></option>
                        <?php } ?>
                     </select>
                   </div>
@@ -70,13 +70,8 @@
 
                     <div class="form-group text-center">
                       <span>Subir Archivo:</span>
-										  <input type="file" id ="archivo_cont" name="archivo_cont" required>
+										  <input type="file" name="archivo[]" value="" multiple/>
 						        </div>
-
-                  <div class="form-group">
-                    <label for="setting-input-3" class="form-label" style="display: none;">Inicio</label>
-                    <input type="hidden" id="fecha" name="fecha" value="<?php echo date('Y-m-d'); ?>">
-                  </div>
                   
                   <button type="submit" class="btn app-btn-primary mb-2">Agregar Contratacion</button>
 

@@ -22,7 +22,12 @@
             <div class='sstats-meta intro'><?php echo $data1['descripcion']?></div>
             <div class='sstats-meta' style='color:#000000; font-size:10px;'><?php echo $data1['fecha']?></div>
             <div style='margin-top:15px; margin-bottom: 30px;'>
-              <div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/Peticiones/<?php echo $data1['archivo']; ?>" class='btn-sm app-btn-secondary' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $data1['archivo']; ?></a></div></div>
+              <?php foreach ($data3 as $arc) {
+                if ($arc['intento'] == 0) {?>
+                  <div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/Peticiones/<?php echo $arc['nombre']; ?>" class='btn-sm app-btn-secondary mb-2' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $arc['nombre']; ?></a></div><br>
+                <?php }
+              } ?>
+              </div>
             </div><!--//app-card-body-->  
               <!--//app-card-body  <a class='app-card-link-mask' href='#'></a> -->
             </div><!--//app-card-->
@@ -45,16 +50,23 @@
 
             <?php foreach ($data2 as $validar) { ?>
             <div style="padding: 10px 0 0 20px">
-            <div class='sstats-meta text-success'><?php echo $validar['nombre_externo']?></div>
-            <div class='sstats-meta intro'><?php echo $validar['descripcion']?></div>
+            <div class='sstats-meta text-success'><?php echo $validar['nombre']?></div>
+            <div class='sstats-meta intro'><?php echo $validar['respuesta']?></div>
             <div class='sstats-meta' style='color:#000000; font-size:10px;'><?php echo $validar['fecha']?></div>
             <div style='margin-top:15px; margin-bottom: 30px;'>
-              <div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/Foro/<?php echo $validar['archivo']; ?>" class='btn-sm app-btn-secondary' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $validar['archivo']; ?></a></div>
+              <?php foreach ($data3 as $arcv) {
+                if ($arcv['intento'] == $validar['intento']) {?>
+                  <div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/Peticiones/<?php echo $arcv['nombre']; ?>" class='btn-sm app-btn-secondary mb-2' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $arcv['nombre']; ?></a></div><br>
+                <?php }
+              } ?>
+              </div>
             </div>
             <hr>
             </div>
             <?php }?>
-
+              <form action="<?php echo base_url() ?>Contratos/validar?contrato=<?php echo $data1['id_contrato']; ?>" method="post" class="d-inline elim">
+                <button title="Validar" type="submit" class="btn btn-primary mb-2">Validar</button>
+              </form>
 
 				    		    </div><!--//app-card-body-->		
 				    		  </div><!--//app-card-->
@@ -63,36 +75,12 @@
 			      </div><!--//tab-pane-->
           </div>
         </div><!--//tab-content-->
-      </div>
-            <div class='mb-3'>
-            <div style='font-size:14px; color:#5cb377;'><?php $data1['id_contrato']?></div>
-            <div style='font-size:12px;'><?php $data1['id_contrato']?></div>
-            <div style='font-size:14px; color:#000000;'><?php $data1['id_contrato']?></div>
-            <div class='sstats-meta' style='color:#000000; font-size:10px;'><?php $data1['id_contrato']?></div>
-            </div>
+
 
       </div>
     </div><!--//app-wrapper-->
-</div>
-</div>
-<!--<div style="margin-top:20px">
-<form class="settings-form" id="" method="POST" name="form" action="php/modificaElContrato_juridico.php">
-<input type="" id="numContrato_Validar" name="numContrato_Validar"> value="
-<?php
- /* include("conexionBD.php");
-  if(isset($_GET["id"]))
-  $id = $_GET['id'];
-  $query = "SELECT * FROM foro WHERE ID = '$id' ORDER BY fecha DESC";
-  $result = $mysqli->query($query);
-  while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-    $id = $row['ID'];
-    $titulo = $row['titulo'];
-    echo $titulo;
-  }*/
-?>">-->
 
-</form>
-</div>
+
 </div>
 </div>
 
@@ -115,7 +103,7 @@
                     </div> 
                     <div class="form-group">
                       <span>Subir Archivo:</span>
-                      <input type="file" name="archivo" value=""/>
+                      <input type="file" name="archivo[]" value="" multiple/>
                     </div>                   
                 </div>
                 <div class="card-footer">

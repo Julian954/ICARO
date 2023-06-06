@@ -58,42 +58,55 @@ class Contrataciones extends Controllers {
      */
     public function agregar() {
         
-        $name = pathinfo($_FILES['archivo_cont']['name']);
-        $nombre_archivo = $_FILES['archivo_cont']['name'];        
-        $tipo_archivo = $_FILES['archivo_cont']['type'];
-        $tamano_archivo = $_FILES['archivo_cont']['size'];
-        $ruta_temporal = $_FILES['archivo_cont']['tmp_name'];
-        $error_archivo = $_FILES['archivo_cont']['error'];
-        $tmaximo = 20 * 1024 * 1024;
         $oficio = $_POST['NoOficio'];
         $administrador = $_SESSION['nombre'];
         $descripcion = $_POST['Descripcion'];
-        $contratacion = $_POST['TipoCn'];
+        $contratacion = $_POST['tipocontrata'];
         $area = $_POST['Area'];
         $contrato = $_POST['Contrato'];
+        $number = $contrato;
         $termino = $_POST['Termino'];
         $maximo = $_POST['Maximo'];
         $dictamen = $_POST['Dictamen'];
-        $inicio = $_POST['fecha'];
+        $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen);
+        
+        $i = 0;
+        $tipo = 2;
+        $archivos = $_FILES['archivo'];
+        foreach ($archivos["name"] as $indice => $nombre) {
+            
+            $name = pathinfo($archivos["name"][$indice]);
+            $nombre_archivo = $archivos["name"][$indice];        
+            $tipo_archivo = $archivos["type"][$indice];
+            $tamano_archivo = $archivos["size"][$indice];
+            $ruta_temporal = $archivos["tmp_name"][$indice];
+            $error_archivo = $archivos["error"][$indice];
+            $tmaximo = 20 * 1024 * 1024;
+            
+            if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf" || $name["extension"] == "docx" || $name["extension"] == "zip" || $name["extension"] == "xlsx")){
+                if ($error_archivo == UPLOAD_ERR_OK ) {
+                    $nombre_nuevo = $number."0".$yo.$i.$tipo.".".$name["extension"];                                
+                    $ruta_destino = 'Assets/Documentos/Peticiones/'.$nombre_nuevo;
+                    if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
+                        $i=$i+1;
+                        $alert=$i;            
+                        $agregar= $this->model->agregar_pdf($number, $nombre_nuevo, 0, $tipo);
 
-        if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf")){
-            if ($error_archivo == UPLOAD_ERR_OK ) {
-                $nombre_nuevo = $oficio.".".$name["extension"];                                
-                $ruta_destino = 'Assets/Documentos/Peticiones/'.$nombre_nuevo;
-                if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
-                    $alert='Registrado';            
-                    $agregar= $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $nombre_archivo, $inicio);
-
+                    } else {
+                        $alert =  'No Se Adjunto Archivo';
+                    }
                 } else {
-                    $alert =  'No Se Adjunto Archivo';
-                    $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $nombre_archivo, $inicio);
+                $alert =  'No Se Adjunto Archivo';
+
                 }
-            } 
+            } else {
+                $alert =  'No Se Adjunto Archivo';
+            }
         }
-        $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $nombre_archivo, $inicio);
         header("location: " . base_url() . "Contrataciones/Registro?msg=$alert");
         die();
     }
+
 
     public function agregar_validadcont()
     {
