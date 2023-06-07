@@ -23,7 +23,7 @@
             <div class='sstats-meta text-success'><?php echo $data1['id_creador']?></div>
             <div class='sstats-meta intro'><?php echo $data1['descripcion']?></div>
             <div class='sstats-meta' style='color:#000000; font-size:10px;'><?php echo $data1['fecha']?></div>
-            <div style='margin-top:15px; margin-bottom: 30px;'><div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/<?php echo $data1['archivo']; ?>" class='btn-sm app-btn-secondary' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $data1['archivo']; ?></a></div></div>
+            <div style='margin-top:15px; margin-bottom: 30px;'><div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/<?php echo $data1['archivo']; ?>" target="_blank" class='btn-sm app-btn-secondary' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $data1['archivo']; ?></a></div></div>
             </div><!--//app-card-body-->
               <a class='app-card-link-mask' href='#'></a>
             </div><!--//app-card-->

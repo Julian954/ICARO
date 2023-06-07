@@ -104,7 +104,7 @@ class ContratacionesModel extends Mysql {
 
     public function SelectTipoContratacion()
     {
-        $sql = "SELECT * FROM tipos_contratacion";
+        $sql = "SELECT * FROM tipocontrata";
         $res = $this->select_all($sql);
         return $res;
     }

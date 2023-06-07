@@ -49,7 +49,8 @@ class Contrataciones extends Controllers {
         $data1 = $this->model->SelectAreas();
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
-        $this->views->getView($this, "Registro", "", $data1, $data2, $data3);
+        $data4 = $this->model->SelectTipoContratacion();
+        $this->views->getView($this, "Registro", "", $data1, $data2, $data3,$data4);
     }
 
     /**

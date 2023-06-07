@@ -30,9 +30,9 @@
                   <div class="form-group">
                     <label for="setting-input-3" class="form-label">Tipo de Contratacion</label>
                     <select class="form-control" id="tipocontrata" name="tipocontrata" required>
-                      <?php //foreach ($data4 as $tipocontrata) { ?>
-                        <option> Por Adjudicacion Directa</option>
-                       <?php// } ?>
+                    <?php foreach ($data4 as $tipocontrata) { ?>
+                        <option> <?php echo $tipocontrata['tipoco']; ?></option>
+                       <?php } ?>
                     </select>
                   </div>
 
