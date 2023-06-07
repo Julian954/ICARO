@@ -33,6 +33,7 @@ class Contratos extends Controllers {
         $data1 =$this->model->selectContratosVal();
         $data2 =$this->model->selectExternoJ();
         $data3 =$this->model->selectContratosEdo1();
+        
         $this->views->getView($this, "Validando", "",$data1, $data2, $data3);
     }
 
@@ -137,6 +138,7 @@ class Contratos extends Controllers {
         $number = limpiarInput($_GET['contrato']);
         $estado = 4;
         $actualizar = $this->model->actualizaEstado($estado, $number);
+        $actualizar2 = $this->model->actualizaEstado4($estado, $number);
         $alert = "Formalizado";
         header("location: " . base_url() . "Contratos/Validando?msg=$alert");
         die();

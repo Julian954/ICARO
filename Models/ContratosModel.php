@@ -263,13 +263,24 @@ class ContratosModel extends Mysql {
         $return = "";
         $this->id = $id;
         $this->estado = $estado;
-        $query = "UPDATE contratos SET estado = ? WHERE numero=?";
+        $query = "UPDATE contratos SET contratos.estado = ? WHERE numero=?";       
         $data = array($this->estado, $this->id);
         $resul = $this->update($query, $data);
         $return = $resul;
         return $return;
     }
 
+    public function actualizaEstado4(int $estado, string $id)
+    {
+        $return = "";
+        $this->id = $id;
+        $this->estado = $estado;
+        $query = "UPDATE validar_cont SET validar_cont.estado = ? WHERE id_contrato=?";       
+        $data = array($this->estado, $this->id);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;
+    }
     //actualizar intento de validar
     public function actualizarintento(int $intentos, string $id)
     {

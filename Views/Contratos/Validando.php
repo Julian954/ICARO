@@ -28,7 +28,7 @@
                 </div><!--//app-card-body-->
               </div><!--//inner-->
             </div><!--//app-card-->
-                
+                            
             <div class="position-relative mb-3">
                 <div class="row g-3 justify-content-between">
                     <div class="col-auto">
@@ -36,12 +36,20 @@
                     </div>
                 </div>
             </div>
-				    <div class="tab-content" id="orders-table-tab-content">
-			          <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-				    	    <div class="app-card app-card-orders-table shadow-sm mb-5">
-				    		    <div class="app-card-body">
-				    			    <div class="table-responsive">
-				    			      <table class="table app-table-hover mb-0 text-left" id="Table">
+
+            <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+            <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Contratos En Porceso de Formalización</a>
+            <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Contratos Formalizados</a>
+        </nav>
+
+          
+
+            <div class="tab-content" id="orders-table-tab-content">
+              <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+                  <div class="app-card app-card-orders-table shadow-sm mb-5">
+                      <div class="app-card-body">
+                          <div class="table-responsive">
+                          <table class="table app-table-hover mb-0 text-left" id="Table6">
 				    						  <thead>
 				    							  <tr>
                               <th scope="col"></th>    
@@ -55,6 +63,7 @@
 				    						  </thead>
 				    						  <tbody>
                             <?php foreach ($data1 as $validar) { ?>
+                              
 				    						    	<tr>
                                 <td></td>
                                 <td><?php echo $validar['id_contrato']; ?></td>
@@ -72,16 +81,53 @@
                             <?php }?>
 				    						  </tbody>
 				    					  </table>
-				    		      </div><!--//table-responsive-->  
-				    		    </div><!--//app-card-body-->		
-				    		  </div><!--//app-card-->
-						    </div><!--//app-card-body-->
-						  </div><!--//app-card-->
-			      </div><!--//tab-pane-->
-          </div>
-        </div><!--//tab-content-->
-      </div>
-    </div><!--//app-wrapper-->
+                          </div><!--//table-responsive-->
+                      </div><!--//app-card-body-->
+                  </div><!--//app-card app-card-orders-table shadow-sm mb-5-->
+              </div><!--//tab-pane fade show active-->
+                            
+	
+                            
+                            
+              <div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
+                  <div class="app-card app-card-orders-table shadow-sm mb-5" style="margin-bottom:0px; padding-bottom:0px;">
+                      <div class="app-card-body">
+                          <div class="table-responsive">
+                          <table class="table app-table-hover mb-0 text-left" id="Table">
+				    						  <thead>
+				    							  <tr>
+                              <th scope="col"></th>    
+                              <th scope="col">Contrato</th>
+                              <th scope="col">Fecha de creacion</th>
+                              <th scope="col">Interno Juridico</th>
+                              <th scope="col">Externo Juridico</th>                
+                              <th scope="col">No. Intentos</th>
+                              <th scope="col">Ver</th>
+				    							  </tr>
+				    						  </thead>
+				    						  <tbody>
+                            
+                            <?php foreach ($data1 as $validar) { ?>
+				    						    	<tr>
+                                <td></td>
+                                <td><?php echo $validar['id_contrato']; ?></td>
+                                <td><?php echo $validar['fecha']; ?></td>
+                                <td><?php echo $validar['id_creador']; ?></td>
+                                <td><?php echo $validar['id_validador']; ?></td>
+                                <td><?php echo $validar['intentos'];?></td>
+                                <td>
+                                  <a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $validar['id_contrato']; ?>">VER</a>                                  
+                                </td>
+				    						    	</tr>
+                            <?php }?>
+				    						  </tbody>
+				    					  </table>
+              </div><!--//table-responsive-->
+          </div><!--//app-card-body-->
+          </div><!--app-card app-card-orders-table mb-5-->
+                            </div>
+                            </div>
+                           
     <div id="VentanaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
