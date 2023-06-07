@@ -296,6 +296,7 @@
                           <th scope="col">Termino</th>
                           <th scope="col">Máximo</th>
                           <th scope="col">Creación</th>
+                          <thscope="col"> </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -322,6 +323,7 @@
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['fecha']; ?></td>
+                            <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $validar['id_contrato']; ?>">VER</a></td>
                           </tr>
                         <?php } ?>
                       </tbody>

@@ -24,7 +24,7 @@
             <div style='margin-top:15px; margin-bottom: 30px;'>
               <?php foreach ($data3 as $arc) {
                 if ($arc['intento'] == 0) {?>
-                  <div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/Peticiones/<?php echo $arc['nombre']; ?>" class='btn-sm app-btn-secondary mb-2' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $arc['nombre']; ?></a></div><br>
+                  <div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/Peticiones/<?php echo $arc['nombre']; ?>"  target="_blank" class='btn-sm app-btn-secondary mb-2' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $arc['nombre']; ?></a></div><br>
                 <?php }
               } ?>
               </div>
@@ -56,7 +56,7 @@
             <div style='margin-top:15px; margin-bottom: 30px;'>
               <?php foreach ($data3 as $arcv) {
                 if ($arcv['intento'] == $validar['intento']) {?>
-                  <div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/Peticiones/<?php echo $arcv['nombre']; ?>" class='btn-sm app-btn-secondary mb-2' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $arcv['nombre']; ?></a></div><br>
+                  <div style='height:12px !important;'><a href="<?php echo base_url(); ?>Assets/Documentos/Foro/<?php echo $arcv['nombre']; ?>" target="_blank" class='btn-sm app-btn-secondary mb-2' style='background-color:#F7DC6F; font-weight: bold; font-size:12px;'><?php echo $arcv['nombre']; ?></a></div><br>
                 <?php }
               } ?>
               </div>

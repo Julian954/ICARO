@@ -153,6 +153,14 @@
 <script src="<?php echo base_url(); ?>Assets/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/DataTables/DataTables-1.10.21/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
 <script>
+    window.onload = function(){
+        var contenedor = document.getElementById('contenedor_carga');
+
+        contenedor.style.visibility = 'hidden';
+        contenedor.style.opacity = '0';
+
+    }
+
     $(document).ready(function() {
         $('#Table').DataTable({
 			language: {

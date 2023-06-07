@@ -2,41 +2,39 @@
 
 <?php if($_SESSION['rol'] <= 1){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
 <div class="page-content2">
-    <section>
-        <div class="card container-fluid2 text-center">
-            <div class="card-header"><i class="fas fa-exclamation-circle"></i> ERROR</div>
-            <div class="card-body">
-                <img src="../Assets/img/unicornio.png" style="height: 400px; ">                
-                <h5 class="card-title">Error: No tienes acceso a esta página.</h5>
-            </div>
-            <div class="card-footer text-muted">
-              <a href="<?php echo base_url() ?>login" class="btn btn-primary">Ir al inicio</a>
-            </div>
+  <section>
+    <div class="card container-fluid2 text-center">
+      <div class="card-header"><i class="fas fa-exclamation-circle"></i> ERROR</div>
+        <div class="card-body">
+          <img src="../Assets/img/unicornio.png" style="height: 400px; ">                
+          <h5 class="card-title">Error: No tienes acceso a esta página.</h5>
         </div>
-    </section>
+        <div class="card-footer text-muted">
+          <a href="<?php echo base_url() ?>login" class="btn btn-primary">Ir al inicio</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 <?php }  else { ?> <!-- En caso de ser valido -->
 <!--//app-header-->
-    <div class="app-wrapper">
+  <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
-		    <div class="container-xl">
-
-			    <h1 class="app-page-title">Revision</h1>
-        
-         <button class="btn btn-success" data-toggle="modal" data-target="#VentanaModal">Cargar Contratos de Validación</button>
-          
-          <div class="app-card app-card-accordion shadow-sm mb-4" >
-				    <div class="">
-              <div class="modal fade" id="VentanaModal" tabindex="-1" role="dialog" aria-labelledby="TituloVentana" aria-hidden="true">
+		  <div class="container-xl">
+			  <h1 class="app-page-title">Revision</h1>
+        <button class="btn btn-success" data-toggle="modal" data-target="#VentanaModal">Cargar Contratos de Validación</button>
+        <div class="app-card app-card-accordion shadow-sm mb-4" >
+				  <div class="">
+            <div class="modal fade" id="VentanaModal" tabindex="-1" role="dialog" aria-labelledby="TituloVentana" aria-hidden="true">
               <div class="dialog-modal" rol="document">
-            <div class="modal-content">
-            <h4 class="app-card-title" id="TituloVentana">Cargar Datos</h4>
+                <div class="modal-content">
+                <h4 class="app-card-title" id="TituloVentana">Cargar Datos</h4>
                <button class="btn-close" data-bs-dismiss="modal" aria-label="cerrar" class="fas fa-window-close"></button>
 				    <!--//app-card-header-->
-				    <div class="app-card-body p-4" style="padding-top:20px; important!">
-              <div class="app-card-body">
-                <form method="POST" action="<?php echo base_url(); ?>/Contratos/agregar_validadcont" autocomplete="off" enctype="multipart/form-data">
-                <div class="mb-3">
+				          <div class="app-card-body p-4" style="padding-top:20px; important!">
+                    <div class="app-card-body">
+                      <form method="POST" action="<?php echo base_url(); ?>/Contratos/agregar_validadcont" autocomplete="off" enctype="multipart/form-data">
+                        <div class="mb-3">
                 <?php
 // Ejemplo de conexión a la base de datos
 $servername = "localhost";

@@ -13,6 +13,8 @@
 	    <!-- theme stylesheet-->
 	    <link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/style.default.css" id="theme-stylesheet">
 	    <link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/bootstrap.min.css">
+
+		<link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/carga.css">
 	    <!-- Custom stylesheet - for your changes-->
 	    <link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/dataTables.bootstrap4.min.css">
 	    <!-- Favicon-->
@@ -35,6 +37,10 @@
 	</head>
 
 	<body class="app">
+		<div id="contenedor_carga">
+			<div id="carga"><!--<img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/app-logo.svg" height="100px" alt="logo">--></div>
+		</div>
+
 	    <header class="app-header fixed-top">
 	        <div class="app-header-inner">
 		        <div class="container-fluid py-2">

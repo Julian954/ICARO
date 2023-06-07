@@ -3,17 +3,17 @@
 <?php }  else { ?> <!-- En caso de ser valido -->
   <?php encabezado() ?> <!-- Poner el header -->
 
-    <div class="app-wrapper">
-	    <div class="app-content pt-3 p-md-3 p-lg-4">
-		    <div class="container-xl">
-			    <h1 class="app-page-title">Contrataciones</h1>
-			    <div class="app-card app-card-accordion shadow-sm mb-4">
+  <div class="app-wrapper">
+	  <div class="app-content pt-3 p-md-3 p-lg-4">
+		  <div class="container-xl">
+			  <h1 class="app-page-title">Contrataciones</h1>
+			  <div class="app-card app-card-accordion shadow-sm mb-4">
 				    <div class="app-card-header p-3">
 				      <h4 class="app-card-title">Nueva Contratacion</h4>
 				    </div><!--//app-card-header-->
 				    <div class="app-card-body p-4" style="padding-top:20px; important!">
               <div class="app-card-body">
-              <form method="POST" action="<?php echo base_url(); ?>Contrataciones/agregar" autocomplete="off" enctype="multipart/form-data">
+                <form method="POST" action="<?php echo base_url(); ?>Contrataciones/agregar" autocomplete="off" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="oficio" class="form-label" style="color:#000000;">Numero de Oficio<span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresar el número del Contrato y/o Convenio tal cual fue registrado en SAI y plasmado en el documento impreso"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" style="color:#FF0000;" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -26,39 +26,34 @@
                     <label for="setting-input-2" class="form-label">Descripción del Requerimiento</label>
                     <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="" required>
                   </div>
-
                   <div class="form-group">
                     <label for="setting-input-3" class="form-label">Tipo de Contratacion</label>
                     <select class="form-control" id="tipocontrata" name="tipocontrata" required>
-                      <?php //foreach ($data4 as $tipocontrata) { ?>
-                        <option> Por Adjudicacion Directa</option>
-                       <?php// } ?>
+                      <?php foreach ($data4 as $tipocontrata) { ?>
+                      <option> <?php echo $tipocontrata['tipoco']; ?></option>
+                      <?php } ?>
                     </select>
                   </div>
-
                   <div class="form-group">
                     <label for="setting-input-3" class="form-label">Area Requirente</label>
                     <select class="form-control" id="Area" name="Area" required>
                       <?php foreach ($data1 as $area) { ?>
-                        <option> <?php echo $area['area']; ?></option>
-                       <?php } ?>
+                      <option> <?php echo $area['area']; ?></option>
+                      <?php } ?>
                     </select>
                   </div>
-
                   <div class="form-group">
                     <label for="setting-input-3" class="form-label">Tipo de Contrato</label>
                     <select class="form-control" id="Contrato" name="Contrato" required>
                       <?php foreach ($data2 as $tipo) { ?>
-                        <option> <?php echo $tipo['tipo']; ?></option>
-                       <?php } ?>
+                      <option> <?php echo $tipo['tipo']; ?></option>
+                      <?php } ?>
                     </select>
                   </div>
-
-                 <div class="form-group">
-                 <label for="setting-input-3" class="form-label" style="color:#000000;">Término</label>
-                 <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="Termino" name="Termino" value="" require>
-                 </div>
-
+                  <div class="form-group">
+                    <label for="setting-input-3" class="form-label" style="color:#000000;">Término</label>
+                    <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="Termino" name="Termino" value="" require>
+                  </div>
                   <div class="form-group">
                     <label for="setting-input-3" class="form-label" style="color:#000000;">Monto Máximo $</label>
                     <input type="number" min="0" class="form-control" id="Maximo" name="Maximo" value="" required>
@@ -67,21 +62,18 @@
                     <label for="setting-input-3" class="form-label" style="color:#000000;">No. Dictamen</label>
                     <input type="text" class="form-control" id="Dictamen" name="Dictamen" value="" required>
                   </div>
-
-                    <div class="form-group text-center">
-                      <span>Subir Archivo:</span>
-										  <input type="file" name="archivo[]" value="" multiple/>
-						        </div>
-                  
+                  <div class="form-group text-center">
+                    <span>Subir Archivo:</span>
+										<input type="file" name="archivo[]" value="" multiple/>
+						      </div>
                   <button type="submit" class="btn app-btn-primary mb-2">Agregar Contratacion</button>
-
                 </form>
               </div><!--//app-card-body-->
 				    </div><!--//app-card-body-->
 				</div><!--//app-card desde aqui borrar-->
 		  </div><!--//container-fluid-->
 	  </div><!--//app-content-->
-    </div><!--//app-wrapper-->
+  </div><!--//app-wrapper-->
 
 
     <!-- Javascript -->
