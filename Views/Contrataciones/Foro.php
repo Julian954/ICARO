@@ -108,43 +108,41 @@
 </div>
 </div>
 
-<div id="VentanaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Cargar Datos</h5>
-                  <button class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
+  <div id="VentanaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Cargar Datos</h5>
+            <button class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <form method="post" action="<?php echo base_url(); ?>Contratos/agregar_comentario" autocomplete="off" enctype="multipart/form-data">
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="setting-input-3" class="form-label" style="color:#000000;">Administrador Externo Juridico</label>                      
+                <?php  foreach ($data2 as $fila): ?><?php endforeach; ?>      
+                <input type="text" class="form-control" id="tu" name="tu" value="<?php echo /*$fila['id_responde'] . " - ".*/ $fila['nombre_externo']; ?>" readonly />                                                                                               
+              </div>                    
+              <div class="form-group">
+                <label for="setting-input-2" class="form-label">Administrador Interno Juridico</label><!--utilizo el nombre de usuario que se encuentra logeado y lo uso en el campo solicitante--> 
+                <input type="text" class="form-control" id="yo" name="yo" value="<?php echo /*$fila['id_validacion'] . " - ".*/ $fila['nombre_interno'];?>" required readonly />   
               </div>
-              <form method="post" action="<?php echo base_url(); ?>Contratos/agregar_comentario" autocomplete="off" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <div class="form-group">
-                      <label for="setting-input-3" class="form-label" style="color:#000000;">Administrador Externo Juridico</label>                      
-                          <?php  foreach ($data2 as $fila): ?><?php endforeach; ?>      
-                            <input type="text" class="form-control" id="tu" name="tu" value="<?php echo /*$fila['id_responde'] . " - ".*/ $fila['nombre_externo']; ?>" readonly />                                                                                               
-                    </div>                    
-                    <div class="form-group">
-                      <label for="setting-input-2" class="form-label">Administrador Interno Juridico</label><!--utilizo el nombre de usuario que se encuentra logeado y lo uso en el campo solicitante--> 
-                      <input type="text" class="form-control" id="yo" name="yo" value="<?php echo /*$fila['id_validacion'] . " - ".*/ $fila['nombre_interno'];?>" required readonly />   
-                    </div>
-                    <input type="text" class="form-control" id="number" name="number" value="<?php echo $data1['id_contrato']?>" style="display: none;"  readonly/>
-                    <div class="form-group">
-                      <label for="setting-input-2" class="form-label">Comentarios</label>
-                      <textarea rows="10" col="20" class="form-control" id="descripcion" name="descripcion" value="" required></textarea>
-                    </div> 
-                    <div class="form-group">
-                      <span>Subir Archivo:</span>
-                      <input type="file" name="archivo" value=""/>
-                    </div>                   
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar comentarios</button>
-                    <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
-                </div>
-              </form>
+              <input type="text" class="form-control" id="number" name="number" value="<?php echo $data1['id_contrato']?>" style="display: none;"  readonly/>
+              <div class="form-group">
+                <label for="setting-input-2" class="form-label">Comentarios</label>
+                <textarea rows="10" col="20" class="form-control" id="descripcion" name="descripcion" value="" required></textarea>
+              </div> 
+              <div class="form-group">
+                <span>Subir Archivo:</span>
+                <input type="file" name="archivo" value=""/>
+              </div>                   
           </div>
+          <div class="card-footer">
+              <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar comentarios</button>
+              <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
+          </div>
+        </form>
       </div>
+    </div>
   </div>
 
 
