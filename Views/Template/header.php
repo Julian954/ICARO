@@ -38,7 +38,7 @@
 
 	<body class="app">
 		<div id="contenedor_carga">
-			<div id="carga"><!--<img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/app-logo.svg" height="100px" alt="logo">--></div>
+			<div id="carga"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/carga.gif" height="300px" alt="logo"></div>
 		</div>
 
 	    <header class="app-header fixed-top">
