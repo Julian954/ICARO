@@ -17,8 +17,15 @@
 </div>
 <?php }  else { ?> <!-- En caso de ser valido -->
 
-<p>Hola</p>
-
+                    <div class="container2">
+                      <input type="file" id="file-input" multiple />
+                      <label for="file-input">
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                        &nbsp; Choose Files To Upload
+                      </label>
+                      <div id="num-of-files">No Files Choosen</div>
+                      <ul id="files-list"></ul>
+                    </div>
 <?php } ?>
 
 <?php pie() ?> <!-- Pone el fotter -->

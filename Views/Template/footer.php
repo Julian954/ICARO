@@ -1,4 +1,5 @@
-	    <footer class="app-footer">
+	    <hr class="my-4">
+        <footer class="app-footer">
 		    <div class="container text-center py-3">
 		         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
             <small class="copyright">Diseño y Desarrollo <i class="" style="color: #fb866a;"></i> por la OOADR. Coordinación de Abastecimiento y Equipamiento</small>
@@ -152,6 +153,10 @@
 <script src="<?php echo base_url(); ?>Assets/js/sweetalert2@9.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/DataTables/DataTables-1.10.21/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>Assets/js/files.js"></script>
+<!-- FontAwesome JS-->
+<script defer src="<?php echo base_url(); ?>Assets/css/fontawesome/js/all.min.js"></script>
+		
 <script>
     window.onload = function(){
         var contenedor = document.getElementById('contenedor_carga');

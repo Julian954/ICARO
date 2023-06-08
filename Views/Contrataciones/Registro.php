@@ -1,18 +1,33 @@
-<?php if($_SESSION['rol'] <= 1){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
-  <?php permisos() ?> <!-- Poner el mensaje de erro -->
-<?php }  else { ?> <!-- En caso de ser valido -->
+<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 2){ ?> <!-- Si es Admin o Requiriente -->
   <?php encabezado() ?> <!-- Poner el header -->
 
-  <div class="app-wrapper">
-	  <div class="app-content pt-3 p-md-3 p-lg-4">
-		  <div class="container-xl">
-			  <h1 class="app-page-title">Contrataciones</h1>
-			  <div class="app-card app-card-accordion shadow-sm mb-4">
-				    <div class="app-card-header p-3">
-				      <h4 class="app-card-title">Nueva Contratacion</h4>
-				    </div><!--//app-card-header-->
-				    <div class="app-card-body p-4" style="padding-top:20px; important!">
-              <div class="app-card-body">
+    <div class="app-wrapper">
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">			    
+			    <h1 class="app-page-title">Requerimientos</h1>
+			    <hr class="mb-4">
+            <div class="row g-4 settings-section">
+	            <div class="col-12 col-md-4">
+		            <h3 class="section-title">Nuevo Requerimiento</h3>
+		            <div class="section-intro">Favor de llenar toda la información del Requerimeinto que desea registrar.</div><br>
+                  <?php if (isset($_GET['msg'])) {
+                      $alert = $_GET['msg'];
+                      if ($alert == "existe") { ?>
+                          <div class="alert alert-warning" role="alert">
+		                        <h3 class="section-title">ATENCIÓN</h3>
+		                        <div class="section-intro">Ya existe un Requerimiento con ese número.</div>
+                          </div>
+                      <?php } else if ($alert == "error") { ?>
+                          <div class="alert alert-danger" role="alert">
+		                        <h3 class="section-title">ERROR</h3>
+		                        <div class="section-intro">No se pudo registrar el Requerimiento, intente de nuevo o cantacte a soporte.</div>
+                          </div>
+                      <?php }
+                  } ?>
+	            </div>
+	            <div class="col-12 col-md-8">
+		            <div class="app-card app-card-settings shadow-sm p-4">
+						      <div class="app-card-body">
                 <form method="POST" action="<?php echo base_url(); ?>Contrataciones/agregar" autocomplete="off" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="oficio" class="form-label" style="color:#000000;">Numero de Oficio<span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresar el número del Contrato y/o Convenio tal cual fue registrado en SAI y plasmado en el documento impreso"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -62,27 +77,29 @@
                     <label for="setting-input-3" class="form-label" style="color:#000000;">No. Dictamen</label>
                     <input type="text" class="form-control" id="Dictamen" name="Dictamen" value="" required>
                   </div>
-                  <div class="form-group text-center">
-                    <span>Subir Archivo:</span>
-										<input type="file" name="archivo[]" value="" multiple/>
-						      </div>
-                  <button type="submit" class="btn app-btn-primary mb-2">Agregar Contratacion</button>
+                  <div class="form-group">
+                    <div class="container2">
+                      <input type="file" id="file-input" multiple name="archivo[]" required/>
+                      <label id="fileup" for="file-input">
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                        &nbsp; Selecciona los archivos.
+                      </label>
+                      <div id="num-of-files">Sin archivos cargados.</div>
+                      <ul id="files-list"></ul>
+                      <hr>
+                      <div><strong>Nota:</strong> Solo se permiten archivos PDF, WORD, EXCEL y ZIP, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn app-btn-primary mb-2">Solicitar Requerimiento</button>
                 </form>
-              </div><!--//app-card-body-->
-				    </div><!--//app-card-body-->
-				</div><!--//app-card desde aqui borrar-->
-		  </div><!--//container-fluid-->
-	  </div><!--//app-content-->
-  </div><!--//app-wrapper-->
-
-
-    <!-- Javascript -->
-    <script src="assets/plugins/popper.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Page Specific JS -->
-    <script src="assets/js/app.js"></script>
-
+						    </div><!--//app-card-body-->
+						  </div><!--//app-card-->
+	          </div>
+          </div><!--//row-->
+		    </div><!--//container-fluid-->
+	    </div><!--//app-content-->
+    </div><!--//app-wrapper-->    					
+<?php }  else { ?> <!-- En caso de ser valido -->
+  <?php permisos() ?> <!-- Poner el mensaje de erro -->
 <?php } ?>
-
 <?php pie() ?> <!-- Pone el fotter -->

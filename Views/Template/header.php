@@ -25,13 +25,12 @@
 			setlocale(LC_ALL,'es_ES', 'Spanish_Spain', 'Spanish');
 			$link = $_SERVER['REQUEST_URI'];
 			$linkShort = substr($link, 0, strrpos($link, "/")); ?>
-	
-	    <!-- FontAwesome JS-->
-	    <script defer src="<?php echo base_url(); ?>Assets/css/fontawesome/js/all.min.js"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 	    <!-- App CSS -->
 	    <link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 
 	</head>
@@ -58,7 +57,7 @@
 				                <i class="search-mobile-trigger-icon"><?php echo utf8_encode(strftime('%d/%B/%Y')); ?></i>
 				            </div><!--//TABLET Y PC-->
 		            		<div class="app-search-box col">
-								<i class="search-mobile-trigger-icon"><?php echo utf8_encode(strftime('%A %d de %B de %Y, %H:%M')); ?></i>
+								<i class="search-mobile-trigger-icon"><?php echo utf8_encode(strftime('%A %d de %B de %Y, %H:%M')).$_SESSION['rol']; ?></i>
 		            		</div><!--//NOTIFICACIONES-->
 			            	<div class="app-utilities col-auto">
 				            	<div class="app-utility-item app-notifications-dropdown dropdown">
@@ -188,7 +187,7 @@
 						        </a><!--//nav-link-->
 						        <div id="submenu-1" class="collapse submenu submenu-1 <?php if ($linkShort == "/IMSS/Contratos") { echo "show"; } ?>" data-parent="#menu-accordion">
 							        <ul class="submenu-list list-unstyled">
-									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Registro">Registro de Contratos</a></li>
+									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Registro">Nuevo Contrato</a></li>
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/General">Seguimiento</a></li>
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Validando">Flujo de Revisión</a></li>
 							        </ul>
@@ -203,7 +202,7 @@
 										  	<path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
 										</svg>
 							        </span>
-			                        <span class="nav-link-text">Contrataciones</span>
+			                        <span class="nav-link-text">Requerimientos</span>
 			                        <span class="submenu-arrow">
 			                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 										  	<path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
@@ -212,7 +211,7 @@
 						        </a><!--//nav-link-->
 						        <div id="submenu-2" class="collapse submenu submenu-2 <?php if ($linkShort == "/IMSS/Contrataciones") { echo "show"; } ?>" data-parent="#menu-accordion">
 							        <ul class="submenu-list list-unstyled">
-									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/Registro">Registro de Contrataciones</a></li>
+									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/Registro">Nuevo Requerimiento</a></li>
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/General">Seguimiento</a></li>
 								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/Validando">Flujo de Revisión</a></li>
 							        </ul>
