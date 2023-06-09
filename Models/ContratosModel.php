@@ -115,7 +115,7 @@
                return $res;
         }
 
-         public function archivos_foro(string $contrato){
+        public function archivos_foro(string $contrato){
             $this->contrato = $contrato;
             $sql = "SELECT * FROM formatos WHERE contrato = '{$this->contrato}' AND tipo = 1";
             $res = $this->select_all($sql);
