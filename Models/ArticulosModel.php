@@ -73,35 +73,22 @@ class ArticulosModel extends Mysql
         return $return;
     }
 
-    public function procesarArchivos($archivo)
+    public function procesarArchivos($datos)
     {
-        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-        $spreadsheet = $reader->load($archivo);
-        $hoja = $spreadsheet->getSheet(0);
-
-        $numFilas = $hoja->getHighestRow();
-        $numColumnas = $hoja->getHighestColumn();
-
-        $return = '';
-
-        for ($fila = 6; $fila <= $numFilas; $fila++) {
-            $valor1 = $hoja->getCell(C)->getValue(); // Columna 3
-            $valor2 = $hoja->getCell(I)->getValue(); // Columna 9
-            $datos = [];
-            $query = "INSERT INTO articulos( clave, descripcion) VALUES (?, ?)";
-            $datos = array('clave' => $valor1,'descripcion' => $valor2);
-            $resul = $this->insert($query, $datos);
-
-            if ($resul) {
-                $return = 'Archivo procesado exitosamente';
-            } else {
-                $return = 'Error al procesar el archivo';
-                break; // Si ocurre un error en la inserción, se detiene el bucle
-            }
+        array_shift($datos);
+        foreach ($datos as $fila) {
+          $clave = $fila[2] ?? ''; // Valor de la columna "GPO" en el archivo CSV
+          $descripcion = $fila[8] ?? ''; // Valor de la columna "ESP" en el archivo CSV
+        
+          // Insertar los datos en la base de datos
+          $query = "INSERT INTO catalogo (clave, descripcion) VALUES (?,?)";
+          $data = array($clave, $descripcion);
+          $resul = $this->insert($query, $data); //insert es para agregar un registro
         }
     
         return $return;
     }
+
     public function procesarArchivosG($archivo) {
         $spreadsheet = IOFactory::load($archivo);
         $hoja = $spreadsheet->getActiveSheet(0);
