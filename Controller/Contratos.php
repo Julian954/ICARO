@@ -68,15 +68,82 @@
             $data = $this->model->EstadoContratos();
             echo json_encode($data);
             die();
+<<<<<<< HEAD
         }            
+=======
+        }
+
+>>>>>>> 38dd2285d250307133d22d511a4d79b69e21376e
         // Muestra la vista "Validando" con los datos obtenidos de los modelos.
         public function Validando()
         {        
             $data1 =$this->model->selectContratosVal();
             $data2 =$this->model->selectExternoJ();
             $data3 =$this->model->selectContratosEdo1();
-            $this->views->getView($this, "Validando", "",$data1, $data2, $data3);
+            $this->views->getView($this, "Validando", "", $data1, $data2, $data3);
         }
+
+        // Agrega contrato a validación
+        public function agregar_validadcont()
+        {
+            $tu = limpiarInput($_POST['miSelect1']);
+            $descripcion = limpiarInput($_POST['descripcion']);        
+            $yo = $_SESSION['id'];
+            $number =limpiarInput($_POST['miSelect2']);
+            $insert = $this->model->agregar_validar( $number, $descripcion, $yo, $tu);
+            if ($insert == 'existe') {
+                $alert = 'existe';
+                header("location: " . base_url() . "Contratos/Validando?msg=$alert");
+            } else if ($insert > 0) {
+                //Si se agrega te redirige a la vista "Validando" con un mensaje de alerta y se agrega documentos.
+                //ESTA ES LA PARTE DE AGREGAR EL DOCUMENTO
+                $i = 0;
+                $tipo = 1;
+                $archivos = $_FILES['archivo'];
+                
+                foreach ($archivos["name"] as $indice => $nombre) {
+                    $name = pathinfo($archivos["name"][$indice]);
+                    $nombre_archivo = $archivos["name"][$indice];
+                    $tipo_archivo = $archivos["type"][$indice];
+                    $tamano_archivo = $archivos["size"][$indice];
+                    $ruta_temporal = $archivos["tmp_name"][$indice];
+                    $error_archivo = $archivos["error"][$indice];
+                    $tmaximo = 20 * 1024 * 1024;
+                
+                    if (($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf" || $name["extension"] == "docx" || $name["extension"] == "zip" || $name["extension"] == "xlsx")) {
+                        if ($error_archivo == UPLOAD_ERR_OK) {
+                            $nombre_nuevo = $oficio . "0" . $administrador . $i . $tipo . "." . $name["extension"];
+                            $ruta_destino = 'Assets/Documentos/Peticiones/' . $nombre_nuevo;
+                            if (move_uploaded_file($ruta_temporal, $ruta_destino)) {
+                                $i = $i + 1;
+                                $documento = $i;
+                                $agregar = $this->model->agregar_pdf($oficio, $nombre_nuevo, 0, $tipo);
+                                $estado = 2;
+                                $actualizar = $this->model->actualizaEstado($estado, $number);
+                            } else {
+                                $documento = 'mover';
+                            }
+                        } else {
+                            $documento = 'archivo';
+                        
+                        }
+                    } else {
+                        $documento = 'formato';
+                    }
+                }
+                $alert = 'registrado';
+                header("location: " . base_url() . "Contratos/Validando?msg=$alert&documento=$documento");
+            } else {
+                $alert = 'error';
+                header("location: " . base_url() . "Contratos/Validando?msg=$alert");
+            }
+            die();
+        }
+
+
+
+
+
 
         // Muestra la vista "Foro" con los datos obtenidos de los modelos.
         public function Foro()
@@ -88,53 +155,7 @@
             $this->views->getView($this, "Foro", "", $data1, $data2, $data3);
         }
 
-        public function agregar_validadcont()
-        {
-            $tu = limpiarInput($_POST['miSelect1']);
-            $descripcion = limpiarInput($_POST['descripcion']);        
-            $yo = $_SESSION['id'];
-            $number =limpiarInput($_POST['miSelect2']);
-            $insert = $this->model->agregar_validar( $number, $descripcion, $yo, $tu);
 
-            $i = 0;
-            $tipo = 1;
-            $archivos = $_FILES['archivo'];
-            foreach ($archivos["name"] as $indice => $nombre) {
-
-                $name = pathinfo($archivos["name"][$indice]);
-                $nombre_archivo = $archivos["name"][$indice];        
-                $tipo_archivo = $archivos["type"][$indice];
-                $tamano_archivo = $archivos["size"][$indice];
-                $ruta_temporal = $archivos["tmp_name"][$indice];
-                $error_archivo = $archivos["error"][$indice];
-                $tmaximo = 20 * 1024 * 1024;
-                if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf" || $name["extension"] == "docx" || $name["extension"] == "zip" || $name["extension"] == "xlsx")){
-                    if ($error_archivo == UPLOAD_ERR_OK ) {
-                        $nombre_nuevo = $number."0".$yo.$i.$tipo.".".$name["extension"];                                
-                        $ruta_destino = 'Assets/Documentos/Peticiones/'.$nombre_nuevo;
-                        if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
-                            $i=$i+1;
-                            $alert=$i;            
-                            $agregar= $this->model->agregar_pdf($number, $nombre_nuevo, 0, $tipo);
-
-                        } else {
-                            $alert =  'No Se Adjunto Archivo';
-                        }
-                    } else {
-                    $alert =  'No Se Adjunto Archivo';
-
-                    }
-                } else {
-                    $alert =  'No Se Adjunto Archivo';
-                }
-            }
-
-            $estado = 2;
-            $actualizar = $this->model->actualizaEstado($estado, $number);
-
-            header("location: " . base_url() . "Contratos/Validando?msg=$alert");
-            die();
-        }
 
         public function validar(){
             $number = limpiarInput($_GET['contrato']);

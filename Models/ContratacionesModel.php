@@ -135,39 +135,39 @@
             return $res;
         }
 
-
-
-
-
-
-
-
-
-    
-
+        //VISTA VALIDANDO
         // Selecciona todos los contratos de la base de datos.
-        public function selectContratosVal()
-        {
-            $sql = "SELECT * FROM validar_cont";
+        public function selectContratosVal() {
+            $sql = "SELECT validar_cont.*, validar_cont.id_validador AS validador, validar_cont.id_creador AS creador, validar_cont.id_contrato AS estado, u1.nombre as creador, u2.nombre as validador, c1.estado as estado FROM validar_cont
+                    JOIN usuarios u1 ON validar_cont.id_creador = u1.id
+                    JOIN contratos c1 ON validar_cont.id_contrato = c1.numero
+                    JOIN usuarios u2 ON validar_cont.id_validador = u2.id";
             $res = $this->select_all($sql);
             return $res;
         }
 
         // Selecciona todos los usuarios externos juridicos
-        public function selectExternoJ()
-        {
-            $sql = "SELECT * FROM usuarios";
+        public function selectExternoJ() {
+            $sql = "SELECT * FROM usuarios WHERE rol = 3";
             $res = $this->select_all($sql);
             return $res;
         }
 
         // Selecciona todos los contratos en estado 1
-        public function selectContratosEdo1()
-        {
-            $sql = "SELECT * FROM contratos WHERE estado = 1";
+        public function selectContratosEdo1() {
+            $sql = "SELECT * FROM contrataciones WHERE estado = 1";
             $res = $this->select_all($sql);
             return $res;
         }
+    
+
+
+
+
+
+
+        
+
 
         // Selecciona todos los contratos en estado 1
         public function selectContrato(string $contrato)

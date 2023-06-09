@@ -68,18 +68,20 @@
                                 <div class="col-lg-12">
                                     <label for="rol">Rol</label>
                                     <select id="rol" class="form-control" name="rol" required>
+                                        <?php if ($_SESSION['rol'] >= 7) {?>
+                                            <option value="7" <?php if ($data1['rol'] == "7") {echo "selected";} ?>>Administrador</option> <?php } ?>
                                         <?php if ($_SESSION['rol'] >= 6) {?>
-                                            <option value="5" <?php if ($data1['rol'] == "5") {echo "selected";} ?>>Administrador</option> <?php } ?>
+                                            <option value="6" <?php if ($data1['rol'] == "6") {echo "selected";} ?>>Operador</option> <?php } ?>
                                         <?php if ($_SESSION['rol'] >= 5) {?>
-                                            <option value="4" <?php if ($data1['rol'] == "4") {echo "selected";} ?>>Gestor</option> <?php } ?>
+                                            <option value="5" <?php if ($data1['rol'] == "5") {echo "selected";} ?>>Jefatura</option> <?php } ?>
                                         <?php if ($_SESSION['rol'] >= 4) {?>
-                                            <option value="4" <?php if ($data1['rol'] == "4") {echo "selected";} ?>>Gerente</option> <?php } ?>
+                                            <option value="4" <?php if ($data1['rol'] == "4") {echo "selected";} ?>>Abogado Abasto</option> <?php } ?>
                                         <?php if ($_SESSION['rol'] >= 3) {?>
-                                            <option value="3" <?php if ($data1['rol'] == "3") {echo "selected";} ?>>Externo Jurídico</option> <?php } ?>
+                                            <option value="3" <?php if ($data1['rol'] == "3") {echo "selected";} ?>>Abogado Jurídico</option> <?php } ?>
                                         <?php if ($_SESSION['rol'] >= 2) {?>
-                                            <option value="2" <?php if ($data1['rol'] == "2") {echo "selected";} ?>>Externo Administrativo</option>
-                                        <?php if ($_SESSION['rol'] >= 3) {?>
-                                            <option value="3" <?php if ($data1['rol'] == "3") {echo "selected";} ?>>Almacén</option> <?php } ?>
+                                            <option value="2" <?php if ($data1['rol'] == "2") {echo "selected";} ?>>Requiriente</option>
+                                        <?php if ($_SESSION['rol'] >= 1) {?>
+                                            <option value="1" <?php if ($data1['rol'] == "1") {echo "selected";} ?>>Almacén</option> <?php } ?>
                                         <?php } ?>
                                     </select>
                                 </div>
