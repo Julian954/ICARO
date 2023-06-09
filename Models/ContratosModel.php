@@ -35,7 +35,7 @@
         }
 
         // Agrega un nuevo contrato a la base de datos.
-        public function agregarContrato(string $numero, string $descripcion, string $area, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $plataforma, string $devengo) {
+        public function agregarContrato(string $numero, string $descripcion, string $area, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $plataforma, string $fecha_termina, string $devengo) {
             $return = "";
             $this->numero = $numero;
             $this->descripcion = $descripcion;
@@ -47,6 +47,7 @@
             $this->devengo = $devengo;
             $this->fianza = $fianza;
             $this->plataforma = $plataforma;
+            $this->fecha_termina=$fecha_termina;
 
             // Verifica si el contrato ya existe en la base de datos
             $sql = "SELECT * FROM contratos WHERE numero = '{$this->numero}'";
@@ -54,18 +55,17 @@
 
             if (empty($result)) {
                 // Si el contrato no existe, se inserta en la base de datos
-                $query = "INSERT INTO contratos(numero, descripcion, area, administrador, tipo, termino, maximo, devengo, fianza, plataforma) VALUES (?,?,?,?,?,?,?,?,?,?)";
-                $data = array($this->numero, $this->descripcion, $this->area, $this->administrador, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->plataforma);
+                $query = "INSERT INTO contratos(numero, descripcion, area, administrador, tipo, termino, maximo, devengo, fianza, plataforma, fecha_eliminar) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                $data = array($this->numero, $this->descripcion, $this->area, $this->administrador, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->plataforma, $this->fecha_termina);
                 $resul = $this->insert($query, $data);
                 $return = $resul;
             } else {
                 // Si el contrato ya existe, se devuelve un mensaje indicando que el contrato ya existe
                 $return = "existe";
             }
-
             return $return;
         }
-
+    
         //VISTA GENERAL
         // Selecciona todos los contratos de la base de datos.
         public function selectContratos() {
@@ -316,6 +316,6 @@
             $resul = $this->insert($query, $data);                          
             return $resul;
     }
-    }
+}
 ?>
 

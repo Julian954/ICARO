@@ -77,6 +77,12 @@
                        <?php } ?>
                     </select>
                   </div>
+                  <div class="hidden" style="display: none;">
+                  <?php date_default_timezone_get('America/Mexico_City');                  
+                  $fecha_elimina = date("Y-m-d", strtotime($fecha . "+1 year"));
+                  ?>
+                  <input type="datatime" id="fecha_elimina" name="fecha_elimina" value="<?= $fecha_elimina ?>">
+                  </div>                  
                   <button type="submit" class="btn app-btn-primary">Agregar Contrato</button>
                 </form>
 					    </div><!--//app-card-body-->

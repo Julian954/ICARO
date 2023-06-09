@@ -49,9 +49,14 @@
   				    							<a href="<?php echo base_url(); ?>Login/reset">¿Olvidate la contraseña?</a>
   				    						</div>
   				    					</div><!--//col-6-->
+										  <div class="text-center">
+								  <div style="display: none;">
+									<input id="fecha_elimina" name="fecha_elimina" type="text" value="<?php echo date('Y-m-d', strtotime('-1 year'));?>" readonly>
+								</div>
   				    				</div><!--//extra-->
   				    			</div><!--//form-group-->
-  				    			<div class="text-center">
+								
+  				    			
   				    				<button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto" >Log In</button>
   				    			</div><br>
   	              				<?php if (isset($_GET['msg'])) { ?>
