@@ -89,8 +89,6 @@
             die();
         }
 
-
-
         // Muestra la vista "Contratos_seguimiento" con los datos obtenidos de los modelos.
         public function General()
         {
@@ -100,8 +98,22 @@
             $data4 = $this->model->porcentajesContrataciones();
             $data5 = $this->model->PgsBarContrata();
             $data6 = $this->model->totalContrataciones();
-            $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, $data6, "");
+            $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, $data6);
         }
+
+        //Datos para la gráfica de contratos
+        public function GeneralRequerimientos()
+        {
+            $data = $this->model->porcentajesContrataciones();
+            echo json_encode($data);
+            die();
+        }
+
+
+
+
+
+
 
         public function Validando()
         {

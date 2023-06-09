@@ -66,15 +66,60 @@
             return $return;
         }
 
-
-
-        
+        //VISTA GENERAL
         // Selecciona todos los contratos de la base de datos.
         public function selectContratos() {
-            $sql = "SELECT * FROM contratos";
+            $sql = "SELECT contratos.*, usuarios.nombre FROM contratos, usuarios WHERE contratos.administrador = usuarios.id;";
             $res = $this->select_all($sql);
             return $res;
         }
+
+        // Selecciona todos los contratos de la base de datos.
+        public function EstadoContratos()
+        {
+            $sql = "SELECT estado, CASE estado WHEN 1 THEN 'En Contratacion' WHEN 2 THEN 'En Validación' WHEN 3 THEN 'Validados' WHEN 4 THEN 'Formalizados' ELSE 'ERROR' END AS nombre, COUNT(*) AS total FROM contratos GROUP BY estado;";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        // Obtiene el total de contratos y la suma de los máximos de los contratos.
+        public function totalcontratos() {
+            $sql = "SELECT COUNT(*) as total, SUM(maximo) as maximo FROM contratos";
+            $res = $this->select($sql);
+            return $res;
+        }
+
+        // Obtiene el número de contratos agrupados por tipo.
+        public function tipocontrato() {
+            $sql = "SELECT COUNT(numero) as cont FROM contratos WHERE (tipo!='Conv. Monto') AND (tipo!='Conv. Vigencia')
+                    UNION
+                    SELECT COUNT(numero) as cont FROM contratos WHERE (tipo!='Por Monto') AND (tipo!='Por Vigencia')";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        // Obtiene la cantidad de contratos por plataforma y tipo de contrato (convocatoria o contrato).
+        public function tipoplatformaconv() {
+            $sql = "SELECT plataforma, 
+            SUM(CASE WHEN tipo IN ('Conv. Vigencia', 'Conv. Monto') THEN 1 ELSE 0 END) AS conv_count,
+            SUM(CASE WHEN tipo IN ('Por Vigencia', 'Por Monto') THEN 1 ELSE 0 END) AS contr_count
+            FROM contratos
+            WHERE plataforma IN ('SAI', 'PREI')
+            GROUP BY plataforma";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        // Obtiene la cantidad de contratos por area totales y estado 4.
+        public function PgsBarContr()
+        {
+            $sql = "SELECT area, COUNT(*) AS total, SUM(CASE WHEN estado = 4 THEN 1 ELSE 0 END) AS form FROM contratos GROUP BY area";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+
+
 
 
         // Selecciona todos los contratos de la base de datos.
@@ -192,39 +237,7 @@
             $res = $this->select_all($sql);
             return $res;
         }
-        /**
-         * Obtiene el total de contratos y la suma de los máximos de los contratos.
-         */
-        public function totalcontratos() {
-            $sql = "SELECT COUNT(*) as total, SUM(maximo) as maximo FROM contratos";
-            $res = $this->select($sql);
-            return $res;
-        }
-
-        /**
-         * Obtiene el número de contratos agrupados por tipo.
-         */
-        public function tipocontrato() {
-            $sql = "SELECT COUNT(numero) as cont FROM contratos WHERE (tipo!='Conv. Monto') AND (tipo!='Conv. Vigencia')
-                    UNION
-                    SELECT COUNT(numero) as cont FROM contratos WHERE (tipo!='Por Monto') AND (tipo!='Por Vigencia')";
-            $res = $this->select_all($sql);
-            return $res;
-        }
-
-        /**
-         * Obtiene la cantidad de contratos por plataforma y tipo de contrato (convocatoria o contrato).
-         */
-        public function tipoplatformaconv() {
-            $sql = "SELECT plataforma, 
-            SUM(CASE WHEN tipo IN ('Conv. Vigencia', 'Conv. Monto') THEN 1 ELSE 0 END) AS conv_count,
-            SUM(CASE WHEN tipo IN ('Por Vigencia', 'Por Monto') THEN 1 ELSE 0 END) AS contr_count
-            FROM contratos
-            WHERE plataforma IN ('SAI', 'PREI')
-            GROUP BY plataforma";
-            $res = $this->select_all($sql);
-            return $res;
-        }
+ 
 
         public function datosuser()
         {
@@ -234,13 +247,7 @@
             return $res;
         }
 
-        public function PgsBarContr()
-        {
-            $sql = "SELECT area, COUNT(*) AS total, SUM(CASE WHEN estado = 4 THEN 1 ELSE 0 END) AS form FROM contratos GROUP BY area";
-            $res = $this->select_all($sql);
-            return $res;
 
-        }
 
         public function agregar_foro(string $number, string $yo, string $tu)
         {

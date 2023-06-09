@@ -75,7 +75,75 @@
             return $return;
         }
 
+        //VISTA GENERAL
+        // Selecciona todos los contratos de la base de datos.
+        public function selectContrataciones() {
+            $sql = "SELECT contrataciones.*, usuarios.nombre FROM contrataciones, usuarios WHERE contrataciones.administrador = usuarios.id;";
+            $res = $this->select_all($sql);
+            return $res;
+        }
 
+        public function tipocontratoCns()
+        {
+            $sql = "SELECT COUNT(NoOficio) as cont FROM contrataciones WHERE (contrato!='Conv. Monto') AND (contrato!='Conv. Vigencia')
+                    UNION
+                    SELECT COUNT(NoOficio) as cont FROM contrataciones WHERE (contrato!='Por Monto') AND (contrato!='Por Vigencia')";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        public function tipocontratacion()
+        {
+            $sql = "SELECT contratacion, 
+            SUM(CASE WHEN contrato IN ('Conv. Vigencia', 'Conv. Monto') THEN 1 ELSE 0 END) AS conv_count,
+            SUM(CASE WHEN contrato IN ('Por Monto', 'Por Vigencia' ) THEN 1 ELSE 0 END) AS contr_count
+            FROM contrataciones
+            WHERE contratacion IN ('Alineamiento', 'Peticion')
+            GROUP BY contratacion";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        // Selecciona todos los contratos de la base de datos.
+        public function porcentajesContrataciones()
+        {
+            $sql = "SELECT estado, CASE estado WHEN 1 THEN 'En Contratacion' WHEN 2 THEN 'En Validación' WHEN 3 THEN 'Validados' WHEN 4 THEN 'Formalizados' ELSE 'ERROR' END AS nombre, COUNT(*) AS total FROM contrataciones GROUP BY estado;";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        // Obtiene la cantidad de contratos por area totales y estado 4.
+        public function PgsBarContrata()
+        {
+            $sql = "SELECT area, COUNT(*) AS total, SUM(CASE WHEN estado = 4 THEN 1 ELSE 0 END) AS form FROM contrataciones GROUP BY area";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        // Obtiene el total de contratos y la suma de los máximos de los contratos.
+        public function totalcontratos() {
+            $sql = "SELECT COUNT(*) as total, SUM(maximo) as maximo FROM contratos";
+            $res = $this->select($sql);
+            return $res;
+        }
+
+        // Selecciona todos los contratos de la base de datos.
+        public function totalContrataciones()
+        {
+            $sql = "SELECT COUNT(*) as total, SUM(Maximo) as maximo FROM contrataciones";
+            $res = $this->select($sql);
+            return $res;
+        }
+
+
+
+
+
+
+
+
+
+    
 
         // Selecciona todos los contratos de la base de datos.
         public function selectContratosVal()
@@ -154,12 +222,7 @@
 
             return $return;
         }
-        public function selectContrataciones()
-        {
-            $sql = "SELECT * FROM contrataciones";
-            $res = $this->select_all($sql);
-            return $res;
-        }
+ 
 
         //Subir el archivo PDF a BD
         public function agregar_pdf(string $contrato, string $nombre, string $intento, string $tipo)
@@ -177,48 +240,12 @@
             return $return;
         }
 
-        // Selecciona todos los contratos de la base de datos.
-        public function totalContrataciones()
-        {
-            $sql = "SELECT COUNT(*) as total, SUM(Maximo) as maximo FROM contrataciones";
-            $res = $this->select_all($sql);
-            return $res;
-        }
 
-        public function PgsBarContrata()
-        {
-            $sql = "SELECT Area, COUNT(*) AS total, SUM(CASE WHEN Estado = 4 THEN 1 ELSE 0 END) AS form FROM contrataciones GROUP BY Area";
-            $res = $this->select_all($sql);
-            return $res;
 
-        }
 
-        public function tipocontratoCns()
-        {
-            $sql = "SELECT COUNT(NoOficio) as cont FROM contrataciones WHERE (contrato!='Conv. Monto') AND (contrato!='Conv. Vigencia')
-                    UNION
-                    SELECT COUNT(NoOficio) as cont FROM contrataciones WHERE (contrato!='Por Monto') AND (contrato!='Por Vigencia')";
-            $res = $this->select_all($sql);
-            return $res;
-        }
 
-        public function tipocontratacion()
-        {
-            $sql = "SELECT Contratacion, 
-            SUM(CASE WHEN Contrato IN ('Conv. Vigencia', 'Conv. Monto') THEN 1 ELSE 0 END) AS conv_count,
-            SUM(CASE WHEN Contrato IN ('Por Vigencia', 'Por Monto') THEN 1 ELSE 0 END) AS contr_count
-            FROM contrataciones
-            WHERE Contratacion IN ('Alineamiento', 'Disposicion')
-            GROUP BY Contratacion";
-            $res = $this->select_all($sql);
-            return $res;
-        }
 
-        public function porcentajesContrataciones()
-        {
-            $sql = "SELECT estado, COUNT(*) AS total FROM contrataciones GROUP BY estado";
-            $res = $this->select_all($sql);
-            return $res;
-        }
+
+
     }
 ?>
