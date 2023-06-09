@@ -18,7 +18,6 @@
             $data1 = $this->model->SelectAreas();
             $data2 = $this->model->SelectTipo();
             $data3 = $this->model->SelectPlataforma();
-
             $this->views->getView($this, "Registro", "", $data1, $data2, $data3);
         }
 
@@ -50,19 +49,29 @@
             die();
         }
 
-
-
-
         // Muestra la vista "General" con los datos obtenidos de los modelos.
         public function General() {
             $data1 = $this->model->selectContratos();
-            $data2 = $this->model->porcentajesCont();
+            $data2 = $this->model->EstadoContratos();
             $data3 = $this->model->totalcontratos();
             $data4 = $this->model->tipocontrato();
             $data5 = $this->model->tipoplatformaconv();
-            $data7 = $this->model->PgsBarContr();
-            $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, "", $data7);
+            $data6 = $this->model->PgsBarContr();
+            $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, $data6);
         }
+
+        //Datos para la gráfica de contratos
+        public function GeneralContratos()
+        {
+            $data = $this->model->EstadoContratos();
+            echo json_encode($data);
+            die();
+        }
+
+    
+
+
+
 
         // Muestra la vista "Validando" con los datos obtenidos de los modelos.
         public function Validando()

@@ -39,7 +39,7 @@
 		<div id="contenedor_carga">
 			<div id="carga"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/carga.gif" height="300px" alt="logo"></div>
 		</div>
-
+		<input type="hidden" id="url" value="<?php echo base_url(); ?>">
 	    <header class="app-header fixed-top">
 	        <div class="app-header-inner">
 		        <div class="container-fluid py-2">
