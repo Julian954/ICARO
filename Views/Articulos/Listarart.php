@@ -71,7 +71,7 @@
                                                 <td><?php echo $us['des_corta']; ?></td>
                                                 <td>
                                                     <a title="Editar" href="<?php echo base_url() ?>Articulos\editar?id=<?php echo $us['id']; ?>" class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
-                                                    <form action="<?php echo base_url() ?>Articulos/eliminar?id=<?php echo $us['id']; ?>" method="post" class="d-inline elim">
+                                                    <form action="<?php echo base_url() ?>Articulos/eliminar?id=<?php echo $us['id']; ?>" method="post" class="d-inline elimper">
                                                         <button title="Eliminar" type="submit" class="btn btn-danger mb-2"><i class="fas fa-trash-alt"></i></button>
                                                     </form>            
                                                 </td>
@@ -128,18 +128,25 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="app-card-body text-center">
-			<form action="<?php echo base_url() ?>Articulos/procesarArchivo" method="POST" enctype="multipart/form-data">
-  				<div>
-                    <br>
-				    <input type="file" name="archivo" required>
-			    </div>		    
-                <div class="card-footer">
-                    <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Subir</button>
-                    <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
-                </div>
-            </form>
-        </div>
+            <div class="modal-body">
+                <form action="<?php echo base_url(); ?>Articulos/procesarArchivo" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div class="container2">
+                        <input type="file" id="file-input" name="archivo_csv" required/>
+                        <label id="fileup" for="file-input">
+                         <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                        &nbsp; Selecciona los archivos.
+                        </label>
+                        <div id="num-of-files">Sin archivos cargados.</div>
+                        <ul id="files-list"></ul>
+                        <hr>
+                        <div><strong>Nota:</strong> Solo se permiten archivos PDF, WORD, EXCEL y ZIP, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div>
+                  </div>    
+                    </div>
+                    <button class="btn btn-success mb-2" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Registrar</button>
+                    <button class="btn btn-danger mb-2" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
+                </form>
+            </div>
     </div>
 </div>
 

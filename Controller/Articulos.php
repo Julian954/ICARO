@@ -77,19 +77,27 @@ class Articulos extends Controllers
     }
 
     public function procesarArchivo() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_FILES['archivo'])) {
-                $archivo = $_FILES['archivo']['tmp_name'];
-                $result = $this->model->procesarArchivos($archivo);
-
-                if ($result) {
-                    echo "Datos insertados correctamente en la base de datos.";
-                } else {
-                    echo "Error al procesar el archivo.";
-                }
+        if (!empty($_FILES['archivo_csv']['name'])) {
+            $archivo_tmp = $_FILES['archivo_csv']['tmp_name'];
+            
+            // Procesar el archivo CSV y obtener los datos
+            $datos = [];
+            if (($gestor = fopen($archivo_tmp, 'r')) !== false) {
+              while (($fila = fgetcsv($gestor, 1000, ',')) !== false) {
+                $datos[] = $fila;
+              }
+              fclose($gestor);
             }
+        
+            // Pasar los datos al modelo para su inserción en la base de datos
+            $this->model->procesarArchivos($datos);
+            $alert =  'DocumentoActualizado';
+          }
+          
+          // Redirigir a la página deseada después de la carga del archivo
+          header("location: " . base_url() . "Articulos/Listarart?msg=$alert");
+          die();
         }
-    }
 
 }
 ?>

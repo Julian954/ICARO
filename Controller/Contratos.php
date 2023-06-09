@@ -32,9 +32,10 @@
             $maximo = limpiarInput($_POST['maximo']);
             $fianza = limpiarInput($_POST['fianza']);
             $plataforma = limpiarInput($_POST['plataforma']);
+            $fecha_termina=limpiarInput($_POST['fecha_elimina']);
             $devengo = 0; // default
 
-            $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $plataforma, $devengo);
+            $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $plataforma, $fecha_termina, $devengo);
             if ($insert == 'existe') {
                 $alert = 'existe';
                 header("location: " . base_url() . "Contratos/Registro?msg=$alert");
@@ -57,7 +58,8 @@
             $data4 = $this->model->tipocontrato();
             $data5 = $this->model->tipoplatformaconv();
             $data6 = $this->model->PgsBarContr();
-            $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, $data6);
+            //$data7=$this->model->eliminarcontrato();            
+        $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, $data6/*, $data7*/);
         }
 
         //Datos para la gráfica de contratos
@@ -66,8 +68,12 @@
             $data = $this->model->EstadoContratos();
             echo json_encode($data);
             die();
+<<<<<<< HEAD
+        }            
+=======
         }
 
+>>>>>>> 38dd2285d250307133d22d511a4d79b69e21376e
         // Muestra la vista "Validando" con los datos obtenidos de los modelos.
         public function Validando()
         {        

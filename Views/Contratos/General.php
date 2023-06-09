@@ -231,6 +231,7 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <th scope="col">Eliminacion</th>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -258,13 +259,20 @@
                           <td><?php echo $us['termino']; ?></td>
                           <td><?php echo $us['maximo']; ?></td>
                           <td><?php echo $us['fecha']; ?></td>
+                          <td><?php 
+$fecha2 = new DateTime($us['fecha_eliminar']);
+$fecha1 = new DateTime(date('Y-m-d'));
+$intervalo = $fecha1->diff($fecha2);
+$dias = $intervalo->days;
+echo "En"." ".$dias." - "."dias";
+ ?></td>
                           <?php if ($us['estado'] != 1) { ?>
                             <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $us['numero']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                                 <path fill-rule="evenodd" d="M5.172 10.828a.5.5 0 0 0 .707 0l4.096-4.096V9.5a.5.5 0 1 0 1 0V5.525a.5.5 0 0 0-.5-.5H6.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
                               </svg>
-                            </a></td>
+                            </a></td>                            
                           <?php } else { ?>
                             <td></td>
                           <?php } ?>
@@ -295,7 +303,7 @@
                     <tbody>
                       <?php foreach ($data1 as $us) { ?>
                         <?php if ($us['estado'] == 1) { ?>
-                          <tr>
+                          <tr>               
                             <td>
                               <?php if ($us['estado'] == 2) { ?>
                                 <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
@@ -316,9 +324,9 @@
                             <td><?php echo $us['nombre']; ?></td>
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
-                            <td><?php echo $us['fecha']; ?></td>
+                            <td><?php echo $us['fecha']; ?></td>                            
                           </tr>
-                        <?php } ?>
+                        <?php  } ?>
                       <?php } ?>
                     </tbody>
                   </table>  

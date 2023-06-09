@@ -130,12 +130,13 @@ class Usuarios extends Controllers
 
     //Iniciar sesión
     public function login()
-    {
+    {        
         if (!empty($_POST['usuario']) || !empty($_POST['clave'])) {
             $usuario = $_POST['usuario'];
-            $clave = $_POST['clave'];
-            $hash = hash("SHA256", $clave);
+            $clave = $_POST['clave'];            
+            $hash = hash("SHA256", $clave);            
             $data = $this->model->selectUsuario($usuario, $hash);
+            
             if (!empty($data)) {
                     $_SESSION['id'] = $data['id'];
                     $_SESSION['nombre'] = $data['nombre'];
@@ -152,12 +153,19 @@ class Usuarios extends Controllers
                     $_SESSION['perfil'] = $data['perfil'];
                     $_SESSION['telefono'] = $data['telefono'];
                     $_SESSION['activo'] = true;
+                    
+                    //$fecha_elimina = $_POST['fecha_elimina'];                
                     header('location: '.base_url(). 'Inicio/Home');
             } else {
                 $error = 0;
                 header("location: ".base_url(). 'Login'."?msg=$error");
             }
+
         }
+        $fecha_elimina = $_POST['fecha_elimina'];
+        $dato=$this->model->eliminarContratos($fecha_elimina);
+        $dato1=$this->model->eliminarContratos1($fecha_elimina);
+        $dato2=$this->model->eliminarContratos2($fecha_elimina);
     }
 
     //Cambiar contraseña
