@@ -5,7 +5,8 @@
 
     <div class="app-wrapper">
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
-		    <div class="container-xl">			    
+		    <div class="container-xl">			   
+				 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#productos"><i class="fas fa-plus-circle"></i> Nuevo</button> 
 			    <h1 class="app-page-title">Carga de archivos Excel</h1>
 			 
 				<hr class="my-4">
@@ -122,7 +123,7 @@
 	    </footer><!--//app-footer-->
 	    
     </div><!--//app-wrapper--> 
-	   					
+
 <div id="productos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

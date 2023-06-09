@@ -145,7 +145,7 @@
                             </a>
                           <?php if ($_SESSION['rol'] == 7) { ?>
                               <form action="<?php echo base_url() ?>Contratos/formalizar?contrato=<?php echo $validar['id_contrato']; ?>" method="post" class="d-inline forma">
-                                <button title="Validar" type="submit" class="btn btn-primary mb-2">Formalizar</button>
+                                <button title="Formalizar" type="submit" class="btn app-btn-primary btn-sm"><i class="fa fa-check fa-xs"></i></button>
                               </form>
                             </td>
                           <?php } else { ?>
