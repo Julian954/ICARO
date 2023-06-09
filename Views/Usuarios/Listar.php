@@ -98,16 +98,18 @@
                                                 <td><?php echo $us['correo']; ?></td>
                                                 <td><?php echo $us['telefono']; ?></td>
                                                 <td><?php
-                                                    if ($us['rol'] == 6) {
+                                                    if ($us['rol'] == 7) {
                                                         echo "Administrador";
+                                                    } elseif ($us['rol'] == 6) {
+                                                        echo "Operador";
                                                     } elseif ($us['rol'] == 5) {
-                                                        echo "Gestor";
+                                                        echo "Jefatura";
                                                     } elseif ($us['rol'] == 4) {
-                                                        echo "Gerente";
+                                                        echo "Abogado Abasto";
                                                     } elseif ($us['rol'] == 3) {
-                                                        echo "Externo Jurídico";
+                                                        echo "Abogado Jurídico";
                                                     } elseif ($us['rol'] == 2) {
-                                                        echo "Externo Ad";
+                                                        echo "Requiriente";
                                                     } elseif ($us['rol'] == 1) {
                                                         echo "Almacén";
                                                     } ?> </td>
@@ -164,11 +166,12 @@
                         <div class="col-lg-12">
                             <label for="rol">Rol</label>
                             <select id="rol" class="form-control" name="rol" required>
-                                <?php if($_SESSION['rol'] >= 6){ ?><option value="6">Administrador</option> <?php } ?>
-                                <?php if($_SESSION['rol'] >= 5){ ?><option value="4">Gestor</option> <?php } ?>
-                                <?php if($_SESSION['rol'] >= 4){ ?><option value="4">Gerente</option> <?php } ?>
-                                <?php if($_SESSION['rol'] >= 3){ ?><option value="3">Externo Jurídico</option> <?php } ?>
-                                <?php if($_SESSION['rol'] >= 2){ ?><option value="2">Externo Administrativo</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 7){ ?><option value="7">Administrador</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 6){ ?><option value="6">Operador</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 5){ ?><option value="5">Jefatura</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 4){ ?><option value="4">Abogado Abasto</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 3){ ?><option value="3">Abogado Jurídico</option> <?php } ?>
+                                <?php if($_SESSION['rol'] >= 2){ ?><option value="2">Requiriente</option> <?php } ?>
                                 <option value="1">Almacen</option>
                             </select>
                         </div>

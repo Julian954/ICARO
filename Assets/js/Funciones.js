@@ -47,11 +47,11 @@ $(document).ready(function () {
     });
   });
 
-  //Mensaje de alerta al subir grado
-  $(".subir").submit(function (e) {
+  //Mensaje de alerta al formalizar
+  $(".forma").submit(function (e) {
     e.preventDefault();
     Swal.fire({
-      title: "¿Está seguro de subir de grado a TODOS los alumnos?",
+      title: "¿Está seguro de Formalizar el Instrumento?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#28a745",
@@ -66,11 +66,11 @@ $(document).ready(function () {
   });
 
   //Mensaje de alerta al reiniciar asistencias
-  $(".horas").submit(function (e) {
+  $(".validar").submit(function (e) {
     e.preventDefault();
     Swal.fire({
       title:
-        "¿Está seguro de reiniciar las asistencias y faltas a TODOS los alumnos?",
+        "¿Está seguro de Validar el Instrumento?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#28a745",
@@ -84,6 +84,15 @@ $(document).ready(function () {
     });
   });
 
+
+
+
+
+
+
+
+
+  
   //Mensaje de alerta al restablecer contraseña
   $(".rest").submit(function (e) {
     e.preventDefault();

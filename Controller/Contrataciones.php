@@ -109,12 +109,7 @@
             die();
         }
 
-
-
-
-
-
-
+        // Agrega contrato a validación
         public function Validando()
         {
             $data1 = $this->model->selectContratosVal();
@@ -122,17 +117,6 @@
             $data3 = $this->model->selectContratosEdo1();
             $this->views->getView($this, "Validando", "", $data1, $data2, $data3);
         }
-
-        public function Foro()
-        {
-            $contrato = $_GET['contrato'];
-            $data1 = $this->model->selectContrato($contrato);
-            $data2 = $this->model->datos_foro();
-            $this->views->getView($this, "Foro", "", $data1, $data2);
-        }
-
-
-
 
         public function agregar_validadcont()
         {
@@ -183,6 +167,16 @@
         {
 
         }
+
+        public function Foro()
+        {
+            $contrato = $_GET['contrato'];
+            $data1 = $this->model->selectContrato($contrato);
+            $data2 = $this->model->datos_foro();
+            $this->views->getView($this, "Foro", "", $data1, $data2);
+        }
+
+
         public function agregar_comentario(string $contrato)
         {
             //$contrato = $_POST['number']; 

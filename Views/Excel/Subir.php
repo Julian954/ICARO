@@ -121,8 +121,36 @@
 		    </div>
 	    </footer><!--//app-footer-->
 	    
-    </div><!--//app-wrapper-->    					
-
+    </div><!--//app-wrapper--> 
+	   					
+<div id="productos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="my-modal-title"><i class="fas fa-upload"></i> Cargar Productos</h5>
+                <button class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="<?php echo base_url(); ?>Productos/subirarchivo" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="img">Selecciona Archivo</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="archivo">
+                            <label class="custom-file-label" for="customFile"></label>
+                            <label><br><strong>Nota:</strong> Favor de solo subir el formato que se proporciona editado con los productos, si no sabe como usar el formato dirigase al módulo Ayuda->Materiales. El tamaño máximo del archivo debe ser menor a 20 MB.</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-success mb-2" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Registrar</button>
+                    <a href="<?php echo base_url() ?>Assets/archivos/plantillas/PlantillaProductos.csv" class="btn btn-primary mb-2"><i class="fas fa-download"></i> Formato</a>
+                    <button class="btn btn-danger mb-2" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
 <?php } ?>
 
 <?php pie() ?> <!-- Pone el fotter -->
