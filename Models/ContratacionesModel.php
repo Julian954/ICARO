@@ -200,63 +200,95 @@
             return $res;
         }
 
+        //actualizar estado de contrato
+        public function actualizaEstado(int $estado, string $id)
+        {
+            $return = "";
+            $this->id = $id;
+            $this->estado = $estado;
+            $query = "UPDATE contrataciones SET estado = ? WHERE nooficio=?";       
+            $data = array($this->estado, $this->id);
+            $resul = $this->update($query, $data);
+            $return = $resul;
+            return $return;
+        }
 
+        //actualizar estado de contrato
+        public function actualizaResp(string $estado, string $id)
+        {
+            $return = "";
+            $this->id = $id;
+            $this->estado = $estado;
+            $query = "UPDATE validar_contrata SET id_validador = ? WHERE id_contrato=?";       
+            $data = array($this->estado, $this->id);
+            $resul = $this->update($query, $data);
+            $return = $resul;
+            return $return;
+        }
 
-
-
-
-        
-
-
-        // Selecciona todos los contratos en estado 1
-        public function selectContrato(string $contrato)
-        { //me marca error cuando agrego comentarios en el modal de Foro.php
+        //VISTA FORO
+        // Selecciona los detalles del contrato
+        public function selectContrato(string $contrato) {
             $this->contrato = $contrato;
-            $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->contrato}'";
+            $sql = "SELECT * FROM validar_contrata, usuarios WHERE validar_contrata.id_contrato = '{$this->contrato}' AND validar_contrata.id_creador = usuarios.id";
             $res = $this->select($sql);
             return $res;
         }
 
-        public function datos_foro()
-        {
-            $sql = "SELECT * FROM detalle_cont";
+        public function datos_foro(string $contrato){
+           $this->contrato = $contrato;
+           $sql = "SELECT * FROM detalle_contrata, usuarios WHERE detalle_contrata.contrato = '{$this->contrato}' AND detalle_contrata.id_responde = usuarios.id";
+           $res = $this->select_all($sql);
+               return $res;
+        }
+
+        public function archivos_foro(string $contrato){
+            $this->contrato = $contrato;
+            $sql = "SELECT * FROM formatos WHERE contrato = '{$this->contrato}' AND tipo = 2";
             $res = $this->select_all($sql);
             return $res;
         }
 
-
-
-
-
-
-        /**
-         * Obtiene los porcentajes de contratos agrupados por estado.
-         */
-        //query de validar_cont
-        public function validar_cont()
-        {
-            $sql = "SELECT * FROM validar_cont";
-            $res = $this->select_all($sql);
-            return $res;
-        }
-
- 
-
-
-
-        // Obtiene el total de contratos y la suma de los máximos de los contratos.
-        public function totalcontratos() {
-            $sql = "SELECT COUNT(*) as total, SUM(maximo) as maximo FROM contratos";
+        public function detalleContrato(string $contrato){
+            $this->contrato = $contrato;
+            $sql = "SELECT * FROM contrataciones WHERE nooficio = '{$this->contrato}'";
             $res = $this->select($sql);
             return $res;
         }
 
+        public function contarintento(string $contrato){
+            $this->contrato = $contrato;
+            $sql = "SELECT COUNT(*) AS intentos FROM detalle_contrata WHERE contrato = '{$this->contrato}'";
+            $res = $this->select($sql);
+            return $res;
+        }
 
+        public function agregar_validar_comentarios(string $id_responde, string $contrato, string $respuesta, string $intento)
+        {
+            $return = "";        
+            $this->id_responde = $id_responde;
+            $this->contrato = $contrato;
+            $this->respuesta = $respuesta;        
+            $this->intento=$intento;           
+            $query = "INSERT INTO detalle_contrata(id_responde, contrato, respuesta, intento) VALUES (?,?,?,?)";
+            $data = array($this->id_responde, $this->contrato,$this->respuesta,$this->intento);
+            $resul = $this->insert($query, $data);                          
+            return $resul;
+        }
 
-
-
-
-
+        //actualizar intento de validar
+        public function actualizarintento(string $intentos, string $id)
+        {
+            $return = "";
+            $this->id = $id;
+            $this->intentos = $intentos;
+            $query = "UPDATE validar_contrata SET intentos = ? WHERE id_contrato = ?";
+            $data = array($this->intento, $this->id);
+            $resul = $this->update($query, $data);
+            $return = $resul;
+            return $return;
+        }
 
     }
 ?>
+

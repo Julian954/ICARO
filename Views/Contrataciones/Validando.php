@@ -227,7 +227,7 @@
               <label for="setting-input-3" class="form-label" style="color:#000000;">No.Trabajador y Nombre </label>
               <select class="form-control" name="miSelect1" id="miSelect1">
                 <?php foreach ($data2 as $fila){ ?>
-                  <option value="<?php echo $fila['nombre']; ?>"><?php echo $fila['usuario']." - ".$fila['nombre']; ?></option>                
+                  <option value="<?php echo $fila['id']; ?>"><?php echo $fila['usuario']." - ".$fila['nombre']; ?></option>                
                 <?php } ?>
               </select>   
             </div>
