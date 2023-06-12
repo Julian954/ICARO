@@ -36,7 +36,7 @@
             $maximo = limpiarInput($_POST['maximo']);
             $fianza = limpiarInput($_POST['fianza']);
             $plataforma = limpiarInput($_POST['plataforma']);
-            $fecha_termina = date("Y-m-d", strtotime($fecha . "+1 year"));
+            $fecha_termina = date("Y-m-d", strtotime("+1 year"));
             $devengo = 0; // default
 
             $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $plataforma, $fecha_termina, $devengo);

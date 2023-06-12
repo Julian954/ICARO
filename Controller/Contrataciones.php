@@ -1,12 +1,15 @@
 <?php
-
     class Contrataciones extends Controllers
     {
+
+        //YA QUEDÓ AL 100% YA NO SE NECESITA MOVER NADA
+
+        //YA SOLO MÁS ADELANTE FALTA CREAR LA FUNCIÓN PARA ELIMINAR DIARIO, YA REVISÉ 
+        //CUANDO SE TENGA EL HOSTING SE PUEDEN POGRAMAR FUNCIONES.
 
         // Inicia la sesión y verifica si el usuario está activo.
         // Si el usuario no está activo, redirige al inicio de sesión.
         // Llama al constructor de la clase padre (Controllers).
-
         public function __construct()
         {
             session_start();
@@ -39,8 +42,9 @@
             $termino = limpiarInput($_POST['Termino']);
             $maximo = limpiarInput($_POST['Maximo']);
             $dictamen = limpiarInput($_POST['Dictamen']);
+            $fecha_termina = date("Y-m-d", strtotime("+1 year"));
 
-            $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen);
+            $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $fecha_termina);
             if ($insert == 'existe') {
                 $alert = 'existe';
                 header("location: " . base_url() . "Contrataciones/Registro?msg=$alert");

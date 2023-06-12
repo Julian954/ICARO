@@ -39,7 +39,7 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-2" class="form-label">Descripción del Requerimiento</label>
-                  <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="" required>
+                  <textarea name="Descripcion" id="Descripcion" class="form-control" cols="auto" rows="auto"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label">Tipo de Contratacion</label>

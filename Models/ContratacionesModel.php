@@ -44,7 +44,7 @@
         }
 
         // Agrega un nuevo contrataciones a la base de datos.
-        public function agregarContratacion(string $oficio, string $administrador, string $descripcion, string $contratacion, string $area, string $contrato, string $termino, string $maximo, string $dictamen)
+        public function agregarContratacion(string $oficio, string $administrador, string $descripcion, string $contratacion, string $area, string $contrato, string $termino, string $maximo, string $dictamen, string $fecha_termina)
         {
             $return = "";
             $this->oficio = $oficio;
@@ -56,6 +56,7 @@
             $this->termino = $termino;
             $this->maximo = $maximo;
             $this->dictamen = $dictamen;
+            $this->fecha_termina = $fecha_termina;
 
             // Verifica si el contrato ya existe en la base de datos
             $sql = "SELECT * FROM contrataciones WHERE nooficio = '{$this->oficio}'";
@@ -63,18 +64,33 @@
 
             if (empty($result)) {
                 // Si el contrato no existe, se inserta en la base de datos
-                $query = "INSERT INTO contrataciones(nooficio, administrador, descripcion, contratacion, area, contrato, termino, maximo, dictamen) VALUES (?,?,?,?,?,?,?,?,?)";
-                $data = array($this->oficio, $this->administrador, $this->descripcion, $this->contratacion, $this->area, $this->contrato, $this->termino, $this->maximo, $this->dictamen);
+                $query = "INSERT INTO contrataciones(nooficio, administrador, descripcion, contratacion, area, contrato, termino, maximo, dictamen, fecha_eliminar) VALUES (?,?,?,?,?,?,?,?,?,?)";
+                $data = array($this->oficio, $this->administrador, $this->descripcion, $this->contratacion, $this->area, $this->contrato, $this->termino, $this->maximo, $this->dictamen, $this->fecha_termina);
                 $resul = $this->insert($query, $data);
                 $return = $resul;
             } else {
                 // Si el contrato ya existe, se devuelve un mensaje indicando que el contrato ya existe
                 $return = "existe";
             }
-
             return $return;
         }
 
+        //Subir el archivo PDF a BD
+        public function agregar_pdf(string $contrato, string $nombre, string $intento, string $tipo)
+        {
+            $return = "";
+            $this->contrato = $contrato;
+            $this->nombre = $nombre;
+            $this->intento = $intento;
+            $this->tipo = $tipo;
+
+            $query = "INSERT INTO formatos(contrato, nombre, intento, tipo) VALUES (?,?,?,?)";
+            $data = array($this->contrato, $this->nombre, $this->intento, $this->tipo);
+            $resul = $this->insert($query, $data);
+            $return = $resul;
+            return $return;
+        }
+        
         //VISTA GENERAL
         // Selecciona todos los contratos de la base de datos.
         public function selectContrataciones() {
@@ -117,13 +133,6 @@
         {
             $sql = "SELECT area, COUNT(*) AS total, SUM(CASE WHEN estado = 4 THEN 1 ELSE 0 END) AS form FROM contrataciones GROUP BY area";
             $res = $this->select_all($sql);
-            return $res;
-        }
-
-        // Obtiene el total de contratos y la suma de los máximos de los contratos.
-        public function totalcontratos() {
-            $sql = "SELECT COUNT(*) as total, SUM(maximo) as maximo FROM contratos";
-            $res = $this->select($sql);
             return $res;
         }
 
@@ -224,20 +233,13 @@
         }
  
 
-        //Subir el archivo PDF a BD
-        public function agregar_pdf(string $contrato, string $nombre, string $intento, string $tipo)
-        {
-            $return = "";
-            $this->contrato = $contrato;
-            $this->nombre = $nombre;
-            $this->intento = $intento;
-            $this->tipo = $tipo;
 
-            $query = "INSERT INTO formatos(contrato, nombre, intento, tipo) VALUES (?,?,?,?)";
-            $data = array($this->contrato, $this->nombre, $this->intento, $this->tipo);
-            $resul = $this->insert($query, $data);
-            $return = $resul;
-            return $return;
+
+        // Obtiene el total de contratos y la suma de los máximos de los contratos.
+        public function totalcontratos() {
+            $sql = "SELECT COUNT(*) as total, SUM(maximo) as maximo FROM contratos";
+            $res = $this->select($sql);
+            return $res;
         }
 
 

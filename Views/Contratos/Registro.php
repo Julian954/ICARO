@@ -76,10 +76,7 @@
                         <option> <?php echo $plataforma['plataforma'] ?></option>
                        <?php } ?>
                     </select>
-                  </div>
-                  <div class="hidden" style="display: none;">
-                    <input type="datatime" id="fecha_elimina" name="fecha_elimina" value="<?= $fecha_elimina ?>">
-                  </div>                  
+                  </div>              
                   <button type="submit" class="btn app-btn-primary">Agregar Contrato</button>
                 </form>
 					    </div><!--//app-card-body-->
