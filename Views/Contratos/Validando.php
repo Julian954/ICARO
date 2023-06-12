@@ -49,8 +49,8 @@
                         <th scope="col">Edo</th>    
                         <th scope="col">Contrato</th>
                         <th scope="col">Fecha de creacion</th>
-                        <th scope="col">Interno Juridico</th>
-                        <th scope="col">Externo Juridico</th>                
+                        <th scope="col">Responsable</th>
+                        <th scope="col">Validador</th>                
                         <th scope="col">No. Intentos</th>
                         <th scope="col">Foro</th>
 			  					    </tr>
@@ -107,8 +107,8 @@
                         <th scope="col">Edo</th>    
                         <th scope="col">Contrato</th>
                         <th scope="col">Fecha de creacion</th>
-                        <th scope="col">Interno Juridico</th>
-                        <th scope="col">Externo Juridico</th>                
+                        <th scope="col">Responsable</th>
+                        <th scope="col">Validador</th>                 
                         <th scope="col">No. Intentos</th>
                         <th scope="col">Foro</th>
 			  					    </tr>
@@ -143,14 +143,7 @@
                               <path fill-rule="evenodd" d="M5.172 10.828a.5.5 0 0 0 .707 0l4.096-4.096V9.5a.5.5 0 1 0 1 0V5.525a.5.5 0 0 0-.5-.5H6.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
                             </svg>
                             </a>
-                          <?php if ($_SESSION['rol'] == 7) { ?>
-                              <form action="<?php echo base_url() ?>Contratos/formalizar?contrato=<?php echo $validar['id_contrato']; ?>" method="post" class="d-inline forma">
-                                <button title="Formalizar" type="submit" class="btn app-btn-primary btn-sm"><i class="fa fa-check fa-xs"></i></button>
-                              </form>
-                            </td>
-                          <?php } else { ?>
-                            </td>
-                          <?php } ?>
+                          </td>
                         <?php } ?>
                       <?php }?>
 			  				    </tbody>

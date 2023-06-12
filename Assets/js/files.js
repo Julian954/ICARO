@@ -2,7 +2,6 @@ let fileInput = document.getElementById("file-input");
 let fileList = document.getElementById("files-list");
 let numOfFiles = document.getElementById("num-of-files");
 
-console.log("Hola");
 fileInput.addEventListener("change", () => {
   fileList.innerHTML = "";
   numOfFiles.textContent = `${fileInput.files.length} Files Selected`;
@@ -12,7 +11,8 @@ fileInput.addEventListener("change", () => {
     let listItem = document.createElement("li");
     let fileName = i.name;
     let fileSize = (i.size / 1024).toFixed(1);
-    let fileExtension = fileName.substring(fileName.length - 3);
+    let punto = fileName.lastIndexOf(".")+1;
+    let fileExtension = fileName.substring(punto);
     if (fileSize < 1024) {
       if (
         fileExtension == "pdf" ||

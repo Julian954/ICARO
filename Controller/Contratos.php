@@ -1,10 +1,14 @@
 <?php
     class Contratos extends Controllers {
 
+        //YA QUEDÓ AL 100% YA NO SE NECESITA MOVER NADA
+
+        //YA SOLO MÁS ADELANTE FALTA CREAR LA FUNCIÓN PARA ELIMINAR DIARIO, YA REVISÉ 
+        //CUANDO SE TENGA EL HOSTING SE PUEDEN POGRAMAR FUNCIONES.
+
         // Inicia la sesión y verifica si el usuario está activo.
         // Si el usuario no está activo, redirige al inicio de sesión.
         // Llama al constructor de la clase padre (Controllers).
-
         public function __construct() {
             session_start();
             if (empty($_SESSION['activo'])) {
@@ -32,7 +36,7 @@
             $maximo = limpiarInput($_POST['maximo']);
             $fianza = limpiarInput($_POST['fianza']);
             $plataforma = limpiarInput($_POST['plataforma']);
-            $fecha_termina=limpiarInput($_POST['fecha_elimina']);
+            $fecha_termina = date("Y-m-d", strtotime($fecha . "+1 year"));
             $devengo = 0; // default
 
             $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $plataforma, $fecha_termina, $devengo);
@@ -57,9 +61,8 @@
             $data3 = $this->model->totalcontratos();
             $data4 = $this->model->tipocontrato();
             $data5 = $this->model->tipoplatformaconv();
-            $data6 = $this->model->PgsBarContr();
-            //$data7=$this->model->eliminarcontrato();            
-        $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, $data6/*, $data7*/);
+            $data6 = $this->model->PgsBarContr();       
+        $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, $data6);
         }
 
         //Datos para la gráfica de contratos
@@ -68,12 +71,8 @@
             $data = $this->model->EstadoContratos();
             echo json_encode($data);
             die();
-<<<<<<< HEAD
-        }            
-=======
         }
 
->>>>>>> 38dd2285d250307133d22d511a4d79b69e21376e
         // Muestra la vista "Validando" con los datos obtenidos de los modelos.
         public function Validando()
         {        
@@ -140,55 +139,31 @@
             die();
         }
 
-
-
-
-
-
         // Muestra la vista "Foro" con los datos obtenidos de los modelos.
         public function Foro()
         {
             $contrato = $_GET['contrato'];       
-            $data1 =$this->model->selectContrato($contrato);
-            $data2 =$this->model->datos_foro($contrato);
-            $data3 =$this->model->archivos_foro($contrato);
-            $this->views->getView($this, "Foro", "", $data1, $data2, $data3);
+            $data1 = $this->model->selectContrato($contrato);
+            $data2 = $this->model->datos_foro($contrato);
+            $data3 = $this->model->archivos_foro($contrato);
+            $data4 = $this->model->detalleContrato($contrato);
+            $this->views->getView($this, "Foro", "", $data1, $data2, $data3, $data4);
         }
 
-
-
-        public function validar(){
-            $number = limpiarInput($_GET['contrato']);
-            $estado = 3;
-            $actualizar = $this->model->actualizaEstado($estado, $number);
-            $alert = "validado";
-            header("location: " . base_url() . "Contratos/Validando?msg=$alert");
-            die();
-        }
-
-        public function formalizar(){
-            $number = limpiarInput($_GET['contrato']);
-            $estado = 4;
-            $actualizar = $this->model->actualizaEstado($estado, $number);
-            $actualizar2 = $this->model->actualizaEstado4($estado, $number);
-            $alert = "Formalizado";
-            header("location: " . base_url() . "Contratos/Validando?msg=$alert");
-            die();
-        }
-
+        // Añade un comentario en el foro
         public function agregar_comentario(string $contrato)
         {
-            $descripcion = $_POST['descripcion'];        
+            $descripcion = limpiarInput($_POST['descripcion']);        
             $yo = $_SESSION['id'];   
-            $number =$_POST['number'];
+            $number = limpiarInput($_POST['number']);
             $intento = $this->model->contarintento($number);
             $insert = $this->model->agregar_validar_comentarios($yo, $number, $descripcion, $intento['intentos']+1);
             $contrato = $this->model->selectContrato($number);
-            if ($contrato['id_creador'] == $yo) {
+            if ($contrato['id_creador'] == $yo || $_SESSION['rol'] == 7) {
                 $sumar = $this->model->actualizarintento($contrato['intentos']+2, $number);
             }
-
             $i = 0;
+            $intentonuevo = $intento['intentos']+1;
             $archivos = $_FILES['archivo'];
             foreach ($archivos["name"] as $indice => $nombre) {
 
@@ -201,24 +176,41 @@
                 $tmaximo = 20 * 1024 * 1024;
                 if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf" || $name["extension"] == "docx" || $name["extension"] == "zip" || $name["extension"] == "xlsx")){
                     if ($error_archivo == UPLOAD_ERR_OK ) {
-                        $nombre_nuevo = $number."0".$yo.$i.".".$name["extension"];                                
+                        $nombre_nuevo = $number.$intentonuevo.$yo.$i.".".$name["extension"];                                
                         $ruta_destino = 'Assets/Documentos/Foro/'.$nombre_nuevo;
                         if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
                             $i=$i+1;
                             $alert=$i;            
                             $agregar= $this->model->agregar_pdf($number, $nombre_nuevo, $intento['intentos']+1, 1);
                         } else {
-                            $alert =  'No Se Adjunto Archivo';
+                            $alert =  'NoArchivo';
                         }
                     } else {
-                    $alert =  'No Se Adjunto Archivo';
+                    $alert =  'NoArchivo';
 
                     }
                 } else {
-                    $alert =  'No Se Adjunto Archivo';
+                    $alert =  'NoArchivo';
                 }
-            }                        
-            header("location: " . base_url() . "Contratos/Foro?contrato=$number&=msg=$alert");
+            }          
+            $alert =  'Registrado';              
+            header("location: " . base_url() . "Contratos/Foro?contrato=$number&msg=$alert");
+            die();
+        }
+
+        public function validar(){
+            $number = limpiarInput($_GET['contrato']);
+            $estado = 3;
+            $actualizar = $this->model->actualizaEstado($estado, $number);
+            header("location: " . base_url() . "Contratos/Foro?contrato=$number");
+            die();
+        }
+
+        public function formalizar(){
+            $number = limpiarInput($_GET['contrato']);
+            $estado = 4;
+            $actualizar = $this->model->actualizaEstado($estado, $number);
+            header("location: " . base_url() . "Contratos/Foro?contrato=$number");
             die();
         }
     }

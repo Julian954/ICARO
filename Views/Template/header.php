@@ -57,7 +57,7 @@
 				                <i class="search-mobile-trigger-icon"><?php echo utf8_encode(strftime('%d/%B/%Y')); ?></i>
 				            </div><!--//TABLET Y PC-->
 		            		<div class="app-search-box col">
-								<i class="search-mobile-trigger-icon"><?php echo utf8_encode(strftime('%A %d de %B de %Y, %H:%M')).$_SESSION['rol']; ?></i>
+								<i class="search-mobile-trigger-icon"><?php echo utf8_encode(strftime('%A %d de %B de %Y, %H:%M')); ?></i>
 		            		</div><!--//NOTIFICACIONES-->
 			            	<div class="app-utilities col-auto">
 				            	<div class="app-utility-item app-notifications-dropdown dropdown">

@@ -231,7 +231,9 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
-                        <th scope="col">Eliminacion</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -259,13 +261,13 @@
                           <td><?php echo $us['termino']; ?></td>
                           <td><?php echo $us['maximo']; ?></td>
                           <td><?php echo $us['fecha']; ?></td>
-                          <td><?php 
-$fecha2 = new DateTime($us['fecha_eliminar']);
-$fecha1 = new DateTime(date('Y-m-d'));
-$intervalo = $fecha1->diff($fecha2);
-$dias = $intervalo->days;
-echo "En"." ".$dias." - "."dias";
- ?></td>
+                          <?php if ($_SESSION['rol'] == 7) { 
+                            $eliminar = new  DateTime($us['fecha_eliminar']);
+                            $hoy = new DateTime(date('Y-m-d'));
+                            $intervalo = $hoy->diff($eliminar);
+                            ?>
+                            <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                          <?php } ?>
                           <?php if ($us['estado'] != 1) { ?>
                             <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $us['numero']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
@@ -298,6 +300,9 @@ echo "En"." ".$dias." - "."dias";
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                       </tr>
                     </thead>
                     <tbody>
@@ -324,7 +329,14 @@ echo "En"." ".$dias." - "."dias";
                             <td><?php echo $us['nombre']; ?></td>
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
-                            <td><?php echo $us['fecha']; ?></td>                            
+                            <td><?php echo $us['fecha']; ?></td>
+                            <?php if ($_SESSION['rol'] == 7) { 
+                              $eliminar = new  DateTime($us['fecha_eliminar']);
+                              $hoy = new DateTime(date('Y-m-d'));
+                              $intervalo = $hoy->diff($eliminar);
+                              ?>
+                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                            <?php } ?>                         
                           </tr>
                         <?php  } ?>
                       <?php } ?>
@@ -348,6 +360,9 @@ echo "En"." ".$dias." - "."dias";
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -376,6 +391,13 @@ echo "En"." ".$dias." - "."dias";
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['fecha']; ?></td>
+                            <?php if ($_SESSION['rol'] == 7) { 
+                              $eliminar = new  DateTime($us['fecha_eliminar']);
+                              $hoy = new DateTime(date('Y-m-d'));
+                              $intervalo = $hoy->diff($eliminar);
+                              ?>
+                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                            <?php } ?>
                             <?php if ($us['estado'] != 1) { ?>
                             <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $us['numero']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
@@ -407,6 +429,9 @@ echo "En"." ".$dias." - "."dias";
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -435,6 +460,13 @@ echo "En"." ".$dias." - "."dias";
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['fecha']; ?></td>
+                            <?php if ($_SESSION['rol'] == 7) { 
+                              $eliminar = new  DateTime($us['fecha_eliminar']);
+                              $hoy = new DateTime(date('Y-m-d'));
+                              $intervalo = $hoy->diff($eliminar);
+                              ?>
+                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                            <?php } ?>
                             <?php if ($us['estado'] != 1) { ?>
                             <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $us['numero']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
@@ -466,6 +498,9 @@ echo "En"." ".$dias." - "."dias";
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -494,6 +529,13 @@ echo "En"." ".$dias." - "."dias";
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['fecha']; ?></td>
+                            <?php if ($_SESSION['rol'] == 7) { 
+                              $eliminar = new  DateTime($us['fecha_eliminar']);
+                              $hoy = new DateTime(date('Y-m-d'));
+                              $intervalo = $hoy->diff($eliminar);
+                              ?>
+                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                            <?php } ?>
                             <?php if ($us['estado'] != 1) { ?>
                             <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $us['numero']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
@@ -516,9 +558,9 @@ echo "En"." ".$dias." - "."dias";
     </div>
   </div><!--//app-wrapper-->
   <script>
-      window.addEventListener("load", function() {
-          GeneralContratos();
-      })
+    window.addEventListener("load", function() {
+        GeneralContratos();
+    })
   </script>
 
 <?php }  else { ?> <!-- En caso de ser valido -->

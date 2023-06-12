@@ -1,6 +1,8 @@
 <?php
     class ContratosModel extends Mysql {
 
+        //YA QUEDÓ AL 100% YA NO SE NECESITA MOVER NADA
+
         // Propiedades de la clase ContratosModel
         public $numero, $descripcion, $administrador, $area, $tipo, $termino, $maximo, $fianza, $estado, $plataforma, $devengo, $fecha;
 
@@ -47,7 +49,7 @@
             $this->devengo = $devengo;
             $this->fianza = $fianza;
             $this->plataforma = $plataforma;
-            $this->fecha_termina=$fecha_termina;
+            $this->fecha_termina = $fecha_termina;
 
             // Verifica si el contrato ya existe en la base de datos
             $sql = "SELECT * FROM contratos WHERE numero = '{$this->numero}'";
@@ -77,7 +79,7 @@
         // Selecciona todos los contratos de la base de datos.
         public function EstadoContratos()
         {
-            $sql = "SELECT estado, CASE estado WHEN 1 THEN 'En Contratacion' WHEN 2 THEN 'En Validación' WHEN 3 THEN 'Validados' WHEN 4 THEN 'Formalizados' ELSE 'ERROR' END AS nombre, COUNT(*) AS total FROM contratos GROUP BY estado;";
+            $sql = "SELECT estado, CASE estado WHEN 1 THEN 'En Contratacion' WHEN 2 THEN 'En Validación' WHEN 3 THEN 'Validados' WHEN 4 THEN 'Formalizados' ELSE 'ERROR' END AS nombre, COUNT(*) AS total FROM contratos GROUP BY estado";
             $res = $this->select_all($sql);
             return $res;
         }
@@ -192,19 +194,9 @@
             return $return;
         }
 
-
-
-
-
-
-
-
-
-
-        
-
-        // Selecciona todos los contratos en estado 1
-        public function selectContrato(string $contrato) { //me marca error cuando agrego comentarios en el modal de Foro.php
+        //VISTA FORO
+        // Selecciona los detalles del contrato
+        public function selectContrato(string $contrato) {
             $this->contrato = $contrato;
             $sql = "SELECT * FROM validar_cont, usuarios WHERE validar_cont.id_contrato = '{$this->contrato}' AND validar_cont.id_creador = usuarios.id";
             $res = $this->select($sql);
@@ -225,95 +217,18 @@
             return $res;
         }
 
-         public function contarintento(string $contrato){
+        public function detalleContrato(string $contrato){
             $this->contrato = $contrato;
-            $sql = "SELECT COUNT(*) AS intentos FROM detalle_cont WHERE contrato = '{$this->contrato}'";
+            $sql = "SELECT * FROM contratos WHERE numero = '{$this->contrato}'";
             $res = $this->select($sql);
             return $res;
         }
 
-
-
-
-
-
-        /**
-         * Obtiene los porcentajes de contratos agrupados por estado.
-         */
-        public function porcentajesCont() {
-            $sql = "SELECT estado, COUNT(*) AS total FROM contratos GROUP BY estado";
-            $res = $this->select_all($sql);
+        public function contarintento(string $contrato){
+            $this->contrato = $contrato;
+            $sql = "SELECT COUNT(*) AS intentos FROM detalle_cont WHERE contrato = '{$this->contrato}'";
+            $res = $this->select($sql);
             return $res;
-        }
-    //query de validar_cont
-        public function validar_cont(){
-            $sql = "SELECT * FROM validar_cont";
-            $res=$this->select_all($sql);
-            return $res;
-        }
-
-
-
-        public function pedir_datos()
-        {
-            $sql = "SELECT * FROM validar_cont";
-            $res = $this->select_all($sql);
-            return $res;
-        }
- 
-
-        public function datosuser()
-        {
-            $ID = $_SESSION['id'];
-            $sql="SELECT nombre as nom,correo as correo,telefono as phone,perfil as foto FROM usuarios WHERE id = $ID";
-            $res = $this->select_all($sql);
-            return $res;
-        }
-
-
-
-        public function agregar_foro(string $number, string $yo, string $tu)
-        {
-            $return = "";
-            $this->tu = $tu;
-            $this->number = $number;               
-            $this->yo = $yo;                         
-                $query = "INSERT INTO detalle_cont(observacion, id_validacion, id_responde,nombre_interno, nombre_externo) VALUES (?,?,?,?,?)";
-                $data = array($this->number, $this->yo, $this->tu, $this->yo, $this->tu);
-                $resul = $this->insert($query, $data);                        
-        }
-
-        /*public function pedir_datos()
-        {
-            $sql = "SELECT * FROM validar_cont";
-            $res = $this->select_all($sql);
-            return $res;
-        }*/
-
-
-
-        public function actualizaEstado4(int $estado, string $id)
-        {
-            $return = "";
-            $this->id = $id;
-            $this->estado = $estado;
-            $query = "UPDATE validar_cont SET validar_cont.estado = ? WHERE id_contrato=?";       
-            $data = array($this->estado, $this->id);
-            $resul = $this->update($query, $data);
-            $return = $resul;
-            return $return;
-        }
-        //actualizar intento de validar
-        public function actualizarintento(int $intentos, string $id)
-        {
-            $return = "";
-            $this->id = $id;
-            $this->intentos = $intentos;
-            $query = "UPDATE validar_cont SET intentos = ? WHERE id_contrato=?";
-            $data = array($this->intento, $this->id);
-            $resul = $this->update($query, $data);
-            $return = $resul;
-            return $return;
         }
 
         public function agregar_validar_comentarios(string $id_responde, string $contrato, string $respuesta, string $intento)
@@ -327,7 +242,21 @@
             $data = array($this->id_responde, $this->contrato,$this->respuesta,$this->intento);
             $resul = $this->insert($query, $data);                          
             return $resul;
+        }
+
+        //actualizar intento de validar
+        public function actualizarintento(string $intentos, string $id)
+        {
+            $return = "";
+            $this->id = $id;
+            $this->intentos = $intentos;
+            $query = "UPDATE validar_cont SET intentos = ? WHERE id_contrato = ?";
+            $data = array($this->intento, $this->id);
+            $resul = $this->update($query, $data);
+            $return = $resul;
+            return $return;
+        }
+
     }
-}
 ?>
 
