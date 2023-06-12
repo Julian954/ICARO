@@ -42,9 +42,11 @@
             $termino = limpiarInput($_POST['Termino']);
             $maximo = limpiarInput($_POST['Maximo']);
             $dictamen = limpiarInput($_POST['Dictamen']);
+            $comentario = limpiarInput($_POST['comentario']);
             $fecha_termina = date("Y-m-d", strtotime("+1 year"));
 
             $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $fecha_termina);
+            $validar = $this->model->agregar_validar($oficio, $comentario, $administrador);
             if ($insert == 'existe') {
                 $alert = 'existe';
                 header("location: " . base_url() . "Contrataciones/Registro?msg=$alert");
@@ -119,7 +121,8 @@
             $data1 = $this->model->selectContratosVal();
             $data2 = $this->model->selectExternoJ();
             $data3 = $this->model->selectContratosEdo1();
-            $this->views->getView($this, "Validando", "", $data1, $data2, $data3);
+            $data4 = $this->model->selectContratosNo();
+            $this->views->getView($this, "Validando", "", $data1, $data2, $data3, $data4);
         }
 
         public function agregar_validadcont()

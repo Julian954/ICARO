@@ -177,6 +177,7 @@
               </select>   
             </div>
             <div class="form-group">
+              <label for="miSelect2" class="form-label" style="color:#000000;">Contrato</label>
               <select class="form-control" name="miSelect2" id="miSelect2">
                 <?php foreach ($data3 as $filacont){ ?>   
                   <?php if ($filacont['administrador'] == $_SESSION['id'] || $_SESSION['rol'] == 7){ ?>  

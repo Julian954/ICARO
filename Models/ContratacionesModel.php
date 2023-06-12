@@ -75,6 +75,28 @@
             return $return;
         }
 
+        //Agrega los datos de la validación
+        public function agregar_validar(string $number, string $descripcion, string $yo)
+        {
+            $return = "";
+            $this->number = $number;
+            $this->descripcion = $descripcion;
+            $this->yo = $yo;
+
+            $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
+            $result = $this->selecT($sql);
+
+            if (empty($result)) {
+                $query = "INSERT INTO validar_contrata(id_contrato, descripcion, id_creador) VALUES (?,?,?)";
+                $data = array($this->number, $this->descripcion, $this->yo);
+                $resul = $this->insert($query, $data);
+                $return = $resul;
+            } else {
+                $return = "existe";
+            }
+            return $return;
+        }
+
         //Subir el archivo PDF a BD
         public function agregar_pdf(string $contrato, string $nombre, string $intento, string $tipo)
         {
@@ -147,17 +169,17 @@
         //VISTA VALIDANDO
         // Selecciona todos los contratos de la base de datos.
         public function selectContratosVal() {
-            $sql = "SELECT validar_cont.*, validar_cont.id_validador AS validador, validar_cont.id_creador AS creador, validar_cont.id_contrato AS estado, u1.nombre as creador, u2.nombre as validador, c1.estado as estado FROM validar_cont
-                    JOIN usuarios u1 ON validar_cont.id_creador = u1.id
-                    JOIN contratos c1 ON validar_cont.id_contrato = c1.numero
-                    JOIN usuarios u2 ON validar_cont.id_validador = u2.id";
+            $sql = "SELECT validar_contrata.*, validar_contrata.id_validador AS validador, validar_contrata.id_creador AS creador, validar_contrata.id_contrato AS estado, u1.nombre as creador, u2.nombre as validador, c1.estado as estado FROM validar_contrata
+                    JOIN usuarios u1 ON validar_contrata.id_creador = u1.id
+                    JOIN contrataciones c1 ON validar_contrata.id_contrato = c1.nooficio
+                    JOIN usuarios u2 ON validar_contrata.id_validador = u2.id";
             $res = $this->select_all($sql);
             return $res;
         }
 
         // Selecciona todos los usuarios externos juridicos
         public function selectExternoJ() {
-            $sql = "SELECT * FROM usuarios WHERE rol = 3";
+            $sql = "SELECT * FROM usuarios WHERE rol = 4";
             $res = $this->select_all($sql);
             return $res;
         }
@@ -168,7 +190,15 @@
             $res = $this->select_all($sql);
             return $res;
         }
-    
+
+        // Selecciona todos los contratos de la base de datos.
+        public function selectContratosNo() {
+            $sql = "SELECT validar_contrata.*, validar_contrata.id_creador AS creador, validar_contrata.id_contrato AS estado, u1.nombre as creador, c1.estado as estado FROM validar_contrata
+                    JOIN usuarios u1 ON validar_contrata.id_creador = u1.id
+                    JOIN contrataciones c1 ON validar_contrata.id_contrato = c1.nooficio";
+            $res = $this->select_all($sql);
+            return $res;
+        }
 
 
 
@@ -209,28 +239,7 @@
             $res = $this->select_all($sql);
             return $res;
         }
-        public function agregar_validar(string $number, string $descripcion, string $yo, string $tu)
-        {
-            $return = "";
-            $this->tu = $tu;
-            $this->number = $number;
-            $this->descripcion = $descripcion;
-            $this->yo = $yo;
 
-            $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->number}'";
-            $result = $this->selecT($sql);
-            if (empty($result)) {
-                $query = "INSERT INTO validar_cont(id_contrato, descripcion, id_creador, id_validador) VALUES (?,?,?,?)";
-                $data = array($this->number, $this->descripcion, $this->yo, $this->tu);
-                $resul = $this->insert($query, $data);
-
-                $return = $resul;
-            } else {
-                $return = "Contrato existente";
-            }
-
-            return $return;
-        }
  
 
 

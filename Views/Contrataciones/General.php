@@ -1,6 +1,4 @@
-<?php if($_SESSION['rol'] <= 1){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
-  <?php permisos() ?> <!-- Poner el header -->
-<?php } else { ?> <!-- En caso de ser válido -->
+<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 5){ ?> <!-- Si es Admin, Requiriente o de Jefatura-->
   <?php encabezado() ?> <!-- Poner el header -->
   
   <div class="app-wrapper">
@@ -197,7 +195,7 @@
                   </div>
         				</div><!--//col-->
         			  <div class="col-12 col-lg-3">
-                  <a class="btn app-btn-primary" href="<?php echo base_url(); ?>Contratos/Validando">
+                  <a class="btn app-btn-primary" href="<?php echo base_url(); ?>Contrataciones/Validando">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                       <path fill-rule="evenodd" d="M5.172 10.828a.5.5 0 0 0 .707 0l4.096-4.096V9.5a.5.5 0 1 0 1 0V5.525a.5.5 0 0 0-.5-.5H6.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
@@ -237,6 +235,9 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -264,6 +265,13 @@
                           <td><?php echo $us['termino']; ?></td>
                           <td><?php echo $us['maximo']; ?></td>
                           <td><?php echo $us['inicio']; ?></td>
+                          <?php if ($_SESSION['rol'] == 7) { 
+                            $eliminar = new  DateTime($us['fecha_eliminar']);
+                            $hoy = new DateTime(date('Y-m-d'));
+                            $intervalo = $hoy->diff($eliminar);
+                            ?>
+                            <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                          <?php } ?>
                           <td><a href="<?php echo base_url(); ?>Contrataciones/Foro?contrato=<?php echo $us['nooficio']; ?>">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
@@ -292,11 +300,14 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                       </tr>
                     </thead>
                     <tbody>
                       <?php foreach ($data1 as $us) { ?>
-                        <?php if ($us['estado'] == 1) { ?>
+                        <?php if ($us['estado'] == 1 && ($_SESSION['rol'] == 7 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == $us['administrador'])) { ?>
                           <tr>
                             <td>
                               <?php if ($us['estado'] == 2) { ?>
@@ -319,6 +330,13 @@
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['inicio']; ?></td>
+                            <?php if ($_SESSION['rol'] == 7) { 
+                              $eliminar = new  DateTime($us['fecha_eliminar']);
+                              $hoy = new DateTime(date('Y-m-d'));
+                              $intervalo = $hoy->diff($eliminar);
+                              ?>
+                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                            <?php } ?>
                           </tr>
                         <?php } ?>
                       <?php } ?>
@@ -342,6 +360,9 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -370,6 +391,13 @@
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['inicio']; ?></td>
+                            <?php if ($_SESSION['rol'] == 7) { 
+                              $eliminar = new  DateTime($us['fecha_eliminar']);
+                              $hoy = new DateTime(date('Y-m-d'));
+                              $intervalo = $hoy->diff($eliminar);
+                              ?>
+                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                            <?php } ?> 
                             <?php if ($us['estado'] != 1) { ?>
                               <td><a href="<?php echo base_url(); ?>Contrataciones/Foro?contrato=<?php echo $us['nooficio']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
@@ -401,6 +429,9 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -429,6 +460,13 @@
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['inicio']; ?></td>
+                            <?php if ($_SESSION['rol'] == 7) { 
+                              $eliminar = new  DateTime($us['fecha_eliminar']);
+                              $hoy = new DateTime(date('Y-m-d'));
+                              $intervalo = $hoy->diff($eliminar);
+                              ?>
+                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                            <?php } ?> 
                             <?php if ($us['estado'] != 1) { ?>
                               <td><a href="<?php echo base_url(); ?>Contrataciones/Foro?contrato=<?php echo $us['nooficio']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
@@ -460,6 +498,9 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
+                        <?php if ($_SESSION['rol'] == 7) { ?>
+                          <th scope="col">Eliminación</th>
+                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -488,6 +529,13 @@
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['inicio']; ?></td>
+                            <?php if ($_SESSION['rol'] == 7) { 
+                              $eliminar = new  DateTime($us['fecha_eliminar']);
+                              $hoy = new DateTime(date('Y-m-d'));
+                              $intervalo = $hoy->diff($eliminar);
+                              ?>
+                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
+                            <?php } ?> 
                             <?php if ($us['estado'] != 1) { ?>
                               <td><a href="<?php echo base_url(); ?>Contrataciones/Foro?contrato=<?php echo $us['nooficio']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
@@ -509,12 +557,13 @@
       </div>
     </div>
   </div><!--//app-wrapper-->
-    <script>
-      window.addEventListener("load", function() {
-          GeneralContrataciones();
-      })
+  <script>
+    window.addEventListener("load", function() {
+        GeneralContrataciones();
+    })
   </script>
 
- <?php } ?>
-
+<?php }  else { ?> <!-- En caso de ser valido -->
+  <?php permisos() ?> <!-- Poner el mensaje de erro -->
+<?php } ?>
 <?php pie() ?> <!-- Pone el fotter -->

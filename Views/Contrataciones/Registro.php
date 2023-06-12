@@ -78,6 +78,10 @@
                   <input type="text" class="form-control" id="Dictamen" name="Dictamen" value="" required>
                 </div>
                 <div class="form-group">
+                  <label for="setting-input-2" class="form-label">Comentarios</label>
+                  <textarea name="comentario" id="comentario" class="form-control" cols="auto" rows="auto"></textarea>
+                </div>
+                <div class="form-group">
                   <div class="container2">
                     <input type="file" id="file-input" multiple name="archivo[]" required/>
                     <label id="fileup" for="file-input">
