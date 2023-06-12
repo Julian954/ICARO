@@ -127,108 +127,89 @@
 
         public function agregar_validadcont()
         {
-            $name = pathinfo($_FILES["archivo"]["name"]);
-            $nombre_archivo = $_FILES["archivo"]["name"];
-            $tipo_archivo = $_FILES["archivo"]["type"];
-            $tamano_archivo = $_FILES["archivo"]["size"];
-            $ruta_temporal = $_FILES["archivo"]["tmp_name"];
-            $error_archivo = $_FILES["archivo"]["error"];
-            $tmaximo = 20 * 1024 * 1024;
-            $tu = $_POST['miSelect1'];
-            //$me=$_POST['yo'];
-            //$numero = $_POST['miSelect2'];
-            $descripcion = $_POST['descripcion'];
-            $yo = $_SESSION['nombre'];
-            $number = $_POST['miSelect2'];
-            //$nombre_archi=$_POST['archivo'];   
-            //$estado = +1; //POR DEFAULT SE CREAN CON 1 (En Contratacion)
-            if (($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf")) {
-                if ($error_archivo == UPLOAD_ERR_OK) {
-                    $nombre_nuevo = $_SESSION['id'] . "." . $name["extension"];
-                    $ruta_destino = 'Assets/Documentos/' . $nombre_nuevo;
-                    if (move_uploaded_file($ruta_temporal, $ruta_destino)) {
-                        $alert = 'Registrado';
-                        $agregar = $this->model->agregar_pdf($number, $descripcion, $yo, $tu, $nombre_archivo);
-                        //ingreso los datos de contraro, interno y externo para referenciar en el foro
-                        $agregar_foro = $this->model->agregar_foro($number, $yo, $tu);
-                    } else {
-                        $alert = 'No Se Adjunto Archivo';
-                        $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
-                        $agregar_foro = $this->model->agregar_foro($number, $yo, $tu);
-                    }
-                } else {
-                    $alert = 'No Se Adjunto Archivo';
-                    $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
-                    $agregar_foro = $this->model->agregar_foro($number, $yo, $tu);
-                }
-            } else {
-                $alert = 'No Se Adjunto Archivo';
-                $insert = $this->model->agregar_validar($number, $descripcion, $yo, $tu);
-                $agregar_foro = $this->model->agregar_foro($number, $yo, $tu);
-            }
-            header("location: " . base_url() . "Contratos/Validando?msg=$alert");
+            $tu = limpiarInput($_POST['miSelect1']);
+            $number = limpiarInput($_POST['miSelect2']);
+            $estadoN = 2;
+            $estado = $this->model->actualizaEstado($estadoN, $number);
+            $responsable = $this->model->actualizaResp($tu, $number);
+            $alert = "agregado";
+            header("location: " . base_url() . "Contrataciones/Validando?msg=$alert");
             die();
-        }
-        //descargar el pdf del historial en la conversacion del Foro
-        public function get_pdf()
-        {
-
         }
 
         public function Foro()
         {
             $contrato = $_GET['contrato'];
             $data1 = $this->model->selectContrato($contrato);
-            $data2 = $this->model->datos_foro();
-            $this->views->getView($this, "Foro", "", $data1, $data2);
+            $data2 = $this->model->datos_foro($contrato);
+            $data3 = $this->model->archivos_foro($contrato);
+            $data4 = $this->model->detalleContrato($contrato);
+            $this->views->getView($this, "Foro", "", $data1, $data2, $data3, $data4);
         }
-
-
+ 
+        // Añade un comentario en el foro
         public function agregar_comentario(string $contrato)
         {
-            //$contrato = $_POST['number']; 
-            $name = pathinfo($_FILES["archivo"]["name"]);
-            $nombre_archivo = $_FILES["archivo"]["name"];
-            $tipo_archivo = $_FILES["archivo"]["type"];
-            $tamano_archivo = $_FILES["archivo"]["size"];
-            $ruta_temporal = $_FILES["archivo"]["tmp_name"];
-            $error_archivo = $_FILES["archivo"]["error"];
-            $tmaximo = 20 * 1024 * 1024;
-            $tu = $_POST['tu'];
-            $number = $_POST['number'];
-            //$me=$_POST['yo'];
-            //$numero = $_POST['miSelect2'];
-            $descripcion = $_POST['descripcion'];
-            $yo = $_POST['yo'];
-            $rol = $_SESSION['rol'];
-            //$nombre_archi=$_POST['archivo'];   
-            //$estado = +1; //POR DEFAULT SE CREAN CON 1 (En Contratacion)
-            if (($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf")) {
-                if ($error_archivo == UPLOAD_ERR_OK) {
-                    $nombre_nuevo = $_SESSION['id'] . "." . $name["extension"];
-                    $ruta_destino = 'Assets/Documentos/' . $nombre_nuevo;
-                    if (move_uploaded_file($ruta_temporal, $ruta_destino)) {
-                        $alert = 'Registrado';
-                        $agregar = $this->model->agregar_comentarios_pdf($tu, $yo, $number, $descripcion, $nombre_archivo, $rol);
-                        //ingreso los datos de contraro, interno y externo para referenciar en el foro
-                        //$agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
+            $descripcion = limpiarInput($_POST['descripcion']);        
+            $yo = $_SESSION['id'];   
+            $number = limpiarInput($_POST['number']);
+            $intento = $this->model->contarintento($number);
+            $insert = $this->model->agregar_validar_comentarios($yo, $number, $descripcion, $intento['intentos']+1);
+            $contrato = $this->model->selectContrato($number);
+            if ($contrato['id_creador'] == $yo || $_SESSION['rol'] == 7) {
+                $sumar = $this->model->actualizarintento($contrato['intentos']+2, $number);
+            }
+            $i = 0;
+            $intentonuevo = $intento['intentos']+1;
+            $archivos = $_FILES['archivo'];
+            foreach ($archivos["name"] as $indice => $nombre) {
+
+                $name = pathinfo($archivos["name"][$indice]);
+                $nombre_archivo = $archivos["name"][$indice];        
+                $tipo_archivo = $archivos["type"][$indice];
+                $tamano_archivo = $archivos["size"][$indice];
+                $ruta_temporal = $archivos["tmp_name"][$indice];
+                $error_archivo = $archivos["error"][$indice];
+                $tmaximo = 20 * 1024 * 1024;
+                if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf" || $name["extension"] == "docx" || $name["extension"] == "zip" || $name["extension"] == "xlsx")){
+                    if ($error_archivo == UPLOAD_ERR_OK ) {
+                        $nombre_nuevo = $number.$intentonuevo.$yo.$i.".".$name["extension"];                                
+                        $ruta_destino = 'Assets/Documentos/Foro/'.$nombre_nuevo;
+                        if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
+                            $i=$i+1;
+                            $alert=$i;            
+                            $agregar= $this->model->agregar_pdf($number, $nombre_nuevo, $intento['intentos']+1, 1);
+                        } else {
+                            $alert =  'NoArchivo';
+                        }
                     } else {
-                        $alert = 'No Se Adjunto Archivo';
-                        $insert = $this->model->agregar_validar_comentarios($tu, $yo, $number, $descripcion, $rol);
-                        //$agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
+                    $alert =  'NoArchivo';
+
                     }
                 } else {
-                    $alert = 'No Se Adjunto Archivo';
-                    $insert = $this->model->agregar_validar_comentarios($tu, $yo, $number, $descripcion, $rol);
-                    //$agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
+                    $alert =  'NoArchivo';
                 }
-            } else {
-                $alert = 'No Se Adjunto Archivo';
-                $insert = $this->model->agregar_validar_comentarios($tu, $yo, $number, $descripcion, $rol);
-                //$agregar_foro= $this->model->agregar_foro($number, $yo, $tu);
-            }
-            header("location: " . base_url() . "Contratos/Foro?msg=$alert");
+            }          
+            $alert =  'Registrado';              
+            header("location: " . base_url() . "Contrataciones/Foro?contrato=$number&msg=$alert");
+            die();
+        }
+
+        public function validar(){
+            $number = limpiarInput($_GET['contrato']);
+            $estado = 3;
+            $actualizar = $this->model->actualizaEstado($estado, $number);
+            header("location: " . base_url() . "Contrataciones/Foro?contrato=$number");
+            die();
+        }
+
+        public function formalizar(){
+            $number = limpiarInput($_GET['contrato']);
+            $estado = 4;
+            $actualizar = $this->model->actualizaEstado($estado, $number);
+            header("location: " . base_url() . "Contrataciones/Foro?contrato=$number");
             die();
         }
     }
 ?>
+
