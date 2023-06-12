@@ -136,7 +136,7 @@
             SUM(CASE WHEN contrato IN ('Conv. Vigencia', 'Conv. Monto') THEN 1 ELSE 0 END) AS conv_count,
             SUM(CASE WHEN contrato IN ('Por Monto', 'Por Vigencia' ) THEN 1 ELSE 0 END) AS contr_count
             FROM contrataciones
-            WHERE contratacion IN ('Alineamiento', 'Peticion')
+            WHERE contratacion IN ('Alineamiento', 'Peticion', 'Disposicion')
             GROUP BY contratacion";
             $res = $this->select_all($sql);
             return $res;
