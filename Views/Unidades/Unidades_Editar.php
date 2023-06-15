@@ -61,7 +61,7 @@
                         
                         <div class="card-footer">
                             <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Modificar</button>
-                            <a href="<?php echo base_url(); ?>Unidades/Unidades" class="btn btn-danger"><i class="fas fa-window-close"></i> Cancelar</a>
+                            <a href="<?php echo base_url(); ?>Unidades/Unidad" class="btn btn-danger"><i class="fas fa-window-close"></i> Cancelar</a>
                         </div>
                     </form>
                 </div>
