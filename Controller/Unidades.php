@@ -64,7 +64,7 @@ class Unidades extends Controllers //Aquí se debe llamas igual que el archivo
         
         $eliminar = $this->model->eliminarUnidades($id);
         //$data = $this->model->selectUsuarios();
-        $alert =  'eliminado';
+        $alert =  'Eliminado';
         $data1 = $this->model->selectUnidades(); 
         header("location: " . base_url() . "Unidades/Unidad?msg=$alert");
         die();
