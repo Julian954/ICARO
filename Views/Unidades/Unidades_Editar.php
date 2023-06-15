@@ -41,7 +41,7 @@
             <div class="col-lg-6 mt-auto">
                 <div class="card container-fluid2">
                     <h5 class="card-header"><i class="fa fa-edit"></i> <strong>Editar Unidad</strong></h5>
-                    <form method="post" action="<?php echo base_url(); ?>Pedidos/actualizar" autocomplete="off"> 
+                    <form method="post" action="<?php echo base_url(); ?>Unidades/actualizar" autocomplete="off"> 
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
@@ -61,7 +61,7 @@
                         
                         <div class="card-footer">
                             <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Modificar</button>
-                            <a href="<?php echo base_url(); ?>Pedidos/Unidades" class="btn btn-danger"><i class="fas fa-window-close"></i> Cancelar</a>
+                            <a href="<?php echo base_url(); ?>Unidades/Unidades" class="btn btn-danger"><i class="fas fa-window-close"></i> Cancelar</a>
                         </div>
                     </form>
                 </div>
