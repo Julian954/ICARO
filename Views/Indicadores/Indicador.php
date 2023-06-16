@@ -1,20 +1,5 @@
-<?php encabezado() ?> <!-- Poner el header -->
-
-<?php if($_SESSION['rol'] <= 1){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
-<div class="page-content2">
-    <section>
-        <div class="card container-fluid2 text-center">
-            <div class="card-header"><i class="fas fa-exclamation-circle"></i> ERROR</div>
-            <div class="card-body">
-                <h5 class="card-title">Error: No tienes acceso a esta página.</h5>
-            </div>
-            <div class="card-footer text-muted">
-              <a href="<?php echo base_url() ?>Dashboard/Alumnos" class="btn btn-primary">Ir al inicio</a>
-            </div>
-        </div>
-    </section>
-</div>
-<?php }  else { ?> <!-- En caso de ser valido -->
+<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 5){ ?> <!-- Si es Admin o de Jefatura-->
+  <?php encabezado() ?> <!-- Poner el header -->
 
 	<div class="app-wrapper">
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
@@ -26,13 +11,14 @@
 							    <h4 class="stats-type mb-1">Acumulado<span style="color:#FF0000;">Negadas</span> <span style="font-weight: bold; color:#000000;">Hoy</span></h4>
 							    <div class="stats-figure">76<span>&nbsp;recetas</span></div>
 							    <div class="stats-meta text-danger">
-								<span style="font-weight:bold;">389</span>&nbsp;"negadas ayer"</div>
+									<span style="font-weight:bold;">389</span>&nbsp;"negadas ayer"
+								</div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
 				    </div><!--//col-12 col-lg-6-->
 
-           	  <div class="col-6 col-lg-3">
+           	  		<div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1"><span style="color:#FF0000;">Negadas</span> <span style="font-weight: bold; color:#000000;">YTD 2021</span></h4>
@@ -44,7 +30,7 @@
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
 				    </div><!--//col-6 col-lg-3-->
 
-          	    <div class="col-6 col-lg-3">
+          	    	<div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1"><span style="color:#FF0000;">Negadas</span> <span style="font-weight: bold; color:#000000;">Diario</span></h4>
@@ -199,6 +185,8 @@
 
    			 <!-- Page Specific JS -->
    				 <script src="Assets/js/app.js"></script>
+				 
+<?php }  else { ?> <!-- En caso de ser valido -->
+  <?php permisos() ?> <!-- Poner el mensaje de erro -->
 <?php } ?>
-
-<?php pie() ?>
+<?php pie() ?> <!-- Pone el fotter -->

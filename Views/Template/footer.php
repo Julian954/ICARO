@@ -1,8 +1,7 @@
 	<div class="app-wrapper">
-        <hr class="my-4">
         <footer class="app-footer">
+            <hr class="my-1">
 		    <div class="container text-center py-3">
-		         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
                 <small class="copyright">Diseño y Desarrollo <i class="" style="color: #fb866a;"></i> por la OOADR. Coordinación de Abastecimiento y Equipamiento</small>
 		    </div>
 	    </footer><!--//app-footer-->

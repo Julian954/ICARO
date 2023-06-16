@@ -9,7 +9,8 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         }
         parent::__construct();
     }
-//Aquí se debe llamar igual que la vista
+    
+    //Aquí se debe llamar igual que la vista
     public function Home()
     {
         $this->views->getView($this, "Home", "");

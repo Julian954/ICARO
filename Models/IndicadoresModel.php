@@ -7,6 +7,33 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
     }
 
     //Se pueden hacer 5 tipo de consultas
+    public function nivelatencionycosto()
+    {
+        $sql = "SELECT fecha, AVG(surtida) AS surtida, AVG(costo_receta) AS costo FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
+        $res = $this->select_all($sql); 
+        return $res;
+    }
+
+    //Se pueden hacer 5 tipo de consultas
+    public function negadasymanuales()
+    {
+        $sql = "SELECT fecha, SUM(negadas) AS negadas, SUM(mnuales) AS manuales FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
+        $res = $this->select_all($sql); //select_all es para seleccionar cuando el resultado puede arrojar muchas filas
+        return $res;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    //Se pueden hacer 5 tipo de consultas
     public function selectUsuarios()
     {
         $sql = "SELECT * FROM usuarios";
@@ -65,4 +92,20 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
         return $return;
     }
 }
+
+
+
+//SUMA POR DÍA (NEGADAS)
+// SELECT SUM(negadas) AS suma FROM indicadores GROUP BY fehca;
+
+//SUMA POR DÍA (MANUALES)
+// SELECT SUM(mnuales) AS suma FROM indicadores GROUP BY fehca;
+
+
+
+//PROMEDIO POR DÍA (NIVEL DE ATENCION GRAFICA)
+// SELECT AVG(surtida) AS promedio FROM indicadores GROUP BY fehca;
+
+
+
 ?>
