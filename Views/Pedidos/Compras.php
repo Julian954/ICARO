@@ -23,7 +23,7 @@
 			    <div class="position-relative mb-3">
 				    <div class="row g-3 justify-content-between">
 					    <div class="col-auto">
-					        <h1 class="app-page-title mb-0">Pedidos Locales 2021</h1>
+					        <h1 class="app-page-title mb-0">Pedidos</h1>
 					    </div>
 				    </div>
 			    </div>
@@ -32,16 +32,16 @@
 				    <div class="app-card-header px-4 py-3">
 				        <div class="row g-3 align-items-center">
 					        <div class="col-12 col-lg-auto text-center text-lg-left">
-				                <img class="profile-image" src="assets/images/profiles/profile-1.png" alt="">
+				                <img class="profile-image" src="../Assets/img/users/<?php echo $_SESSION['perfil'];?>" alt="">
 					        </div><!--//col-->
 					        <div class="col-12 col-lg-auto text-center text-lg-left">
 						        <div class="notification-type mb-2"><span class="badge bg-info">Oficina de Adquisiciones</span></div>
-						        <h4 class="notification-title mb-1">Lic. Víctor Ramírez Hernández </h4>
+						        <h4 class="notification-title mb-1"><?php echo $_SESSION['nombre']; ?> </h4>
 
 						        <ul class="notification-meta list-inline mb-0">
-							        <li class="list-inline-item">victor.hernandez@imss.gob.mx</li>
+							        <li class="list-inline-item"><?php echo $_SESSION['correo']; ?></li>
 							        <li class="list-inline-item">|</li>
-							        <li class="list-inline-item">312 111 22 33</li>
+							        <li class="list-inline-item"><?php echo $_SESSION['telefono']; ?></li>
 						        </ul>
 
 					        </div><!--//col-->
@@ -54,6 +54,90 @@
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
       <div class="app-content p-lg-4" style="margin-top:-25px !important; padding-top:-25px !important;">
+
+	  
+
+	  	
+	 
+                <div class="app-card app-card-stats-table h-100 shadow-sm">
+                    
+                    <div class="app-card-body p-3 p-lg-4"> 
+                        <div class="table-responsive">
+                            <table class="table table-borderless mb-0">
+                                <thead>
+                                    <tr>
+										<th style="text-align:center; width:200px">Datos</th>
+										<th style="text-align:center; width:100px">Cantidad</th>
+										<th style="text-align:center">Progreso</th>
+									</tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td  >Total Pedidos</td>
+                                        <td style="text-align:center">10</td>
+                                        <td class="stat-cell"><div class="progress">
+<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div></td>                                        
+                                    </tr>
+                                    <tr>
+                <td  >Pedidos Medicamento</td>
+                                        <td style="text-align:center">107</td>
+                                        <td ><div class="progress">
+<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div></td>
+                </tr>
+              <tr>
+                <td >Pedidos Curación</td>
+                                        <td style="text-align:center">1076</td>
+                                        
+                <td class="stat-cell">
+				<div class="progress">
+<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div></td>
+              </tr>
+              <tr>
+                <td >Otros Pedidos</td>
+                                        <td style="text-align:center">1079</td>
+                                        
+                <td class="stat-cell">
+				<div class="progress">
+<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div></td>
+              </tr>
+              <tr>
+                <td >Total </td>
+                                        <td style="text-align:center">1079</td>                                        
+                <td class="stat-cell">
+				<div class="progress">
+<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div></td>
+                                    </tr>
+									<tr>
+                <td>Total Entregado</td>
+                                        <td style="text-align:center">1079</td>                                        
+                <td class="stat-cell">
+				<div class="progress">
+<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div></td>
+                                    </tr>
+									<tr>
+                <td>Total</td>
+                                        <td style="text-align:center">1079</td>                                        
+                <td class="stat-cell">
+				<div class="progress">
+<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+</div></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!--//table-responsive-->
+                    </div><!--//app-card-body p-3-->
+                </div><!--//app-card app-card-stats-table h-100 shadow-sm-->
+            <!--//col-12 col-lg-6-->
+
+
+       
+
 
         <div class="card-body" style="border-color:#59d05d !important;">
       <h1 class="app-page-title mb-4">Autorizaciones PAC/Correo 2021</h1>
@@ -71,7 +155,7 @@
                 <th scope="col">$ Monto</th>
                 <th scope="col">$ Pagado</th>
                 <th scope="col" style="background-color:#f5f6fe !important;"></th>
-              </t
+</tr>
             </thead>
             <tbody style="font-size: 0.875rem !important;">
               <tr>
