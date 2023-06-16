@@ -92,12 +92,12 @@ class Articulos extends Controllers
             // Pasar los datos al modelo para su inserción en la base de datos
             $this->model->procesarArchivos($datos);
             $alert =  'DocumentoActualizado';
-          }
+        }
           
           // Redirigir a la página deseada después de la carga del archivo
           header("location: " . base_url() . "Articulos/Listarart?msg=$alert");
           die();
-        }
+    }
 
 }
 ?>
