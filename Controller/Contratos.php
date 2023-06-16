@@ -27,6 +27,11 @@
 
         // Agrega un nuevo contrato a la base de datos con los datos proporcionados mediante el formulario.
         public function agregar() {
+            if (isset($_POST['contrato'])) {
+                $categoria = "Contrato";
+            } else {
+                $categoria = "Convenio";
+            }
             $numero = limpiarInput($_POST['numero']);
             $descripcion = limpiarInput($_POST['descripcion']);
             $area = limpiarInput($_POST['area']);
@@ -39,7 +44,7 @@
             $fecha_termina = date("Y-m-d", strtotime("+1 year"));
             $devengo = 0; // default
 
-            $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $plataforma, $fecha_termina, $devengo);
+            $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $plataforma, $fecha_termina, $devengo, $categoria);
             if ($insert == 'existe') {
                 $alert = 'existe';
                 header("location: " . base_url() . "Contratos/Registro?msg=$alert");

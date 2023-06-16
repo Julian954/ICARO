@@ -85,18 +85,14 @@
                     <div class="item-data">De los <?php echo $data6['total']; ?> Instrumentos</div>
 										<div class="item-label mb-2">
                       <strong>
-                        <span style="text-decoration:solid underline #5B99EA 2px;"><?php echo $data2[1]['cont']; ?></span>
-                         son Convenios
-                          <?php foreach ($data3 as $cov) { ?>
-                            <span style="font-weight:lighter; color:#ff0000; font-size:12px;">(<?php echo $cov['contratacion'].': '.$cov['conv_count'].'.';?>)</span>
-                          <?php } ?>
-                         y 
-                        <span style="text-decoration:solid underline #5B99EA 2px;"><?php echo $data2[0]['cont']; ?></span>
-                         son Contratos
-                          <?php foreach ($data3 as $con) { ?>
-                            <span style="font-weight:lighter; color:#ff0000; font-size:12px;">(<?php echo $con['contratacion'].': '.$cov['contr_count'].'.';?>)</span>
-                          <?php } ?>
-                         .
+                        <?php foreach ($data2 as $ctr) { ?>
+                          <span style="text-decoration:solid underline #5B99EA 2px;"><?= $ctr['total']; ?></span>
+                          <?=' son '.$ctr['categoria'].'s: ';?>
+                          <?php foreach ($data3 as $cov) { 
+                            if ($cov['categoria'] == $ctr['categoria']) {?>
+                            <span style="font-weight:lighter; color:#ff0000; font-size:12px;">(<?= $cov['contrato'].': '.$cov['total'].'.';?>)</span>
+                          <?php }} ?>
+                        <?php } ?>
                       </strong>
                     </div>
                     <div class="item-data">Los estados de los Instrumentos son:</div>

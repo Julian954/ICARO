@@ -37,7 +37,7 @@
         }
 
         // Agrega un nuevo contrato a la base de datos.
-        public function agregarContrato(string $numero, string $descripcion, string $area, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $plataforma, string $fecha_termina, string $devengo) {
+        public function agregarContrato(string $numero, string $descripcion, string $area, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $plataforma, string $fecha_termina, string $devengo, string $categoria) {
             $return = "";
             $this->numero = $numero;
             $this->descripcion = $descripcion;
@@ -50,6 +50,7 @@
             $this->fianza = $fianza;
             $this->plataforma = $plataforma;
             $this->fecha_termina = $fecha_termina;
+            $this->categoria = $categoria;
 
             // Verifica si el contrato ya existe en la base de datos
             $sql = "SELECT * FROM contratos WHERE numero = '{$this->numero}'";
@@ -57,8 +58,8 @@
 
             if (empty($result)) {
                 // Si el contrato no existe, se inserta en la base de datos
-                $query = "INSERT INTO contratos(numero, descripcion, area, administrador, tipo, termino, maximo, devengo, fianza, plataforma, fecha_eliminar) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-                $data = array($this->numero, $this->descripcion, $this->area, $this->administrador, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->plataforma, $this->fecha_termina);
+                $query = "INSERT INTO contratos(numero, descripcion, area, administrador, tipo, termino, maximo, devengo, fianza, plataforma, fecha_eliminar, categoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                $data = array($this->numero, $this->descripcion, $this->area, $this->administrador, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->plataforma, $this->fecha_termina, $this->categoria);
                 $resul = $this->insert($query, $data);
                 $return = $resul;
             } else {
@@ -93,21 +94,14 @@
 
         // Obtiene el número de contratos agrupados por tipo.
         public function tipocontrato() {
-            $sql = "SELECT COUNT(numero) as cont FROM contratos WHERE (tipo!='Conv. Monto') AND (tipo!='Conv. Vigencia')
-                    UNION
-                    SELECT COUNT(numero) as cont FROM contratos WHERE (tipo!='Por Monto') AND (tipo!='Por Vigencia')";
+            $sql = "SELECT categoria, COUNT(*) as total FROM contratos GROUP BY categoria";
             $res = $this->select_all($sql);
             return $res;
         }
 
         // Obtiene la cantidad de contratos por plataforma y tipo de contrato (convocatoria o contrato).
         public function tipoplatformaconv() {
-            $sql = "SELECT plataforma, 
-            SUM(CASE WHEN tipo IN ('Conv. Vigencia', 'Conv. Monto') THEN 1 ELSE 0 END) AS conv_count,
-            SUM(CASE WHEN tipo IN ('Por Vigencia', 'Por Monto') THEN 1 ELSE 0 END) AS contr_count
-            FROM contratos
-            WHERE plataforma IN ('SAI', 'PREI')
-            GROUP BY plataforma";
+            $sql = "SELECT categoria, tipo, COUNT(*) as total FROM contratos GROUP BY categoria, tipo";
             $res = $this->select_all($sql);
             return $res;
         }

@@ -38,6 +38,15 @@
                   <input type="text" class="form-control" id="NoOficio" name="NoOficio" value="" required>
                 </div>
                 <div class="form-group">
+                  <div class="mb-3">
+								    <div class="form-check form-switch" style="padding: 0px;">
+                      <label class="form-check-label" style="padding: 0 40px 0 0;">Convenio</label>
+									    <input class="form-check-input" type="checkbox" id="contrato" name="contrato" checked>
+									    <label class="form-check-label" for="contrato">Contrato</label>
+									  </div>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="setting-input-2" class="form-label">Descripción del Requerimiento</label>
                   <textarea name="Descripcion" id="Descripcion" class="form-control" cols="auto" rows="auto"></textarea>
                 </div>

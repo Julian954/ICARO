@@ -33,6 +33,11 @@
         // Agrega un nuevo contrato a la base de datos con los datos proporcionados mediante el formulario.
         public function agregar()
         {
+            if (isset($_POST['contrato'])) {
+                $categoria = "Contrato";
+            } else {
+                $categoria = "Convenio";
+            }
             $oficio = limpiarInput($_POST['NoOficio']);
             $administrador = limpiarInput($_SESSION['id']);
             $descripcion = limpiarInput($_POST['Descripcion']);
@@ -45,7 +50,7 @@
             $comentario = limpiarInput($_POST['comentario']);
             $fecha_termina = date("Y-m-d", strtotime("+1 year"));
 
-            $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $fecha_termina);
+            $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $fecha_termina, $categoria);
             $validar = $this->model->agregar_validar($oficio, $comentario, $administrador);
             if ($insert == 'existe') {
                 $alert = 'existe';

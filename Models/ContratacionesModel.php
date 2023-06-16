@@ -44,7 +44,7 @@
         }
 
         // Agrega un nuevo contrataciones a la base de datos.
-        public function agregarContratacion(string $oficio, string $administrador, string $descripcion, string $contratacion, string $area, string $contrato, string $termino, string $maximo, string $dictamen, string $fecha_termina)
+        public function agregarContratacion(string $oficio, string $administrador, string $descripcion, string $contratacion, string $area, string $contrato, string $termino, string $maximo, string $dictamen, string $fecha_termina, string $categoria)
         {
             $return = "";
             $this->oficio = $oficio;
@@ -57,6 +57,7 @@
             $this->maximo = $maximo;
             $this->dictamen = $dictamen;
             $this->fecha_termina = $fecha_termina;
+            $this->categoria = $categoria;
 
             // Verifica si el contrato ya existe en la base de datos
             $sql = "SELECT * FROM contrataciones WHERE nooficio = '{$this->oficio}'";
@@ -64,8 +65,8 @@
 
             if (empty($result)) {
                 // Si el contrato no existe, se inserta en la base de datos
-                $query = "INSERT INTO contrataciones(nooficio, administrador, descripcion, contratacion, area, contrato, termino, maximo, dictamen, fecha_eliminar) VALUES (?,?,?,?,?,?,?,?,?,?)";
-                $data = array($this->oficio, $this->administrador, $this->descripcion, $this->contratacion, $this->area, $this->contrato, $this->termino, $this->maximo, $this->dictamen, $this->fecha_termina);
+                $query = "INSERT INTO contrataciones(nooficio, administrador, descripcion, contratacion, area, contrato, termino, maximo, dictamen, fecha_eliminar, categoria) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                $data = array($this->oficio, $this->administrador, $this->descripcion, $this->contratacion, $this->area, $this->contrato, $this->termino, $this->maximo, $this->dictamen, $this->fecha_termina, $this->categoria);
                 $resul = $this->insert($query, $data);
                 $return = $resul;
             } else {
@@ -123,21 +124,14 @@
 
         public function tipocontratoCns()
         {
-            $sql = "SELECT COUNT(NoOficio) as cont FROM contrataciones WHERE (contrato!='Conv. Monto') AND (contrato!='Conv. Vigencia')
-                    UNION
-                    SELECT COUNT(NoOficio) as cont FROM contrataciones WHERE (contrato!='Por Monto') AND (contrato!='Por Vigencia')";
+            $sql = "SELECT categoria, COUNT(*) as total FROM contrataciones GROUP BY categoria";
             $res = $this->select_all($sql);
             return $res;
         }
 
         public function tipocontratacion()
         {
-            $sql = "SELECT contratacion, 
-            SUM(CASE WHEN contrato IN ('Conv. Vigencia', 'Conv. Monto') THEN 1 ELSE 0 END) AS conv_count,
-            SUM(CASE WHEN contrato IN ('Por Monto', 'Por Vigencia' ) THEN 1 ELSE 0 END) AS contr_count
-            FROM contrataciones
-            WHERE contratacion IN ('Alineamiento', 'Peticion', 'Disposicion')
-            GROUP BY contratacion";
+            $sql = "SELECT categoria, contrato, COUNT(*) as total FROM contrataciones GROUP BY categoria, contrato";
             $res = $this->select_all($sql);
             return $res;
         }
