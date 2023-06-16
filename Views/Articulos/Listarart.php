@@ -132,7 +132,7 @@
                 <form action="<?php echo base_url(); ?>Articulos/procesarArchivo" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <div class="container2">
-                        <input type="file" id="file-input" name="archivo_csv" required/>
+                        <input type="file" id="file-input" accept="csv" name="archivo_csv" required/>
                         <label id="fileup" for="file-input">
                          <i class="fa-solid fa-arrow-up-from-bracket"></i>
                         &nbsp; Selecciona los archivos.
@@ -140,7 +140,7 @@
                         <div id="num-of-files">Sin archivos cargados.</div>
                         <ul id="files-list"></ul>
                         <hr>
-                        <div><strong>Nota:</strong> Solo se permiten archivos PDF, WORD, EXCEL y ZIP, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div>
+                        <div><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div>
                   </div>    
                     </div>
                     <button class="btn btn-success mb-2" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Registrar</button>

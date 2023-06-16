@@ -89,44 +89,5 @@ class ArticulosModel extends Mysql
         return $return;
     }
 
-    public function procesarArchivosG($archivo) {
-        $spreadsheet = IOFactory::load($archivo);
-        $hoja = $spreadsheet->getActiveSheet(0);
-    
-        $datos = [];
-    
-        foreach ($hoja->getRowIterator(6) as $fila) {
-            $celdas = [];
-            $cellIterator = $fila->getCellIterator();
-            $cellIterator->setIterateOnlyExistingCells(false);
-    
-            foreach ($cellIterator as $celda) {
-                $columna = $celda->getColumn();
-                if ($columna == 'CVE14' || $columna == 'DESCRIPCION') {
-                    $valor = $celda->getValue();
-                    $celdas[] = $valor;
-                }
-            }
-    
-            $datos[] = $celdas;
-        }
-    
-        $conexion = new PDO('mysql:host=localhost;dbname=imss', 'root', '');
-    
-        foreach ($datos as $fila) {
-            $valor1 = $fila[2]; // Columna "CVE14"
-            $valor2 = $fila[8]; // Columna "DESCRIPCION"
-    
-            $query = "INSERT INTO catalogo (clave, descripcion) VALUES (?,?)";
-            $data = array($this->$valor1, $this->$valor2);
-            $resul = $this->insert($query, $data);
-            $return = $resul;
-        }
-    
-        return true;
-    }
-    
-
-
 }
 ?>

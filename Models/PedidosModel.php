@@ -119,5 +119,26 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         return $return;
     }
     //hasta aqui son las unidades
+
+    public function insertar_datos($datos, string $fecha) {
+        array_splice($datos, 0, 3);
+        foreach ($datos as $fila) {
+          $nopedido = $fila[5]??'';
+          $alta = $fila[35]??'';
+          $proveedor = $fila[30]??'';
+          $cuenta = $fila[10]??'';
+          $qty = $fila[11]??'';
+          $top = $fila[27] ?? ''; 
+          $fecha_alta = $fila[34] ?? ''; 
+          $unidades = $fila[36] ?? ''; 
+          $monto = $fila[38] ?? ''; 
+          $pagado = $fila[112] ?? ''; 
+
+          // Insertar los datos en la base de datos
+          $query = "INSERT INTO negada(clave, cmp, consumo, unidades, almacen, negadas,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+          $data = array($clave, $cmp, $consumo, $unidades, $almacen, $negadas, $fechaN);
+          $resul = $this->insert($query, $data); //insert es para agregar un registro
+        }
+    }
 }
 ?>

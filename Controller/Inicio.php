@@ -151,10 +151,21 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
             die();
         }
 
+        public function subir_rank()
+        {
+        $satisfaccion = $_POST['satisf'];
+        $rank = $_POST['rank'];
+        $fecha = $_POST['fecha'];          
+        $insert = $this->model->insertarrank($satisfaccion, $rank, $fecha);        
+        header("location: " . base_url() . "Excel/Subir?msg=$alert");
+        die();   
+        }
+
     public function subir_archivo() {
         // Verificar si se ha enviado un archivo
-        if (!empty($_FILES['archivo_csv']['name'])) {
-          $archivo_tmp = $_FILES['archivo_csv']['tmp_name'];
+        $fecha = limpiarInput($_POST['fechas']);
+        if (!empty($_FILES['archivo']['name'])) {
+          $archivo_tmp = $_FILES['archivo']['tmp_name'];
           
           // Procesar el archivo CSV y obtener los datos
           $datos = [];
@@ -166,12 +177,12 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
           }
       
           // Pasar los datos al modelo para su inserción en la base de datos
-          $this->model->insertar_datos($datos);
+          $this->model->insertar_datos($datos,$fecha);
           $alert =  'DocumentoActualizado';
         }
         
         // Redirigir a la página deseada después de la carga del archivo
-        header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
+        header("location: " . base_url() . "Excel/Subir?msg=$alert");
         die();
       }
       

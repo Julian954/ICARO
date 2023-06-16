@@ -71,6 +71,29 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
     }
     //hasta aqui son las unidades
     
-    //POR CADA CONTROLADOR QUE SE CREE SE TIENE QUE CREAR UN MODEL
+    public function subir_archivo() {
+        // Verificar si se ha enviado un archivo
+        $fecha = limpiarInput($_POST['fechas']);
+        if (!empty($_FILES['archivo']['name'])) {
+          $archivo_tmp = $_FILES['archivo']['tmp_name'];
+          
+          // Procesar el archivo CSV y obtener los datos
+          $datos = [];
+          if (($gestor = fopen($archivo_tmp, 'r')) !== false) {
+            while (($fila = fgetcsv($gestor, 1000, ',')) !== false) {
+              $datos[] = $fila;
+            }
+            fclose($gestor);
+          }
+      
+          // Pasar los datos al modelo para su inserción en la base de datos
+          $this->model->insertar_datos($datos,$fecha);
+          $alert =  'DocumentoActualizado';
+        }
+        
+        // Redirigir a la página deseada después de la carga del archivo
+        header("location: " . base_url() . "Excel/Subir?msg=$alert");
+        die();
+      }
 }
 ?>
