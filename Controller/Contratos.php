@@ -56,26 +56,6 @@
                 $alert = 'error';
                 header("location: " . base_url() . "Contratos/Registro?msg=$alert");
             }
-            
-            $data1 =$this->model->select_eliminar_validarcont();
-            $data2 =$this->model->select_eliminar_detallecont();
-            
-            $archivo = opendir('Assets/Documentos/Peticiones/');                 
-            $archivo2 = opendir('Assets/Documentos/Foro/');    
-            foreach ($data1 as $row) {  
-            }
-            while ($elemento = readdir($archivo))   {
-                if ($row['archivo']!=$elemento) {
-                    @unlink('Assets/Documentos/Peticiones/'.$elemento);
-            }
-        }
-                        
-            foreach ($data2 as $row2) {  
-            }
-            while ($elemento2 = readdir($archivo2))   {
-                if ($row2['archivo']!=$elemento2) {
-                    @unlink('Assets/Documentos/Foro/'.$elemento2);
-            }}
             die();
         }
 
@@ -238,6 +218,31 @@
             header("location: " . base_url() . "Contratos/Foro?contrato=$number");
             die();
         }
+
+        public function eliminarano(){
+            
+            $data1 =$this->model->select_eliminar_validarcont();
+            $data2 =$this->model->select_eliminar_detallecont();
+            
+            $archivo = opendir('Assets/Documentos/Peticiones/');                 
+            $archivo2 = opendir('Assets/Documentos/Foro/');    
+            foreach ($data1 as $row) {  
+            }
+            while ($elemento = readdir($archivo)) {
+                if ($row['archivo']!=$elemento) {
+                    @unlink('Assets/Documentos/Peticiones/'.$elemento);
+                }
+            }            
+            foreach ($data2 as $row2) {  
+            }
+            while ($elemento2 = readdir($archivo2))   {
+                if ($row2['archivo']!=$elemento2) {
+                    @unlink('Assets/Documentos/Foro/'.$elemento2);
+                }
+            }
+            die();
+        }
+        
     }
 ?>
 

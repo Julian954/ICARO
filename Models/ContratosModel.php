@@ -174,17 +174,6 @@
             $return = $resul;
             return $return;
         }
-//compara los archivos de la BD para eliminar los que no existen alla
-        public function select_eliminar_validarcont(){
-            $sql = "SELECT archivo FROM validar_cont";
-            $res = $this->select_all($sql);
-            return $res;
-        }
-        public function select_eliminar_detallecont(){
-            $sql = "SELECT archivo FROM detalle_cont";
-            $res = $this->select_all($sql);
-            return $res;
-        }
 
         //actualizar estado de contrato
         public function actualizaEstado(int $estado, string $id)
@@ -260,6 +249,19 @@
             $resul = $this->update($query, $data);
             $return = $resul;
             return $return;
+        }
+
+        
+        //compara los archivos de la BD para eliminar los que no existen alla
+        public function select_eliminar_validarcont(){
+            $sql = "SELECT archivo FROM validar_cont";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+        public function select_eliminar_detallecont(){
+            $sql = "SELECT archivo FROM detalle_cont";
+            $res = $this->select_all($sql);
+            return $res;
         }
 
     }
