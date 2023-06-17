@@ -26,17 +26,17 @@
   		  	<div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
   		    	<div class="d-flex flex-column align-content-end">
   			    	<div class="app-auth-body mx-auto">	
-  				    	<div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon mr-2" src="Assets/img/app-logo.svg" alt="logo"></a></div>
-  					  	<h2 class="auth-heading text-center mb-5">Log in to Portal</h2>
+  				    	<div class="app-auth-branding mb-4"><a class="app-logo" href=""><img class="logo-icon mr-2" src="<?= base_url();?>Assets/img/app-logo.svg" alt="logo"></a></div>
+  					  	<h2 class="auth-heading text-center mb-5">Ingresar al portal</h2>
   			      		<div class="auth-form-container text-left">
   						  	<form class="auth-form login-form" id="user" action="<?php echo base_url(); ?>Usuarios/login" method="POST" autocomplete="off">         
   						    	<div class="email mb-3">
   							    	<label class="sr-only" for="usuario">Email</label>
-  							    	<input id="usuario" name="usuario" type="email" class="form-control signin-email" placeholder="Email address" required="required">
+  							    	<input id="usuario" name="usuario" type="email" class="form-control signin-email" placeholder="Dirección de correo" required="required">
   						    	</div><!--//form-group-->
   						    	<div class="password mb-3">
   				    				<label class="sr-only" for="clave">Password</label>
-  				    				<input id="clave" name="clave" type="password" class="form-control signin-password" placeholder="Password" required="required">
+  				    				<input id="clave" name="clave" type="password" class="form-control signin-password" placeholder="Contraseña" required="required">
   				    				<div class="extra mt-3 row justify-content-between">
   				    					<div class="col-6">
   				    						<div class="form-check">
@@ -57,7 +57,7 @@
   				    			</div><!--//form-group-->
 								
   				    			
-  				    				<button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto" >Log In</button>
+  				    				<button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto" >Ingresar</button>
   				    			</div><br>
   	              				<?php if (isset($_GET['msg'])) { ?>
   	              				  	<div class="alert alert-danger" role="alert">

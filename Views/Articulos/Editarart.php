@@ -1,4 +1,5 @@
-<?php encabezado() ?>
+<?php if($_SESSION['rol'] == 7){ ?> <!-- Si es Admin-->
+    <?php encabezado() ?> <!-- Poner el header -->
 
 <!-- Begin Page Content -->
 <div class="app-wrapper">
@@ -39,4 +40,8 @@
         </div>
     </section>
 </div>
-<?php pie() ?>
+
+<?php }  else { ?> <!-- En caso de ser valido -->
+  <?php permisos() ?> <!-- Poner el mensaje de erro -->
+<?php } ?>
+<?php pie() ?> <!-- Pone el fotter -->

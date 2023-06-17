@@ -22,6 +22,9 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
         return $res;
     }
 
+
+
+    
     //Selecciona usuarios activos
     public function selectIndicadores()
     {

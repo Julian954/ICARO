@@ -16,14 +16,6 @@ class Indicadores extends Controllers //Aquí se debe llamas igual que el archiv
         $this->views->getView($this, "Indicador", "");
     }
 
-    //Aquí se debe llamar igual que la vista
-    public function Estadisticas()
-    {
-        $data1 = $this->model->nivelatencionycosto();
-        $data2 = $this->model->negadasymanuales();
-        $this->views->getView($this, "Estadisticas", "", $data1, $data2);
-    }
-
     //POR CADA CONTROLADOR QUE SE CREE SE TIENE QUE CREAR UN MODEL
     public function insertarnacional()
     {

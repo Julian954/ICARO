@@ -23,6 +23,11 @@ function pie($data="")
     $VistaP = "Views/Template/footer.php";
     require_once($VistaP);
 }
+function referencias($data="")
+{
+    $VistaP = "Views/Template/referencias.php";
+    require_once($VistaP);
+}
 
 function limpiarInput($dato) {
     // Eliminar espacios en blanco al principio y al final
