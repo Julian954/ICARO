@@ -138,10 +138,12 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
           $pagado = $fila[44] ?? '';//AS
           $this->fecha = $fecha;
 
+          if (!empty($nopedido) && !empty($tipo) && !empty($proveedor) && !empty($topn) && !empty($cantidad)) {
           // Insertar los datos en la base de datos
           $query = "INSERT INTO pedidos(nopedido, tipo, clave, noalta, proveedor, cantidad, topn, fecha_alta, monto, pagado , fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
           $data = array($nopedido, $tipo, $clave, $noalta, $proveedor, $cantidad, $topn, $fecha_alta,$monto, $pagado , $this->fecha);
           $resul = $this->insert($query, $data); //insert es para agregar un registro
+          }
         }
     }
 }

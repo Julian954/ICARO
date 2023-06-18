@@ -33,26 +33,30 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
         return $res;
     }
 
-    public function procesarArchivos($datos,string $fechad)
-    {
-        array_splice($datos, 0, 1);
-        foreach ($datos as $fila) {
-            $unidad = $fila[2] ?? '';
-            $surtida = $fila[5] ?? '';
-            $negadas = $fila[7] ?? '';
-            $electronicas = $fila[10] ?? '';
-            $mnuales = $fila[11] ?? '';
-            $costo_receta = $fila[14] ?? '';
-            $costo_paciente = $fila[15] ?? '';
-            $this->fechad = $fechad;
-          // Insertar los datos en la base de datos
-          $query = "INSERT INTO indicadores (unidad,surtida,negadas,mnuales,costo_receta,costo_paciente,electronicas,fecha) VALUES (?,?,?,?,?,?,?,?)";
-          $data = array($unidad, $surtida, $negadas, $mnuales,$costo_receta, $costo_paciente, $electronicas,$this->fechad);
-          $resul = $this->insert($query, $data); //insert es para agregar un registro
+    public function procesarArchivos($datos, string $fechad)
+{
+    array_splice($datos, 0, 1);
+    foreach ($datos as $fila) {
+        $unidad = $fila[2] ?? '';
+        $surtida = $fila[5] ?? '';
+        $negadas = $fila[7] ?? '';
+        $electronicas = $fila[10] ?? '';
+        $mnuales = $fila[11] ?? '';
+        $costo_receta = $fila[14] ?? '';
+        $costo_paciente = $fila[15] ?? '';
+        $this->fechad = $fechad;
+
+        if (!empty($unidad)) {
+            // Insertar los datos en la base de datos
+            $query = "INSERT INTO indicadores (unidad, surtida, negadas, mnuales, costo_receta, costo_paciente, electronicas, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $data = array($unidad, $surtida, $negadas, $mnuales, $costo_receta, $costo_paciente, $electronicas, $this->fechad);
+            $resul = $this->insert($query, $data); //insert es para agregar un registro
         }
-    
-        return $return;
     }
+
+    return $return;
+}
+
 }
 
 
