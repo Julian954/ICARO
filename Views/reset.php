@@ -27,17 +27,17 @@
 		    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
 			    <div class="d-flex flex-column align-content-end">
 				    <div class="app-auth-body mx-auto">	
-					    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/app-logo.svg" alt="logo"></a></div>
-						<h2 class="auth-heading text-center mb-4">Restablecer Contraseña</h2>
+					    <div class="app-auth-branding mb-4"><a class="app-logo" href=""><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/app-logo.svg" alt="logo"></a></div>
+						<h2 class="auth-heading text-center mb-4">Restablecer contraseña</h2>
 						<div class="auth-intro mb-4 text-center">Ingresa tu correo y te enviaremos un link para restablecer tu contraseña.</div>
 						<div class="auth-form-container text-left">
 							<form class="auth-form resetpass-form">                
 								<div class="email mb-3">
 									<label class="sr-only" for="reg-email">Email</label>
-									<input id="reg-email" name="reg-email" type="email" class="form-control login-email" placeholder="Email" required="required">
+									<input id="reg-email" name="reg-email" type="email" class="form-control login-email" placeholder="Dirección de correo" required="required">
 								</div><!--//form-group-->
 								<div class="text-center">
-									<button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto">Restablecer Contraseña</button>
+									<button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto">Restablecer contraseña</button>
 								</div>
 							</form>
 							<div class="auth-option text-center pt-5"><a class="app-link" href="<?php echo base_url(); ?>" >Log in</a></div>

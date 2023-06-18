@@ -6,6 +6,22 @@ class InicioModel extends Mysql{
         parent::__construct();
     }
 
+    //Se pueden hacer 5 tipo de consultas
+    public function nivelatencionycosto()
+    {
+        $sql = "SELECT fecha, AVG(surtida) AS surtida, AVG(costo_receta) AS costo FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
+        $res = $this->select_all($sql); 
+        return $res;
+    }
+
+    //Se pueden hacer 5 tipo de consultas
+    public function negadasymanuales()
+    {
+        $sql = "SELECT fecha, SUM(negadas) AS negadas, SUM(mnuales) AS manuales FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
+        $res = $this->select_all($sql); //select_all es para seleccionar cuando el resultado puede arrojar muchas filas
+        return $res;
+    }
+
     //Selecciona las áreas
     public function SelectAreas()
     {

@@ -13,7 +13,9 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
     //Aquí se debe llamar igual que la vista
     public function Home()
     {
-        $this->views->getView($this, "Home", "");
+        $data1 = $this->model->nivelatencionycosto();
+        $data2 = $this->model->negadasymanuales();
+        $this->views->getView($this, "Home", "", $data1, $data2);
         die();
     }
 
