@@ -114,7 +114,7 @@
 								<label for="pedidos" class="form-label">Pedidos</label>
 								<div class="mb-3">
 									<div class="app-card-body text-center">
-										<form action="<?php echo base_url(); ?>Pedidos/subir_archivo" method="post" enctype="multipart/form-data">
+										<form action="<?php echo base_url(); ?>Pedidos/subirarchivo" method="post" enctype="multipart/form-data">
 											<div class="form-group">
 												<label for="date" class="form-label" style="color:#000000;">Fecha</label>
 												<input type="date" class="form-control" id="fechaId" name="fechaId" value="" require>
