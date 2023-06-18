@@ -18,18 +18,21 @@
                                 <div class="row">
                                     <div class="col-lg-8 mb-2 py-2">
                                         <button class="btn btn-success" type="button" data-toggle="modal" data-target="#nuevo_cliente"><i class="fas fa-plus-circle"></i> Nuevo</button>
-                                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#archivoArticulos"><i class="fas fa-plus-circle"></i> Subir Archivo</button>
                                     </div>
                                     <div class="col-lg-4">
                                         <?php if (isset($_GET['msg'])) {
                                             $alert = $_GET['msg'];
-                                            if ($alert == "eliminado") { ?>
+                                            if ($alert == "Eliminado") { ?>
                                                 <div class="alert alert-danger" role="alert">
                                                     <strong>La unidad fue eliminada.</strong>
                                                 </div>
+                                            <?php } elseif($alert == "modificado") { ?>
+                                                <div class="alert alert-success" role="alert">
+                                                    <strong>La unidad fue modificada.</strong>
+                                                </div>
                                             <?php } else { ?>
                                                 <div class="alert alert-success" role="alert">
-                                                    <strong>La usuario fue registrada.</strong>
+                                                    <strong>La unidad fue registrada.</strong>
                                                 </div>
                                             <?php }
                                         } ?>
@@ -89,7 +92,7 @@
                          <div class="col-lg-6">
                              <div class="form-group">
                                   <label for="clave">Clave</label>
-                                 <input id="clave" class="form-control" type="number" min="1000000000" max="9999999999" name="clave" placeholder="Clave" required>
+                                 <input id="clave" class="form-control" type="text" name="clave" placeholder="Clave" required>
                                 </div>
                          </div>   
                          <div class="col-lg-6">

@@ -33,37 +33,25 @@ class Excel extends Controllers //Aquí se debe llamas igual que el archivo
             $x = 0; //Ya existen
             foreach (($lineas) as $linea) {
                 $cantidad_total = count($lineas);
-                $cantidad_agregada = ($cantidad_total - 2);
+                $cantidad_agregada = ($cantidad_total - 11);
                 if ($i > 1) {
                     $datos = explode(",", $linea);
-                    $codigo = $datos[0];
-                    $nombre = $datos[1];
-                    $precio = $datos[2];
-                    $minimo = $datos[3]; 
-                    $categoria = $datos[4];
-                    $proveedor = $datos[5];
-                    $tipo = $datos[6];
-                    if ($nombre != "" && $codigo != "" ){
-                        $insert = $this->model->insertarProductos($codigo, $nombre, $precio, $proveedor, $categoria, $tipo, $minimo);
-                        if ($insert == 'existe') {
-                            $data1 = $this->model->editarProductosC($codigo);
-                            if ($data1['estado'] == 2) {
-                                $id = $data1['id'];
-                                $actualizar = $this->model->actualizarProductos($codigo, $nombre, $cantidad, $precio, $proveedor, $categoria, $tipo, $minimo, $id);
-                                $eliminar = $this->model->reingresarProductos($id);
-                                    if ($actualizar == 1) {
-                                        $a++;
-                                    } else {
-                                        $e++;
-                                    }
-                            } else {
-                                $x++; 
-                            }
-                        } else if ($insert > 0) {
-                            $a++;
-                        } else {
-                            $e++;
-                        }
+                    $nopedido = $datos[4]??'';//E
+                    $tipo = $datos[7]??'';//H
+                    $gen = $datos[8]??'';//i
+                    $clave = $datos[9]??'';//J
+                    $dif= $datos[10]??'';//K
+                    $var= $datos[11]??'';//L
+                    $topn = $tipo . $gen . $clave . $dif . $var; //H-L
+                    $cantidad = $datos[25]??'';//Z
+                    $proveedor = $datos[28]??'';//AC
+                    $noalta = $datos[34]??'';//AI
+                    $fecha_alta = $datos[33] ?? ''; //AH
+                    $monto = $datos[42] ?? '';//AQ
+                    $pagado = $datos[44] ?? '';//AS
+                    if ($nopedido != "" && $tipo != "" ){
+                        $insert = $this->model->insertar_datos($codigo, $nombre, $precio, $proveedor, $categoria, $tipo, $minimo);
+                        $a++;
                     } else{
                         $e++;
                     }
@@ -71,15 +59,9 @@ class Excel extends Controllers //Aquí se debe llamas igual que el archivo
                 $i++;
             }
             $alert = "cargado";
-            $data1 = $this->model->selectProductos();
-            $data2 = $this->model->selectCat();
-            $data3 = $this->model->selectPro();
             header("location: " . base_url() . "Productos/Listar?msg=$alert&a=$a&e=$e&x=$x");
         }else{
             $alert = "error";
-            $data1 = $this->model->selectProductos();
-            $data2 = $this->model->selectCat();
-            $data3 = $this->model->selectPro(); 
             header("location: " . base_url() . "Productos/Listar?msg=$alert");
         }
         die();  
