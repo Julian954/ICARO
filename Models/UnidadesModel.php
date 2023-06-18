@@ -36,7 +36,7 @@ class UnidadesModel extends Mysql
         return $return;
     }
 
-    public function insertarUnidades(string $nombre, int $clave, string $abreviacion)
+    public function insertarUnidades(string $nombre, string $clave, string $abreviacion)
     {
         $return = "";
         $this->nombre = $nombre;        

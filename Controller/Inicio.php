@@ -10,7 +10,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         parent::__construct();
     }
     
-    //Aquí se debe llamar igual que la vista
+    //Muestra la vista HOME
     public function Home()
     {
         $data1 = $this->model->nivelatencionycosto();
@@ -18,6 +18,16 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $this->views->getView($this, "Home", "", $data1, $data2);
         die();
     }
+
+    //Datos para la gráfica de clinicas
+    public function pastelnegadas()
+    {
+        $data = $this->model->Gpastelnegadas();
+        echo json_encode($data);
+        die();
+    }
+
+
 
     public function Notificaciones()
     {

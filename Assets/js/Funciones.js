@@ -489,6 +489,50 @@ function BarrasMateriales2() {
   });
 }
 
+function pastelnegadas() {
+  $.ajax({
+    url: base + "Inicio/pastelnegadas",
+    type: "POST",
+    success: function (response) {
+      var data = JSON.parse(response);
+      var nombre = [];
+      var total = [];
+      for (var i = 0; i < data.length; i++) {
+        nombre.push(data[i]["abreviacion"]);
+        total.push(data[i]["negadas"]);
+        console.log(data[i]["abreviacion"]);
+        console.log(data[i]["negadas"]);
+        console.log("Hola");
+      }
+      // Set new default font family and font color to mimic Bootstrap's default styling
+      Chart.defaults.global.defaultFontFamily =
+        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+      Chart.defaults.global.defaultFontColor = "#292b2c";
+      // Pie Chart Example
+      var ctx = document.getElementById("pastelnegadas");
+      var myPieChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: nombre,
+          datasets: [
+            {
+              data: total,
+              backgroundColor: [
+                "#A8E6CE",
+                "#DCEDC2",
+                "#FFD3B5",
+                "#FFAAA6",
+                "#00A8C6",
+                "#FF9C00e",
+              ],
+            },
+          ],
+        },
+      });
+    },
+  });
+}
+
 function GeneralContratos() {
   $.ajax({
     url: base + "Contratos/GeneralContratos",

@@ -137,7 +137,7 @@
             </div><!--//app-card-header p-3-->
             <div class="app-card-body p-3 p-lg-4">
               <div class="chart-container">
-                <canvas id="chart-pie" width="100%" height="75"></canvas>
+                <canvas id="pastelnegadas" width="100%" height="75"></canvas>
               </div><!-- //chart-container -->
             </div><!--//app-card-body p-3 p-lg-4-->
           </div><!--//card-header-action-->
@@ -447,5 +447,10 @@
 </div><!--//container-xl-->
 
 </div><!--app-content pt-3 p-md-3 p-lg-4-->  
+<script>
+  window.addEventListener("load", function() {
+      pastelnegadas();
+  })
+</script>
 
 <?php pie() ?> <!-- Pone el fotter -->

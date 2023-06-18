@@ -6,7 +6,7 @@ class InicioModel extends Mysql{
         parent::__construct();
     }
 
-    //Se pueden hacer 5 tipo de consultas
+    //Selecciona el promedio de atencion y costo de los ultimos dos días
     public function nivelatencionycosto()
     {
         $sql = "SELECT fecha, AVG(surtida) AS surtida, AVG(costo_receta) AS costo FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
@@ -14,13 +14,32 @@ class InicioModel extends Mysql{
         return $res;
     }
 
-    //Se pueden hacer 5 tipo de consultas
+    //Selecciona la suma de negadas y manuales de los ultimos dos días
     public function negadasymanuales()
     {
         $sql = "SELECT fecha, SUM(negadas) AS negadas, SUM(mnuales) AS manuales FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
-        $res = $this->select_all($sql); //select_all es para seleccionar cuando el resultado puede arrojar muchas filas
+        $res = $this->select_all($sql); 
         return $res;
     }
+
+    //Selecciona las negadas actuales por clínica
+    public function Gpastelnegadas()
+    {
+        $sql = "SELECT unidades.abreviacion, indicadores.negadas, indicadores.fecha FROM indicadores, unidades WHERE indicadores.unidad = unidades.clave AND fecha = (SELECT MAX(fecha) FROM indicadores)";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     //Selecciona las áreas
     public function SelectAreas()
