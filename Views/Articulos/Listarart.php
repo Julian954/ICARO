@@ -71,7 +71,7 @@
                                                 <td><?php echo $us['des_corta']; ?></td>
                                                 <td>
                                                     <a title="Editar" href="<?php echo base_url() ?>Articulos\editar?id=<?php echo $us['id']; ?>" class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
-                                                    <form action="<?php echo base_url() ?>Articulos/eliminar?id=<?php echo $us['id']; ?>" method="post" class="d-inline elimper">
+                                                    <form action="<?php echo base_url() ?>Articulos/eliminar?id=<?php echo $us['id']; ?>" method="post" class="d-inline elim">
                                                         <button title="Eliminar" type="submit" class="btn btn-danger mb-2"><i class="fas fa-trash-alt"></i></button>
                                                     </form>            
                                                 </td>
@@ -119,34 +119,32 @@
         </div>
     </div>
 </div>
-<div id="archivoArticulos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+<div id="archivArticulos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Nuevo Usuario</h5>
+                <h5 class="modal-title" id="my-modal-title"><i class="fas fa-upload"></i> Cargar Productos</h5>
                 <button class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?php echo base_url(); ?>Articulos/procesarArchivo" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url(); ?>Productos/subirarchivo" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <div class="container2">
-                        <input type="file" id="file-input" accept="csv" name="archivo_csv" required/>
-                        <label id="fileup" for="file-input">
-                         <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                        &nbsp; Selecciona los archivos.
-                        </label>
-                        <div id="num-of-files">Sin archivos cargados.</div>
-                        <ul id="files-list"></ul>
-                        <hr>
-                        <div><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div>
-                  </div>    
+                        <label for="img">Selecciona Archivo</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="archivo">
+                            <label class="custom-file-label" for="customFile"></label>
+                            <label><br><strong>Nota:</strong> Favor de solo subir el formato que se proporciona editado con los productos, si no sabe como usar el formato dirigase al módulo Ayuda->Materiales. El tamaño máximo del archivo debe ser menor a 20 MB.</label>
+                        </div>
                     </div>
                     <button class="btn btn-success mb-2" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Registrar</button>
+                    <a href="<?php echo base_url() ?>Assets/archivos/plantillas/PlantillaProductos.csv" class="btn btn-primary mb-2"><i class="fas fa-download"></i> Formato</a>
                     <button class="btn btn-danger mb-2" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
                 </form>
             </div>
+            </div>
+        </div>
     </div>
 </div>
 

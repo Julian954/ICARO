@@ -121,22 +121,26 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
     //hasta aqui son las unidades
 
     public function insertar_datos($datos, string $fecha) {
-        array_splice($datos, 0, 3);
+        array_splice($datos, 0, 11);
         foreach ($datos as $fila) {
-          $nopedido = $fila[5]??'';
-          $alta = $fila[35]??'';
-          $proveedor = $fila[30]??'';
-          $cuenta = $fila[10]??'';
-          $qty = $fila[11]??'';
-          $top = $fila[27] ?? ''; 
-          $fecha_alta = $fila[34] ?? ''; 
-          $unidades = $fila[36] ?? ''; 
-          $monto = $fila[38] ?? ''; 
-          $pagado = $fila[112] ?? ''; 
+          $nopedido = $fila[4]??'';//E
+          $tipo = $fila[7]??'';//H
+          $gen = $fila[8]??'';//i
+          $clave = $fila[9]??'';//J
+          $dif= $fila[10]??'';//K
+          $var= $fila[11]??'';//L
+          $topn = $tipo . $gen . $clave . $dif . $var; //H-L
+          $cantidad = $fila[25]??'';//Z
+          $proveedor = $fila[28]??'';//AC
+          $noalta = $fila[34]??'';//AI
+          $fecha_alta = $fila[33] ?? ''; //AH
+          $monto = $fila[42] ?? '';//AQ
+          $pagado = $fila[44] ?? '';//AS
+          $this->fecha = $fecha;
 
           // Insertar los datos en la base de datos
-          $query = "INSERT INTO negada(clave, cmp, consumo, unidades, almacen, negadas,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)";
-          $data = array($clave, $cmp, $consumo, $unidades, $almacen, $negadas, $fechaN);
+          $query = "INSERT INTO pedidos(nopedido, tipo, clave, noalta, proveedor, cantidad, topn, fecha_alta, monto, pagado , fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          $data = array($nopedido, $tipo, $clave, $noalta, $proveedor, $cantidad, $topn, $fecha_alta,$monto, $pagado , $this->fecha);
           $resul = $this->insert($query, $data); //insert es para agregar un registro
         }
     }
