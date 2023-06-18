@@ -89,7 +89,7 @@
 									<div class="app-card-body text-center">
 										<form action="<?php echo base_url(); ?>Inicio/subir_rank" method="post">
 											<label for="date" class="form-label" style="color:#000000;">Fecha</label>
-											<input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="fecha" name="fecha" value="" require><br>
+											<input type="date" class="form-control" id="fecha" name="fecha" value="" require><br>
 											<label for="text" class="form-label" style="color:#000000;">Porcentaje de satisfaccion Nacional %</label>
 											<input type="text" min="0" class="form-control" id="satisf" name="satisf" value="" required>
 											<label for="text" class="form-label" style="color:#000000;">Ranking Nacional Colima</label>
@@ -117,9 +117,9 @@
 										<form action="<?php echo base_url(); ?>Pedidos/subir_archivo" method="post" enctype="multipart/form-data">
 											<div class="form-group">
 												<label for="date" class="form-label" style="color:#000000;">Fecha</label>
-												<input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="fechaId" name="fechaId" value="" require>
+												<input type="date" class="form-control" id="fechaId" name="fechaId" value="" require>
 											</div><br>	
-											<input type="file" id="file-input4" accept="csv" name="archivo_csv" required/>
+											<input type="file" id="file-input4" accept="csv" name="archivo" required/>
 											<label id="fileup" for="file-input4">
 												<i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp; Selecciona los archivos.
 											</label>

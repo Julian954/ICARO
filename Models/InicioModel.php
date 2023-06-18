@@ -244,7 +244,7 @@ class InicioModel extends Mysql{
           $fechaN = $fecha;
 
           // Insertar los datos en la base de datos
-          $query = "INSERT INTO negada(clave, cmp, consumo, unidades, almacen, negadas,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+          $query = "INSERT INTO negadas(clave, cmp, consumo, unidades, almacen, negadas,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)";
           $data = array($clave, $cmp, $consumo, $unidades, $almacen, $negadas, $fechaN);
           $resul = $this->insert($query, $data); //insert es para agregar un registro
         }

@@ -73,7 +73,7 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
     
     public function subir_archivo() {
         // Verificar si se ha enviado un archivo
-        $fecha = limpiarInput($_POST['fechas']);
+        $fecha = limpiarInput($_POST['fechaId']);
         if (!empty($_FILES['archivo']['name'])) {
           $archivo_tmp = $_FILES['archivo']['tmp_name'];
           
