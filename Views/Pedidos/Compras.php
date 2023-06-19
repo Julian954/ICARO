@@ -57,14 +57,32 @@
 -->
 	  
 
-<?php include('Config\Config.php');
+<?php /*include('Config\Config.php');
 $sqlCliente=("SELECT * FROM pedidos ");
 //$sqlCantidad=("SELECT cantidad FROM pedidos");
 $queryCliente=mysqli_query($con, $sqlCliente);
 //$queryCant=mysqli_query($con, $sqlCantidad);
 $cantidad=mysqli_num_rows($queryCliente);
-
+*/
 // while($pe=mysqli_fetch_array($queryCant)){  $final=$final+$pe;};
+$final=0;
+$final2=0;
+$final3=0;
+$total_pedi2=0;
+$z=0;
+foreach ($data1 as $pedi2){
+  $z++;
+  $total_pedi2=$total_pedi2+$pedi2['cantidad'];
+  if($pedi2['tipo']=="010" || $pedi2['tipo']=="020" || $pedi2['tipo']=="030" || $pedi2['tipo']=="040"){
+  $final=$final+$pedi2['cantidad'];
+  }
+  if($pedi2['tipo']=="060"){
+  $final2=$final2+$pedi2['cantidad'];
+  }
+  if($pedi2['tipo']=="050" || $pedi2['tipo']=="040" || $pedi2['tipo']=="080"){
+    $final3=$final3+$pedi2['cantidad'];
+  }
+};
 ?>
 <?php //$i=0; while($pedidos=mysqli_fetch_array($queryCliente)){ if($pedidos['tipo']=="010" || $pedidos['tipo']=="020" || $pedidos['tipo']=="030" || $pedidos['tipo']=="040") $final=intval($final+$pedidos['cantidad']);}?> 
 <div class="app-card app-card-stats-table h-100 shadow-sm">                    
@@ -79,18 +97,18 @@ $cantidad=mysqli_num_rows($queryCliente);
 					</tr>
         </thead>
       <tbody>
-          <tr>
+          <tr>      
             <td  >Total Pedidos</td>
-            <td style="text-align:center"><?= $cantidad ?></td>
-            <td class="stat-cell"><div class="progress">
+            <td style="text-align:center"><?= $z ?></td>
+            <!--<td class="stat-cell"><div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-</div></td>                                        
+</div></td>      -->                                  
           </tr>
           <tr>
             <td  >Pedidos Medicamento</td>
             <td style="text-align:center"><?php echo $final ?></td>
             <td ><div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($final*100/$total_pedi2,2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($final*100/$total_pedi2,2);?>%</div>
 </div></td>
           </tr>
           <tr>
@@ -99,7 +117,7 @@ $cantidad=mysqli_num_rows($queryCliente);
               <td style="text-align:center"><?php echo $final2 ?></td>                                        
               <td class="stat-cell">
 				<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($final2*100/$total_pedi2,2);?>%;"  aria-valuemin="0" aria-valuemax="100"><?php echo number_format($final2*100/$total_pedi2,2);?>%</div>
 </div></td>
           </tr>
           <tr>
@@ -108,20 +126,20 @@ $cantidad=mysqli_num_rows($queryCliente);
               <td style="text-align:center"><?php echo $final3 ?></td>                                        
               <td class="stat-cell">
 				<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width: <?php echo number_format($final3*100/$total_pedi2,2);?>%;"  aria-valuemin="0" aria-valuemax="100"><?php echo number_format($final3*100/$total_pedi2,2);?>%</div>
 </div></td>
           </tr>
           <tr>
               <td >Total Contratado</td>
-              <td style="text-align:center">1079</td>                                        
-              <td class="stat-cell">
+              <td style="text-align:center">$ <?php ?></td>                                        
+              <!--<td class="stat-cell">
 				<div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-</div></td>
+</div></td>-->
           </tr>
 					<tr>
               <td>Total Entregado</td>
-              <td style="text-align:center">1079</td>                                        
+              <td style="text-align:center">$ </td>                                        
               <td class="stat-cell">
 				<div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -129,7 +147,7 @@ $cantidad=mysqli_num_rows($queryCliente);
           </tr>
 					<tr>
               <td>Total Por Entregar</td>
-              <td style="text-align:center">1079</td>                                        
+              <td style="text-align:center">$ </td>                                        
               <td class="stat-cell">
 				<div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -162,7 +180,8 @@ $cantidad=mysqli_num_rows($queryCliente);
 </tr>
             </thead>
             <tbody >
-              <?php $i=0; while($pedidos=mysqli_fetch_array($queryCliente)){ $i++; /*$final=$final+$pedidos['cantidad'];*/if($i<=15){  ?> 
+              <?php $i=0; foreach($data1 as $pedidos) { $i++;if($i<=15){ ?>
+              <?php //while($pedidos){ $i++; /*$final=$final+$pedidos['cantidad'];*/if($i<=15){  ?> 
                 <div style="display:none;">
               <tr>
                 <td><?= $i ?></td>
@@ -178,10 +197,10 @@ $cantidad=mysqli_num_rows($queryCliente);
                 <td><button  type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>
                 <?php }else{?>
                   <td><button style="display:none" type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>
-                  <?php }?>
+                  <?php }}?>
               </tr>  </div>
               <?php include('modal.php');    ?>
-              <?php }}; ?>  
+              <?php }; ?>  
             </tbody>
           </table>
         </div>

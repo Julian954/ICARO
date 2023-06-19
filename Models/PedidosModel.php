@@ -179,14 +179,15 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         return $return;
     }
 
-    public function PagarPedido(int $id)
-    {
-        $this->id = $id;
-        $sql = "SELECT * FROM pedidos WHERE id = '{$this->id}'";
-        $res = $this->select($sql);
-        if (empty($res)) {
-            $res = 0;
-        }
+    public function SelectPedido(){
+        $sql = "SELECT * FROM pedidos";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+    //$cantidad=mysqli_num_rows($queryCliente);
+    public function SelectCantidad(){
+        $sql = "SELECT * FROM pedidos";
+        $res = $this->mysqli_num_rows($sql);
         return $res;
     }
 }

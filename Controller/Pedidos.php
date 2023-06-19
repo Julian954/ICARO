@@ -14,9 +14,9 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
     public function Compras()
     {
         //$id = $_GET['id'];
-        
-        //$data2 = $this->model->PagarPedido($id);
-    $this->views->getView($this, "Compras", ""/*, $data2*/);
+        $data1= $this->model->SelectPedido();
+        //$data2 = $this->model->SelectCantidad();
+    $this->views->getView($this, "Compras", "", $data1/*, $data2*/);
     }
 
     public function Pagado(){
