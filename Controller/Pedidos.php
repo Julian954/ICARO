@@ -13,9 +13,19 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
     //Aquí se debe llamar igual que la vista
     public function Compras()
     {
-        $this->views->getView($this, "Compras", "");
+        //$id = $_GET['id'];
+        
+        //$data2 = $this->model->PagarPedido($id);
+    $this->views->getView($this, "Compras", ""/*, $data2*/);
     }
 
+    public function Pagado(){
+        $id = $_POST['id'];
+        $monto2=$_POST['monto2'];
+        $insert = $this->model->insertarPago($monto2, $id);
+        header("location: " . base_url() . "Pedidos/Compras");
+        die();
+    }
     //De aqui para abajo es la de unidades
     public function Unidades()
     {

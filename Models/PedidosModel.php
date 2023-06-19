@@ -165,5 +165,29 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         $data = array($this->nopedido, $this->tipo, $this->clave, $this->noalta, $this->proveedor, $this->cantidad, $this->topn, $this->fecha_alta, $this->monto, $this->pagado , $this->fecha);
         $resul = $this->insert($query, $data); //insert es para agregar un registro
     }
+
+    
+    public function insertarPago(string $monto2, int $id)
+    {
+        $return = "";
+        $this->monto2 = $monto2; 
+        $this->id=$id;                        
+        $query = "UPDATE pedidos SET monto2=? WHERE id=?";
+        $data = array($this->monto2, $this->id);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;
+    }
+
+    public function PagarPedido(int $id)
+    {
+        $this->id = $id;
+        $sql = "SELECT * FROM pedidos WHERE id = '{$this->id}'";
+        $res = $this->select($sql);
+        if (empty($res)) {
+            $res = 0;
+        }
+        return $res;
+    }
 }
 ?>
