@@ -314,6 +314,7 @@
     <!-- Javascript -->
     <script src="<?php echo base_url(); ?>Assets/js/popper.min.js"></script>
     <script src="Assets/js/bootstrap.min.js"></script>
+    <!-- <script src="../Assets/js/main.js"></script> -->
 
     <!-- Charts JS -->
     <script src="<?php echo base_url(); ?>Assets/js/chart.min.js"></script>
@@ -323,6 +324,31 @@
 
     <!-- Page Specific JS -->
     <script src="<?php echo base_url(); ?>Assets/js/app.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#TableArticulos").DataTable({
+                "processing":true,
+                "serverSide":true,
+                "sAjaxSource":"../ServerSide/serversideArticulos.php",
+                "columnDefs":[{
+                    "targets":-1,
+                    "defaultContent":"<div class='wrapper text-center'><div class='btn-group'><button title='Editar' type='submit' class='btn btn-primary mb-2'><i class='fas fa-edit'></i></button><button title='Eliminar' type='submit' class='btn btn-danger mb-2'><i class='fas fa-trash-alt'></i></button></div></div>"
+                }]
+            })
+        });
+    </script>
+    <!-- <script>
+        tablaArticulos = $('#tablaArticulo').DataTable({  
+        "bProcessing":true,
+        "bDeferRender":true,
+        "bServerSider":true,
+        "sAjaxSource":"../ServerSide/serversideArticulos.php",
+        "columnDefs":[{
+            "targets":-1,
+            "defaultContent":"<div class='wrapper text-center'><div class='btn-group'><button title='Eliminar' type='submit' class='btn btn-danger mb-2'><i class='fas fa-trash-alt'></i></button>"
+        }]
+        }); 
+    </script> -->
 
 
 </body>
