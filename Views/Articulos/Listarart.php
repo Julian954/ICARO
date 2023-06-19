@@ -99,22 +99,16 @@
                 </div>
                 <div class="modal-body">
                     <form action="<?php echo base_url(); ?>Articulos/procesarArchivo" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <div class="container2">
-                            <input type="file" id="file-input" accept="csv" name="archivo_csv" required/>
-                            <label id="fileup" for="file-input">
-                             <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                            &nbsp; Selecciona los archivos.
-                            </label>
-                            <div id="num-of-files">Sin archivos cargados.</div>
-                            <ul id="files-list"></ul>
-                            <hr>
-                            <div><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div>
-                            </div>    
-                        </div>
-                        <button class="btn btn-success mb-2" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Registrar</button>
-                        <button class="btn btn-danger mb-2" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
-                    </form>
+						<div class="form-group">
+                    	    <label for="img">Selecciona Archivo</label>
+                    	    <div class="custom-file">
+                    	      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo_csv" required>
+                    	      <label class="custom-file-label" for="customFile"></label>
+                    	      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
+                    	    </div>
+                    	</div>
+						<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
+					</form>
                 </div>
             </div>
         </div>
