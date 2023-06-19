@@ -190,6 +190,15 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
       
           // Pasar los datos al modelo para su inserción en la base de datos
           $this->model->insertar_datos($datos,$fecha);
+          $data = $this->model->ordenarnegad($fecha);
+          $i = 0;
+          foreach ($data as $neg) {
+            if ($i>14) {
+                $eliminar = $this->model->eliminarorden($neg['id']);
+            }
+            $i++;
+          } 
+
           $alert =  'DocumentoActualizado';
         }
         

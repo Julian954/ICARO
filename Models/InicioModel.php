@@ -1,6 +1,6 @@
 <?php
 class InicioModel extends Mysql{ 
-    public $id, $area, $usuario, $tipo, $plataforma, $tipocontrata, $fecha, $gpo , $gen;
+    public $id, $area, $usuario, $tipo, $plataforma, $tipocontrata, $fecha, $gpo , $gen , $fechaN;
     public function __construct()
     {
         parent::__construct();
@@ -48,6 +48,13 @@ class InicioModel extends Mysql{
         $res = $this->select_all($sql);
         return $res;
     }
+    public function ordenarnegad(string $fechaN)
+    {
+        $this->fecha = $fechaN;
+        $ordenar ="SELECT * FROM `negadas` WHERE fecha='{$this->fecha}'  ORDER BY `negadas`.`negadas` DESC";
+        $res= $this->select_all($ordenar);
+        return $res;
+    }
 
     //Selecciona los tipos
     public function SelectTipo()
@@ -90,6 +97,15 @@ class InicioModel extends Mysql{
         $return = "";
         $this->id = $id;
         $query = "DELETE FROM areas WHERE id='{$this->id}' ";
+        $resul = $this->delete($query);
+        $return = $resul;
+        return $return;
+    }
+    public function eliminarorden(int $id)
+    {
+        $return = "";
+        $this->id = $id;
+        $query = "DELETE FROM negadas WHERE id='{$this->id}' ";
         $resul = $this->delete($query);
         $return = $resul;
         return $return;
@@ -229,26 +245,33 @@ class InicioModel extends Mysql{
 
     public function insertar_datos($datos, string $fecha) {
         array_splice($datos, 0, 3);
-        foreach ($datos as $fila) {
-          $gpo = $fila[6]??'';
-          $gen = $fila[7]??'';
-          $esp = $fila[8]??'';
-          $dif = $fila[9]??'';
-          $var = $fila[10]??'';
-          $clave = $gpo . $gen . $esp . $dif . $var;
-          $cmp = $fila[27] ?? ''; 
-          $consumo = $fila[34] ?? ''; 
-          $unidades = $fila[36] ?? ''; 
-          $almacen = $fila[38] ?? ''; 
-          $negadas = $fila[112] ?? ''; 
-          $fechaN = $fecha;
 
-          // Insertar los datos en la base de datos
-          $query = "INSERT INTO negadas(clave, cmp, consumo, unidades, almacen, negadas,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)";
-          $data = array($clave, $cmp, $consumo, $unidades, $almacen, $negadas, $fechaN);
-          $resul = $this->insert($query, $data); //insert es para agregar un registro
+        foreach ($datos as $fila) {
+            $gpo = $fila[6] ?? '';
+            $gen = $fila[7] ?? '';
+            $esp = $fila[8] ?? '';
+            $dif = $fila[9] ?? '';
+            $var = $fila[10] ?? '';
+            $clave = $gpo . $gen . $esp . $dif . $var;
+            $cmp = $fila[27] ?? '';
+            $consumo = $fila[34] ?? '';
+            $unidades = $fila[36] ?? '';
+            $almacen = $fila[38] ?? '';
+            $negadas = $fila[112] ?? '';
+            $fechaN = $fecha;
+
+            if(!empty($clave) && !empty($negadas) && ($negadas != 0)){    
+                // Insertar los datos en la base de datos
+                $query = "INSERT INTO negadas(clave, cmp, consumo, unidades, almacen, negadas,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $data = array($clave, $cmp, $consumo, $unidades, $almacen, $negadas, $fechaN);
+                $resul = $this->insert($query, $data); // insert es para agregar un registro
+            }
         }
-    }      
+
+        
+
+
+    }     
     
     
 }
