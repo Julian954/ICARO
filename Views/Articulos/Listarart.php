@@ -132,16 +132,16 @@
                     <div class="modal-body">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="clave">Codigo del Articulo</label>
+                                <label for="cl">Codigo del Articulo</label>
                                 <input id="id" class="form-control" type="text" name="id" placeholder="Ingresa los 14 digitos" required>
                                 <input id="cl" class="form-control" type="text" name="clave" placeholder="Ingresa los 14 digitos" required>
                             </div>
                             <div class="form-group">
-                                <label for="desc">Descripcion</label>
+                                <label for="des">Descripcion</label>
                                 <input id="des" class="form-control" type="text" name="desc" placeholder="Descripcion" required>
                             </div>
                             <div class="form-group">
-                                <label for="corta">Clave corta</label>
+                                <label for="cor">Clave corta</label>
                                 <input id="cor" class="form-control" type="text" name="corta" placeholder="Descripcion corta" required>
                             </div>
                         </div>
