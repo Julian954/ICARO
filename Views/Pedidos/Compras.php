@@ -203,7 +203,7 @@ foreach ($data1 as $pedi2){
                 <td><?php if($pedidos['negadas']!=null){?>SI<?php }elseif($pedidos['negadas']==null){?>NO<?php }?></td>
                 <td><?= $pedidos['monto'] ?></td>
                 <td><?= $pedidos['fecha'] ?></td>
-                <?php if($pedidos['monto2']==="0"){?>
+                <?php if($pedidos['monto2']===0){?>
                 <td><button  type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>
                 <?php }else{?>
                   <td><button style="display:none" type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>

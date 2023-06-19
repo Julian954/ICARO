@@ -7,9 +7,23 @@ var URLactual = String(window.location);
 var Posicion = URLactual.indexOf("?");
 var Final = Posicion + 33;
 let Part = URLactual.slice(Posicion, Final);
+var fila; //captura la fila, para editar o eliminar
 
 
 $(document).ready(function () {
+  //Editar
+  $(document).on("click", ".btnEditar", function () {
+    fila = $(this).closest("tr");
+    id = parseInt(fila.find("td:eq(0)").text()); //capturo el ID
+    clave = fila.find("td:eq(1)").text();
+    desc = fila.find("td:eq(2)").text();
+    corta = fila.find("td:eq(3)").text();
+    $("#id").val(id);
+    $("#cl").val(clave);
+    $("#des").val(desc);
+    $("#cor").val(corta);
+    $("#modalCRUD").modal("show");
+  });
 
   //Mensaje de alerta al inactivar algo
   $(".elim").submit(function (e) {
@@ -69,8 +83,7 @@ $(document).ready(function () {
   $(".validar").submit(function (e) {
     e.preventDefault();
     Swal.fire({
-      title:
-        "¿Está seguro de Validar el Instrumento?",
+      title: "¿Está seguro de Validar el Instrumento?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#28a745",
@@ -84,6 +97,34 @@ $(document).ready(function () {
     });
   });
 
+  //Mensaje de alerta al eliminar algo
+  $(".elimart").submit(function (e) {
+    e.preventDefault();
+    Swal.fire({
+      title: "¿Está seguro de eliminar permanentemente?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#28a745",
+      cancelButtonColor: "#dc3545",
+      confirmButtonText: "Si",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fila = $(this);
+        id = parseInt($(this).closest("tr").find("td:eq(0)").text());
+        $.ajax({
+          url: base + "Articulos/eliminar",
+          type: "POST",
+          datatype: "json",
+          data: {id: id },
+          success: function () {
+            tablaUsuarios.row(fila.parents("tr")).remove().draw();
+          },
+        });
+        location.href = base + "Articulos/Listarart?msg=eliminado";
+      }
+    });
+  });
 
 
 
@@ -92,7 +133,10 @@ $(document).ready(function () {
 
 
 
-  
+
+
+
+
   //Mensaje de alerta al restablecer contraseña
   $(".rest").submit(function (e) {
     e.preventDefault();

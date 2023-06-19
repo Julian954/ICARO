@@ -68,7 +68,7 @@ class Articulos extends Controllers
 
     public function eliminar()
     {
-        $id = $_POST['user_id'];
+        $id = $_POST['id'];
         $eliminar = $this->model->eliminarArticulo($id);
         $alert = 'Eliminado';
         $data1 = $this->model->selectArticulos();
