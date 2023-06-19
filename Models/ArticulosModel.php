@@ -75,7 +75,7 @@ class ArticulosModel extends Mysql
 
     public function procesarArchivos($datos)
     {
-        array_shift($datos);
+        array_splice($datos, 0,5);
         foreach ($datos as $fila) {
           $clave = $fila[2] ?? ''; // Valor de la columna "GPO" en el archivo CSV
           $descripcion = $fila[8] ?? ''; // Valor de la columna "ESP" en el archivo CSV

@@ -36,30 +36,16 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table app-table-hover mb-0 text-left" id="Table">
+                                    <table class="table app-table-hover mb-0 text-left" id="TableArticulos">
     							        <thead>
                                             <tr>
-                                            <th class="cell" >Codigo de Articulo</th>
+                                            <th class="cell" >Numero de Articulo</th>
+                                            <th class="cell" >Clave de Articulo</th>
                                             <th class="cell" >Descripcion</th>
                                             <th class="cell" >Descripcion corta</th>
                                             <th class="cell" >Acciones</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php foreach ($data1 as $us) { ?>
-                                                <tr>
-                                                    <td><?php echo $us['clave']; ?></td>
-                                                    <td><?php echo $us['descripcion']; ?></td>
-                                                    <td><?php echo $us['des_corta']; ?></td>
-                                                    <td>
-                                                        <a title="Editar" href="<?php echo base_url() ?>Articulos\editar?id=<?php echo $us['id']; ?>" class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
-                                                        <form action="<?php echo base_url() ?>Articulos/eliminar?id=<?php echo $us['id']; ?>" method="post" class="d-inline elimper">
-                                                            <button title="Eliminar" type="submit" class="btn btn-danger mb-2"><i class="fas fa-trash-alt"></i></button>
-                                                        </form>            
-                                                    </td>
-                                                </tr>
-                                            <?php } ?>
-                                        </tbody>
                                     </table>
                                 </div><!--//table-responsive-->
                             </div><!--//app-card-body-->
@@ -74,7 +60,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Nuevo Usuario</h5>
+                    <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Nuevo Articulo</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -106,7 +92,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Nuevo Usuario</h5>
+                    <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Nuevos Articulos</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
