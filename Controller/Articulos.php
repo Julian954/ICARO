@@ -54,8 +54,8 @@ class Articulos extends Controllers
     {
         $id = $_POST['id'];
         $clave = limpiarInput($_POST['clave']);
-        $descripcion = limpiarInput($_POST['descripcion']);
-        $corta = limpiarInput($_POST['descorta']);
+        $descripcion = limpiarInput($_POST['desc']);
+        $corta = limpiarInput($_POST['corta']);
         $actualizar = $this->model->actualizarArticulos($clave, $descripcion, $corta, $id);     
             if ($actualizar == 1) {
                 $alert = 'modificado';
@@ -68,11 +68,12 @@ class Articulos extends Controllers
 
     public function eliminar()
     {
-        $id = $_GET['id'];
+        $id = $_POST['user_id'];
         $eliminar = $this->model->eliminarArticulo($id);
         $alert = 'Eliminado';
         $data1 = $this->model->selectArticulos();
         header("location: " . base_url() . "Articulos/Listarart?msg=$alert");
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
 

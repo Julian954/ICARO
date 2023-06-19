@@ -143,6 +143,7 @@
 </div>
 <!-- JavaScript files-->
 <script src="<?php echo base_url(); ?>Assets/js/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>Assets/js/tables.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/Funciones.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/chartjs.min.js"></script>
@@ -324,19 +325,7 @@
 
     <!-- Page Specific JS -->
     <script src="<?php echo base_url(); ?>Assets/js/app.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#TableArticulos").DataTable({
-                "processing":true,
-                "serverSide":true,
-                "sAjaxSource":"../ServerSide/serversideArticulos.php",
-                "columnDefs":[{
-                    "targets":-1,
-                    "defaultContent":"<div class='wrapper text-center'><div class='btn-group'><button title='Editar' type='submit' class='btn btn-primary mb-2'><i class='fas fa-edit'></i></button><button title='Eliminar' type='submit' class='btn btn-danger mb-2'><i class='fas fa-trash-alt'></i></button></div></div>"
-                }]
-            })
-        });
-    </script>
+
     <!-- <script>
         tablaArticulos = $('#tablaArticulo').DataTable({  
         "bProcessing":true,

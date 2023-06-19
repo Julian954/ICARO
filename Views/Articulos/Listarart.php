@@ -60,7 +60,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Nuevo Articulo</h5>
+                    <h5 class="modal-title" id="my-modal-title"> Nuevo Articulo</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -69,7 +69,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="clave">Codigo del Articulo</label>
-                            <input id="clave" min="00000000000000" max="99999999999999" class="form-control" type="text" name="clave" placeholder="Ingresa los 14 digitos" required>
+                            <input id="clave" class="form-control" type="text" name="clave" placeholder="Ingresa los 14 digitos" required>
                         </div>
                         <div class="form-group">
                             <label for="desc">Descripcion</label>
@@ -116,6 +116,41 @@
                         <button class="btn btn-danger mb-2" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="my-modal-title">Ediatr Articulo</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formUsuarios" method="post" action="<?php echo base_url(); ?>Articulos/actualizar" autocomplete="off">    
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="clave">Codigo del Articulo</label>
+                                <input id="id" class="form-control" type="text" name="id" placeholder="Ingresa los 14 digitos" required>
+                                <input id="cl" class="form-control" type="text" name="clave" placeholder="Ingresa los 14 digitos" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="desc">Descripcion</label>
+                                <input id="des" class="form-control" type="text" name="desc" placeholder="Descripcion" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="corta">Clave corta</label>
+                                <input id="cor" class="form-control" type="text" name="corta" placeholder="Descripcion corta" required>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Registrar</button>
+                            <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
+                        </div>             
+                    </div>
+                </form>    
             </div>
         </div>
     </div>
