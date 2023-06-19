@@ -69,10 +69,20 @@ $final=0;
 $final2=0;
 $final3=0;
 $total_pedi2=0;
+$total_contratado=0;
+$total_entregado=0;
+$total_por_entregar=0;
 $z=0;
 foreach ($data1 as $pedi2){
   $z++;
   $total_pedi2=$total_pedi2+$pedi2['cantidad'];
+  $total_contratado=$total_contratado+$pedi2['monto'];
+  if($pedi2['monto2']!=0){
+    $total_entregado=$total_entregado+$pedi2['monto'];
+  }
+  if($pedi2['monto2']==0){
+    $total_por_entregar=$total_por_entregar+$pedi2['monto'];
+  }
   if($pedi2['tipo']=="010" || $pedi2['tipo']=="020" || $pedi2['tipo']=="030" || $pedi2['tipo']=="040"){
   $final=$final+$pedi2['cantidad'];
   }
@@ -131,7 +141,7 @@ foreach ($data1 as $pedi2){
           </tr>
           <tr>
               <td >Total Contratado</td>
-              <td style="text-align:center">$ <?php ?></td>                                        
+              <td style="text-align:center">$ <?php echo  $total_contratado ?></td>                                        
               <!--<td class="stat-cell">
 				<div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -139,18 +149,18 @@ foreach ($data1 as $pedi2){
           </tr>
 					<tr>
               <td>Total Entregado</td>
-              <td style="text-align:center">$ </td>                                        
+              <td style="text-align:center">$ <?php echo $total_entregado ?></td>                                        
               <td class="stat-cell">
 				<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width: 1<?php echo number_format($total_entregado/$total_contratado,2);?>%;"  aria-valuemin="0" aria-valuemax="100"><?php echo number_format($total_entregado/$total_contratado*100,2);?>%</div>
 </div></td>
           </tr>
 					<tr>
               <td>Total Por Entregar</td>
-              <td style="text-align:center">$ </td>                                        
+              <td style="text-align:center">$ <?php echo $total_por_entregar ?></td>                                        
               <td class="stat-cell">
 				<div class="progress">
-<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="progress-bar bg-success" role="progressbar" style="width: <?php echo number_format($total_por_entregar*100/$total_contratado,2);?>%;"  aria-valuemin="0" aria-valuemax="100"><?php echo number_format($total_por_entregar*100/$total_contratado,2);?>%</div>
 </div></td>
           </tr>
         </tbody>
@@ -164,7 +174,7 @@ foreach ($data1 as $pedi2){
         <div class="card-body" style="border-color:#59d05d !important;">
       <h1 class="app-page-title mb-4">Autorizaciones PAC/Correo 2021</h1>
 
-          <table class="table table-head-bg-success table-striped table-hover">
+          <table class="table table-head-bg-success table-striped table-hover" id="Table">
             <thead style="background-color:#59d05d !important; font-size: 0.875rem !important; color:#ffffff !important; vertical-align: middle !important; border:1px !important; font-size:14px; border-color:#ebedf2 !important; padding:0.75rem !important;">
               <tr>
                 <th scope="col"></th>
@@ -180,7 +190,7 @@ foreach ($data1 as $pedi2){
 </tr>
             </thead>
             <tbody >
-              <?php $i=0; foreach($data1 as $pedidos) { $i++;if($i<=15){ ?>
+              <?php $i=0; foreach($data1 as $pedidos) { $i++;/*if($i<=15){*/ ?>
               <?php //while($pedidos){ $i++; /*$final=$final+$pedidos['cantidad'];*/if($i<=15){  ?> 
                 <div style="display:none;">
               <tr>
@@ -189,15 +199,15 @@ foreach ($data1 as $pedi2){
                 <td><?= $pedidos['tipo'] ?></td>
                 <td><?= $pedidos['clave'] ?></td>
                 <td><?= $pedidos['cantidad'] ?></td>
-                <td><?= $pedidos['nopedido'] ?></td>
-                <td>SI</td>
+                <td><?= $pedidos['eta'] ?></td>
+                <td><?php if($pedidos['negadas']!=null){?>SI<?php }elseif($pedidos['negadas']==null){?>NO<?php }?></td>
                 <td><?= $pedidos['monto'] ?></td>
                 <td><?= $pedidos['fecha'] ?></td>
                 <?php if($pedidos['monto2']===0){?>
                 <td><button  type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>
                 <?php }else{?>
                   <td><button style="display:none" type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>
-                  <?php }}?>
+                  <?php }?>
               </tr>  </div>
               <?php include('modal.php');    ?>
               <?php }; ?>  

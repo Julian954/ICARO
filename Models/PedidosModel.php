@@ -181,15 +181,10 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
     }
 
     public function SelectPedido(){
-        $sql = "SELECT * FROM pedidos";
+        $sql = "SELECT pedidos.* , negadas.negadas FROM pedidos LEFT JOIN negadas ON pedidos.topn = negadas.clave;";
         $res = $this->select_all($sql);
         return $res;
     }
-    //$cantidad=mysqli_num_rows($queryCliente);
-    public function SelectCantidad(){
-        $sql = "SELECT * FROM pedidos";
-        $res = $this->mysqli_num_rows($sql);
-        return $res;
-    }
+
 }
 ?>
