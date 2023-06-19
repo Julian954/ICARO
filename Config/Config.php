@@ -7,3 +7,4 @@
     const CHARSET = "charset=utf8";
     
     //coneccion para la vista de pedidos
+?>

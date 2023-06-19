@@ -18,26 +18,24 @@
 							<div class="app-card app-card-settings shadow-sm p-4">
 								<label for="indicadores" class="form-label">Indicadores</label>
 								<div class="mb-3">
-									<div class="app-card-body text-center">		
+									<div class="app-card-body">		
 										<form action="<?php echo base_url(); ?>Indicadores/procesarArchivo" method="post" enctype="multipart/form-data">
+                    						<div class="form-group">
+                    						    <label for="date">Fecha</label>
+												<input type="date" class="form-control" id="fecha" name="fecha" required>
+                    						</div>
 											<div class="form-group">
-											<label for="date" class="form-label" style="color:#000000;">Fecha</label>
-											<input type="date" class="form-control" id="fecha" name="fecha" required>
-											</div><br>
-											<input type="file" id="file-input" accept="csv" name="archivo_csv" required/>
-											<label id="fileup" for="file-input">
-												<i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp; Selecciona los archivos.
-											</label>
-											<div id="num-of-files">Sin archivos cargados.</div>
-												<ul id="files-list"></ul>
-												<hr>
-												<div><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div><br>
-												<button class="btn btn-success mb-2" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
-											</div>  
+                    						    <label for="img">Selecciona Archivo</label>
+                    						    <div class="custom-file">
+                    						      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo_csv" required>
+                    						      <label class="custom-file-label" for="customFile"></label>
+                    						      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
+                    						    </div>
+                    						</div>
+											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
 										</form>
 									</div><!--//app-card-body-->
-								</div>
-										
+								</div>	
 							</div><!--//app-card-->
 						</div>
 					</div><!--//row-->
@@ -54,21 +52,21 @@
 								<div class="mb-3">
 									<div class="app-card-body text-center">
 										<form action="<?php echo base_url(); ?>Inicio/subir_archivo" method="post" enctype="multipart/form-data">
+                    						<div class="form-group">
+                    						    <label for="date">Fecha</label>
+												<input type="date" class="form-control" id="fechas" name="fechas" required>
+                    						</div>
 											<div class="form-group">
-												<label for="date" class="form-label" style="color:#000000;">Fecha</label>
-												<input type="date" class="form-control" id="fechas" name="fechas" value="" require>
-											</div><br>
-											<input type="file" id="file-input2" name="archivo" required/>
-											<label id="fileup" for="file-input2">
-												<i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp; Selecciona los archivos.
-											</label>
-											<div id="num-of-files">Sin archivos cargados.</div>
-												<ul id="files-list"></ul>
-												<hr>
-												<div><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div><br>
-												<button class="btn btn-success mb-2" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
-											</div>  
+                    						    <label for="img">Selecciona Archivo</label>
+                    						    <div class="custom-file">
+                    						      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo" required>
+                    						      <label class="custom-file-label" for="customFile"></label>
+                    						      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
+                    						    </div>
+                    						</div>
+											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
 										</form>
+
 									</div><!--//app-card-body-->
 								</div>
 								
@@ -115,20 +113,19 @@
 								<div class="mb-3">
 									<div class="app-card-body text-center">
 										<form action="<?php echo base_url(); ?>Pedidos/subirarchivo" method="post" enctype="multipart/form-data">
+                    						<div class="form-group">
+                    						    <label for="date">Fecha</label>
+												<input type="date" class="form-control" id="fechaId" name="fechaId" required>
+                    						</div>
 											<div class="form-group">
-												<label for="date" class="form-label" style="color:#000000;">Fecha</label>
-												<input type="date" class="form-control" id="fechaId" name="fechaId" value="" require>
-											</div><br>	
-											<input type="file" id="file-input4" accept="csv" name="archivo" required/>
-											<label id="fileup" for="file-input4">
-												<i class="fa-solid fa-arrow-up-from-bracket"></i>&nbsp; Selecciona los archivos.
-											</label>
-											<div id="num-of-files">Sin archivos cargados.</div>
-												<ul id="files-list"></ul>
-												<hr>
-												<div><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div><br>
-												<button class="btn btn-success mb-2" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
-											</div>    
+                    						    <label for="img">Selecciona Archivo</label>
+                    						    <div class="custom-file">
+                    						      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo" required>
+                    						      <label class="custom-file-label" for="customFile"></label>
+                    						      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
+                    						    </div>
+                    						</div>
+											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
 										</form>
 									</div><!--//app-card-body-->
 								</div>
