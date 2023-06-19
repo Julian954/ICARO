@@ -15,7 +15,9 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
     {
         $data1 = $this->model->nivelatencionycosto();
         $data2 = $this->model->negadasymanuales();
-        $this->views->getView($this, "Home", "", $data1, $data2);
+        $data3 = $this->model->top15negadas();
+        $data4 = $this->model->quejas();
+        $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4);
         die();
     }
 

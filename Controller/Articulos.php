@@ -26,13 +26,13 @@ class Articulos extends Controllers
         $insert = $this->model->insertarArticulos($clave, $descripcion, $corta);
         if ($insert == 'existe') {
             // Si el artículo ya existe, muestra una alerta
-            $alert = 'El artículo ya existe';
+            $alert = 'existe';
         } elseif ($insert) {
             // Si el artículo se registra correctamente, muestra una alerta de éxito
-            $alert = 'Artículo registrado exitosamente';
+            $alert = 'registrado';
         } else {
             // Si ocurre un error en el registro, muestra una alerta de error
-            $alert = 'Error al registrar el artículo';
+            $alert = 'error';
         }
         // Pasa la alerta como parámetro GET en la redirección
         header("location: " . base_url() . "Articulos/Listarart?msg=" . urlencode($alert));

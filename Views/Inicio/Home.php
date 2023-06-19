@@ -144,12 +144,76 @@
         </div><!--//col-auto-->
       </div><!--//row-auto-->
 
+      <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+        <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">15 NEGADAS</a>
+        <a class="flex-sm-fill text-sm-center nav-link"  id="orders-cont-tab" data-toggle="tab" href="#orders-cont" role="tab" aria-controls="orders-cont" aria-selected="false">QUEJAS</a>
+      </nav>
       <div class="tab-content" id="orders-table-tab-content">
         <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
           <div class="app-card app-card-orders-table shadow-sm mb-4">
             <div class="app-card-body p-3">
               <div class="table-responsive">
                 <table class="table app-table-hover mb-0 text-left" id="Table">
+							    <thead>
+								    <tr>
+                      <th class="cell">Clave</th>
+                      <th class="cell">Descripción</th>
+                      <th class="cell">CPM</th>
+                      <th class="cell">Consumo</th>
+                      <th class="cell">Existencia</th>
+                      <th class="cell">Negadas</th>
+                      <th class="cell">Transitos</th>
+                      <th class="cell">Pedidos</th>
+                    </tr>
+                  </thead>
+							    <tbody>
+                    <?php foreach ($data3 as $neg) { ?>
+                    <tr>
+                      <td><?php echo $neg['clave']; ?></td>
+                      <td><?php echo $neg['des_corta']; ?></td>
+                      <td><?php echo $neg['cmp']; ?></td>
+                      <td><?php echo $neg['consumo']; ?></td>
+                      <?php if ($neg['unidades']+$neg['almacen'] < $neg['cmp']) { ?>
+                        <td>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Unidades: <?=$neg['unidades'];?>. Almacén: <?=$neg['almacen'];?>.">
+                            <span class="badge bg-danger"><?php echo $neg['unidades']+$neg['almacen'];?></span>
+                          </span>
+                        </td>
+                      <?php } else {?>
+                        <td>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Unidades: <?=$neg['unidades'];?>. Almacén: <?=$neg['almacen'];?>.">
+                            <span class="badge bg-warning"><?php echo $neg['unidades']+$neg['almacen'];?></span>
+                          </span>
+                        </td>
+                      <?php } ?>
+                      <td><?php echo $neg['negadas']; ?></td>
+                      <td><?php echo $neg['negadas']; ?></td>
+                      <?php if ($neg['fecha_inc'] == null) { ?>
+                        <td>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
+                            <span class="badge bg-warning">Vigente</span>
+                          </span>
+                        </td>
+                      <?php } else { ?>
+                        <td>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
+                            <span class="badge bg-danger">Incumplido</span>
+                          </span>
+                        </td>
+                      <?php } ?>
+                    </tr>
+                    <?php } ?>
+							    </tbody>
+                </table>
+              </div><!--//table-responsive-->
+            </div><!--//app-card-body-->
+          </div><!--//app-card app-card-orders-table shadow-sm mb-5-->
+        </div><!--//tab-pane fade show active-->
+        <div class="tab-pane fade show" id="orders-cont" role="tabpanel" aria-labelledby="orders-cont-tab">
+          <div class="app-card app-card-orders-table shadow-sm mb-4">
+            <div class="app-card-body p-3">
+              <div class="table-responsive">
+                <table class="table app-table-hover mb-0 text-left" id="Table2">
 							    <thead>
 								    <tr>
                       <th class="cell">Clave</th>
