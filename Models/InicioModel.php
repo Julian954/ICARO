@@ -275,12 +275,18 @@ class InicioModel extends Mysql{
             $unidades = $fila[36] ?? '';
             $almacen = $fila[38] ?? '';
             $negadas = $fila[112] ?? '';
+            $copel = $fila[52] ?? '';
+            $unops = $fila[53] ?? '';
+            $ooad = $fila[54] ?? '';
+            $pedidos = $fila[55] ?? '';
+            $transooad = $fila[56] ?? '';
+            $fecha_inc = $fila[82] ?? '';
             $fechaN = $fecha;
 
             if(!empty($clave) && !empty($negadas) && ($negadas != 0)){    
                 // Insertar los datos en la base de datos
-                $query = "INSERT INTO negadas(clave, cmp, consumo, unidades, almacen, negadas,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $data = array($clave, $cmp, $consumo, $unidades, $almacen, $negadas, $fechaN);
+                $query = "INSERT INTO negadas(clave, cmp, consumo, unidades, almacen, negadas, fecha_inc, copel, unops, ooad, pedidos, transooad, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $data = array($clave, $cmp, $consumo, $unidades, $almacen, $negadas, $fecha_inc, $copel, $unops, $ooad, $pedidos, $transooad,$fechaN);
                 $resul = $this->insert($query, $data); // insert es para agregar un registro
             }
         }
