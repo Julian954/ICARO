@@ -8,7 +8,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="post" action="<?php echo base_url(); ?>Pedidos/Pagado" autocomplete="off" enctype="multipart/form-data">
+        <form method="post" action="<?php echo base_url(); ?>Inicio/Queja" autocomplete="off" enctype="multipart/form-data">
           <div class="modal-body">
           <input style="display:none;" type="text" class="form-control" name="id" id="id"  value="<?php echo $pedidos['id']; ?>" readonly/>   
             <div class="form-group">
@@ -18,7 +18,7 @@
             
             <div class="form-group">
               <label  for="monto" class="form-label" style="color:#000000;">Monto</label>
-              <input type="number" value="<?php echo $pedidos['monto'] ?>" class="form-control" name="monto2" id="monto2" />                            
+              <input type="number" value="<?php echo $pedidos['monto'] ?>" class="form-control" name="monto2" id="monto2" readonly/>                            
             </div>                       
           </div>
           <div class="card-footer">
