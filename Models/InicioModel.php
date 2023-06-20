@@ -46,7 +46,21 @@ class InicioModel extends Mysql{
         return $res;
     }
 
-
+    public function insertarQueja(string $descripcion, int $piezas, int $umf, int $receta, int $estado, int $id)
+    {
+        $return = "";
+        $this->descripcion = $descripcion; 
+        $this->piezas = $piezas; 
+        $this->umf = $umf; 
+        $this->receta = $receta; 
+        $this->estado = $estado; 
+        $this->id=$id;                        
+        $query = "UPDATE quejas SET monto2=? WHERE id=?";
+        $data = array($this->descripcion, $this->piezas, $this->umf, $this->receta, $this->estado, $this->id);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;
+    }
 
 
 

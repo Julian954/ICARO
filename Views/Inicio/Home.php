@@ -256,6 +256,7 @@
                               <path fill-rule="evenodd" d="M5.172 10.828a.5.5 0 0 0 .707 0l4.096-4.096V9.5a.5.5 0 1 0 1 0V5.525a.5.5 0 0 0-.5-.5H6.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
                             </svg>
                           </a></td>
+                          <?php include('Modal_quejas.php');    ?>
                         <?php } else { ?>
                           <td></td>
                         <?php } ?>

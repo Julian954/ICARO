@@ -28,7 +28,18 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         echo json_encode($data);
         die();
     }
-
+    public function Queja(){
+        $id = $_POST['id'];
+        $descipcion  =$_POST['descipcion'];
+        $piezas=$_POST['piezas'];
+        $umf  =$_POST['umf'];
+        $receta=$_POST['receta'];
+        $estado  =$_POST['estado'];
+        //$fecha=$_POST['fecha'];
+        $insert = $this->model->insertarQueja($descipcion, $piezas, $umf, $receta, $estado, $id);
+        header("location: " . base_url() . "Inicio/Home");
+        die();
+    }
 
 
     public function Notificaciones()
