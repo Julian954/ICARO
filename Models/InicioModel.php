@@ -21,6 +21,22 @@ class InicioModel extends Mysql{
         $res = $this->select_all($sql); 
         return $res;
     }
+    
+    //Selecciona las negadas más recientes
+    public function top15negadas()
+    {
+        $sql = "SELECT negadas.*, catalogo.des_corta FROM negadas, catalogo WHERE negadas.clave = catalogo.clave AND negadas.fecha = (SELECT MAX(fecha) FROM negadas)";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Selecciona las quejas
+    public function quejas()
+    {
+        $sql = "SELECT quejas.*, unidades.abreviacion FROM quejas, unidades WHERE quejas.umf = unidades.id";
+        $res = $this->select_all($sql);
+        return $res;
+    }
 
     //Selecciona las negadas actuales por clínica
     public function Gpastelnegadas()
@@ -30,21 +46,7 @@ class InicioModel extends Mysql{
         return $res;
     }
 
-    //Selecciona las negadas actuales por clínica
-    public function top15negadas()
-    {
-        $sql = "SELECT negadas.*, catalogo.des_corta FROM negadas, catalogo WHERE negadas.clave = catalogo.clave";
-        $res = $this->select_all($sql);
-        return $res;
-    }
 
-    //Selecciona las negadas actuales por clínica
-    public function quejas()
-    {
-        $sql = "SELECT * FROM quejas";
-        $res = $this->select_all($sql);
-        return $res;
-    }
 
 
 

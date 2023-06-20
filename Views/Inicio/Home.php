@@ -113,7 +113,7 @@
             </div><!--//app-card-header p-3-->
             <div class="app-card-body p-3 p-lg-4">
               <div class="chart-container">
-                <canvas id="canvas-linechart" width="100%" height="75"></canvas>
+                <canvas id="BarrasAtencion" width="100%" height="75"></canvas>
               </div><!-- //chart-container -->
             </div><!--//app-card-body p-3 p-lg-4-->
           </div><!--//card-header-action-->
@@ -265,7 +265,7 @@
 							      	<tr>
                         <td><?php echo $que['descripcion']; ?></td>
                         <td><?php echo $que['piezas']; ?></td>
-                        <td><?php echo $que['umf']; ?></td>
+                        <td><?php echo $que['abreviacion']; ?></td>
                         <td><?php echo $que['receta']; ?></td>
                         <td><?php echo $que['fecha'];?></td>
                         <?php if ($que['estado'] == 1) { ?>
@@ -513,7 +513,8 @@
 </div><!--app-content pt-3 p-md-3 p-lg-4-->  
 <script>
   window.addEventListener("load", function() {
-      pastelnegadas();
+    BarrasAtencion();  
+    pastelnegadas();
   })
 </script>
 

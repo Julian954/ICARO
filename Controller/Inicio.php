@@ -22,14 +22,35 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
     }
 
     //Datos para la gráfica de clinicas
+    public function BarrasAtencion()
+    {
+        // Si hoy es lunes, nos daría el lunes pasado.
+        if (date("D")=="Mon"){
+            $week_start = date("Y-m-d", strtotime('last Monday', time()));
+            $week_end = date("Y-m-d",strtotime($week_start.'+ 6 days', time()));
+        } else {
+            $week_start = date("Y-m-d", strtotime('last Monday', time()));
+            $week_end = date("Y-m-d",strtotime('next Sunday', time()));
+        }
+        $data = [];
+        for ($i=0; $i < 5; $i++) { 
+            //AQUI TENGO QUE HACER DOS CONSULTAS EN LAS PIDO LA MEDIA NACIONAL DE UN DIA DADO
+            //DESPUÉS LO AGREGO A UN OBJETO
+            $week_start = date("Y-m-d",strtotime($week_start.'+ 1 days', time()));
+        }
+        die();
+        $data = $this->model->Gpastelnegadas();
+        echo json_encode($data);
+        die();
+    }
+
+    //Datos para la gráfica de clinicas
     public function pastelnegadas()
     {
         $data = $this->model->Gpastelnegadas();
         echo json_encode($data);
         die();
     }
-
-
 
     public function Notificaciones()
     {

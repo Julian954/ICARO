@@ -302,7 +302,6 @@ $(document).ready(function () {
 });
 
 //Gráfica de Barra
-
 function BarrasAlumnos() {
   $.ajax({
     url: base + "Reportes/AsistenciasFaltas",
@@ -533,6 +532,107 @@ function BarrasMateriales2() {
   });
 }
 
+
+
+
+
+
+
+
+function BarrasAtencion() {
+  $.ajax({
+    url: base + "Inicio/BarrasAtencion" + Part,
+    type: "POST",
+    success: function (response) {
+      var data = JSON.parse(response);
+      var nombre = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+      var nacional = [90.09, 94.09, 91.09, 94.09, 99.09];
+      var colima = [99.62, 98.62, 98.62, 88.62, 98.62];
+      for (var i = 0; i < data.length; i++) {
+        nacional.push(data[i]["nacional"]);
+        colima.push(data[i]["colima"]);
+      }
+      // Set new default font family and font color to mimic Bootstrap's default styling
+      Chart.defaults.global.defaultFontFamily =
+        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+      Chart.defaults.global.defaultFontColor = "#292b2c";
+
+      const Colima = {
+        label: "Colima",
+        data: colima,
+        backgroundColor: "rgba(92, 179, 119, 0.2)", // Color de fondo
+        borderColor: "rgba(92, 179, 119, 0.8)", // Color del borde
+        borderWidth: 1, // Ancho del borde
+      };
+
+      const Nacional = {
+        label: "Nacional",
+        data: nacional,
+        borderDash: [3, 5],
+        backgroundColor: "rgba(0, 168, 198, 0.0)", // Color de fondo
+        borderColor: "rgba(0, 168, 198, 1)", // Color del borde
+        borderWidth: 1, // Ancho del borde
+      };
+
+      // Bar Chart Example
+      var ctx = document.getElementById("BarrasAtencion");
+      var myLineChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: nombre,
+          datasets: [Nacional, Colima],
+        },
+        options: {
+          tooltips: {
+            mode: "index",
+            intersect: false,
+            titleMarginBottom: 10,
+            bodySpacing: 10,
+            xPadding: 16,
+            yPadding: 16,
+            borderColor: window.chartColors.border,
+            borderWidth: 1,
+            backgroundColor: "#fff",
+            bodyFontColor: window.chartColors.text,
+            titleFontColor: window.chartColors.text,
+
+            callbacks: {
+              //Ref: https://stackoverflow.com/questions/38800226/chart-js-add-commas-to-tooltip-and-y-axis
+              label: function (tooltipItem, data) {
+                if (parseInt(tooltipItem.value) >= 1000) {
+                  return (
+                    "%" +
+                    tooltipItem.value
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+                    "%"
+                  );
+                } else {
+                  return tooltipItem.value + "%";
+                }
+              },
+            },
+          },
+          hover: {
+            mode: "nearest",
+            intersect: true,
+          },
+          scales: {
+            xAxes: [],
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+    },
+  });
+}
+
 function pastelnegadas() {
   $.ajax({
     url: base + "Inicio/pastelnegadas",
@@ -544,9 +644,6 @@ function pastelnegadas() {
       for (var i = 0; i < data.length; i++) {
         nombre.push(data[i]["abreviacion"]);
         total.push(data[i]["negadas"]);
-        console.log(data[i]["abreviacion"]);
-        console.log(data[i]["negadas"]);
-        console.log("Hola");
       }
       // Set new default font family and font color to mimic Bootstrap's default styling
       Chart.defaults.global.defaultFontFamily =
