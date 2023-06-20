@@ -309,19 +309,19 @@
               </div><!--//row justify-content-between align-items-center-->
             </div><!--//app-card-header-->
             <div class="app-card-body">
-              <?php foreach ($data5 as $bar) { ?>
-							  <div class="item p-3">
+              <?php //foreach ($data5 as $bar) { ?>
+		<!-- 					  <div class="item p-3">
 							    <div class="row align-items-center">
 								    <div class="col">
-									    <div class="title " style="color:#000000;"><?php echo $bar['area'].' ('.$bar['form'].'/'.$bar['total'].')';?></div>
+									    <div class="title " style="color:#000000;"><?php //echo $bar['area'].' ('.$bar['form'].'/'.$bar['total'].')';?></div>
 									    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($bar['form']*100/$bar['total'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($bar['form']*100/$bar['total'],2);?>%</div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width:<?php //echo number_format($bar['form']*100/$bar['total'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php// echo number_format($bar['form']*100/$bar['total'],2);?>%</div>
                       </div>
-								    </div><!--//col-->
-							    </div><!--//row-->
-							  </div><!--//item-->
-                <hr style="margin: 0;">
-              <?php } ?>
+								    </div>
+							    </div>
+							  </div>
+                <hr style="margin: 0;"> -->
+              <?php //} ?>
 
               <div class="item p-3">
                 <div class="row align-items-center">

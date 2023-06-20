@@ -67,7 +67,7 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
     array_splice($datos, 0, 1);
     foreach ($datos as $fila) {
         $unidad = $fila[2] ?? '';
-        $presentadas = $fila[4] ?? '';
+        $presentadas = $fila[9] ?? '';
         $surtida = $fila[5] ?? '';
         $negadas = $fila[7] ?? '';
         $electronicas = $fila[10] ?? '';
