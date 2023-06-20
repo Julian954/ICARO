@@ -172,9 +172,13 @@ foreach ($data1 as $pedi2){
 
 
 <br>
-        <div class="card-body" style="border-color:#59d05d !important;">
+        
       <h1 class="app-page-title mb-4">Autorizaciones PAC/Correo 2021</h1>
-
+			  <div class="tab-content" id="orders-table-tab-content">
+		      <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+			  	  <div class="app-card app-card-orders-table shadow-sm mb-5">
+			  	    <div class="app-card-body p-3">
+			  		    <div class="table-responsive">
           <table class="table app-table-hover mb-0 text-left" id="Table">
             <thead>
               <tr>
@@ -214,8 +218,10 @@ foreach ($data1 as $pedi2){
               <?php }; ?>  
             </tbody>
           </table>
-        </div>
-      </div>
+                </div>
+              </div>
+            </div>
+          </div><!--//app-card-body-->
 			</div><!--//app-wrapper-->
 
 

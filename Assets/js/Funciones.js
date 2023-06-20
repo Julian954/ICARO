@@ -537,6 +537,65 @@ function BarrasMateriales2() {
 
 
 
+function barrasrankig() {
+  $.ajax({
+    url: base + "Indicadores/barrasrankig" + Part,
+    type: "POST",
+    success: function (response) {
+      var data = JSON.parse(response);
+      var nombre = [];
+      var ventas = [];
+      var compras = [];
+      for (var i = 0; i < data.length; i++) {
+        nombre.push(data[i]["mes"]);
+        ventas.push(data[i]["colima"]);
+        compras.push(data[i]["nacional"]);
+      }
+      // Set new default font family and font color to mimic Bootstrap's default styling
+      Chart.defaults.global.defaultFontFamily =
+        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+      Chart.defaults.global.defaultFontColor = "#292b2c";
+
+      const Ventas = {
+        label: "Colima",
+        data: ventas,
+        backgroundColor: "rgba(255, 20, 20, 0.2)", // Color de fondo
+        borderColor: "rgba(0, 0, 0, 0.2)", // Color del borde
+        borderWidth: 1, // Ancho del borde
+      };
+
+      const Compras = {
+        label: "Nacional",
+        data: compras,
+        backgroundColor: "rgba(20, 255, 20, 0.2)", // Color de fondo
+        borderColor: "rgba(0, 0, 0, 0.2)", // Color del borde
+        borderWidth: 1, // Ancho del borde
+      };
+
+      // Bar Chart Example
+      var ctx = document.getElementById("barrasrankig");
+      var myLineChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: nombre,
+          datasets: [Ventas, Compras],
+        },
+        options: {
+          scales: {
+            xAxes: [],
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+    },
+  });
+}
 
 
 function BarrasAtencion() {
@@ -546,10 +605,10 @@ function BarrasAtencion() {
     success: function (response) {
       var data = JSON.parse(response);
       var nombre = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
-      var nacional = [90.09, 94.09, 91.09, 94.09, 99.09];
-      var colima = [99.62, 98.62, 98.62, 88.62, 98.62];
+      var nacional = [];
+      var colima = [];
       for (var i = 0; i < data.length; i++) {
-        nacional.push(data[i]["nacional"]);
+        nacional.push(data[i]["mnacional"]);
         colima.push(data[i]["colima"]);
       }
       // Set new default font family and font color to mimic Bootstrap's default styling

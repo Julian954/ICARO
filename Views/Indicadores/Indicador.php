@@ -21,8 +21,8 @@
            	  		<div class="col-6 col-lg-3">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1"><span style="color:#FF0000;">Negadas</span> <span style="font-weight: bold; color:#000000;">YTD 2021</span></h4>
-							    <div class="stats-figure">27.06<span>(k)</span></div>
+							    <h4 class="stats-type mb-1"><span style="color:#FF0000;">Negadas</span> <span style="font-weight: bold; color:#000000;"><?=date('Y')?></span></h4>
+							    <div class="stats-figure"><?=$data1['negada']?><span></span></div>
 							    <div class="stats-meta text-warning">
 								   <span style="font-weight:bold;">540</span>&nbsp;"máximo diairo"</div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
@@ -34,11 +34,8 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1"><span style="color:#FF0000;">Negadas</span> <span style="font-weight: bold; color:#000000;">Diario</span></h4>
-							    <div class="stats-figure"><span>217</span></div>
-							    <div class="stats-meta text-success">
-								    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  									<path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
-									</svg>Promedio</div>
+							    <div class="stats-figure"><?=number_format($data1['negadap'],2)?></div>
+							    <div class="stats-meta text-success">Promedio</div>
 						   		 </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -50,11 +47,8 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4" style="background-color:#2ECC71;">
 							    <h4 class="stats-type mb-1" style="color:#FFFFFF;">Nivel de Atención</h4>
-							    <div class="stats-figure" style="color:#FFFFFF;">97.12<span>%</span></div>
-							    <div class="stats-meta" style="color:#F9E79F">
-								    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  		<path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
-		</svg> OOADR <span style="font-weight: bold;">Colima 2021</span></div>
+							    <div class="stats-figure" style="color:#FFFFFF;"><?=number_format($data1['surtida'],2)?><span>%</span></div>
+							    <div class="stats-meta" style="color:#FFFFFF"> OOADR <span style="font-weight: bold;">COLIMA <?=date('Y')?></span></div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -65,7 +59,7 @@
 						    <div class="app-card-body p-3 p-lg-4" style="background-color:#F39C12;">
 							    <h4 class="stats-type mb-1" style="color:#FFFFFF;">Nivel de Atención</h4>
 							    <div class="stats-figure" style="color:#FFFFFF;">96.70<span>%</span></div>
-							    <div class="stats-meta" style="color:#FFFFFF;">Media <span style="font-weight: bold;">Nacional 2021</span></div>
+							    <div class="stats-meta" style="color:#FFFFFF;">Media <span style="font-weight: bold;">Nacional <?=date('Y')?></span></div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -90,10 +84,10 @@
 				    <div class="col-4 col-lg-2">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1"><span class="text-success">%</span>Eletrónica</h4>
-							    <div class="stats-figure">96.87<span>%</span></div>
+							    <h4 class="stats-type mb-1"><span class="text-success"></span>Eletrónicas</h4>
+							    <div class="stats-figure"><?=$data1['electronica']?><span></span></div>
 							    <div class="stats-meta text-success">
-		<span class="text-danger">160</span>&nbsp<span class="text-danger">Manuales</span></div>
+		<span class="text-danger">160</span>&nbsp<span class="text-danger">Ayer</span></div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -103,7 +97,7 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Manuales</h4>
-							    <div class="stats-figure">160</div>
+							    <div class="stats-figure"><?=$data1['manuals']?></div>
 							    <div class="stats-meta text-success">Ayer</div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
@@ -125,9 +119,9 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">$ Receta</h4>
-							    <div class="stats-figure">$53.74</div>
+							    <div class="stats-figure">$<?=number_format($data1['costor'],2)?></div>
                   <div class="stats-meta text-success">
-		<span class="text-success">Primer Nivel</span>  </div>
+		<span class="text-success">Ayer</span>  </div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -137,9 +131,9 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">$ Paciente</h4>
-							    <div class="stats-figure">$139.82</div>
+							    <div class="stats-figure">$<?=number_format($data1['costop'],2)?></div>
                   <div class="stats-meta text-success">
-		<span class="text-danger">Segundo Nivel</span>  </div>
+		<span class="text-succes">Ayer</span>  </div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -165,7 +159,7 @@
               				</div><!--//app-card-header p-3 border-0-->
 								<div class="app-card-body p-4">
                 					<div class="chart-container">
-                       					 <canvas id="chart-bar"></canvas>
+                       					 <canvas id="barrasrankig"></canvas>
                 					</div><!--chart-container-->
               					</div><!--//app-card-body p-4-->
             			</div><!--//app-card app-card-chart shadow-sm-->
@@ -175,16 +169,12 @@
 	    </div><!--//app-content p-md-3 p-lg-4-->
 	</div><!--//app-wrapper-->
 
-		    <!-- Javascript -->
-				<script src="Assets/plugins/popper.min.js"></script>
-    			<script src="Assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script>
+  window.addEventListener("load", function() {
+    barrasrankig();  
+  })
+</script>
 
-   			 <!-- Charts JS -->
-   				<script src="Assets/plugins/chart.js/chart.min.js"></script>
-    			<script src="chart_indica.js"></script>
-
-   			 <!-- Page Specific JS -->
-   				 <script src="Assets/js/app.js"></script>
 				 
 <?php }  else { ?> <!-- En caso de ser valido -->
   <?php permisos() ?> <!-- Poner el mensaje de erro -->

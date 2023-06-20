@@ -309,7 +309,7 @@
               </div><!--//row justify-content-between align-items-center-->
             </div><!--//app-card-header-->
             <div class="app-card-body">
-              <?php foreach ($data6 as $bar) { ?>
+              <?php foreach ($data5 as $bar) { ?>
 							  <div class="item p-3">
 							    <div class="row align-items-center">
 								    <div class="col">
@@ -501,7 +501,7 @@
                     </div><!--//app-card-body px-4-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                    <a class="btn app-btn-secondary" href="#">Ver</a>
+                    <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Articulos/Listarart">Ver</a>
                     </div><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-lg-4-->
