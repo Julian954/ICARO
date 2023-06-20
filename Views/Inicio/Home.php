@@ -163,7 +163,6 @@
                       <th class="cell">Existencia</th>
                       <th class="cell">Negadas</th>
                       <th class="cell">Transitos</th>
-                      <th class="cell">Pedidos</th>
                     </tr>
                   </thead>
 							    <tbody>
@@ -187,17 +186,16 @@
                         </td>
                       <?php } ?>
                       <td><?php echo $neg['negadas']; ?></td>
-                      <td><?php echo $neg['negadas']; ?></td>
                       <?php if ($neg['fecha_inc'] == null) { ?>
                         <td>
                           <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
-                            <span class="badge bg-warning">Vigente</span>
+                            <span class="badge bg-warning"><?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad']+$neg['pedidos'];?></span>
                           </span>
                         </td>
                       <?php } else { ?>
                         <td>
                           <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
-                            <span class="badge bg-danger">Incumplido</span>
+                            <span class="badge bg-danger"><?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad']+$neg['pedidos'];?></span>
                           </span>
                         </td>
                       <?php } ?>
@@ -209,26 +207,63 @@
             </div><!--//app-card-body-->
           </div><!--//app-card app-card-orders-table shadow-sm mb-5-->
         </div><!--//tab-pane fade show active-->
+        
         <div class="tab-pane fade show" id="orders-cont" role="tabpanel" aria-labelledby="orders-cont-tab">
           <div class="app-card app-card-orders-table shadow-sm mb-4">
             <div class="app-card-body p-3">
+              <div class="row">
+                  <div class="col-lg-8 mb-2 py-2">
+                      <?php if ($_SESSION['rol'] == 7) { ?>
+                          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#nuevo_cliente"><i class="fas fa-plus-circle"></i> Nuevo</button>   
+                      <?php } ?>
+                  </div>
+                  <div class="col-lg-4">
+                      <?php if (isset($_GET['msg'])) {
+                          $alert = $_GET['msg'];
+                          if ($alert == "existe") { ?>
+                              <div class="alert alert-warning" role="alert">
+                                  <strong>El usuario ya existe.</strong>
+                              </div>
+                          <?php } else if ($alert == "error") { ?>
+                              <div class="alert alert-danger" role="alert">
+                                  <strong>Error al registra.</strong>
+                              </div>
+                          <?php } else if ($alert == "registrado") { ?>
+                              <div class="alert alert-success" role="alert">
+                                  <strong>Usuario registrado.</strong>
+                              </div>
+                          <?php } else if ($alert == "modificado") { ?>
+                              <div class="alert alert-success" role="alert">
+                                  <strong>Usuario modificado.</strong>
+                              </div>
+                          <?php } else if ($alert == "inactivo") { ?>
+                              <div class="alert alert-success" role="alert">
+                                  <strong>El usuario fue inactivado.</strong>
+                              </div>
+                          <?php } else { ?>
+                              <div class="alert alert-danger" role="alert">
+                                  <strong>Las contraseñas no coinciden.</strong>
+                              </div>
+                          <?php }
+                      } ?>
+                  </div>
+              </div>
               <div class="table-responsive">
                 <table class="table app-table-hover mb-0 text-left" id="Table2">
 							    <thead>
 								    <tr>
-                      <th class="cell">Clave</th>
                       <th class="cell">Descripción</th>
-                      <th class="cell">CPM</th>
-                      <th class="cell">Consumo</th>
-                      <th class="cell">Existencia</th>
-                      <th class="cell">Negadas</th>
-                      <th class="cell"></th>
+                      <th class="cell">Piezas</th>
+                      <th class="cell">UMF</th>
+                      <th class="cell">Receta</th>
+                      <th class="cell">Fecha</th>
+                      <th class="cell">Estado</th>
                     </tr>
                   </thead>
 							    <tbody>
-                    <?php foreach ($data1 as $validar) { ?>
-                      <?php if ($validar['estado'] == 2 && ($_SESSION['rol'] == 7 || $_SESSION['rol'] == 5 || $_SESSION['id'] == $validar['id_validador'] || $_SESSION['id'] == $validar['id_creador'])) { ?>
+                    <?php foreach ($data4 as $que) { ?>
 							      	<tr>
+<<<<<<< HEAD
                         <td>
                           <?php if ($validar['estado'] == 2) { ?>
                             <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
@@ -257,34 +292,29 @@
                             </svg>
                           </a></td>
                           <?php include('Modal_quejas.php');    ?>
+=======
+                        <td><?php echo $que['descripcion']; ?></td>
+                        <td><?php echo $que['piezas']; ?></td>
+                        <td><?php echo $que['umf']; ?></td>
+                        <td><?php echo $que['receta']; ?></td>
+                        <td><?php echo $que['fecha'];?></td>
+                        <?php if ($que['estado'] == 1) { ?>
+                          <td>
+                            <span class="badge bg-warning">Atendido</span>
+                          </td>
+>>>>>>> 03666988ef7674e9dad622b677f608e8edd56566
                         <?php } else { ?>
-                          <td></td>
+                          <td>
+                            <span class="badge bg-danger">Pendiente</span>
+                              <?php if ($_SESSION['rol'] == 7) { ?>
+                                <form action="<?php echo base_url() ?>Usuarios/editar?id=<?php echo $us['id']; ?>" method="post" class="d-inline elim">
+                                    <button title="Atender" type="submit" class="btn btn-success mb-2"><i class="fas fa-check"></i></button>
+                                </form>   
+                              <?php } ?>
+                          </td>
                         <?php } ?>
-                      <?php } ?>
                     <?php }?>
 							    </tbody>
-                  <tbody>
-                                <tr>
-                      <td class="cell" style="color:#000000;">010 000 1210 00 00</td>
-                                              <td class="cell"><span class="truncate">Pinaverio</span></td>
-                                              <td class="cell">7,187</td>
-                                              <td class="cell"><span>7,118</span>
-                      <!--<span class="note">2:16 PM</span>-->
-                      <td class="cell"><span class="badge bg-danger">1,099</span></td>
-                                              <td class="cell">69</td>
-                                              <td class="cell"><a class="btn-sm app-btn-secondary" href="">E-175</a></td>
-                                          </tr>
-                    <tr>
-                      <td class="cell" style="color:#000000;">010 000 5186 01 00</td>
-                                              <td class="cell"><span class="truncate">Pantoprazol</span></td>
-                                              <td class="cell">22,858</td>
-                                              <td class="cell"><span>22,698</span>
-                      <!--<span class="note">2:16 PM</span>-->
-                      <td class="cell"><span class="badge bg-warning">8,563</span></td>
-                                              <td class="cell">48</td>
-                                              <td class="cell"><a class="btn-sm app-btn-secondary" style="background-color:#F7DC6F; font-weight: bold;" href="">T-Pedido</a></td>
-                                          </tr>
-                  </tbody>
                 </table>
               </div><!--//table-responsive-->
             </div><!--//app-card-body-->
@@ -445,7 +475,7 @@
                     </div><!--//app-card-body px-4-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="#">Ver</a>
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Contratos/General">Ver</a>
                     </div><!--//app-card-footer-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
@@ -474,7 +504,7 @@
                     </div><!--//app-card-body-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="#">Ver</a>
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Pedidos/Compras">Ver</a>
                     </div><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
