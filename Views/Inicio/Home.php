@@ -444,7 +444,7 @@
                     </div><!--//app-card-body px-4-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="#">Ver</a>
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Contratos/General">Ver</a>
                     </div><!--//app-card-footer-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
@@ -473,7 +473,7 @@
                     </div><!--//app-card-body-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="#">Ver</a>
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Pedidos/Compras">Ver</a>
                     </div><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->

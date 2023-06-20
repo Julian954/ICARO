@@ -174,8 +174,8 @@ foreach ($data1 as $pedi2){
         <div class="card-body" style="border-color:#59d05d !important;">
       <h1 class="app-page-title mb-4">Autorizaciones PAC/Correo 2021</h1>
 
-          <table class="table table-head-bg-success table-striped table-hover" id="Table">
-            <thead style="background-color:#59d05d !important; font-size: 0.875rem !important; color:#ffffff !important; vertical-align: middle !important; border:1px !important; font-size:14px; border-color:#ebedf2 !important; padding:0.75rem !important;">
+          <table class="table app-table-hover mb-0 text-left" id="Table">
+            <thead>
               <tr>
                 <th scope="col"></th>
                 <th scope="col"><span></span>No. Pedido</th>
