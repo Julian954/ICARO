@@ -214,7 +214,8 @@
               <div class="row">
                   <div class="col-lg-8 mb-2 py-2">
                       <?php if ($_SESSION['rol'] == 7) { ?>
-                          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#nuevo_cliente"><i class="fas fa-plus-circle"></i> Nuevo</button>   
+                          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#Queja"><i class="fas fa-plus-circle"></i> Nuevo</button> 
+                          <?php include('Modal_quejas.php'); ?>
                       <?php } ?>
                   </div>
                   <div class="col-lg-4">
@@ -276,7 +277,7 @@
                           <td>
                             <span class="badge bg-danger">Pendiente</span>
                               <?php if ($_SESSION['rol'] == 7) { ?>
-                                <form action="<?php echo base_url() ?>Usuarios/editar?id=<?php echo $us['id']; ?>" method="post" class="d-inline elim">
+                                <form action="<?php echo base_url() ?>Inicio/quejaestado?id=<?php echo $que['id']; ?>" method="post" class="d-inline elim">
                                     <button title="Atender" type="submit" class="btn btn-success mb-2"><i class="fas fa-check"></i></button>
                                 </form>   
                               <?php } ?>

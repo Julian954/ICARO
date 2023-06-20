@@ -1,4 +1,7 @@
 	<div class="app-wrapper">
+        <div style="visibility: hidden;" id="pantalla-carga">
+            <div class="mensaje-carga">Enviando datos...</div>
+        </div>
         <footer class="app-footer">
             <hr class="my-1">
 		    <div class="container text-center py-3">

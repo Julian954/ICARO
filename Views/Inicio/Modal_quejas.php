@@ -1,24 +1,35 @@
   
-  <div id="VentanaModal<?php echo $pedidos['id']; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+  <div id="Queja" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="my-modal-title"> Enlazar Pedido</h5>
+          <h5 class="modal-title" id="my-modal-title"> Agregar la Queja</h5>
           <button class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <form method="post" action="<?php echo base_url(); ?>Inicio/Queja" autocomplete="off" enctype="multipart/form-data">
           <div class="modal-body">
-          <input style="display:none;" type="text" class="form-control" name="id" id="id"  value="<?php echo $pedidos['id']; ?>" readonly/>   
+          
             <div class="form-group">
-              <label for="setting-input-3" class="form-label" style="color:#000000;">No.Contrato y clave</label>              
-              <input type="text" class="form-control" name="contrato" id="contrato"  value="<?php echo $pedidos['nopedido']." - ".$pedidos['clave']; ?>" readonly/>                                                        
-            </div>
-            
+              <label for="setting-input-3" class="form-label" style="color:#000000;">Descripción</label>              
+              <input type="text" class="form-control" name="descripcion" id="descripcion"  />                                                        
+            </div>            
             <div class="form-group">
-              <label  for="monto" class="form-label" style="color:#000000;">Monto</label>
-              <input type="number" value="<?php echo $pedidos['monto'] ?>" class="form-control" name="monto2" id="monto2" readonly/>                            
+              <label  for="Piezas" class="form-label" style="color:#000000;">Piezas</label>
+              <input type="number" class="form-control" name="piezas" id="piezas" />                            
+            </div>      
+             <div class="mb-3">
+                      <label for="umf" class="form-label">UMF</label>
+                      <select class="form-control" id="umf" name="umf" required>
+                        <?php foreach ($data6 as $umf) { ?>
+                          <option value="<?= $umf['id'] ?>"><?= $umf['nombre'] ?></option>
+                         <?php } ?>
+                      </select>
+                  </div>
+            <div class="form-group">
+              <label  for="receta" class="form-label" style="color:#000000;">Receta</label>
+              <input type="number" class="form-control" name="receta" id="receta" />                            
             </div>                       
           </div>
           <div class="card-footer">

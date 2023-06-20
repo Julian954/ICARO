@@ -70,29 +70,41 @@ class InicioModel extends Mysql{
         return $res;
     }
 
-    public function insertarQueja(string $descripcion, int $piezas, int $umf, int $receta, int $estado, int $id)
+    public function insertarQueja(string $descripcion, int $piezas, int $umf, int $receta)
     {
         $return = "";
         $this->descripcion = $descripcion; 
         $this->piezas = $piezas; 
         $this->umf = $umf; 
-        $this->receta = $receta; 
-        $this->estado = $estado; 
-        $this->id=$id;                        
-        $query = "UPDATE quejas SET monto2=? WHERE id=?";
-        $data = array($this->descripcion, $this->piezas, $this->umf, $this->receta, $this->estado, $this->id);
-        $resul = $this->update($query, $data);
+        $this->receta = $receta;                            
+        $query = "INSERT INTO quejas(descripcion, piezas, umf, receta) VALUES (?,?,?,?)";
+        $data = array($this->descripcion, $this->piezas, $this->umf, $this->receta);
+        $resul = $this->insert($query, $data);
         $return = $resul;
         return $return;
     }
 
+    
+
+    public function selectquejas_final()
+    {        
+        $sql ="SELECT * FROM unidades";
+        $res= $this->select_all($sql);
+        return $res;
+    }
 
 
-
-
-
-
-
+   public function Actualizar_Queja(int $id, int $estado)
+    {
+        $return = "";       
+        $this->estado = $estado;
+        $this->id = $id;        
+        $query = "UPDATE quejas SET estado=? WHERE id=?";
+        $data = array($this->estado, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
 
 
 
