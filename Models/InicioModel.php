@@ -49,7 +49,7 @@ class InicioModel extends Mysql{
     //Selecciona las negadas actuales por clínica
     public function Gpastelnegadas()
     {
-        $sql = "SELECT unidades.abreviacion, indicadores.negadas, indicadores.fecha FROM indicadores, unidades WHERE indicadores.unidad = unidades.clave AND fecha = (SELECT MAX(fecha) FROM indicadores)";
+        $sql = "SELECT unidades.abreviacion, indicadores.negadas, indicadores.fecha FROM indicadores, unidades WHERE indicadores.unidad = unidades.clave AND fecha = (SELECT MAX(fecha) FROM indicadores) ORDER BY `indicadores`.`negadas` DESC";
         $res = $this->select_all($sql);
         return $res;
     }

@@ -35,9 +35,9 @@
           </div>
         </div>
         <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-          <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-toggle="tab" href="#orders-no" role="tab" aria-controls="orders-no" aria-selected="true">Contratos Sin Asignar</a>
-          <a class="flex-sm-fill text-sm-center nav-link" id="orders-all-tab" data-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="false">Contratos Asignados</a>
-          <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Contratos Validados</a>
+          <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-toggle="tab" href="#orders-no" role="tab" aria-controls="orders-no" aria-selected="true">Requerimientos Sin Asignar</a>
+          <a class="flex-sm-fill text-sm-center nav-link" id="orders-all-tab" data-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="false">Requerimientos Asignados</a>
+          <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Requerimientos Validados</a>
         </nav>
         <div class="tab-content" id="orders-table-tab-content">
           <div class="tab-pane fade show active" id="orders-no" role="tabpanel" aria-labelledby="orders-no-tab">
@@ -48,7 +48,7 @@
 			  				    <thead>
 			  					    <tr>
                         <th scope="col">Edo</th>    
-                        <th scope="col">Contrato</th>
+                        <th scope="col">Requerimiento</th>
                         <th scope="col">Fecha de creacion</th>
                         <th scope="col">Responsable</th>
                         <th scope="col">Validador</th>                
@@ -102,7 +102,7 @@
 			  				    <thead>
 			  					    <tr>
                         <th scope="col">Edo</th>    
-                        <th scope="col">Contrato</th>
+                        <th scope="col">Requerimiento</th>
                         <th scope="col">Fecha de creacion</th>
                         <th scope="col">Responsable</th>
                         <th scope="col">Validador</th>                
@@ -160,7 +160,7 @@
 			  				    <thead>
 			  					    <tr>
                         <th scope="col">Edo</th>    
-                        <th scope="col">Contrato</th>
+                        <th scope="col">Requerimiento</th>
                         <th scope="col">Fecha de creacion</th>
                         <th scope="col">Responsable</th>
                         <th scope="col">Validador</th>                 
@@ -232,7 +232,7 @@
               </select>   
             </div>
             <div class="form-group">
-              <label for="miSelect2" class="form-label" style="color:#000000;">Contrato</label>
+              <label for="miSelect2" class="form-label" style="color:#000000;">Requerimiento</label>
               <select class="form-control" name="miSelect2" id="miSelect2">
                 <?php foreach ($data3 as $filacont): ?>      
                   <option value="<?php echo $filacont['nooficio']; ?>"><?php echo $filacont['nooficio']; ?></option>                           

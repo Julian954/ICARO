@@ -700,7 +700,7 @@ function pastelnegadas() {
       var data = JSON.parse(response);
       var nombre = [];
       var total = [];
-      for (var i = 0; i < data.length; i++) {
+      for (var i = 0; i < 5; i++) {
         nombre.push(data[i]["abreviacion"]);
         total.push(data[i]["negadas"]);
       }

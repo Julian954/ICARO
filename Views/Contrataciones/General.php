@@ -225,7 +225,7 @@
 			  					  <thead>
 			  						  <tr>
                         <th scope="col">Edo</th>
-                        <th scope="col">Contrato</th>
+                        <th scope="col">Requerimiento</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Administrador</th>
                         <th scope="col">Termino</th>
@@ -290,7 +290,7 @@
 			  					  <thead>
 			  						  <tr>
                         <th scope="col">Edo</th>
-                        <th scope="col">Contrato</th>
+                        <th scope="col">Requerimiento</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Administrador</th>
                         <th scope="col">Termino</th>
@@ -350,7 +350,7 @@
 			  					  <thead>
 			  						  <tr>
                         <th scope="col">Edo</th>
-                        <th scope="col">Contrato</th>
+                        <th scope="col">Requerimiento</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Administrador</th>
                         <th scope="col">Termino</th>
@@ -419,7 +419,7 @@
 			  					  <thead>
 			  						  <tr>
                         <th scope="col">Edo</th>
-                        <th scope="col">Contrato</th>
+                        <th scope="col">Requerimiento</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Administrador</th>
                         <th scope="col">Termino</th>
@@ -488,7 +488,7 @@
 			  					  <thead>
 			  						  <tr>
                         <th scope="col">Edo</th>
-                        <th scope="col">Contrato</th>
+                        <th scope="col">Requerimiento</th>
                         <th scope="col">Descripción</th>
                         <th scope="col">Administrador</th>
                         <th scope="col">Termino</th>
