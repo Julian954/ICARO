@@ -38,6 +38,14 @@ class InicioModel extends Mysql{
         return $res;
     }
 
+    public function pedidos()
+    {
+        $ordenar ="SELECT COUNT(nopedido), COUNT(fecha_alta), MONTH(fecha_alta) AS mes FROM pedidos GROUP BY mes";
+        $res= $this->select_all($ordenar);
+        return $res;
+    }
+
+
     //Selecciona las negadas actuales por clínica
     public function Gpastelnegadas()
     {
@@ -46,7 +54,21 @@ class InicioModel extends Mysql{
         return $res;
     }
 
+    public function atencioncolima(string $fechaN)
+    {
+        $this->fecha = $fechaN;
+        $ordenar ="SELECT AVG(surtida) AS colima FROM indicadores WHERE fecha = '{$this->fecha}' GROUP BY fecha";
+        $res= $this->select($ordenar);
+        return $res;
+    }
 
+    public function atencionnacional(string $fechaN)
+    {
+        $this->fecha = $fechaN;
+        $ordenar ="SELECT AVG(atencion) AS mnacional FROM nacional WHERE fecha = '{$this->fecha}' GROUP BY fecha";
+        $res= $this->select($ordenar);
+        return $res;
+    }
 
     public function insertarQueja(string $descripcion, int $piezas, int $umf, int $receta, int $estado, int $id)
     {

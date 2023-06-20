@@ -17,6 +17,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data2 = $this->model->negadasymanuales();
         $data3 = $this->model->top15negadas();
         $data4 = $this->model->quejas();
+        $data5 = $this->model->pedidos();
         $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4);
         die();
     }
@@ -33,13 +34,33 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
             $week_end = date("Y-m-d",strtotime('next Sunday', time()));
         }
         $data = [];
-        for ($i=0; $i < 5; $i++) { 
-            //AQUI TENGO QUE HACER DOS CONSULTAS EN LAS PIDO LA MEDIA NACIONAL DE UN DIA DADO
-            //DESPUÉS LO AGREGO A UN OBJETO
+        $datac = [];
+
+        for ($i=0; $i < 5; $i++) {
+            $colima = $this->model->atencioncolima($week_start);
+            $nacional = $this->model->atencionnacional($week_start);
+            if (isset($colima['colima'])) {
+                if (isset($nacional['mnacional'])) {
+                    $array = ["mnacional" => $nacional['mnacional'], "colima" => $colima['colima']];
+                    $data [$i] = $array;
+                }
+                else {
+                    $array = ["mnacional" => "0", "colima" => $colima['colima']];
+                    $data [$i] = $array;    
+                }
+            }
+            else {
+                if (isset($nacional['mnacional'])) {
+                    $array = ["mnacional" => $nacional['mnacional'], "colima" => "0"];
+                    $data [$i] = $array;
+                }
+                else {
+                    $array = ["mnacional" => "0", "colima" => "0"];
+                    $data [$i] = $array;
+                }   
+            }
             $week_start = date("Y-m-d",strtotime($week_start.'+ 1 days', time()));
         }
-        die();
-        $data = $this->model->Gpastelnegadas();
         echo json_encode($data);
         die();
     }
@@ -51,7 +72,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         echo json_encode($data);
         die();
     }
-    
+
     public function Queja(){
         $id = $_POST['id'];
         $descipcion  =$_POST['descipcion'];

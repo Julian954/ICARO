@@ -6,23 +6,52 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
         parent::__construct();
     }
 
-    //Se pueden hacer 5 tipo de consultas
+   //Selecciona el promedio de atencion y costo de los ultimos dos días
     public function nivelatencionycosto()
     {
-        $sql = "SELECT fecha, AVG(surtida) AS surtida, AVG(costo_receta) AS costo FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
-        $res = $this->select_all($sql); 
+        $sql = "SELECT AVG(surtida) AS surtida, AVG(costo_receta) AS costor, SUM(negadas) AS negada, AVG(negadas) AS negadap, SUM(mnuales) AS manuals, AVG(costo_paciente) AS costop, SUM(electronicas) AS electronica FROM indicadores";
+        $res = $this->select($sql); 
         return $res;
     }
 
-    //Se pueden hacer 5 tipo de consultas
+    //Selecciona la suma de negadas y manuales de los ultimos dos días
     public function negadasymanuales()
     {
         $sql = "SELECT fecha, SUM(negadas) AS negadas, SUM(mnuales) AS manuales FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
-        $res = $this->select_all($sql); //select_all es para seleccionar cuando el resultado puede arrojar muchas filas
+        $res = $this->select_all($sql); 
+        return $res;
+    }
+    
+    //Selecciona las negadas más recientes
+    public function top15negadas()
+    {
+        $sql = "SELECT negadas.*, catalogo.des_corta FROM negadas, catalogo WHERE negadas.clave = catalogo.clave AND negadas.fecha = (SELECT MAX(fecha) FROM negadas)";
+        $res = $this->select_all($sql);
         return $res;
     }
 
+    //Selecciona las quejas
+    public function quejas()
+    {
+        $sql = "SELECT quejas.*, unidades.abreviacion FROM quejas, unidades WHERE quejas.umf = unidades.id";
+        $res = $this->select_all($sql);
+        return $res;
+    }
 
+    public function pedidos()
+    {
+        $ordenar ="SELECT COUNT(nopedido), COUNT(fecha_alta), MONTH(fecha_alta) AS mes FROM pedidos GROUP BY mes";
+        $res= $this->select_all($ordenar);
+        return $res;
+    }
+
+    //Selecciona la suma de negadas y manuales de los ultimos dos días
+    public function ranking()
+    {
+        $sql = "SELECT AVG(surtida) AS colima, AVG(atencion) AS nacional, MONTH(fecha) AS mes FROM (SELECT fecha, surtida, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS surtida, atencion FROM nacional) AS datos_totales GROUP BY mes";
+        $res = $this->select_all($sql); 
+        return $res;
+    }
 
     
     //Selecciona usuarios activos

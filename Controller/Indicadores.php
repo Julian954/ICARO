@@ -13,7 +13,20 @@ class Indicadores extends Controllers //Aquí se debe llamas igual que el archiv
     //Aquí se debe llamar igual que la vista
     public function Indicador()
     {
-        $this->views->getView($this, "Indicador", "");
+        $data1 = $this->model->nivelatencionycosto();
+        $data2 = $this->model->negadasymanuales();
+        $data3 = $this->model->top15negadas();
+        $data4 = $this->model->quejas();
+        $data5 = $this->model->pedidos();
+        $this->views->getView($this, "Indicador", "", $data1, $data2, $data3, $data4, $data5);
+    }
+
+    //Datos para la gráfica de clinicas
+    public function barrasrankig()
+    {
+        $data = $this->model->ranking();
+        echo json_encode($data);
+        die();
     }
 
     //POR CADA CONTROLADOR QUE SE CREE SE TIENE QUE CREAR UN MODEL
