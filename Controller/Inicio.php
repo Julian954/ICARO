@@ -18,7 +18,8 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data3 = $this->model->top15negadas();
         $data4 = $this->model->quejas();
         $data5 = $this->model->pedidos();
-        $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4);
+        $data6 = $this->model->selectquejas_final();
+        $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, "", $data6);
         die();
     }
 
@@ -74,18 +75,25 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
     }
 
     public function Queja(){
-        $id = $_POST['id'];
-        $descipcion  =$_POST['descipcion'];
+        //$id = $_POST['id'];
+        $descipcion  =$_POST['descripcion'];
         $piezas=$_POST['piezas'];
         $umf  =$_POST['umf'];
         $receta=$_POST['receta'];
-        $estado  =$_POST['estado'];
+        //$estado  =$_POST['estado'];
         //$fecha=$_POST['fecha'];
-        $insert = $this->model->insertarQueja($descipcion, $piezas, $umf, $receta, $estado, $id);
+        $insert = $this->model->insertarQueja($descipcion, $piezas, $umf, $receta);
         header("location: " . base_url() . "Inicio/Home");
         die();
     }
 
+    public function quejaestado(){
+        $id=$_GET['id'];
+        $estado= 1;
+        $actualiza = $this->model->Actualizar_Queja($id, $estado);
+        header("location: " . base_url() . "Inicio/Home");
+        die();
+    }
 
     public function Notificaciones()
     {

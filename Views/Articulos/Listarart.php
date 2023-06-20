@@ -98,7 +98,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo base_url(); ?>Articulos/procesarArchivo" method="post" enctype="multipart/form-data">
+                    <form action="<?php echo base_url(); ?>Articulos/procesarArchivo" method="post" enctype="multipart/form-data" id="formulario">
 						<div class="form-group">
                     	    <label for="img">Selecciona Archivo</label>
                     	    <div class="custom-file">

@@ -8,9 +8,16 @@ var Posicion = URLactual.indexOf("?");
 var Final = Posicion + 33;
 let Part = URLactual.slice(Posicion, Final);
 var fila; //captura la fila, para editar o eliminar
+const formulario = document.getElementById('formulario');
 
 
 $(document).ready(function () {
+  //MENSAJE DE CARGA
+  formulario.addEventListener("submit", function (event) {
+    var contenedor = document.getElementById("pantalla-carga");
+    contenedor.style.visibility = "visible";
+  });
+
   //Editar
   $(document).on("click", ".btnEditar", function () {
     fila = $(this).closest("tr");
@@ -116,7 +123,7 @@ $(document).ready(function () {
           url: base + "Articulos/eliminar",
           type: "POST",
           datatype: "json",
-          data: {id: id },
+          data: { id: id },
           success: function () {
             tablaUsuarios.row(fila.parents("tr")).remove().draw();
           },
@@ -125,17 +132,6 @@ $(document).ready(function () {
       }
     });
   });
-
-
-
-
-
-
-
-
-
-
-
 
   //Mensaje de alerta al restablecer contraseña
   $(".rest").submit(function (e) {
