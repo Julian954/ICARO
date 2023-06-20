@@ -18,7 +18,7 @@
             
             <div class="form-group">
               <label  for="monto" class="form-label" style="color:#000000;">Monto</label>
-              <input type="number" value="<?php echo $pedidos['monto'] ?>" class="form-control" name="monto2" id="monto2" readonly/>                            
+              <input type="number" value="<?php echo $pedidos['monto'] ?>" class="form-control" name="monto2" id="monto2" />                            
             </div>                       
           </div>
           <div class="card-footer">

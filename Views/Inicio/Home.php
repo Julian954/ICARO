@@ -113,7 +113,7 @@
             </div><!--//app-card-header p-3-->
             <div class="app-card-body p-3 p-lg-4">
               <div class="chart-container">
-                <canvas id="canvas-linechart" width="100%" height="75"></canvas>
+                <canvas id="BarrasAtencion" width="100%" height="75"></canvas>
               </div><!-- //chart-container -->
             </div><!--//app-card-body p-3 p-lg-4-->
           </div><!--//card-header-action-->
@@ -144,6 +144,10 @@
         </div><!--//col-auto-->
       </div><!--//row-auto-->
 
+      <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+        <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">15 NEGADAS</a>
+        <a class="flex-sm-fill text-sm-center nav-link"  id="orders-cont-tab" data-toggle="tab" href="#orders-cont" role="tab" aria-controls="orders-cont" aria-selected="false">QUEJAS</a>
+      </nav>
       <div class="tab-content" id="orders-table-tab-content">
         <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
           <div class="app-card app-card-orders-table shadow-sm mb-4">
@@ -158,68 +162,128 @@
                       <th class="cell">Consumo</th>
                       <th class="cell">Existencia</th>
                       <th class="cell">Negadas</th>
-                      <th class="cell"></th>
+                      <th class="cell">Transitos</th>
                     </tr>
                   </thead>
 							    <tbody>
-                    <?php foreach ($data1 as $validar) { ?>
-                      <?php if ($validar['estado'] == 2 && ($_SESSION['rol'] == 7 || $_SESSION['rol'] == 5 || $_SESSION['id'] == $validar['id_validador'] || $_SESSION['id'] == $validar['id_creador'])) { ?>
-							      	<tr>
+                    <?php foreach ($data3 as $neg) { ?>
+                    <tr>
+                      <td><?php echo $neg['clave']; ?></td>
+                      <td><?php echo $neg['des_corta']; ?></td>
+                      <td><?php echo $neg['cmp']; ?></td>
+                      <td><?php echo $neg['consumo']; ?></td>
+                      <?php if ($neg['unidades']+$neg['almacen'] < $neg['cmp']) { ?>
                         <td>
-                          <?php if ($validar['estado'] == 2) { ?>
-                            <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z" /></svg>
-                          <?php } elseif ($validar['estado'] == 3) { ?>
-                            <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z" /></svg>
-                          <?php } elseif ($validar['estado'] == 4) { ?>
-                            <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z" /></svg>
-                          <?php } elseif ($validar['estado'] == 1) { ?>
-                            <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" /></svg>
-                          <?php } ?>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Unidades: <?=$neg['unidades'];?>. Almacén: <?=$neg['almacen'];?>.">
+                            <span class="badge bg-danger"><?php echo $neg['unidades']+$neg['almacen'];?></span>
+                          </span>
                         </td>
-                        <td><?php echo $validar['id_contrato']; ?></td>
-                        <td><?php echo $validar['fecha']; ?></td>
-                        <td><?php echo $validar['creador']; ?></td>
-                        <td><?php echo $validar['validador']; ?></td>
-                        <td><?php echo $validar['intentos'];?></td>
-                        <?php if ($validar['estado'] != 1) { ?>
-                          <td><a href="<?php echo base_url(); ?>Contratos/Foro?contrato=<?php echo $validar['id_contrato']; ?>">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                              <path fill-rule="evenodd" d="M5.172 10.828a.5.5 0 0 0 .707 0l4.096-4.096V9.5a.5.5 0 1 0 1 0V5.525a.5.5 0 0 0-.5-.5H6.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707z"/>
-                            </svg>
-                          </a></td>
-                        <?php } else { ?>
-                          <td></td>
-                        <?php } ?>
+                      <?php } else {?>
+                        <td>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Unidades: <?=$neg['unidades'];?>. Almacén: <?=$neg['almacen'];?>.">
+                            <span class="badge bg-warning"><?php echo $neg['unidades']+$neg['almacen'];?></span>
+                          </span>
+                        </td>
                       <?php } ?>
+                      <td><?php echo $neg['negadas']; ?></td>
+                      <?php if ($neg['fecha_inc'] == null) { ?>
+                        <td>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
+                            <span class="badge bg-warning"><?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad']+$neg['pedidos'];?></span>
+                          </span>
+                        </td>
+                      <?php } else { ?>
+                        <td>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
+                            <span class="badge bg-danger"><?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad']+$neg['pedidos'];?></span>
+                          </span>
+                        </td>
+                      <?php } ?>
+                    </tr>
+                    <?php } ?>
+							    </tbody>
+                </table>
+              </div><!--//table-responsive-->
+            </div><!--//app-card-body-->
+          </div><!--//app-card app-card-orders-table shadow-sm mb-5-->
+        </div><!--//tab-pane fade show active-->
+        
+        <div class="tab-pane fade show" id="orders-cont" role="tabpanel" aria-labelledby="orders-cont-tab">
+          <div class="app-card app-card-orders-table shadow-sm mb-4">
+            <div class="app-card-body p-3">
+              <div class="row">
+                  <div class="col-lg-8 mb-2 py-2">
+                      <?php if ($_SESSION['rol'] == 7) { ?>
+                          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#nuevo_cliente"><i class="fas fa-plus-circle"></i> Nuevo</button>   
+                      <?php } ?>
+                  </div>
+                  <div class="col-lg-4">
+                      <?php if (isset($_GET['msg'])) {
+                          $alert = $_GET['msg'];
+                          if ($alert == "existe") { ?>
+                              <div class="alert alert-warning" role="alert">
+                                  <strong>El usuario ya existe.</strong>
+                              </div>
+                          <?php } else if ($alert == "error") { ?>
+                              <div class="alert alert-danger" role="alert">
+                                  <strong>Error al registra.</strong>
+                              </div>
+                          <?php } else if ($alert == "registrado") { ?>
+                              <div class="alert alert-success" role="alert">
+                                  <strong>Usuario registrado.</strong>
+                              </div>
+                          <?php } else if ($alert == "modificado") { ?>
+                              <div class="alert alert-success" role="alert">
+                                  <strong>Usuario modificado.</strong>
+                              </div>
+                          <?php } else if ($alert == "inactivo") { ?>
+                              <div class="alert alert-success" role="alert">
+                                  <strong>El usuario fue inactivado.</strong>
+                              </div>
+                          <?php } else { ?>
+                              <div class="alert alert-danger" role="alert">
+                                  <strong>Las contraseñas no coinciden.</strong>
+                              </div>
+                          <?php }
+                      } ?>
+                  </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table app-table-hover mb-0 text-left" id="Table2">
+							    <thead>
+								    <tr>
+                      <th class="cell">Descripción</th>
+                      <th class="cell">Piezas</th>
+                      <th class="cell">UMF</th>
+                      <th class="cell">Receta</th>
+                      <th class="cell">Fecha</th>
+                      <th class="cell">Estado</th>
+                    </tr>
+                  </thead>
+							    <tbody>
+                    <?php foreach ($data4 as $que) { ?>
+							      	<tr>
+                        <td><?php echo $que['descripcion']; ?></td>
+                        <td><?php echo $que['piezas']; ?></td>
+                        <td><?php echo $que['abreviacion']; ?></td>
+                        <td><?php echo $que['receta']; ?></td>
+                        <td><?php echo $que['fecha'];?></td>
+                        <?php if ($que['estado'] == 1) { ?>
+                          <td>
+                            <span class="badge bg-warning">Atendido</span>
+                          </td>
+                        <?php } else { ?>
+                          <td>
+                            <span class="badge bg-danger">Pendiente</span>
+                              <?php if ($_SESSION['rol'] == 7) { ?>
+                                <form action="<?php echo base_url() ?>Usuarios/editar?id=<?php echo $us['id']; ?>" method="post" class="d-inline elim">
+                                    <button title="Atender" type="submit" class="btn btn-success mb-2"><i class="fas fa-check"></i></button>
+                                </form>   
+                              <?php } ?>
+                          </td>
+                        <?php } ?>
                     <?php }?>
 							    </tbody>
-                  <tbody>
-                                <tr>
-                      <td class="cell" style="color:#000000;">010 000 1210 00 00</td>
-                                              <td class="cell"><span class="truncate">Pinaverio</span></td>
-                                              <td class="cell">7,187</td>
-                                              <td class="cell"><span>7,118</span>
-                      <!--<span class="note">2:16 PM</span>-->
-                      <td class="cell"><span class="badge bg-danger">1,099</span></td>
-                                              <td class="cell">69</td>
-                                              <td class="cell"><a class="btn-sm app-btn-secondary" href="">E-175</a></td>
-                                          </tr>
-                    <tr>
-                      <td class="cell" style="color:#000000;">010 000 5186 01 00</td>
-                                              <td class="cell"><span class="truncate">Pantoprazol</span></td>
-                                              <td class="cell">22,858</td>
-                                              <td class="cell"><span>22,698</span>
-                      <!--<span class="note">2:16 PM</span>-->
-                      <td class="cell"><span class="badge bg-warning">8,563</span></td>
-                                              <td class="cell">48</td>
-                                              <td class="cell"><a class="btn-sm app-btn-secondary" style="background-color:#F7DC6F; font-weight: bold;" href="">T-Pedido</a></td>
-                                          </tr>
-                  </tbody>
                 </table>
               </div><!--//table-responsive-->
             </div><!--//app-card-body-->
@@ -380,7 +444,7 @@
                     </div><!--//app-card-body px-4-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="#">Ver</a>
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Contratos/General">Ver</a>
                     </div><!--//app-card-footer-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
@@ -409,7 +473,7 @@
                     </div><!--//app-card-body-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="#">Ver</a>
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Pedidos/Compras">Ver</a>
                     </div><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
@@ -449,7 +513,8 @@
 </div><!--app-content pt-3 p-md-3 p-lg-4-->  
 <script>
   window.addEventListener("load", function() {
-      pastelnegadas();
+    BarrasAtencion();  
+    pastelnegadas();
   })
 </script>
 

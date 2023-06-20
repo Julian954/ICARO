@@ -18,7 +18,7 @@
 							<div class="app-card app-card-settings shadow-sm p-4">
 								<label for="indicadores" class="form-label">Indicadores</label>
 								<div class="mb-3">
-									<div class="app-card-body">		
+									<div class="app-card-body text-center">		
 										<form action="<?php echo base_url(); ?>Indicadores/procesarArchivo" method="post" enctype="multipart/form-data">
                     						<div class="form-group">
                     						    <label for="date">Fecha</label>

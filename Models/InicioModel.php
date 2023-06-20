@@ -21,6 +21,22 @@ class InicioModel extends Mysql{
         $res = $this->select_all($sql); 
         return $res;
     }
+    
+    //Selecciona las negadas más recientes
+    public function top15negadas()
+    {
+        $sql = "SELECT negadas.*, catalogo.des_corta FROM negadas, catalogo WHERE negadas.clave = catalogo.clave AND negadas.fecha = (SELECT MAX(fecha) FROM negadas)";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Selecciona las quejas
+    public function quejas()
+    {
+        $sql = "SELECT quejas.*, unidades.abreviacion FROM quejas, unidades WHERE quejas.umf = unidades.id";
+        $res = $this->select_all($sql);
+        return $res;
+    }
 
     //Selecciona las negadas actuales por clínica
     public function Gpastelnegadas()
@@ -30,6 +46,23 @@ class InicioModel extends Mysql{
         return $res;
     }
 
+
+
+    public function insertarQueja(string $descripcion, int $piezas, int $umf, int $receta, int $estado, int $id)
+    {
+        $return = "";
+        $this->descripcion = $descripcion; 
+        $this->piezas = $piezas; 
+        $this->umf = $umf; 
+        $this->receta = $receta; 
+        $this->estado = $estado; 
+        $this->id=$id;                        
+        $query = "UPDATE quejas SET monto2=? WHERE id=?";
+        $data = array($this->descripcion, $this->piezas, $this->umf, $this->receta, $this->estado, $this->id);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;
+    }
 
 
 
@@ -258,12 +291,18 @@ class InicioModel extends Mysql{
             $unidades = $fila[36] ?? '';
             $almacen = $fila[38] ?? '';
             $negadas = $fila[112] ?? '';
+            $copel = $fila[52] ?? '';
+            $unops = $fila[53] ?? '';
+            $ooad = $fila[54] ?? '';
+            $pedidos = $fila[55] ?? '';
+            $transooad = $fila[56] ?? '';
+            $fecha_inc = $fila[82] ?? '';
             $fechaN = $fecha;
 
             if(!empty($clave) && !empty($negadas) && ($negadas != 0)){    
                 // Insertar los datos en la base de datos
-                $query = "INSERT INTO negadas(clave, cmp, consumo, unidades, almacen, negadas,fecha) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                $data = array($clave, $cmp, $consumo, $unidades, $almacen, $negadas, $fechaN);
+                $query = "INSERT INTO negadas(clave, cmp, consumo, unidades, almacen, negadas, fecha_inc, copel, unops, ooad, pedidos, transooad, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $data = array($clave, $cmp, $consumo, $unidades, $almacen, $negadas, $fecha_inc, $copel, $unops, $ooad, $pedidos, $transooad,$fechaN);
                 $resul = $this->insert($query, $data); // insert es para agregar un registro
             }
         }

@@ -183,7 +183,7 @@
                         if (move_uploaded_file($ruta_temporal, $ruta_destino)) {                                        
                             $i=$i+1;
                             $alert=$i;            
-                            $agregar= $this->model->agregar_pdf($number, $nombre_nuevo, $intento['intentos']+1, 1);
+                            $agregar= $this->model->agregar_pdf($number, $nombre_nuevo, $intento['intentos']+1, 2);
                         } else {
                             $alert =  'NoArchivo';
                         }

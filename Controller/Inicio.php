@@ -15,7 +15,32 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
     {
         $data1 = $this->model->nivelatencionycosto();
         $data2 = $this->model->negadasymanuales();
-        $this->views->getView($this, "Home", "", $data1, $data2);
+        $data3 = $this->model->top15negadas();
+        $data4 = $this->model->quejas();
+        $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4);
+        die();
+    }
+
+    //Datos para la gráfica de clinicas
+    public function BarrasAtencion()
+    {
+        // Si hoy es lunes, nos daría el lunes pasado.
+        if (date("D")=="Mon"){
+            $week_start = date("Y-m-d", strtotime('last Monday', time()));
+            $week_end = date("Y-m-d",strtotime($week_start.'+ 6 days', time()));
+        } else {
+            $week_start = date("Y-m-d", strtotime('last Monday', time()));
+            $week_end = date("Y-m-d",strtotime('next Sunday', time()));
+        }
+        $data = [];
+        for ($i=0; $i < 5; $i++) { 
+            //AQUI TENGO QUE HACER DOS CONSULTAS EN LAS PIDO LA MEDIA NACIONAL DE UN DIA DADO
+            //DESPUÉS LO AGREGO A UN OBJETO
+            $week_start = date("Y-m-d",strtotime($week_start.'+ 1 days', time()));
+        }
+        die();
+        $data = $this->model->Gpastelnegadas();
+        echo json_encode($data);
         die();
     }
 
@@ -26,7 +51,19 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         echo json_encode($data);
         die();
     }
-
+    
+    public function Queja(){
+        $id = $_POST['id'];
+        $descipcion  =$_POST['descipcion'];
+        $piezas=$_POST['piezas'];
+        $umf  =$_POST['umf'];
+        $receta=$_POST['receta'];
+        $estado  =$_POST['estado'];
+        //$fecha=$_POST['fecha'];
+        $insert = $this->model->insertarQueja($descipcion, $piezas, $umf, $receta, $estado, $id);
+        header("location: " . base_url() . "Inicio/Home");
+        die();
+    }
 
 
     public function Notificaciones()

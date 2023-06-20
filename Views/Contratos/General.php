@@ -235,7 +235,7 @@
                     </thead>
                     <tbody>
                       <?php foreach ($data1 as $us) { ?>
-                        <?php if ($_SESSION['rol'] == 7 || $_SESSION['rol'] == 5 || $_SESSION['rol'] == $us['administrador']) { ?>
+                        <?php if ($_SESSION['rol'] == 7 || $_SESSION['rol'] == 5 || $_SESSION['id'] == $us['administrador']) { ?>
                           <tr>
                             <td>
                               <?php if ($us['estado'] == 2) { ?>

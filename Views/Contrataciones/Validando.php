@@ -4,7 +4,7 @@
   <div class="app-wrapper">
     <div class="app-content pt-3 p-md-3 p-lg-4">
 	    <div class="container-xl">
-        <?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 4){ ?> <!-- Si es Admin o Interno Juridico -->
+        <?php if($_SESSION['rol'] == 7){ ?> <!-- Si es Admin -->
           <div class="position-relative mb-3">
             <div class="row g-3 justify-content-between">
               <div class="col-auto">

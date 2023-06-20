@@ -192,7 +192,7 @@
             </div>
             <div class="form-group">
               <div class="container2">
-                <input type="file" id="file-input" multiple name="archivo[]" required/>
+                <input style="display: none;" type="file" id="file-input" multiple name="archivo[]" required/>
                 <label id="fileup" for="file-input">
                   <i class="fa-solid fa-arrow-up-from-bracket"></i>
                   &nbsp; Selecciona los archivos.

@@ -139,100 +139,6 @@
                 </div><!--//row-->
 
 
-
-				<hr class="my-4">
-               	 	<div class="row g-4 settings-section">
-	                	<div class="col-12 col-md-4">
-		                	<h3 class="section-title">Documentos Negadas</h3>
-		                	<div class="section-intro">Apartado para subir los archivos diarios</div>
-	                	</div>
-	                	<div class="col-12 col-md-8">
-		                	<div class="app-card app-card-settings shadow-sm p-4">
-							<label for="plataforma" class="form-label">Medicamentos Negados</label>
-						    	<div class="app-card-body text-center">
-									<form action="<?php echo base_url() ?>Inicio/subir_archivo" method="POST" enctype="multipart/form-data">
-  										<div>
-											<input type="file" name="archivo_csv" accept=".csv" required>
-											<input type="submit" value="Subir Archivo" class="btn app-btn-primary mb-2">
-										</div>
-									</form>
-						    	</div><!--//app-card-body-->
-						    
-							</div><!--//app-card-->
-	               		 </div>
-                	</div><!--//row-->
-
-
-                <hr class="my-4">
-                <div class="row g-4 settings-section">
-	                <div class="col-12 col-md-4">
-		                <h3 class="section-title">Documentos Recetas</h3>
-		                <div class="section-intro">Apartado para subir los archivos diarios</div>
-	                </div>
-	                <div class="col-12 col-md-8">
-		                <div class="app-card app-card-settings shadow-sm p-4">
-						<label for="plataforma" class="form-label">Recetas</label>
-						    <div class="app-card-body text-center">
-								<form action="<?php echo base_url() ?>Inicio/subir_archivo" method="POST" enctype="multipart/form-data">
-  									<div>
-										<input type="file" name="archivo_csv" accept=".csv" required>
-										<input type="submit" value="Subir Archivo" class="btn app-btn-primary mb-2">
-									</div>
-								</form>
-						    </div><!--//app-card-body-->
-						    
-						</div><!--//app-card-->
-	                </div>
-                </div><!--//row-->
-
-                <hr class="my-4">
-                <div class="row g-4 settings-section">
-	                <div class="col-12 col-md-4">
-		                <h3 class="section-title">Data &amp; Privacy</h3>
-		                <div class="section-intro">Settings section intro goes here. Morbi vehicula, est eget fermentum ornare. </div>
-	                </div>
-	                <div class="col-12 col-md-8">
-		                <div class="app-card app-card-settings shadow-sm p-4">						    
-						    <div class="app-card-body">
-							    <form class="settings-form">
-								    <div class="form-check mb-3">
-										<input class="form-check-input" type="checkbox" value="" id="settings-checkbox-1" checked>
-										<label class="form-check-label" for="settings-checkbox-1">
-										    Keep user app activity history
-										</label>
-									</div><!--//form-check-->
-									<div class="form-check mb-3">
-									    <input class="form-check-input" type="checkbox" value="" id="settings-checkbox-2" checked>
-										<label class="form-check-label" for="settings-checkbox-2">
-										    Keep user app preferences
-										</label>
-									</div>
-									<div class="form-check mb-3">
-									    <input class="form-check-input" type="checkbox" value="" id="settings-checkbox-3">
-										<label class="form-check-label" for="settings-checkbox-3">
-										    Keep user app search history
-										</label>
-									</div>
-									<div class="form-check mb-3">
-									    <input class="form-check-input" type="checkbox" value="" id="settings-checkbox-4">
-										<label class="form-check-label" for="settings-checkbox-4">
-										    Lorem ipsum dolor sit amet
-										</label>
-									</div>
-									<div class="form-check mb-3">
-									    <input class="form-check-input" type="checkbox" value="" id="settings-checkbox-5">
-										<label class="form-check-label" for="settings-checkbox-5">
-										    Aenean quis pharetra metus
-										</label>
-									</div>
-									<div class="mt-3">
-									    <button type="submit" class="btn app-btn-primary" >Save Changes</button>
-									</div>
-							    </form>
-						    </div><!--//app-card-body-->						    
-						</div><!--//app-card-->
-	                </div>
-                </div><!--//row-->
                 <hr class="my-4">
                 <div class="row g-4 settings-section">
 	                <div class="col-12 col-md-4">
@@ -271,17 +177,8 @@
 						</div><!--//app-card-->
 	                </div>
                 </div><!--//row-->
-			    <hr class="my-4">
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
-	    
-	    <footer class="app-footer">
-		    <div class="container text-center py-3">
-		         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-            <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
-		       
-		    </div>
-	    </footer><!--//app-footer-->
 	    
     </div><!--//app-wrapper-->    					
 
