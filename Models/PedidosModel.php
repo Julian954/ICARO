@@ -147,13 +147,14 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         }
     }
 
-    public function subir_datos(string $nopedido, string $tipo, string $clave, string $noalta, string $proveedor, string $cantidad, string $topn, string $eta,string $fecha_alta, string $monto, string $pagado, string $fecha) {
+    public function subir_datos(string $nopedido, string $tipo, string $clave, string $noalta, string $proveedor, string $fecha_inicio ,string $cantidad, string $topn, string $eta,string $fecha_alta, string $monto, string $pagado, string $fecha) {
         $return = "";
         $this->nopedido = $nopedido;
         $this->tipo = $tipo;
         $this->clave = $clave; 
         $this->noalta = $noalta;
         $this->proveedor = $proveedor;
+        $this->fecha_inicio = $fecha_inicio;
         $this->cantidad = $cantidad;
         $this->topn = $topn;
         $this->eta = $eta;
@@ -162,8 +163,8 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         $this->pagado = $pagado; 
         $this->fecha = $fecha;
         // Insertar los datos en la base de datos
-        $query = "INSERT INTO pedidos(nopedido, tipo, clave, noalta, proveedor, cantidad, topn, eta, fecha_alta, monto, pagado , fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $data = array($this->nopedido, $this->tipo, $this->clave, $this->noalta, $this->proveedor, $this->cantidad, $this->topn, $this->eta,$this->fecha_alta, $this->monto, $this->pagado , $this->fecha);
+        $query = "INSERT INTO pedidos(nopedido, tipo, clave, noalta, proveedor, fecha_inicio, cantidad, topn, eta, fecha_alta, monto, pagado , fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $data = array($this->nopedido, $this->tipo, $this->clave, $this->noalta, $this->proveedor, $this->fecha_inicio, $this->cantidad, $this->topn, $this->eta,$this->fecha_alta, $this->monto, $this->pagado , $this->fecha);
         $resul = $this->insert($query, $data); //insert es para agregar un registro
     }
 

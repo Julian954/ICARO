@@ -38,18 +38,20 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
     array_splice($datos, 0, 1);
     foreach ($datos as $fila) {
         $unidad = $fila[2] ?? '';
+        $presentadas = $fila[4] ?? '';
         $surtida = $fila[5] ?? '';
         $negadas = $fila[7] ?? '';
         $electronicas = $fila[10] ?? '';
         $mnuales = $fila[11] ?? '';
+        $atendidos = $fila[11] ?? '';
         $costo_receta = $fila[14] ?? '';
         $costo_paciente = $fila[15] ?? '';
         $this->fechad = $fechad;
 
         if (!empty($unidad)) {
             // Insertar los datos en la base de datos
-            $query = "INSERT INTO indicadores (unidad, surtida, negadas, mnuales, costo_receta, costo_paciente, electronicas, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            $data = array($unidad, $surtida, $negadas, $mnuales, $costo_receta, $costo_paciente, $electronicas, $this->fechad);
+            $query = "INSERT INTO indicadores (unidad, surtida, presentadas, negadas, mnuales, atendidos, costo_receta, costo_paciente, electronicas, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+            $data = array($unidad, $presentadas, $surtida, $negadas, $mnuales, $atendidos, $costo_receta, $costo_paciente, $electronicas, $this->fechad);
             $resul = $this->insert($query, $data); //insert es para agregar un registro
         }
     }

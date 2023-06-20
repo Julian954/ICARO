@@ -133,13 +133,14 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
                 $topn = $tipo . $gen . $clave . $dif . $var; //H-L
                 $cantidad = $datos[25]??'';//Z
                 $proveedor = $datos[28]??'';//AC
+                $fecha_inicio = $datos[30]??'';//AE
                 $noalta = $datos[34]??'';//AI
                 $eta = $datos[31] ?? ''; //AH
                 $fecha_alta = $datos[33] ?? ''; //AH
                 $monto = $datos[42] ?? '';//AQ
                 $pagado = $datos[44] ?? '';//AS 
                 if ($nopedido != "" && $tipo != "" && $gen != "" && $clave != "" && $dif != "" && $var != "" && $cantidad != "" && $proveedor != "" && $monto != "" && $pagado != "" && $eta != ""){
-                    $insert = $this->model->subir_datos($nopedido, $tipo, $clave, $noalta, $proveedor, $cantidad, $topn, $eta, $fecha_alta, $monto, $pagado, $fecha);
+                    $insert = $this->model->subir_datos($nopedido, $tipo, $clave, $noalta, $proveedor, $fecha_inicio, $cantidad, $topn, $eta, $fecha_alta, $monto, $pagado, $fecha);
                     $a++;
                 } else{
                     $e++;
