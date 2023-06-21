@@ -17,8 +17,9 @@
 						<div class="col-12 col-md-8">
 							<div class="app-card app-card-settings shadow-sm p-4">
 								<label for="indicadores" class="form-label">Indicadores</label>
-								<div class="mb-3">
-									<div class="app-card-body text-center">		
+								<div class="mb-3"><br>
+									<h6>Ultima fecha de modificacion : <?= $data2[0];?></h6>	
+									<div class="app-card-body text-center">											
 										<form action="<?php echo base_url(); ?>Indicadores/procesarArchivo" method="post" enctype="multipart/form-data">
                     						<div class="form-group">
                     						    <label for="date">Fecha</label>
@@ -27,12 +28,15 @@
 											<div class="form-group">
                     						    <label for="img">Selecciona Archivo</label>
                     						    <div class="custom-file">
-                    						      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo_csv" required>
+                    						      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo_csv"  <?php if($_SESSION['rol']!=7){ "required"; };?>>
                     						      <label class="custom-file-label" for="customFile"></label>
                     						      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
                     						    </div>
                     						</div>
 											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
+											<?php if($_SESSION['rol']==7){ ?>
+											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i> Eliminar Documento</button>
+											<?php } ?>
 										</form>
 									</div><!--//app-card-body-->
 								</div>	
@@ -59,12 +63,15 @@
 											<div class="form-group">
                     						    <label for="img">Selecciona Archivo</label>
                     						    <div class="custom-file">
-                    						      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo" required>
+                    						      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo" <?php if($_SESSION['rol']!=7){ "required"; };?>>
                     						      <label class="custom-file-label" for="customFile"></label>
                     						      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
                     						    </div>
                     						</div>
 											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
+											<?php if($_SESSION['rol']==7){ ?>
+											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i> Eliminar Documento</button>
+											<?php } ?>
 										</form>
 
 									</div><!--//app-card-body-->
@@ -89,10 +96,13 @@
 											<label for="date" class="form-label" style="color:#000000;">Fecha</label>
 											<input type="date" class="form-control" id="fecha" name="fecha" value="" require><br>
 											<label for="text" class="form-label" style="color:#000000;">Porcentaje de satisfaccion Nacional %</label>
-											<input type="text" min="0" class="form-control" id="satisf" name="satisf" value="" required>
+											<input type="text" min="0" class="form-control" id="satisf" name="satisf" value="" <?php if($_SESSION['rol']!=7){ "required"; };?>>
 											<label for="text" class="form-label" style="color:#000000;">Ranking Nacional Colima</label>
-											<input type="text" min="0" class="form-control" id="rank" name="rank" value="" required><br>
+											<input type="text" min="0" class="form-control" id="rank" name="rank" value="" <?php if($_SESSION['rol']!=7){ "required"; };?>><br>
 											<button class="btn btn-success mb-2" type="submit" id="subir"><i class="fas fa-save"></i> Actualizar Datos</button>
+											<?php if($_SESSION['rol']==7){ /*duda en dejar o no el eliminar el rank*/?>
+											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i>Eliminar Documento</button>
+											<?php } ?>
 										</form>
 									</div>	
 								</div>
@@ -120,12 +130,15 @@
 											<div class="form-group">
                     						    <label for="img">Selecciona Archivo</label>
                     						    <div class="custom-file">
-                    						      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo" required>
+                    						      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo" <?php if($_SESSION['rol']!=7){ "required"; };?>>
                     						      <label class="custom-file-label" for="customFile"></label>
                     						      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
                     						    </div>
                     						</div>
 											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
+											<?php if($_SESSION['rol']==7){ ?>
+											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i> Eliminar Documento</button>
+											<?php } ?>
 										</form>
 									</div><!--//app-card-body-->
 								</div>

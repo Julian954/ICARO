@@ -267,7 +267,10 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
 
           $alert =  'DocumentoActualizado';
         }
-        
+        elseif(empty($_FILES['archivo']['name'])){
+            $this->model->eliminar_datos($fecha);
+            $alert =  'DocumentoEliminado';
+        }
         // Redirigir a la página deseada después de la carga del archivo
         header("location: " . base_url() . "Excel/Subir?msg=$alert");
         die();

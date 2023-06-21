@@ -54,6 +54,15 @@ class InicioModel extends Mysql{
         return $res;
     }
 
+    public function eliminar_datos(string $fecha)
+{
+        $this->fecha = $fecha;
+            $query = "DELETE FROM negadas WHERE fecha = ?";
+            $data = array($this->fecha);
+            $resul = $this->insert($query, $data); //insert es para agregar un registro
+        
+    return $return;
+}
     public function atencioncolima(string $fechaN)
     {
         $this->fecha = $fechaN;

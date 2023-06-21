@@ -88,6 +88,15 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
     return $return;
 }
 
+public function Eliminar_Archivo(string $fechad)
+{
+        $this->fechad = $fechad;
+            $query = "DELETE FROM indicadores WHERE fecha = ?";
+            $data = array($this->fechad);
+            $resul = $this->insert($query, $data); //insert es para agregar un registro
+        
+    return $return;
+}
 }
 
 

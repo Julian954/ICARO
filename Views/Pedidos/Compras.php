@@ -103,7 +103,7 @@ foreach ($data1 as $pedi2){
         <thead>
           <tr>
 						<th style="text-align:center; width:200px">Datos</th>
-						<th style="text-align:center; width:100px">Cantidad</th>
+						<th style="text-align:center; width:150px">Cantidad</th>
 						<th style="text-align:center">Progreso</th>
 					</tr>
         </thead>
@@ -117,7 +117,7 @@ foreach ($data1 as $pedi2){
           </tr>
           <tr>
             <td  >Pedidos Medicamento</td>
-            <td style="text-align:center"><?php echo $final ?></td>
+            <td style="text-align:center"><?php echo number_format($final); ?></td>
             <td ><div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($final*100/$total_pedi2,2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($final*100/$total_pedi2,2);?>%</div>
 </div></td>
@@ -125,7 +125,7 @@ foreach ($data1 as $pedi2){
           <tr>
             <td >Pedidos Curación</td>
             <?php //$i=0; while($pedidos=mysqli_fetch_array($queryCliente)){ if($pedidos['tipo']=="060") $final2=intval($final2+$pedidos['cantidad']);}?>             
-              <td style="text-align:center"><?php echo $final2 ?></td>                                        
+              <td style="text-align:center"><?php echo number_format($final2); ?></td>                                        
               <td class="stat-cell">
 				<div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($final2*100/$total_pedi2,2);?>%;"  aria-valuemin="0" aria-valuemax="100"><?php echo number_format($final2*100/$total_pedi2,2);?>%</div>
@@ -134,7 +134,7 @@ foreach ($data1 as $pedi2){
           <tr>
               <td >Otros Pedidos</td>
               <?php //$i=0; while($pedidos=mysqli_fetch_array($queryCliente)){ if($pedidos['tipo']=="050" || $pedidos['tipo']=="040" || $pedidos['tipo']=="080") $final3=intval($final3+$pedidos['cantidad']);}?>                           
-              <td style="text-align:center"><?php echo $resultado ?></td>                                        
+              <td style="text-align:center"><?php echo number_format($resultado); ?></td>                                        
               <td class="stat-cell">
 				<div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo number_format($resultado*100/$total_pedi2,2);?>%;"  aria-valuemin="0" aria-valuemax="100"><?php echo number_format($resultado*100/$total_pedi2,2);?>%</div>
@@ -142,7 +142,7 @@ foreach ($data1 as $pedi2){
           </tr>
           <tr>
               <td >Total Contratado</td>
-              <td style="text-align:center">$ <?php echo  $total_contratado ?></td>                                        
+              <td style="text-align:center">$ <?php echo  number_format($total_contratado); ?></td>                                        
               <!--<td class="stat-cell">
 				<div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
@@ -150,7 +150,7 @@ foreach ($data1 as $pedi2){
           </tr>
 					<tr>
               <td>Total Entregado</td>
-              <td style="text-align:center">$ <?php echo $total_entregado ?></td>                                        
+              <td style="text-align:center">$ <?php echo number_format($total_entregado); ?></td>                                        
               <td class="stat-cell">
 				<div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo number_format($total_entregado/$total_contratado*100,2);?>%;"  aria-valuemin="0" aria-valuemax="100"><?php echo number_format($total_entregado/$total_contratado*100,2);?>%</div>
@@ -158,7 +158,7 @@ foreach ($data1 as $pedi2){
           </tr>
 					<tr>
               <td>Total Por Entregar</td>
-              <td style="text-align:center">$ <?php echo $total_por_entregar ?></td>                                        
+              <td style="text-align:center">$ <?php echo number_format($total_por_entregar); ?></td>                                        
               <td class="stat-cell">
 				<div class="progress">
 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo number_format($total_por_entregar*100/$total_contratado,2);?>%;"  aria-valuemin="0" aria-valuemax="100"><?php echo number_format($total_por_entregar*100/$total_contratado,2);?>%</div>
@@ -208,7 +208,7 @@ foreach ($data1 as $pedi2){
                 <td><?php if($pedidos['negadas']!=null){?>SI<?php }elseif($pedidos['negadas']==null){?>NO<?php }?></td>
                 <td>$<?=number_format($pedidos['monto'])?> MXN</td>
                 <td><?= $pedidos['fecha'] ?></td>
-                <?php if($pedidos['monto2']===0){?>
+                <?php if($pedidos['monto2']==0){?>
                 <td><button  type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>
                 <?php }else{?>
                   <td>Enlazado!<button style="display:none" type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>

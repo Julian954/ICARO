@@ -30,5 +30,10 @@ class Subir_ExcelModel extends Mysql{
         return $return;
     }
 
+    public function selectFechas(){
+        $sql = "SELECT fecha FROM indicadores ORDER BY fecha DESC";
+            $res = $this->select($sql);
+            return $res;
+    }
 }
 ?>

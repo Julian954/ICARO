@@ -146,6 +146,24 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
           }
         }
     }
+    public function eliminar_datos(string $fecha)
+    {
+            $this->fecha = $fecha;
+                $query = "DELETE FROM pedidos WHERE fecha = ?";
+                $data = array($this->fecha);
+                $resul = $this->insert($query, $data); 
+            
+        return $return;
+    }
+
+    public function eliminar_datos_viejos()
+    {            
+                $query = "DELETE FROM pedidos";
+                $data = array();
+                $resul = $this->insert($query, $data); 
+            
+        return $return;
+    }
 
     public function subir_datos(string $nopedido, string $tipo, string $clave, string $noalta, string $proveedor, string $fecha_inicio ,string $cantidad, string $topn, string $eta,string $fecha_alta, string $monto, string $pagado, string $fecha) {
         $return = "";
@@ -187,5 +205,10 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         return $res;
     }
 
+    public function SelectFecha(){
+        $sql = "SELECT fecha FROM pedidos";
+        $res = $this->select_all($sql);
+        return $res;
+    }
 }
 ?>

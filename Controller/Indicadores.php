@@ -60,8 +60,15 @@ class Indicadores extends Controllers //Aquí se debe llamas igual que el archiv
             $alert =  'Documento Subido';
         } 
           // Redirigir a la página deseada después de la carga del archivo
-          header("location: " . base_url() . "Excel/Subir?msg=$alert");
-          die();
+          
+    
+    elseif(empty($_FILES['archivo_csv']['name'])) {
+        $this->model->Eliminar_Archivo($fechad);
+            $alert =  'Documento Eliminado';
+            
     }
+    header("location: " . base_url() . "Excel/Subir?msg=$alert");
+          die();
+}
 }
 ?>

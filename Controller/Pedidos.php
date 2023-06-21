@@ -15,8 +15,8 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
     {
         //$id = $_GET['id'];
         $data1= $this->model->SelectPedido();
-        //$data2 = $this->model->SelectCantidad();
-    $this->views->getView($this, "Compras", "", $data1/*, $data2*/);
+        $data2 = $this->model->SelectFecha();
+    $this->views->getView($this, "Compras", "", $data1, $data2);
     }
 
     public function Pagado(){
@@ -83,10 +83,10 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
     
     public function subir_archivo() {
         // Verificar si se ha enviado un archivo
-        $fecha = limpiarInput($_POST['fechaId']);
-        if (!empty($_FILES['archivo']['name'])) {
+        $fecha = limpiarInput($_POST['fechaId'] );
+        if (!empty($_FILES['archivo']['name']) && $data2[0]!=$fecha) {
           $archivo_tmp = $_FILES['archivo']['tmp_name'];
-          
+          $this->model->eliminar_datos_viejos();
           // Procesar el archivo CSV y obtener los datos
           $datos = [];
           if (($gestor = fopen($archivo_tmp, 'r')) !== false) {
@@ -97,9 +97,16 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
           }
           // Pasar los datos al modelo para su inserción en la base de datos
           $this->model->insertar_datos($datos,$fecha);
+          
           $alert =  'DocumentoActualizado';
         }
-        
+        elseif (empty($_FILES['archivo']['name'])){
+            $this->model->eliminar_datos($fecha);
+          $alert =  'DocumentoEliminado';
+        }
+        else{
+            $alert =  'Error_Contacta_Al_Administrador';
+        }
         // Redirigir a la página deseada después de la carga del archivo
         header("location: " . base_url() . "Excel/Subir?msg=$alert");
         die();
