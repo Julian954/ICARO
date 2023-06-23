@@ -11,9 +11,8 @@ class Excel extends Controllers //Aquí se debe llamas igual que el archivo
     }
 //Aquí se debe llamar igual que la vista
     public function Subir()
-    {//pedos para regresar la data
-        //$data2 = $this->model->selectFechas();
-    $this->views->getView($this, "Subir", ""/*,$data2*/);        
+    {
+    $this->views->getView($this, "Subir", "");        
         die();
     }
     

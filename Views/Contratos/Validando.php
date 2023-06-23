@@ -166,7 +166,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="post" action="<?php echo base_url(); ?>Contratos/agregar_validadcont" autocomplete="off" enctype="multipart/form-data"">
+        <form method="post" action="<?php echo base_url(); ?>Contratos/agregar_validadcont" autocomplete="off" enctype="multipart/form-data">
           <div class="modal-body">
             <div class="form-group">
               <label for="setting-input-3" class="form-label" style="color:#000000;">No.Trabajador y Nombre </label>

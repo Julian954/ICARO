@@ -19,7 +19,8 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data4 = $this->model->quejas();
         $data5 = $this->model->pedidos();
         $data6 = $this->model->selectquejas_final();
-        $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, "", $data6);
+        $data7 = $this->model->despachos();
+        $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, "", $data6, $data7);
         die();
     }
 
@@ -94,10 +95,20 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         header("location: " . base_url() . "Inicio/Home");
         die();
     }
+    public function Visto(){
+        $id=$_POST['id2'];
+        $visto= 1;
+        $actualiza = $this->model->visto($id, $visto);
+        header("location: " . base_url() . "Inicio/Notificaciones");
+        die();
+    }
 
     public function Notificaciones()
     {
-        $this->views->getView($this, "Notificaciones", "");
+        $id=$_GET['id'];
+    $data1 = $this->model->datos_de_foro_para_noti($id);
+    //$data2 = $this->model->datos_de_foro_para_noti2($id);
+    $this->views->getView($this, "Notificaciones", "", $data1/*, $data2*/);
         die();
     }
 

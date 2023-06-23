@@ -367,51 +367,33 @@
                                 <thead>
                                     <tr>
                                         <th class="meta">Destino</th>
-                                        <th class="meta stat-cell">ECO</th>
-                                        <th class="meta stat-cell">ETA</th>
-                                        <th class="meta stat-cell"></th>
+                                        <th class="meta stat-cell" style="text-align: center; width: 100%;">No. Remision</th>
+                                        <th class="meta stat-cell" style="text-align: center">ECO</th>
+                                        <th class="meta stat-cell" style="text-align: center">ETA</th>
+                                        <th class="meta stat-cell" style="text-align: center"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-success">HGZ#1 - Villa de Álvarez</td>
-                                        <td class="stat-cell">1076</td>
-                                        <td class="stat-cell">10:00 AM</td>
-                                        <td class="stat-cell">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="blue"><path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/>
+                                      <?php foreach($data7 as $despachos){?>
+                                        <td class="text-success"><?= $despachos['unidad'];?></td>
+                                        <td class="stat-cell" style="text-align: center"><?= $despachos['remision'];?></td>
+                                        <td class="stat-cell" style="text-align: center"><?= $despachos['archivo'];?></td>
+                                        <td class="stat-cell" style="text-align: center"><?= $despachos['hora'];?></td>
+                                        <td class="stat-cell" style="text-align: center">
+                                        <?php if($despachos['negadas']==0){?>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+  <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+</svg>
+<?php }elseif($despachos['negadas']==1){?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 </svg></td>
+<?php }?>
+
                                     </tr>
-                                    <tr>
-                <td class="text-success">UMF#18 - Colima</td>
-                                        <td class="stat-cell">1076</td>
-                                        <td class="stat-cell">12:00 AM</td>
-                <td class="stat-cell">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="blue"><path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/>
-</svg></td></tr>
-              <tr>
-                <td class="text-success">UMF#19 - Colima</td>
-                                        <td class="stat-cell">1076</td>
-                                        <td class="stat-cell">12:00 AM</td>
-                <td class="stat-cell">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="brown"><path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/>
-</svg></td>
-              </tr>
-              <tr>
-                <td class="text-success">HGZ#10 - Manzanillo</td>
-                                        <td class="stat-cell">1079</td>
-                                        <td class="stat-cell" style="color:#ff0000;">12:00 AM</td>
-                <td class="stat-cell">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="brown"><path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/>
-</svg></td>
-              </tr>
-              <tr>
-                <td class="text-success">HGSZ#4 - Tecoman</td>
-                                        <td class="stat-cell">1079</td>
-                                        <td class="stat-cell" style="color:#ff0000;">12:00 AM</td>
-                <td class="stat-cell">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="brown"><path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/>
-</svg></td>
-                                    </tr>
+                                    <?php }?>
+                                    
                                 </tbody>
                             </table>
                         </div><!--//table-responsive-->

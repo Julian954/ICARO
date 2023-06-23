@@ -54,6 +54,24 @@ class InicioModel extends Mysql{
         return $res;
     }
 
+    public function datos_de_foro_para_noti(int $id){
+        $this->id = $id;
+        $sql = "SELECT * FROM detalle_cont, usuarios WHERE detalle_cont.id_responde = '{$this->id}'";
+        $res = $this->select_all($sql);
+            return $res;
+    }
+
+    public function despachos(){        
+        $sql = "SELECT * FROM despachos";
+        $res = $this->select_all($sql);
+            return $res;
+    }
+    /*public function datos_de_foro_para_noti2(int $id){
+        $this->id = $id;
+        $sql = "SELECT contrato FROM detalle_cont, usuarios WHERE detalle_cont.id_responde = '{$this->id}'";
+        $res = $this->select_all($sql);
+            return $res;
+    }*/
     public function eliminar_datos(string $fecha)
 {
         $this->fecha = $fecha;
@@ -93,7 +111,16 @@ class InicioModel extends Mysql{
         return $return;
     }
 
-    
+    public function visto($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE detalle_cont SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
 
     public function selectquejas_final()
     {        
