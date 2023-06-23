@@ -427,9 +427,9 @@
                         <div class="intro">Instrumentos jurídicos locales (contratos y convenios) "vigentes", formalizados y/o en proceso de formalización.</div>
                     </div><!--//app-card-body px-4-->
 
-                    <div class="app-card-footer p-4 mt-auto"> 
-                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Contratos/General">Descargar</a>
-                    </div><!--//app-card-footer-->
+                    <form action="<?php echo base_url(); ?>Contratos/DescargarArchivo" method="post" class="app-card-footer p-4 mt-auto">
+                       <button type="submit" class="btn app-btn-secondary">Descargar</button>
+                    </form><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
 
@@ -456,9 +456,9 @@
                         <div class="intro">Estatus de Pedidos Locales, con y sin alta generados por la Oficina de Adquisiciones, por autorización de compra.</div>
                     </div><!--//app-card-body-->
 
-                    <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Pedidos/Compras">Descargar</a>
-                    </div><!--//app-card-footer p-4 mt-auto-->
+                    <form action="<?php echo base_url(); ?>Pedidos/DescargarArchivo" method="post" class="app-card-footer p-4 mt-auto">
+                       <button type="submit" class="btn app-btn-secondary">Descargar</button>
+                    </form><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
 
@@ -484,9 +484,9 @@
                         <div class="intro">Instrumentos jurídicos locales (contratos y convenios) "vigentes", formalizados y/o en proceso de formalización.</div>
                     </div><!--//app-card-body px-4-->
 
-                    <div class="app-card-footer p-4 mt-auto">
-                    <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Articulos/Listarart">Descargar</a>
-                    </div><!--//app-card-footer p-4 mt-auto-->
+                    <form action="<?php echo base_url(); ?>Contrataciones/DescargarArchivo" method="post" class="app-card-footer p-4 mt-auto">
+                       <button type="submit" class="btn app-btn-secondary">Descargar</button>
+                    </form><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-lg-4-->
         </div><!--//row g-4 mb-4-->

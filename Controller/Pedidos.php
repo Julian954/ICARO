@@ -161,5 +161,54 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
         }
         die();  
     }
+    public function DescargarArchivo(){
+        // Conectarse a la base de datos (reemplaza los valores con los de tu base de datos)
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "imss";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+    
+        // Verificar la conexión
+        if ($conn->connect_error) {
+            die("Error al conectar a la base de datos: " . $conn->connect_error);
+        }
+        
+        $conn->set_charset("utf8");
+        
+        // Consulta para obtener los datos de la tabla que deseas exportar (reemplaza 'nombre_de_tabla' con el nombre de tu tabla)
+        $sql = "SELECT nopedido, tipo, clave, noalta, proveedor, cantidad, topn, eta, fecha_alta, monto, pagado, monto2, fecha FROM pedidos";
+        $result = $conn->query($sql);
+    
+        // Crear un archivo CSV y escribir los datos en él
+        $filename = "Pedidos.csv";
+        $file = fopen($filename, "w");
+        if ($file) {
+            // Escribir el encabezado del archivo CSV
+            $header = array("No.Pedido", "GPO", "ESP", "No.Alta", "Proveedor", "Cantidad", "Clave", "ETA", "Fecha Alta", "Monto", "Pagado", "Enlazado", "Fecha");
+            fputcsv($file, $header);
+    
+            // Escribir los datos de la tabla en el archivo CSV
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    // Reemplaza 'columna1', 'columna2', 'columna3' con los nombres de tus columnas de la tabla
+                    $data = array($row['nopedido'], $row['tipo'], $row['clave'], $row['noalta'], $row['proveedor'], $row['cantidad'], $row['topn'], $row['eta'], $row['fecha_alta'], $row['monto'], $row['pagado'], $row['monto2'], $row['fecha']);
+                    fputcsv($file, $data);
+                }
+            }
+    
+            fclose($file);
+    
+            // Descargar el archivo CSV
+            header('Content-Type: application/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            header('Content-Length: ' . filesize($filename));
+            readfile($filename);
+        } else {
+            echo "Error al crear el archivo CSV.";
+        }
+    
+        $conn->close();
+    }
 }
 ?>
