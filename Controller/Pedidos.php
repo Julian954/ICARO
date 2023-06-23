@@ -140,7 +140,11 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
                 $topn = $tipo . $gen . $clave . $dif . $var; //H-L
                 $cantidad = $datos[25]??'';//Z
                 $proveedor = $datos[28]??'';//AC
-                $fecha_inicio = $datos[30]??'';//AE
+                $fechai = $datos[30]??'';//AE
+                $fecha_inicio = DateTime::createFromFormat('j/n/Y', $fechai);
+                if ($fecha_inicio) {
+                    $fecha_inicio = $fecha_inicio->format('Y-m-d'); // Imprime: 2023-05-22
+                }
                 $noalta = $datos[34]??'';//AI
                 $eta = $datos[31] ?? ''; //AH
                 $fecha_alta = $datos[33] ?? ''; //AH

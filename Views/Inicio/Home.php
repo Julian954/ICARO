@@ -106,7 +106,7 @@
                 </div><!--//col-->
                 <div class="col-auto">
                   <div class="card-header-action">
-                    <a href="">Histórico</a><!--AQUÍ DEBE DESCARGAR EL CSV-->
+                    <a href="<?= base_url() ?>Inicio/DescargarAtencion">Histórico</a>
                   </div><!--//card-header-action-->
                 </div><!--//col-auto-->
               </div><!--//row justify-content-between align-items-center-->
@@ -130,14 +130,14 @@
                 </div><!--//col-->
                 <div class="col-auto">
                   <div class="card-header-action">
-                    <a href="">Histórico</a> <!--AQUÍ DEBE DESCARGAR EL CSV-->
+                    <a href="<?= base_url() ?>Inicio/DescargarNegadas">Histórico</a>
                   </div><!--//card-header-action-->
                 </div><!--//col-auto-->
               </div><!--//row justify-content-between align-items-center-->
             </div><!--//app-card-header p-3-->
             <div class="app-card-body p-3 p-lg-4">
               <div class="chart-container">
-                <canvas id="pastelnegadas" width="100%" height="75"></canvas> <!--DEBE MOSTRAR TOP 5 Y OTROS-->
+                <canvas id="pastelnegadas" width="100%" height="75"></canvas>
               </div><!-- //chart-container -->
             </div><!--//app-card-body p-3 p-lg-4-->
           </div><!--//card-header-action-->
@@ -214,36 +214,24 @@
               <div class="row">
                   <div class="col-lg-8 mb-2 py-2">
                       <?php if ($_SESSION['rol'] == 7) { ?>
-                          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#Queja"><i class="fas fa-plus-circle"></i> Nuevo</button> 
+                          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal1">Nueva queja</button> 
                           <?php include('Modal_quejas.php'); ?>
                       <?php } ?>
                   </div>
                   <div class="col-lg-4">
-                      <?php if (isset($_GET['msg'])) { //FALTA REVISAR LAS ALERTAS DE LAS QUEJAS
+                      <?php if (isset($_GET['msg'])) {
                           $alert = $_GET['msg'];
-                          if ($alert == "existe") { ?>
-                              <div class="alert alert-warning" role="alert">
-                                  <strong>El usuario ya existe.</strong>
-                              </div>
-                          <?php } else if ($alert == "error") { ?>
+                          if ($alert == "error") { ?>
                               <div class="alert alert-danger" role="alert">
-                                  <strong>Error al registra.</strong>
+                                  <strong>Error al registrar.</strong>
                               </div>
                           <?php } else if ($alert == "registrado") { ?>
                               <div class="alert alert-success" role="alert">
-                                  <strong>Usuario registrado.</strong>
+                                  <strong>Queja registrada.</strong>
                               </div>
-                          <?php } else if ($alert == "modificado") { ?>
+                          <?php } else if ($alert == "atendido") { ?>
                               <div class="alert alert-success" role="alert">
-                                  <strong>Usuario modificado.</strong>
-                              </div>
-                          <?php } else if ($alert == "inactivo") { ?>
-                              <div class="alert alert-success" role="alert">
-                                  <strong>El usuario fue inactivado.</strong>
-                              </div>
-                          <?php } else { ?>
-                              <div class="alert alert-danger" role="alert">
-                                  <strong>Las contraseñas no coinciden.</strong>
+                                  <strong>La queja fue atendida.</strong>
                               </div>
                           <?php }
                       } ?>
@@ -274,8 +262,8 @@
                             <span class="badge bg-warning">Atendido</span>
                           </td>
                         <?php } elseif ($_SESSION['rol'] == 7){ ?>
-                          <td> <!--FALTA MODIFICAR EL MODAL DE ALERTA-->
-                            <form id="formulario" action="<?php echo base_url() ?>Inicio/quejaestado?id=<?php echo $que['id']; ?>" method="post" class="d-inline elim">
+                          <td>
+                            <form id="formulario" action="<?php echo base_url() ?>Inicio/quejaestado?id=<?php echo $que['id']; ?>" method="post" class="d-inline aten">
                                 <button style="padding: 0;" title="Atender" type="submit" class="btn btn-link"><span class="badge bg-danger">Pendiente</span></button>
                             </form>   
                           </td>
@@ -299,7 +287,7 @@
             <div class="app-card-header p-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
-                  <h4 class="app-card-title">Avance <!--FALTA CORREGIR LAS GRÁFICAS-->
+                  <h4 class="app-card-title">Avance
                     <span style="font-weight: normal; font-size: 12px;">(Pedidos con alta)</span>
                   </h4>
                 </div><!--//col-auto-->
@@ -311,36 +299,19 @@
               </div><!--//row justify-content-between align-items-center-->
             </div><!--//app-card-header-->
             <div class="app-card-body">
-              <?php //foreach ($data5 as $bar) { ?>
-		<!-- 					  <div class="item p-3">
+              <?php foreach ($data5 as $bar) { ?>
+	  					  <div class="item p-3">
 							    <div class="row align-items-center">
 								    <div class="col">
-									    <div class="title " style="color:#000000;"><?php //echo $bar['area'].' ('.$bar['form'].'/'.$bar['total'].')';?></div>
-									    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width:<?php //echo number_format($bar['form']*100/$bar['total'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php// echo number_format($bar['form']*100/$bar['total'],2);?>%</div>
+									    <div class="title " style="color:#000000;"><?php echo ucfirst($bar['mes']).' ('.$bar['monto'].'/'.$bar['pagado'].')';?></div>
+									    <div class="progress" style="height: 0.7rem;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($bar['pagado']*100/$bar['monto'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($bar['pagado']*100/$bar['monto'],2);?>%</div>
                       </div>
 								    </div>
 							    </div>
 							  </div>
-                <hr style="margin: 0;"> -->
-              <?php //} ?>
-
-              <div class="item p-3">
-                <div class="row align-items-center">
-                  <div class="col">
-                    <div class="title mb-1 ">Enero</div>
-                    <div class="progress">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div><!--//col-->
-                  <div class="col-auto">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                    </svg>
-                  </div><!--//col-auto-->
-                </div><!--//row align-items-center-->
-                <a class="item-link-mask" href="#"></a>
-              </div><!--//item-->
+                <hr style="margin: 0;">
+              <?php } ?>
             </div><!--//app-card-body-->
           </div><!--//app-card-->
         </div><!--//col-12 col-lg-6-->
@@ -428,7 +399,7 @@
                     </div><!--//app-card-body px-4-->
 
                     <div class="app-card-footer p-4 mt-auto"> 
-                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Contratos/General">Descargar</a>
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Inicio/DescargarContratos">Descargar</a>
                     </div><!--//app-card-footer-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
@@ -457,7 +428,7 @@
                     </div><!--//app-card-body-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Pedidos/Compras">Descargar</a>
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Inicio/DescargarPedidos">Descargar</a>
                     </div><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
@@ -475,7 +446,7 @@
                             </div><!--//col-auto-->
 
                             <div class="col-auto">
-                                <h4 class="app-card-title">Reuqerimientos</h4>
+                                <h4 class="app-card-title">Requerimientos</h4>
                             </div><!--//col-auto-->
                         </div><!--//row align-items-center gx-3-->
                     </div><!--//app-card-header p-3 border-bottom-0-->
@@ -485,7 +456,7 @@
                     </div><!--//app-card-body px-4-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                    <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Articulos/Listarart">Descargar</a>
+                    <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Inicio/DescargarRequerimientos">Descargar</a>
                     </div><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-lg-4-->
