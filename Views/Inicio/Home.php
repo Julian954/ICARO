@@ -106,7 +106,7 @@
                 </div><!--//col-->
                 <div class="col-auto">
                   <div class="card-header-action">
-                    <a href="">Histórico</a>
+                    <a href="">Histórico</a><!--AQUÍ DEBE DESCARGAR EL CSV-->
                   </div><!--//card-header-action-->
                 </div><!--//col-auto-->
               </div><!--//row justify-content-between align-items-center-->
@@ -130,14 +130,14 @@
                 </div><!--//col-->
                 <div class="col-auto">
                   <div class="card-header-action">
-                    <a href="">Histórico</a>
+                    <a href="">Histórico</a> <!--AQUÍ DEBE DESCARGAR EL CSV-->
                   </div><!--//card-header-action-->
                 </div><!--//col-auto-->
               </div><!--//row justify-content-between align-items-center-->
             </div><!--//app-card-header p-3-->
             <div class="app-card-body p-3 p-lg-4">
               <div class="chart-container">
-                <canvas id="pastelnegadas" width="100%" height="75"></canvas>
+                <canvas id="pastelnegadas" width="100%" height="75"></canvas> <!--DEBE MOSTRAR TOP 5 Y OTROS-->
               </div><!-- //chart-container -->
             </div><!--//app-card-body p-3 p-lg-4-->
           </div><!--//card-header-action-->
@@ -219,7 +219,7 @@
                       <?php } ?>
                   </div>
                   <div class="col-lg-4">
-                      <?php if (isset($_GET['msg'])) {
+                      <?php if (isset($_GET['msg'])) { //FALTA REVISAR LAS ALERTAS DE LAS QUEJAS
                           $alert = $_GET['msg'];
                           if ($alert == "existe") { ?>
                               <div class="alert alert-warning" role="alert">
@@ -273,14 +273,15 @@
                           <td>
                             <span class="badge bg-warning">Atendido</span>
                           </td>
+                        <?php } elseif ($_SESSION['rol'] == 7){ ?>
+                          <td> <!--FALTA MODIFICAR EL MODAL DE ALERTA-->
+                            <form id="formulario" action="<?php echo base_url() ?>Inicio/quejaestado?id=<?php echo $que['id']; ?>" method="post" class="d-inline elim">
+                                <button style="padding: 0;" title="Atender" type="submit" class="btn btn-link"><span class="badge bg-danger">Pendiente</span></button>
+                            </form>   
+                          </td>
                         <?php } else { ?>
                           <td>
                             <span class="badge bg-danger">Pendiente</span>
-                              <?php if ($_SESSION['rol'] == 7) { ?>
-                                <form action="<?php echo base_url() ?>Inicio/quejaestado?id=<?php echo $que['id']; ?>" method="post" class="d-inline elim">
-                                    <button title="Atender" type="submit" class="btn btn-success mb-2"><i class="fas fa-check"></i></button>
-                                </form>   
-                              <?php } ?>
                           </td>
                         <?php } ?>
                     <?php }?>
@@ -298,7 +299,7 @@
             <div class="app-card-header p-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
-                  <h4 class="app-card-title">Avance 
+                  <h4 class="app-card-title">Avance <!--FALTA CORREGIR LAS GRÁFICAS-->
                     <span style="font-weight: normal; font-size: 12px;">(Pedidos con alta)</span>
                   </h4>
                 </div><!--//col-auto-->
@@ -349,7 +350,7 @@
                     <div class="app-card-header p-3">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
-                                <h4 class="app-card-title">Despachos</h4>
+                                <h4 class="app-card-title">Despachos</h4> <!--FALTA REVIAR-->
                             </div><!--//col-auto-->
 
                             <div class="col-auto">
@@ -426,8 +427,8 @@
                         <div class="intro">Instrumentos jurídicos locales (contratos y convenios) "vigentes", formalizados y/o en proceso de formalización.</div>
                     </div><!--//app-card-body px-4-->
 
-                    <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Contratos/General">Ver</a>
+                    <div class="app-card-footer p-4 mt-auto"> 
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Contratos/General">Descargar</a>
                     </div><!--//app-card-footer-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
@@ -452,11 +453,11 @@
                     </div><!--//app-card-header p-3 border-bottom-0-->
 
                     <div class="app-card-body px-4">
-                        <div class="intro">Status de Pedidos Locales, con y sin alta generados por la Oficina de Adquisiciones, por autorización de compra.</div>
+                        <div class="intro">Estatus de Pedidos Locales, con y sin alta generados por la Oficina de Adquisiciones, por autorización de compra.</div>
                     </div><!--//app-card-body-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Pedidos/Compras">Ver</a>
+                       <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Pedidos/Compras">Descargar</a>
                     </div><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-12 col-lg-4-->
@@ -474,17 +475,17 @@
                             </div><!--//col-auto-->
 
                             <div class="col-auto">
-                                <h4 class="app-card-title">Histórico de Claves</h4>
+                                <h4 class="app-card-title">Reuqerimientos</h4>
                             </div><!--//col-auto-->
                         </div><!--//row align-items-center gx-3-->
                     </div><!--//app-card-header p-3 border-bottom-0-->
 
                     <div class="app-card-body px-4">
-                        <div class="intro">Registro de claves de medicamento y material de curación atendidas en el ejercicio encurso.</div>
+                        <div class="intro">Instrumentos jurídicos locales (contratos y convenios) "vigentes", formalizados y/o en proceso de formalización.</div>
                     </div><!--//app-card-body px-4-->
 
                     <div class="app-card-footer p-4 mt-auto">
-                    <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Articulos/Listarart">Ver</a>
+                    <a class="btn app-btn-secondary" href="<?php echo base_url(); ?>Articulos/Listarart">Descargar</a>
                     </div><!--//app-card-footer p-4 mt-auto-->
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-lg-4-->

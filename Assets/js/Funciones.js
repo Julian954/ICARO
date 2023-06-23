@@ -14,8 +14,11 @@ const formulario = document.getElementById('formulario');
 $(document).ready(function () {
   //MENSAJE DE CARGA
   formulario.addEventListener("submit", function (event) {
-    var contenedor = document.getElementById("pantalla-carga");
-    contenedor.style.visibility = "visible";
+    $("#archivoArticulos").on("hidden.bs.modal", function () {
+          var contenedor = document.getElementById("pantalla-carga");
+          contenedor.style.visibility = "visible";
+    });
+    $("#archivoArticulos").modal("hide");
   });
 
   //Editar
