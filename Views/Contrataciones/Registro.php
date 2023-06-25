@@ -95,12 +95,12 @@
                     <input style="display: none;" type="file" id="file-input" multiple name="archivo[]" required/>
                     <label id="fileup" for="file-input">
                       <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                      &nbsp; Selecciona los archivos.
+                      Selecciona los archivos
                     </label>
                     <div id="num-of-files">Sin archivos cargados.</div>
                     <ul id="files-list"></ul>
                     <hr>
-                    <div><strong>Nota:</strong> Solo se permiten archivos PDF, WORD, EXCEL y ZIP, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</div>
+                    <div><strong>Nota:</strong> Solo se permiten archivos PDF, WORD, EXCEL y ZIP, con un tamaño máximo de 20MB, en caso de no cumplir con alguna de estas indicaciones no se subirá.</div>
                   </div>
                 </div>
                 <button type="submit" class="btn app-btn-primary mb-2">Solicitar Requerimiento</button>

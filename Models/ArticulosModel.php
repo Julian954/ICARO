@@ -79,10 +79,11 @@ class ArticulosModel extends Mysql
         foreach ($datos as $fila) {
           $clave = $fila[2] ?? ''; // Valor de la columna "GPO" en el archivo CSV
           $descripcion = $fila[8] ?? ''; // Valor de la columna "ESP" en el archivo CSV
+          $cantidad = $fila[10]??''; //valor de la columna cantidad
         
           // Insertar los datos en la base de datos
-          $query = "INSERT INTO catalogo (clave, descripcion) VALUES (?,?)";
-          $data = array($clave, $descripcion);
+          $query = "INSERT INTO catalogo (clave, descripcion, cantidad) VALUES (?,?,?)";
+          $data = array($clave, $descripcion, $cantidad);
           $resul = $this->insert($query, $data); //insert es para agregar un registro
         }
     
