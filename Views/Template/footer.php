@@ -1,6 +1,14 @@
 	<div class="app-wrapper">
+        
         <div style="visibility: hidden;" id="pantalla-carga">
-            <div class="mensaje-carga">Enviando datos...</div>
+            <div class="mensaje-carga">
+                <a href="#" class="btn-flotante">
+                    <span>
+                        <img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/carga.gif" height="50px" alt="logo">
+                        cargando...
+                    </span>
+                </a>
+            </div>
         </div>
         <footer class="app-footer">
             <hr class="my-1">

@@ -216,6 +216,57 @@
             header("location: " . base_url() . "Contrataciones/Foro?contrato=$number");
             die();
         }
+
+        public function DescargarArchivo(){
+            // Conectarse a la base de datos (reemplaza los valores con los de tu base de datos)
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "imss";
+            $conn = new mysqli($servername, $username, $password, $dbname);
+        
+            // Verificar la conexión
+            if ($conn->connect_error) {
+                die("Error al conectar a la base de datos: " . $conn->connect_error);
+            }
+        
+            // Establecer la codificación de caracteres
+            $conn->set_charset("utf8");
+        
+            // Consulta para obtener los datos de la tabla que deseas exportar (reemplaza 'nombre_de_tabla' con el nombre de tu tabla)
+            $sql = "SELECT nooficio, administrador, categoria, descripcion, contratacion, area, contrato, termino, maximo, dictamen, estado, inicio, fecha_eliminar FROM contrataciones";
+            $result = $conn->query($sql);
+        
+            // Crear un archivo CSV y escribir los datos en él
+            $filename = "Requerimientos.csv";
+            $file = fopen($filename, "w");
+            if ($file) {
+                // Escribir el encabezado del archivo CSV
+                $header = array("No.Oficio", "Administrador", "Categoría", "Descripción", "Contratación", "Área", "Contrato", "Término", "Máximo", "Dictamen", "Estado", "Inicio", "Fecha de Eliminación");
+                fputcsv($file, $header);
+        
+                // Escribir los datos de la tabla en el archivo CSV
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $data = array($row['nooficio'], $row['administrador'], $row['categoria'], $row['descripcion'], $row['contratacion'], $row['area'], $row['contrato'], $row['termino'], $row['maximo'], $row['dictamen'], $row['estado'], $row['inicio'], $row['fecha_eliminar']);
+                        fputcsv($file, $data);
+                    }
+                }
+        
+                fclose($file);
+        
+                // Descargar el archivo CSV
+                header('Content-Type: application/csv');
+                header('Content-Disposition: attachment; filename="' . $filename . '"');
+                header('Content-Length: ' . filesize($filename));
+                readfile($filename);
+            } else {
+                echo "Error al crear el archivo CSV.";
+            }
+        
+            $conn->close();
+        }
+        
     }
 ?>
 

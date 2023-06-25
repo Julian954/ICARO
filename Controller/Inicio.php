@@ -20,7 +20,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data5 = $this->model->pedidos();
         $data6 = $this->model->selectquejas_final();
         $data7 = $this->model->despachos();
-        $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, "", $data6, $data7);
+        $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
         die();
     }
 
@@ -67,24 +67,82 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         die();
     }
 
+    public function DescargarAtencion(){
+        $data = $this->model->rankingdiario();
+
+        // Nombre del archivo CSV y ruta de destino
+        $archivo_csv = 'Assets/Documentos/Exportaciones/Atencion.csv';
+
+        // Abrir el archivo CSV en modo escritura
+        $archivo = fopen($archivo_csv, 'w');
+
+        // Verificar si se pudo abrir el archivo
+        if ($archivo) {
+            // Escribir los encabezados de las columnas
+            $encabezados = array('Colima', 'Nacional', 'Dia');
+            fputcsv($archivo, $encabezados);
+        
+            foreach ($data as $campos) {
+                fputcsv($archivo, $campos);
+            }
+            // Cerrar el archivo
+            fclose($archivo);
+        
+            echo "Exportación completada. Se ha creado el archivo CSV.";
+        } else {
+            echo "Error al crear el archivo CSV.";
+        }
+        header("location: " . base_url() . 'Assets/Documentos/Exportaciones/Atencion.csv');
+        die();
+    }
+
     //Datos para la gráfica de clinicas
     public function pastelnegadas()
     {
         $data = $this->model->Gpastelnegadas();
+        $otros = $this->model->Gpastelnegadasotros();
+        array_push($data, $otros);
         echo json_encode($data);
         die();
     }
 
+    public function DescargarNegadas(){
+        $data = $this->model->negadas();
+
+        // Nombre del archivo CSV y ruta de destino
+        $archivo_csv = 'Assets/Documentos/Exportaciones/Negadas.csv';
+
+        // Abrir el archivo CSV en modo escritura
+        $archivo = fopen($archivo_csv, 'w');
+
+        // Verificar si se pudo abrir el archivo
+        if ($archivo) {
+            // Escribir los encabezados de las columnas
+            $encabezados = array('Unidad', 'Negadas', 'Fecha');
+            fputcsv($archivo, $encabezados);
+
+            foreach ($data as $campos) {
+                fputcsv($archivo, $campos);
+            }
+            // Cerrar el archivo
+            fclose($archivo);
+        
+            echo "Exportación completada. Se ha creado el archivo CSV.";
+        } else {
+            echo "Error al crear el archivo CSV.";
+        }
+        header("location: " . base_url() . 'Assets/Documentos/Exportaciones/Negadas.csv');
+        die();
+    }
+
     public function Queja(){
-        //$id = $_POST['id'];
-        $descipcion  =$_POST['descripcion'];
-        $piezas=$_POST['piezas'];
-        $umf  =$_POST['umf'];
-        $receta=$_POST['receta'];
-        //$estado  =$_POST['estado'];
-        //$fecha=$_POST['fecha'];
+        $descipcion  = limpiarinput($_POST['descripcion']);
+        $piezas = limpiarInput($_POST['piezas']);
+        $umf  = limpiarInput($_POST['umf']);
+        $receta= limpiarInput($_POST['receta']);
         $insert = $this->model->insertarQueja($descipcion, $piezas, $umf, $receta);
-        header("location: " . base_url() . "Inicio/Home");
+        $alert = 'registrado';
+        header("location: " . base_url() . "Inicio/Home?msg=$alert");
         die();
     }
 
@@ -92,9 +150,108 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $id=$_GET['id'];
         $estado= 1;
         $actualiza = $this->model->Actualizar_Queja($id, $estado);
-        header("location: " . base_url() . "Inicio/Home");
+        $alert = 'atendido';
+        header("location: " . base_url() . "Inicio/Home?msg=$alert");
         die();
     }
+
+    public function DescargarContratos(){
+        $data = $this->model->contratos();
+
+        // Nombre del archivo CSV y ruta de destino
+        $archivo_csv = 'Assets/Documentos/Exportaciones/Contratos.csv';
+
+        // Abrir el archivo CSV en modo escritura
+        $archivo = fopen($archivo_csv, 'w');
+
+        // Verificar si se pudo abrir el archivo
+        if ($archivo) {
+            // Escribir los encabezados de las columnas
+            $encabezados = array('No Contrato', 'Descripcion', 'Area', 'Categoria', 'Tipo', 'Termino', 'Maximo', 'Fianza', 'Plataforma', 'Fecha');
+            fputcsv($archivo, $encabezados);
+
+            foreach ($data as $campos) {
+                fputcsv($archivo, $campos);
+            }
+            // Cerrar el archivo
+            fclose($archivo);
+        
+            echo "Exportación completada. Se ha creado el archivo CSV.";
+        } else {
+            echo "Error al crear el archivo CSV.";
+        }
+        header("location: " . base_url() . 'Assets/Documentos/Exportaciones/Contratos.csv');
+        die();
+    }
+
+    public function DescargarRequerimientos(){
+        $data = $this->model->requerimeintos();
+
+        // Nombre del archivo CSV y ruta de destino
+        $archivo_csv = 'Assets/Documentos/Exportaciones/Requerimeintos.csv';
+
+        // Abrir el archivo CSV en modo escritura
+        $archivo = fopen($archivo_csv, 'w');
+
+        // Verificar si se pudo abrir el archivo
+        if ($archivo) {
+            // Escribir los encabezados de las columnas
+            $encabezados = array('No Oficio', 'Descripcion', 'Area', 'Categoria', 'Dictamen', 'Termino', 'Maximo', 'Contrato', 'Contratacion', 'Fecha');
+            fputcsv($archivo, $encabezados);
+
+            foreach ($data as $campos) {
+                fputcsv($archivo, $campos);
+            }
+            // Cerrar el archivo
+            fclose($archivo);
+        
+            echo "Exportación completada. Se ha creado el archivo CSV.";
+        } else {
+            echo "Error al crear el archivo CSV.";
+        }
+        header("location: " . base_url() . 'Assets/Documentos/Exportaciones/Requerimeintos.csv');
+        die();
+    }
+
+    public function DescargarPedidos(){
+        $data = $this->model->pedidosd();
+
+        // Nombre del archivo CSV y ruta de destino
+        $archivo_csv = 'Assets/Documentos/Exportaciones/Pedidos.csv';
+
+        // Abrir el archivo CSV en modo escritura
+        $archivo = fopen($archivo_csv, 'w');
+
+        // Verificar si se pudo abrir el archivo
+        if ($archivo) {
+            // Escribir los encabezados de las columnas
+            $encabezados = array('No pedido', 'Tipo', 'Clave', 'No Alta', 'Proveedor', 'Inicio', 'Cantidad', 'ETA', 'Alta', 'Monto', 'Pagado');
+            fputcsv($archivo, $encabezados);
+
+            foreach ($data as $campos) {
+                fputcsv($archivo, $campos);
+            }
+            // Cerrar el archivo
+            fclose($archivo);
+        
+            echo "Exportación completada. Se ha creado el archivo CSV.";
+        } else {
+            echo "Error al crear el archivo CSV.";
+        }
+        header("location: " . base_url() . 'Assets/Documentos/Exportaciones/Pedidos.csv');
+        die();
+    }
+
+
+
+
+
+
+
+
+
+
+
     public function Visto(){
         $id=$_POST['id'];
         $visto= 1;

@@ -8,15 +8,66 @@ var Posicion = URLactual.indexOf("?");
 var Final = Posicion + 33;
 let Part = URLactual.slice(Posicion, Final);
 var fila; //captura la fila, para editar o eliminar
-const formulario = document.getElementById('formulario');
-
 
 $(document).ready(function () {
+
   //MENSAJE DE CARGA
-  formulario.addEventListener("submit", function (event) {
-    var contenedor = document.getElementById("pantalla-carga");
-    contenedor.style.visibility = "visible";
-  });
+  if (document.getElementById("formulario1") !== null) {
+    const formulario1 = document.getElementById("formulario1");
+    formulario1.addEventListener("submit", function (event) {
+      if (document.getElementById("modal1") !== null) {
+        $("#modal1").on("hidden.bs.modal", function () {
+          var contenedor = document.getElementById("pantalla-carga");
+          contenedor.style.visibility = "visible";
+        });
+      }
+    });
+  }
+  if (document.getElementById("formulario2") !== null) {
+    const formulario2 = document.getElementById("formulario2");
+    formulario2.addEventListener("submit", function (event) {
+      if (document.getElementById("modal2") !== null) {
+        $("#modal2").on("hidden.bs.modal", function () {
+          var contenedor = document.getElementById("pantalla-carga");
+          contenedor.style.visibility = "visible";
+        });
+      }
+    });
+  }
+  if (document.getElementById("formulario3") !== null) {
+    const formulario3 = document.getElementById("formulario3");
+    formulario3.addEventListener("submit", function (event) {
+      if (document.getElementById("modal3") !== null) {
+        $("#modal3").on("hidden.bs.modal", function () {
+          var contenedor = document.getElementById("pantalla-carga");
+          contenedor.style.visibility = "visible";
+        });
+      }
+    });
+  }
+  if (document.getElementById("formulario4") !== null) {
+    const formulario4 = document.getElementById("formulario4");
+    formulario4.addEventListener("submit", function (event) {
+      if (document.getElementById("modal4") !== null) {
+        $("#modal4").on("hidden.bs.modal", function () {
+          var contenedor = document.getElementById("pantalla-carga");
+          contenedor.style.visibility = "visible";
+        });
+      }
+    });
+  }
+  if (document.getElementById("formulario5") !== null) {
+    const formulario5 = document.getElementById("formulario5");
+    formulario5.addEventListener("submit", function (event) {
+      if (document.getElementById("modal5") !== null) {
+        $("#modal5").on("hidden.bs.modal", function () {
+          var contenedor = document.getElementById("pantalla-carga");
+          contenedor.style.visibility = "visible";
+        });
+      }
+    });
+  }
+
 
   //Editar
   $(document).on("click", ".btnEditar", function () {
@@ -86,7 +137,7 @@ $(document).ready(function () {
     });
   });
 
-  //Mensaje de alerta al reiniciar asistencias
+  //Mensaje de alerta al validar
   $(".validar").submit(function (e) {
     e.preventDefault();
     Swal.fire({
@@ -134,10 +185,10 @@ $(document).ready(function () {
   });
 
   //Mensaje de alerta al restablecer contraseña
-  $(".rest").submit(function (e) {
+  $(".aten").submit(function (e) {
     e.preventDefault();
     Swal.fire({
-      title: "¿Está seguro de restablecer la contraseña?",
+      title: "¿Está seguro de atender la queja?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#28a745",
@@ -150,6 +201,19 @@ $(document).ready(function () {
       }
     });
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //Mensaje de alerta al eliminar todos los inactivos
   $(".Etodo").submit(function (e) {
@@ -696,7 +760,7 @@ function pastelnegadas() {
       var data = JSON.parse(response);
       var nombre = [];
       var total = [];
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < data.length; i++) {
         nombre.push(data[i]["abreviacion"]);
         total.push(data[i]["negadas"]);
       }
@@ -719,11 +783,11 @@ function pastelnegadas() {
                 "#FFD3B5",
                 "#FFAAA6",
                 "#00A8C6",
-                "#FF9C00e",
                 "#C2258E",
                 "Blue",
                 "Salmon",
                 "Wheat",
+                "#FF9C00e",
                 "Peru",
                 "CadetBlue",
                 "Navy",

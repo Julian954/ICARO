@@ -29,7 +29,13 @@ class InicioModel extends Mysql{
         $res = $this->select_all($sql);
         return $res;
     }
-
+    //Selecciona las negadas más recientes
+    public function negadas()
+    {
+        $sql = "SELECT unidades.nombre, indicadores.negadas, indicadores.fecha FROM indicadores, unidades WHERE indicadores.unidad = unidades.clave ORDER BY fecha DESC";
+        $res = $this->select_all($sql);
+        return $res;
+    }
     //Selecciona las quejas
     public function quejas()
     {
@@ -37,44 +43,43 @@ class InicioModel extends Mysql{
         $res = $this->select_all($sql);
         return $res;
     }
-
     public function pedidos()
     {
-        $ordenar ="SELECT COUNT(nopedido), COUNT(fecha_alta), MONTH(fecha_alta) AS mes FROM pedidos GROUP BY mes";
+        $ordenar ="SELECT SUM(monto) AS monto, SUM(pagado) AS pagado, MONTHNAME(fecha_inicio) AS mes, MONTH(fecha_inicio) AS nom FROM pedidos GROUP BY nom;";
         $res= $this->select_all($ordenar);
         return $res;
     }
-
-
     //Selecciona las negadas actuales por clínica
     public function Gpastelnegadas()
     {
-        $sql = "SELECT unidades.abreviacion, indicadores.negadas, indicadores.fecha FROM indicadores, unidades WHERE indicadores.unidad = unidades.clave AND fecha = (SELECT MAX(fecha) FROM indicadores) ORDER BY `indicadores`.`negadas` DESC";
+        $sql = "SELECT unidades.abreviacion, indicadores.negadas, indicadores.fecha FROM indicadores, unidades WHERE indicadores.unidad = unidades.clave AND fecha = (SELECT MAX(fecha) FROM indicadores) ORDER BY `indicadores`.`negadas` DESC LIMIT 5";
         $res = $this->select_all($sql);
         return $res;
     }
 
-    public function datos_de_foro_para_noti(){
-        //$this->id = $id;
-        $sql = "SELECT * FROM detalle_cont INNER JOIN validar_cont ON validar_cont.id_contrato = detalle_cont.contrato INNER JOIN usuarios ON detalle_cont.id_responde = usuarios.id";
-        $res = $this->select_all($sql);
-            return $res;
-    }
-    public function datos_de_foro_para_noti2(){
-       
-        $sql = "SELECT * FROM detalle_contrata INNER JOIN validar_contrata ON validar_contrata.id_contrato = detalle_contrata.contrato INNER JOIN usuarios ON detalle_contrata.id_responde = usuarios.id";
-        $res = $this->select_all($sql);
-            return $res;
-    }
-    public function datos_notifica(){
-       
-        $sql = "SELECT * FROM contrataciones";;
-        $res = $this->select_all($sql);
-            return $res;
-    }
-    public function datos_notifica2(){
-       
-        $sql = "SELECT * FROM contratos";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function datos_de_foro_para_noti(int $id){
+        $this->id = $id;
+        $sql = "SELECT * FROM detalle_cont, usuarios WHERE detalle_cont.id_responde = '{$this->id}'";
         $res = $this->select_all($sql);
             return $res;
     }
@@ -276,7 +281,13 @@ class InicioModel extends Mysql{
         return $return;
     }
 
-
+    //Selecciona la suma de negadas y manuales de los ultimos dos días
+    public function rankingdiario()
+    {
+        $sql = "SELECT AVG(surtida) AS colima, AVG(atencion) AS nacional, fecha AS dia FROM (SELECT fecha, surtida, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS surtida, atencion FROM nacional) AS datos_totales GROUP BY dia;";
+        $res = $this->select_all($sql); 
+        return $res;
+    }
 
     //Selecciona las áreas
     public function SelectAreas()
@@ -312,6 +323,30 @@ class InicioModel extends Mysql{
     public function SelectTipoContratacion()
     {
         $sql = "SELECT * FROM tipocontrata";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Seleccionar el tipo de contratacion
+    public function contratos()
+    {
+        $sql = "SELECT numero, descripcion, area, categoria, tipo, termino, maximo, fianza, plataforma, fecha FROM contratos";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Seleccionar el tipo de contratacion
+    public function requerimeintos()
+    {
+        $sql = "SELECT nooficio, descripcion, area, categoria, dictamen, termino, maximo, contrato, contratacion, inicio FROM contrataciones";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Seleccionar el tipo de contratacion
+    public function pedidosd()
+    {
+        $sql = "SELECT nopedido, tipo, clave, noalta, proveedor, fecha_inicio, cantidad, eta, fecha_alta, monto, pagado FROM pedidos";
         $res = $this->select_all($sql);
         return $res;
     }

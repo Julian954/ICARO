@@ -133,6 +133,8 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
           $cantidad = $fila[25]??'';//Z
           $proveedor = $fila[28]??'';//AC
           $noalta = $fila[34]??'';//AI
+          $fechai = $datos[30]??'';//AE
+          $fecha_inicio = DateTime::createFromFormat('m-d-Y', $fechai)->format('Y/m/d');
           $fecha_alta = $fila[33] ?? ''; //AH
           $monto = $fila[42] ?? '';//AQ
           $pagado = $fila[44] ?? '';//AS
@@ -140,8 +142,8 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
 
           if (!empty($nopedido) && !empty($tipo) && !empty($proveedor) && !empty($topn)) {
           // Insertar los datos en la base de datos
-          $query = "INSERT INTO pedidos(nopedido, tipo, clave, noalta, proveedor, cantidad, topn, fecha_alta, monto, pagado , fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-          $data = array($nopedido, $tipo, $clave, $noalta, $proveedor, $cantidad, $topn, $fecha_alta,$monto, $pagado , $this->fecha);
+          $query = "INSERT INTO pedidos(nopedido, tipo, clave, noalta, proveedor, fecha_inicio, cantidad, topn, fecha_alta, monto, pagado , fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          $data = array($nopedido, $tipo, $clave, $noalta, $proveedor, $fecha_inicio, $cantidad, $topn, $fecha_alta,$monto, $pagado , $this->fecha);
           $resul = $this->insert($query, $data); //insert es para agregar un registro
           }
         }
