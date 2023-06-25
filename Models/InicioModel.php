@@ -72,14 +72,19 @@ class InicioModel extends Mysql{
 
 
 
+    public function datos_de_foro_para_noti(){
+        
+        $sql = "SELECT * FROM detalle_cont INNER JOIN validar_cont ON validar_cont.id_contrato = detalle_cont.contrato INNER JOIN usuarios ON detalle_cont.id_responde = usuarios.id";
+        $res = $this->select_all($sql);
+            return $res;
+    }
 
 
 
 
-
-    public function datos_de_foro_para_noti(int $id){
-        $this->id = $id;
-        $sql = "SELECT * FROM detalle_cont, usuarios WHERE detalle_cont.id_responde = '{$this->id}'";
+    public function datos_de_foro_para_noti2(){
+        
+        $sql = "SELECT * FROM detalle_contrata INNER JOIN validar_contrata ON validar_contrata.id_contrato = detalle_contrata.contrato INNER JOIN usuarios ON detalle_contrata.id_responde = usuarios.id";
         $res = $this->select_all($sql);
             return $res;
     }
@@ -248,6 +253,18 @@ class InicioModel extends Mysql{
         $resul = $this->update($query, $data); //Update es para actualizar un registro
         $return = $resul;
         return $return;
+    }
+    public function datos_notifica2()
+    {        
+        $sql ="SELECT * FROM contratos";
+        $res= $this->select_all($sql);
+        return $res;
+    }
+    public function datos_notifica()
+    {        
+        $sql ="SELECT * FROM contrataciones";
+        $res= $this->select_all($sql);
+        return $res;
     }
     public function notificacion_asigna_contrato()
     {        
