@@ -54,9 +54,27 @@ class InicioModel extends Mysql{
         return $res;
     }
 
-    public function datos_de_foro_para_noti(int $id){
-        $this->id = $id;
-        $sql = "SELECT * FROM detalle_cont, usuarios WHERE detalle_cont.id_responde = '{$this->id}'";
+    public function datos_de_foro_para_noti(){
+        //$this->id = $id;
+        $sql = "SELECT * FROM detalle_cont INNER JOIN validar_cont ON validar_cont.id_contrato = detalle_cont.contrato INNER JOIN usuarios ON detalle_cont.id_responde = usuarios.id";
+        $res = $this->select_all($sql);
+            return $res;
+    }
+    public function datos_de_foro_para_noti2(){
+       
+        $sql = "SELECT * FROM detalle_contrata INNER JOIN validar_contrata ON validar_contrata.id_contrato = detalle_contrata.contrato INNER JOIN usuarios ON detalle_contrata.id_responde = usuarios.id";
+        $res = $this->select_all($sql);
+            return $res;
+    }
+    public function datos_notifica(){
+       
+        $sql = "SELECT * FROM contrataciones";;
+        $res = $this->select_all($sql);
+            return $res;
+    }
+    public function datos_notifica2(){
+       
+        $sql = "SELECT * FROM contratos";
         $res = $this->select_all($sql);
             return $res;
     }
@@ -66,12 +84,7 @@ class InicioModel extends Mysql{
         $res = $this->select_all($sql);
             return $res;
     }
-    /*public function datos_de_foro_para_noti2(int $id){
-        $this->id = $id;
-        $sql = "SELECT contrato FROM detalle_cont, usuarios WHERE detalle_cont.id_responde = '{$this->id}'";
-        $res = $this->select_all($sql);
-            return $res;
-    }*/
+
     public function eliminar_datos(string $fecha)
 {
         $this->fecha = $fecha;
@@ -115,13 +128,134 @@ class InicioModel extends Mysql{
         $return = "";       
         $this->visto=$visto;
         $this->id = $id;        
-        $query = "UPDATE detalle_cont SET visto=? WHERE id=?";
+        $query = "UPDATE detalle_cont SET visto=? WHERE id1=?";
         $data = array($this->visto, $this->id);
         $resul = $this->update($query, $data); //Update es para actualizar un registro
         $return = $resul;
         return $return;
     }
-
+    public function visto2($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE detalle_contrata SET visto=? WHERE id1=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto3($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE contrataciones SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto4($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE contratos SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto3_2($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE contrataciones SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto4_2($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE contratos SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto6($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE contratos SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto7($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE contratos SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto8($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE validar_cont SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto9($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE validar_contrata SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto10($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE contratos SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function visto11($id, $visto){
+        $return = "";       
+        $this->visto=$visto;
+        $this->id = $id;        
+        $query = "UPDATE contrataciones SET visto=? WHERE id=?";
+        $data = array($this->visto, $this->id);
+        $resul = $this->update($query, $data); //Update es para actualizar un registro
+        $return = $resul;
+        return $return;
+    }
+    public function notificacion_asigna_contrato()
+    {        
+        $sql ="SELECT * FROM validar_cont";
+        $res= $this->select_all($sql);
+        return $res;
+    }
+    public function notificacion_asigna_requieri()
+    {        
+        $sql ="SELECT * FROM validar_contrata";
+        $res= $this->select_all($sql);
+        return $res;
+    }
     public function selectquejas_final()
     {        
         $sql ="SELECT * FROM unidades";

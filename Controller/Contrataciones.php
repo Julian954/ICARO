@@ -202,8 +202,9 @@
 
         public function validar(){
             $number = limpiarInput($_GET['contrato']);
+            $fecha_valida=$_POST['fecha_valida'];
             $estado = 3;
-            $actualizar = $this->model->actualizaEstado($estado, $number);
+            $actualizar = $this->model->actualizaEstado($estado, $number, $fecha_valida);
             header("location: " . base_url() . "Contrataciones/Foro?contrato=$number");
             die();
         }

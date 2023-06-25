@@ -133,7 +133,7 @@
 							        	</div><!--//dropdown-menu-content-->
 							        	<div class="dropdown-menu-footer p-2 text-center">
 											
-											<a href="<?php echo base_url(); ?>Inicio/Notificaciones?id=<?php echo $_SESSION['id']; ?>">Mostrar</a>
+											<a href="<?php echo base_url(); ?>Inicio/Notificaciones">Mostrar</a>
 							        	</div>					
 									</div><!--//dropdown-menu-->					        
 					        	</div><!--//app-utility-item-->

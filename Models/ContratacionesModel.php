@@ -195,13 +195,14 @@
         }
 
         //actualizar estado de contrato
-        public function actualizaEstado(int $estado, string $id)
+        public function actualizaEstado(int $estado, string $id, string $fecha_valida)
         {
             $return = "";
             $this->id = $id;
             $this->estado = $estado;
-            $query = "UPDATE contrataciones SET estado = ? WHERE nooficio=?";       
-            $data = array($this->estado, $this->id);
+            $this->fecha_valida = $fecha_valida;
+            $query = "UPDATE contrataciones SET fecha_validado=?, estado = ? WHERE nooficio=?";       
+            $data = array($this->fecha_valida, $this->estado, $this->id);
             $resul = $this->update($query, $data);
             $return = $resul;
             return $return;

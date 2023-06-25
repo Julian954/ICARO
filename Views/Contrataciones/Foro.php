@@ -48,7 +48,8 @@
             <button class="btn app-btn-secondary" data-toggle="modal" data-target="#VentanaModal">Responder</button>
             <?php if ($_SESSION['rol'] == 4 || $_SESSION['rol'] == 7) {?>
               <form action="<?php echo base_url() ?>Contrataciones/validar?contrato=<?php echo $data1['id_contrato']; ?>" method="post" class="d-inline validar">
-                <button title="Validar" type="submit" class="btn app-btn-primary">Validar</button>
+              <input type="text" id="fecha_valida" name="fecha_valida" value="<?= date('Y-m-d')?>" style="display:none;" readonly>
+              <button title="Validar" type="submit" class="btn app-btn-primary">Validar</button>
               </form>
             <?php }
           } elseif ($_SESSION['rol'] == 7 && ($data4['estado'] <= 3)) { ?>
