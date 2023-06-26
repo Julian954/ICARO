@@ -184,7 +184,7 @@ foreach ($data1 as $pedi2){
               <tr>
                 <th scope="col"></th>
                 <th scope="col"><span></span>No. Pedido</th>
-                <th scope="col">Tipo</th>
+                <th scope="col">GPO</th>
                 <th scope="col">Clave</th>
                 <th scope="col">Cantidad</th>
                 <th scope="col">ETA</th>

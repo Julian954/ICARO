@@ -47,7 +47,7 @@
                   <table class="table app-table-hover mb-0 text-left" id="Table">
 			  				    <thead>
 			  					    <tr>
-                        <th scope="col">Edo</th>    
+                        <th scope="col"></th>    
                         <th scope="col">Requerimiento</th>
                         <th scope="col">Fecha de creacion</th>
                         <th scope="col">Responsable</th>
@@ -101,7 +101,7 @@
                   <table class="table app-table-hover mb-0 text-left" id="Table2">
 			  				    <thead>
 			  					    <tr>
-                        <th scope="col">Edo</th>    
+                        <th scope="col"></th>    
                         <th scope="col">Requerimiento</th>
                         <th scope="col">Fecha de creacion</th>
                         <th scope="col">Responsable</th>
@@ -159,7 +159,7 @@
                   <table class="table app-table-hover mb-0 text-left" id="Table3">
 			  				    <thead>
 			  					    <tr>
-                        <th scope="col">Edo</th>    
+                        <th scope="col"></th>    
                         <th scope="col">Requerimiento</th>
                         <th scope="col">Fecha de creacion</th>
                         <th scope="col">Responsable</th>

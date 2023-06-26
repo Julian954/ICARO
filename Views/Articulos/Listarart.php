@@ -43,6 +43,7 @@
                                             <th class="cell" >Clave de Articulo</th>
                                             <th class="cell" >Descripcion</th>
                                             <th class="cell" >Descripcion corta</th>
+                                            <th class="cell" >Cantidad</th>
                                             <th class="cell" >Acciones</th>
                                             </tr>
                                         </thead>

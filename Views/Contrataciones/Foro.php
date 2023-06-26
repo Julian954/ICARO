@@ -131,7 +131,7 @@
                 <input style="display: none;" type="file" id="file-input" multiple name="archivo[]"/>
                 <label id="fileup" for="file-input">
                   <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                  &nbsp; Selecciona los archivos.
+                  &nbsp; Selecciona los archivos
                 </label>
                 <div id="num-of-files">Sin archivos cargados.</div>
                 <ul id="files-list"></ul>
