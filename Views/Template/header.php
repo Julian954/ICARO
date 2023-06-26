@@ -37,7 +37,7 @@
 	    <link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">
 		<?php
 		// Configuración de la conexión a la base de datos
-$servername = "localhost:3308";
+$servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "imss";

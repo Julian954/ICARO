@@ -14,9 +14,9 @@ class Despachos extends Controllers //Aquí se debe llamas igual que el archivo
     public function Registro()
     {
         //$id = $_GET['id'];
-        //$data1= $this->model->SelectPedido();
+        $data1= $this->model->SelectUnidad();
         //$data2 = $this->model->SelectFecha();
-    $this->views->getView($this, "Registro", ""/*, $data1, $data2*/);
+    $this->views->getView($this, "Registro", "", $data1);
     }
 
     public function agregar() {
