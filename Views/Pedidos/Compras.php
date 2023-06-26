@@ -74,7 +74,9 @@ $total_entregado=0;
 $total_por_entregar=0;
 $z=0;
 foreach ($data1 as $pedi2){
+  if(substr($pedi2['nopedido'], 0, 3) === "D3P"){
   $z++;
+  }
   $total_pedi2=$total_pedi2+$pedi2['cantidad'];
   $total_contratado=$total_contratado+$pedi2['monto'];
   if($pedi2['monto2']!=0){
@@ -179,7 +181,7 @@ foreach ($data1 as $pedi2){
 			  	  <div class="app-card app-card-orders-table shadow-sm mb-5">
 			  	    <div class="app-card-body p-3">
 			  		    <div class="table-responsive">
-          <table class="table app-table-hover mb-0 text-left" id="Table">
+          <table class="table app-table-hover mb-0 text-left" id="Table" >
             <thead>
               <tr>
                 <th scope="col"></th>
@@ -191,7 +193,7 @@ foreach ($data1 as $pedi2){
                 <th scope="col">Top 15</th>
                 <th scope="col">$ IVA precio</th>
                 <th scope="col">Alta</th>
-                <th scope="col">Enlazar</th>
+                <th scope="col"></th>
 </tr>
             </thead>
             <tbody >
