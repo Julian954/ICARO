@@ -3,8 +3,16 @@
 
 
 <?php encabezado() ?> <!-- Poner el header -->
-
-
+<?php
+// Página 2
+/*if (isset($_GET['valor'])) {
+    $valor = $_GET['valor'];
+    
+    // Regresar el valor a la página 1
+    echo "<a href=echo base_url();'Inicio/Home?valor=".urlencode($valor)."'>Regresar a la página 1</a>";
+	//echo "<a href= Inicio/Notificaciones?valor=" urlencode($valor);"></a>"
+}*/
+?>
 
     <div class="app-wrapper">
 
@@ -18,7 +26,7 @@
 				    </div>
 			    </div>
 <br>
-<?php if($_SESSION['rol'] ==4 || $_SESSION['rol'] ==3/* || $_SESSION['rol'] != 2 || $_SESSION['rol'] != 5 || $_SESSION['rol'] != 6*/){?>
+<?php if($_SESSION['rol'] ==4 || $_SESSION['rol'] ==3){?>
 <?php foreach($data1 as $contratos){ ?>
 		
 	<?php if($contratos['id_responde']!=$_SESSION['id']  && $contratos['visto']==0){ ?>

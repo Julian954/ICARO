@@ -35,7 +35,39 @@
 
 	    <!-- App CSS -->
 	    <link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">
-		
+		<?php
+		// Configuración de la conexión a la base de datos
+$servername = "localhost:3308";
+$username = "root";
+$password = "";
+$dbname = "imss";
+
+try {
+    // Crear una nueva conexión PDO
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    
+    // Configurar el modo de error de PDO para mostrar excepciones
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Ejecutar la consulta
+    $sql = "SELECT * FROM contratos";
+    $result = $conn->query($sql);
+
+    $sql1 = "SELECT * FROM contrataciones";
+    $result1 = $conn->query($sql1);
+
+	$sql2 = "SELECT * FROM validar_cont";
+    $result2 = $conn->query($sql2);
+
+	$sql3 = "SELECT * FROM validar_contrata";
+    $result3 = $conn->query($sql3);
+
+	$sql4 = "SELECT * FROM detalle_cont";
+    $result4 = $conn->query($sql4);
+
+	$sql5 = "SELECT * FROM detalle_contrata";
+    $result5 = $conn->query($sql5);
+?>
 	</head>
 
 	<body class="app">
@@ -64,12 +96,111 @@
 		            		</div><!--//NOTIFICACIONES-->
 			            	<div class="app-utilities col-auto">
 				            	<div class="app-utility-item app-notifications-dropdown dropdown">
-					            	<a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notificaciones">
+					            	<a href="<?php echo base_url(); ?>Inicio/Notificaciones"    role="button" aria-expanded="false" title="Notificaciones">
 						            	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 										  	<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
 										  	<path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
 										</svg>
-						            	<span class="icon-badge">X</span>
+										<?php
+										
+
+
+	if($_SESSION['rol']==7){
+   while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+$fechaPasada = new DateTime($row['fecha_validado']); 
+$fechaActual = new DateTime(); 
+$intervalo = $fechaActual->diff($fechaPasada); 
+$diasTranscurridos = $intervalo->days; 							
+	if($diasTranscurridos>2 && $row['estado']==3 && $row['visto']==2){
+		echo "<span class=icon-badge>!</span>";
+		}else{
+		echo "<span class=icon-badge>X</span>";
+		}
+}
+while ($row1 = $result1->fetch(PDO::FETCH_ASSOC)) {		
+$fechaPasada2 = new DateTime($row1['fecha_validado']); 
+$fechaActual2 = new DateTime(); 
+$intervalo2 = $fechaActual2->diff($fechaPasada2); 
+$diasTranscurridos2 = $intervalo2->days; 		
+	if($diasTranscurridos2>2 && $row1['estado']==3 && $row1['visto']==2){
+		echo "<span class=icon-badge>!</span>";
+	}else{
+	echo "<span class=icon-badge>X</span>";
+	}
+	}
+	while ($row = $result->fetch(PDO::FETCH_ASSOC)) { 							
+			if($row['estado']==3 && $row['visto']==2){
+				echo "<span class=icon-badge>!</span>";
+				}else{
+				echo "<span class=icon-badge>X</span>";
+				}
+		}
+		while ($row1 = $result1->fetch(PDO::FETCH_ASSOC)) {					
+			if($dow1['estado']==3 && $row1['visto']==2){
+				echo "<span class=icon-badge>!</span>";
+			}else{
+			echo "<span class=icon-badge>X</span>";
+			}
+			}
+   while ($row1 = $result1->fetch(PDO::FETCH_ASSOC)) {			
+	if($row1['estado']==3 && $row1['visto']==1){
+		echo "<span class=icon-badge>!</span>";
+		}else{
+		echo "<span class=icon-badge>X</span>";
+		}
+}
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {							
+	if($row['estado']==3 && $row['visto']==1){
+	echo "<span class=icon-badge>!</span>";
+	}else{
+	echo "<span class=icon-badge>X</span>";
+	}
+}
+	}
+
+	if($_SESSION['rol']==4){
+while ($row2 = $result2->fetch(PDO::FETCH_ASSOC)) {
+	if($row2['id_validador']==$_SESSION['id'] && $row2['visto']==0){	
+		echo "<span class=icon-badge>!</span>";
+		}else{
+		echo "<span class=icon-badge>X</span>";
+		}
+}	
+while ($row3 = $result3->fetch(PDO::FETCH_ASSOC)) {
+	if($row3['id_validador']==$_SESSION['id'] && $row3['visto']==0){	
+		echo "<span class=icon-badge>!</span>";
+		}else{
+		echo "<span class=icon-badge>X</span>";
+		}
+}
+}
+
+if($_SESSION['rol']==3 || $_SESSION['rol']==4){
+	while ($row4 = $result4->fetch(PDO::FETCH_ASSOC)) {
+		if($row4['id_responde']!=$_SESSION['id'] && $row4['visto']==0){	
+			echo "<span class=icon-badge>!</span>";
+			}else{
+			echo "<span class=icon-badge>X</span>";
+			}
+	}	
+	while ($row5 = $result5->fetch(PDO::FETCH_ASSOC)) {
+		if($row5['id_responde']!=$_SESSION['id'] && $row5['visto']==0){	
+			echo "<span class=icon-badge>!</span>";
+			}else{
+			echo "<span class=icon-badge>X</span>";
+			}
+	}
+	}
+
+   ?>
+
+<?php										  
+   // Cerrar la conexión
+   $conn = null;
+} catch (PDOException $e) {
+   echo "Error de conexión: " . $e->getMessage();
+}
+										?>
 						        	</a><!--//dropdown-toggle-->
 						        	<div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
 						        	    <div class="dropdown-menu-header p-3">
@@ -82,12 +213,12 @@
 											        <div class="col-auto">
 												       <img class="profile-image" src="assets/images/profiles/profile-1.png" alt="">
 											        </div><!--//col-->
-											        <div class="col">
+											        <!-- <div class="col">
 												        <div class="info"> 
 													        <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
 													        <div class="meta"> 2 hrs ago</div>
 												        </div>
-											        </div><!--//col--> 
+											        </div> --><!--//col--> 
 										        </div><!--//row-->
 										        <a class="link-mask" href="#"></a>
 									       	</div><!--//item-->
@@ -101,40 +232,13 @@
 															  	<path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
 															</svg>
 											        	</div>
-										        	</div><!--//col-->
-										        	<div class="col">
-											        	<div class="info"> 
-												    	    <div class="desc">You have a new invoice. Proin venenatis interdum est.</div>
-												    	    <div class="meta"> 1 day ago</div>
-											        	</div>
-										        	</div><!--//col-->
-									        	</div><!--//row-->
-									        	<a class="link-mask" href="#"></a>
+										        	</div><!--//col-->										        	
+									        	</div><!--//row-->									        	
 									      	</div><!--//item-->
 									   		<!--//NOTIFICACIÓN CON GRÁFICA-->
-								       		<div class="item p-3">
-									        	<div class="row gx-2 justify-content-between align-items-center">
-										        	<div class="col-auto">
-											        	<div class="app-icon-holder icon-holder-mono">
-												        	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-															  	<path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
-															</svg>
-											        	</div>
-										        	</div><!--//col-->
-										        	<div class="col">
-											        	<div class="info"> 
-												        	<div class="desc">Your report is ready. Proin venenatis interdum est.</div>
-												        	<div class="meta"> 3 days ago</div>
-											        	</div>
-										        	</div><!--//col-->
-									        	</div><!--//row-->
-									        	<a class="link-mask" href="#"></a>
-								       		</div><!--//item-->
+								       		
 							        	</div><!--//dropdown-menu-content-->
-							        	<div class="dropdown-menu-footer p-2 text-center">
-											
-											<a href="<?php echo base_url(); ?>Inicio/Notificaciones">Mostrar</a>
-							        	</div>					
+							        				
 									</div><!--//dropdown-menu-->					        
 					        	</div><!--//app-utility-item-->
 				            	<div class="app-utility-item app-user-dropdown dropdown">
