@@ -153,10 +153,10 @@
           <div class="app-card app-card-orders-table shadow-sm mb-4">
             <div class="app-card-body p-3">
               <div class="table-responsive">
-                <table class="table app-table-hover mb-0 text-left" id="Table">
+                <table class="table app-table-hover mb-0 text-left" id="TableN">
 							    <thead>
 								    <tr>
-                      <th class="cell">Clave</th>
+                      <th class="cell">GPO</th>
                       <th class="cell">Descripción</th>
                       <th class="cell">CPM</th>
                       <th class="cell">Consumo</th>
@@ -168,8 +168,12 @@
 							    <tbody>
                     <?php foreach ($data3 as $neg) { ?>
                     <tr>
-                      <td><?php echo $neg['clave']; ?></td>
-                      <td><?php echo $neg['des_corta']; ?></td>
+                      <?php if (substr($neg['clave'],0, 3) == "010") { ?>
+                        <td class="font-weight-bold"><?= substr($neg['clave'],0, 3); ?></td>
+                      <?php } else {?>
+                        <td class="font-weight-bold text-info"><?= substr($neg['clave'],0, 3); ?></td>
+                      <?php } ?>
+                      <td><?= ucfirst(strtolower($neg['des_corta'])); ?></td>
                       <td><?php echo $neg['cmp']; ?></td>
                       <td><?php echo $neg['consumo']; ?></td>
                       <?php if ($neg['unidades']+$neg['almacen'] < $neg['cmp']) { ?>
@@ -287,8 +291,8 @@
             <div class="app-card-header p-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
-                  <h4 class="app-card-title">Avance
-                    <span style="font-weight: normal; font-size: 12px;">(Pedidos con alta)</span>
+                  <h4 class="app-card-title">Avance Del Gasto
+                    <span style="font-weight: normal; font-size: 12px;">(Recibido/Atendido)</span>
                   </h4>
                 </div><!--//col-auto-->
                 <div class="col-auto">
@@ -303,7 +307,7 @@
 	  					  <div class="item p-3">
 							    <div class="row align-items-center">
 								    <div class="col">
-									    <div class="title " style="color:#000000;"><?php echo ucfirst($bar['mes']).' ('.$bar['monto'].'/'.$bar['pagado'].')';?></div>
+									    <div class="title " style="color:#000000;"><?php echo ucfirst($bar['mes']).' ($'.number_format($bar['monto'],2,'.',',').'/$'.number_format($bar['pagado'],2,'.',',').')';?></div>
 									    <div class="progress" style="height: 0.7rem;">
                         <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($bar['pagado']*100/$bar['monto'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($bar['pagado']*100/$bar['monto'],2);?>%</div>
                       </div>

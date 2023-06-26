@@ -801,6 +801,14 @@ function pastelnegadas() {
             },
           ],
         },
+        options: {
+          responsive: true,
+          legend: {
+            display: true,
+            position: "right",
+            align: "center",
+          },
+        },
       });
     },
   });
@@ -828,6 +836,7 @@ function GeneralContratos() {
         type: "pie",
         data: {
           labels: nombre,
+          position: "right",
           datasets: [
             {
               data: total,
@@ -841,6 +850,14 @@ function GeneralContratos() {
               ],
             },
           ],
+        },
+        options: {
+          responsive: true,
+          legend: {
+            display: true,
+            position: "right",
+            align: "center",
+          },
         },
       });
     },
@@ -869,6 +886,7 @@ function GeneralContrataciones() {
         type: "pie",
         data: {
           labels: nombre,
+          position: "right",
           datasets: [
             {
               data: total,
@@ -882,6 +900,14 @@ function GeneralContrataciones() {
               ],
             },
           ],
+        },
+        options: {
+          responsive: true,
+          legend: {
+            display: true,
+            position: "right",
+            align: "center",
+          },
         },
       });
     },

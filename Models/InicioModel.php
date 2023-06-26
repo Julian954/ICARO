@@ -57,7 +57,13 @@ class InicioModel extends Mysql{
         return $res;
     }
 
-
+    //Selecciona las negadas actuales por clínica
+    public function Gpastelnegadasotros()
+    {
+        $sql = "SELECT 'Otros' AS abreviacion, SUM(negadas) AS negadas, fecha FROM ( SELECT negadas, fecha, ROW_NUMBER() OVER (ORDER BY negadas DESC) AS row_num FROM indicadores WHERE fecha = (SELECT MAX(fecha) FROM indicadores) ) AS subconsulta WHERE row_num > 5";
+        $res = $this->select($sql);
+        return $res;
+    }
 
 
 
