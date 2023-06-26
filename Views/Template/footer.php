@@ -100,14 +100,21 @@
 <script src="<?php echo base_url(); ?>Assets/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/Funciones.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/chartjs.min.js"></script>
+<script src="<?php echo base_url(); ?>Assets/js/index-charts.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/all.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/front.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/sweetalert2@9.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/DataTables/DataTables-1.10.21/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>Assets/js/files.js"></script>
-<!-- FontAwesome JS-->
-<script defer src="<?php echo base_url(); ?>Assets/css/fontawesome/js/all.min.js"></script>
+<script src="<?php echo base_url(); ?>Assets/js/app.js"></script>
+<script src="<?php echo base_url(); ?>Assets/js/popper.min.js"></script>
+<script src="<?php echo base_url(); ?>Assets/js/bootstrap.min.js"></script>
+
+
+
+
+
 		
 <script>
     window.onload = function(){
@@ -332,19 +339,13 @@
     });
     </script>
 
-    <!-- Javascript -->
-    <script src="<?php echo base_url(); ?>Assets/js/popper.min.js"></script>
-    <script src="Assets/js/bootstrap.min.js"></script>
-    <!-- <script src="../Assets/js/main.js"></script> -->
 
-    <!-- Charts JS -->
-    <script src="<?php echo base_url(); ?>Assets/js/chart.min.js"></script>
-    <script src="<?php echo base_url(); ?>Assets/js/index-charts.js"></script>
-    <script src="<?php echo base_url(); ?>Assets/js/charts-demo.js"></script>
-    <script src="<?php echo base_url(); ?>Assets/js/chart_indica.js"></script>
+
+
+
 
     <!-- Page Specific JS -->
-    <script src="<?php echo base_url(); ?>Assets/js/app.js"></script>
+    
 
     <!-- <script>
         tablaArticulos = $('#tablaArticulo').DataTable({  
