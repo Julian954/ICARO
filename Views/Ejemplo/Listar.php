@@ -72,7 +72,6 @@
           <span class="text-lowercase">text-lowercase |</span>
           <span class="text-uppercase">text-uppercase |</span>
           <span class="text-capitalize">text-capitalize |</span>
-
         </div><!--//app-card-body-->  
       </div><!--//app-card-->
     </div>

@@ -242,7 +242,7 @@
                   </div>
               </div>
               <div class="table-responsive">
-                <table class="table app-table-hover mb-0 text-left" id="Table2">
+                <table class="table app-table-hover mb-0 text-left" id="Table">
 							    <thead>
 								    <tr>
                       <th class="cell">Descripción</th>
@@ -307,8 +307,8 @@
 	  					  <div class="item p-3">
 							    <div class="row align-items-center">
 								    <div class="col">
-									    <div class="title " style="color:#000000;"><?php echo ucfirst($bar['mes']).' ($'.number_format($bar['monto'],2,'.',',').'/$'.number_format($bar['pagado'],2,'.',',').')';?></div>
-									    <div class="progress" style="height: 0.7rem;">
+									    <div class="title" style="color:black;"><span class="font-weight-bold"><?=ucfirst($bar['mes'])?></span><span style="font-weight: normal; font-size: 12px;"><?= ' ($'.number_format($bar['monto'],2,'.',',').' / $'.number_format($bar['pagado'],2,'.',',').')';?></span></div>
+									    <div class="progress" style="height: 0.9rem;">
                         <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($bar['pagado']*100/$bar['monto'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($bar['pagado']*100/$bar['monto'],2);?>%</div>
                       </div>
 								    </div>
@@ -355,7 +355,7 @@
                                         <td class="text-success"><?= $despachos['unidad'];?></td>
                                         <td class="stat-cell" style="text-align: center"><?= $despachos['remision'];?></td>
                                         <td class="stat-cell" style="text-align: center"><?= $despachos['archivo'];?></td>
-                                        <td class="stat-cell" style="text-align: center"><?= $despachos['hora'];?></td>
+                                        <td class="stat-cell" style="text-align: center"><?= substr($despachos['fecha_entrega'],10,6);?></td>
                                         <td class="stat-cell" style="text-align: center">
                                         <?php if($despachos['negadas']==0){?>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">

@@ -361,6 +361,18 @@ $(document).ready(function () {
   });
 });
 
+
+
+"use strict";
+
+window.chartColors = {
+  green: "#75c181",
+  gray: "#a9b5c9",
+  text: "#252930",
+  blue: "#5b99ea",
+  border: "#e7e9ed",
+};
+
 //Gráfica de Barra
 function BarrasAlumnos() {
   $.ajax({
@@ -613,7 +625,7 @@ function barrasrankig() {
       }
       // Set new default font family and font color to mimic Bootstrap's default styling
       Chart.defaults.global.defaultFontFamily =
-        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
       Chart.defaults.global.defaultFontColor = "#292b2c";
 
       const Ventas = {
@@ -664,7 +676,7 @@ function BarrasAtencion() {
     type: "POST",
     success: function (response) {
       var data = JSON.parse(response);
-      var nombre = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+      var nombre = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
       var nacional = [];
       var colima = [];
       for (var i = 0; i < data.length; i++) {
@@ -673,7 +685,7 @@ function BarrasAtencion() {
       }
       // Set new default font family and font color to mimic Bootstrap's default styling
       Chart.defaults.global.defaultFontFamily =
-        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
       Chart.defaults.global.defaultFontColor = "#292b2c";
 
       const Colima = {
@@ -766,7 +778,7 @@ function pastelnegadas() {
       }
       // Set new default font family and font color to mimic Bootstrap's default styling
       Chart.defaults.global.defaultFontFamily =
-        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
       Chart.defaults.global.defaultFontColor = "#292b2c";
       // Pie Chart Example
       var ctx = document.getElementById("pastelnegadas");
@@ -778,25 +790,16 @@ function pastelnegadas() {
             {
               data: total,
               backgroundColor: [
-                "#A8E6CE",
-                "#DCEDC2",
-                "#FFD3B5",
-                "#FFAAA6",
-                "#00A8C6",
-                "#C2258E",
-                "Blue",
-                "Salmon",
-                "Wheat",
-                "#FF9C00e",
-                "Peru",
-                "CadetBlue",
-                "Navy",
-                "SandyBrown",
-                "LimeGreen",
-                "SpringGreen",
-                "#FE2E2E",
-                "#ffc213",
-                "#ba8181",
+                "#b0c2f2",
+                "#b0f2c2",
+                "#fcb7af",
+                "#d8f8e1",
+                "#ffe4e1",
+                "#fdf9c4",
+                "#ffda9e",
+                "#c5c6c8",
+                "#b2e2f2",
+                "#fabfb7",
               ],
             },
           ],
@@ -828,7 +831,7 @@ function GeneralContratos() {
       }
       // Set new default font family and font color to mimic Bootstrap's default styling
       Chart.defaults.global.defaultFontFamily =
-        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
       Chart.defaults.global.defaultFontColor = "#292b2c";
       // Pie Chart Example
       var ctx = document.getElementById("GeneralContratos");
@@ -841,12 +844,16 @@ function GeneralContratos() {
             {
               data: total,
               backgroundColor: [
-                "#A8E6CE",
-                "#DCEDC2",
-                "#FFD3B5",
-                "#FFAAA6",
-                "#00A8C6",
-                "#FF9C00e",
+                "#b0c2f2",
+                "#b0f2c2",
+                "#fcb7af",
+                "#d8f8e1",
+                "#ffe4e1",
+                "#fdf9c4",
+                "#ffda9e",
+                "#c5c6c8",
+                "#b2e2f2",
+                "#fabfb7",
               ],
             },
           ],
@@ -878,7 +885,7 @@ function GeneralContrataciones() {
       }
       // Set new default font family and font color to mimic Bootstrap's default styling
       Chart.defaults.global.defaultFontFamily =
-        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
       Chart.defaults.global.defaultFontColor = "#292b2c";
       // Pie Chart Example
       var ctx = document.getElementById("GeneralContrataciones");
@@ -891,12 +898,16 @@ function GeneralContrataciones() {
             {
               data: total,
               backgroundColor: [
-                "#A8E6CE",
-                "#DCEDC2",
-                "#FFD3B5",
-                "#FFAAA6",
-                "#00A8C6",
-                "#FF9C00e",
+                "#b0c2f2",
+                "#b0f2c2",
+                "#fcb7af",
+                "#d8f8e1",
+                "#ffe4e1",
+                "#fdf9c4",
+                "#ffda9e",
+                "#c5c6c8",
+                "#b2e2f2",
+                "#fabfb7",
               ],
             },
           ],

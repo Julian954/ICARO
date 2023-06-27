@@ -16,7 +16,6 @@
 	    <link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/dataTables.bootstrap4.min.css">
 		<link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">
 
-
 	    <!-- Favicon-->
 	    <link rel="shortcut icon" href="<?php echo base_url(); ?>Assets/img/favicon.ico">
 
@@ -24,9 +23,8 @@
     	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-		<!-- Time Zone y URL-->
-		<?php date_default_timezone_set('America/Mexico_City'); 
-			setlocale(LC_ALL,'es_ES', 'Spanish_Spain', 'Spanish');
+		<!-- URL-->
+		<?php 
 			$link = $_SERVER['REQUEST_URI'];
 			$linkShort = substr($link, 0, strrpos($link, "/")); ?>
 	    
@@ -67,7 +65,7 @@ try {
 
 	<body class="app">
 		<div id="contenedor_carga">
-			<div id="carga"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/carga.gif" height="300px" alt="logo"></div>
+			<div id="carga"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/carga.gif" height="150px" alt="logo"></div>
 		</div>
 		<input type="hidden" id="url" value="<?php echo base_url(); ?>">
 	    <header class="app-header fixed-top">

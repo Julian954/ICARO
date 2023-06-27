@@ -99,8 +99,7 @@
 <script src="<?php echo base_url(); ?>Assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/Funciones.js"></script>
-<script src="<?php echo base_url(); ?>Assets/js/chartjs.min.js"></script>
-<script src="<?php echo base_url(); ?>Assets/js/index-charts.js"></script>
+<script src="<?php echo base_url(); ?>Assets/js/chart.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/all.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/front.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/sweetalert2@9.js"></script>
@@ -110,11 +109,6 @@
 <script src="<?php echo base_url(); ?>Assets/js/app.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/popper.min.js"></script>
 <script src="<?php echo base_url(); ?>Assets/js/bootstrap.min.js"></script>
-
-
-
-
-
 		
 <script>
     window.onload = function(){
@@ -127,6 +121,7 @@
     
     $("#TableArticulos").DataTable({
       processing: true,
+      responsive: true,
       serverSide: true,
       sAjaxSource: "../ServerSide/serversideArticulos.php",
       columnDefs: [
@@ -164,6 +159,7 @@
 
     $(document).ready(function() {
         $('#Table').DataTable({
+            responsive: true,
 			language: {
 				"decimal": "",
 				"emptyTable": "No hay datos",
@@ -192,6 +188,7 @@
     });
     $(document).ready(function() {
         $('#Table2').DataTable({
+            responsive: true,
 			language: {
 				"decimal": "",
 				"emptyTable": "No hay datos",
@@ -220,6 +217,7 @@
     });
     $(document).ready(function() {
         $('#Table3').DataTable({
+            responsive: true,
 			language: {
 				"decimal": "",
 				"emptyTable": "No hay datos",
@@ -248,6 +246,7 @@
     });
     $(document).ready(function() {
         $('#Table4').DataTable({
+            responsive: true,
 			language: {
 				"decimal": "",
 				"emptyTable": "No hay datos",
@@ -276,6 +275,7 @@
     });
     $(document).ready(function() {
         $('#Table5').DataTable({
+            responsive: true,
 			language: {
 				"decimal": "",
 				"emptyTable": "No hay datos",
@@ -304,7 +304,9 @@
     });
     $(document).ready(function() {
         $('#TableN').DataTable({
+            responsive: true,
             "lengthChange": false,
+            "searching": false,
 			language: {
 				"decimal": "",
 				"emptyTable": "No hay datos",
@@ -328,8 +330,10 @@
 					"sortAscending": ": Activar orden de columna ascendente",
 					"sortDescending": ": Activar orden de columna desendente"
 				}
-			}
-            
+			},
+        "drawCallback": function( settings ) {
+         $('#TableN_paginate').addClass("app-pagination");
+    }
 		});
     });
     // Add the following code if you want the name of the file appear on select

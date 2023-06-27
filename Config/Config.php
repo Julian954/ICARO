@@ -5,5 +5,7 @@
     const DB_USER = "root";
     const PASS = "";
     const CHARSET = "charset=utf8";
-    
+
+    date_default_timezone_set('America/Mexico_City'); 
+	setlocale(LC_ALL,'es_ES', 'Spanish_Spain', 'Spanish');
 ?>
