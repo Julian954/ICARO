@@ -37,7 +37,7 @@
                       </svg></span></label>
                       <select class="form-control" id="unidad" name="unidad">
                         <?php foreach($data1 as $unidades){?>
-                        <option  value="<?=$unidades['abreviacion'];?>"><?=$unidades['abreviacion']." - ".$unidades['nombre'];?></option>
+                        <option  value="<?=$unidades['id'];?>"><?=$unidades['abreviacion']." - ".$unidades['nombre'];?></option>
                         <?php }?>
                       </select>                      
                     </div>
@@ -57,14 +57,8 @@
 
                   <div class="mb-3">
                    <label for="date" class="form-label" style="color:#000000;">Fecha de Entrega</label>
-                   <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="entrega" name="entrega" value="" require>
+                   <input type="datetime-local" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="entrega" name="entrega" value="" require>
                   </div>
-                  
-                  <div class="mb-3">
-                      <label for="setting-input-3" class="form-label" style="color:#000000;">Hora de entrega</label>
-                      <input type="text" class="form-control" id="hora" name="hora" value="" required>
-                  </div>
-                  <div class="mb-3">
                   
                 <label for="img"><strong>Selecciona Archivo</strong></label>
                 <div class="custom-file">

@@ -26,8 +26,9 @@
             $data2 = $this->model->SelectTipo();
             $data3 = $this->model->SelectPlataforma();
             $data4 = $this->model->SelectTipoContratacion();
+            $data5 = $this-> model->SelectDictamen();
 
-            $this->views->getView($this, "Registro", "", $data1, $data2, $data3, $data4);
+            $this->views->getView($this, "Registro", "", $data1, $data2, $data3, $data4, $data5);
         }
 
         // Agrega un nuevo contrato a la base de datos con los datos proporcionados mediante el formulario.

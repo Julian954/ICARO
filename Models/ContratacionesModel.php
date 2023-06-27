@@ -136,6 +136,11 @@
             return $res;
         }
 
+        public function SelectDictamen(){
+            $sql = "SELECT * FROM dictamen";
+            $res = $this->select_all($sql);
+            return $res;
+        }
         // Selecciona todos los contratos de la base de datos.
         public function porcentajesContrataciones()
         {
