@@ -45,10 +45,24 @@ class InicioModel extends Mysql{
     }
     public function pedidos()
     {
-        $ordenar ="SELECT SUM(monto) AS monto, SUM(pagado) AS pagado, MONTHNAME(fecha_inicio) AS mes, MONTH(fecha_inicio) AS nom FROM pedidos GROUP BY nom;";
+        $ordenar ="SELECT fecha, SUM(monto) AS monto, SUM(pagado) AS pagado, MONTHNAME(fecha_inicio) AS mes, MONTH(fecha_inicio) AS nom FROM pedidos GROUP BY nom;";
         $res= $this->select_all($ordenar);
         return $res;
     }
+
+    public function unidades()
+    {        
+        $sql ="SELECT * FROM unidades";
+        $res= $this->select_all($sql);
+        return $res;
+    }
+
+    public function despachos(){        
+        $sql = "SELECT despachos.*, unidades.abreviacion FROM despachos, unidades WHERE despachos.unidad = unidades.id";
+        $res = $this->select_all($sql);
+            return $res;
+    }
+
     //Selecciona las negadas actuales por clínica
     public function Gpastelnegadas()
     {
@@ -95,11 +109,7 @@ class InicioModel extends Mysql{
             return $res;
     }
 
-    public function despachos(){        
-        $sql = "SELECT * FROM despachos";
-        $res = $this->select_all($sql);
-            return $res;
-    }
+
 
     public function eliminar_datos(string $fecha)
 {
@@ -284,12 +294,7 @@ class InicioModel extends Mysql{
         $res= $this->select_all($sql);
         return $res;
     }
-    public function selectquejas_final()
-    {        
-        $sql ="SELECT * FROM unidades";
-        $res= $this->select_all($sql);
-        return $res;
-    }
+
 
 
    public function Actualizar_Queja(int $id, int $estado)

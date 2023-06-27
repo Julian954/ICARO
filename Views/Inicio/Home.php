@@ -3,8 +3,8 @@
 <div class="app-wrapper">
   <div class="app-content pt-3 p-md-3 p-lg-4">
     <div class="container-xl">
-      <div class="row g-4 mb-4">
 
+      <div class="row g-4 mb-4">
         <div class="col-6 col-lg-3">
           <div class="app-card app-card-stat shadow-sm h-100">
             <div class="app-card-body p-3 p-lg-4">
@@ -174,18 +174,22 @@
                         <td class="font-weight-bold text-info"><?= substr($neg['clave'],0, 3); ?></td>
                       <?php } ?>
                       <td><?= ucfirst(strtolower($neg['des_corta'])); ?></td>
-                      <td><?php echo $neg['cmp']; ?></td>
-                      <td><?php echo $neg['consumo']; ?></td>
-                      <?php if ($neg['unidades']+$neg['almacen'] < $neg['cmp']) { ?>
+                      <td><?= number_format($neg['cmp'],0,'.',','); ?></td>
+                      <td><?= number_format($neg['consumo'],0,'.',','); ?></td>
+                      <?php if ($neg['unidades']+$neg['almacen'] < $neg['cmp']) { 
+                        $unidades = number_format($neg['unidades'],0,'.',','); 
+                        $almacen = number_format($neg['almacen'],0,'.',',');
+                        $total = miles($neg['unidades']+$neg['almacen']);
+                        ?>
                         <td>
-                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Unidades: <?=$neg['unidades'];?>. Almacén: <?=$neg['almacen'];?>.">
-                            <span class="badge bg-danger"><?php echo $neg['unidades']+$neg['almacen'];?></span>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Unidades: <?=$unidades;?>. Almacén: <?=$almacen;?>.">
+                            <span class="badge bg-danger"><?= $total;?></span>
                           </span>
                         </td>
                       <?php } else {?>
                         <td>
-                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Unidades: <?=$neg['unidades'];?>. Almacén: <?=$neg['almacen'];?>.">
-                            <span class="badge bg-warning"><?php echo $neg['unidades']+$neg['almacen'];?></span>
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Unidades: <?=$unidades;?>. Almacén: <?=$almacen;?>.">
+                            <span class="badge bg-warning"><?= $total;?></span>
                           </span>
                         </td>
                       <?php } ?>
@@ -218,7 +222,7 @@
               <div class="row">
                   <div class="col-lg-8 mb-2 py-2">
                       <?php if ($_SESSION['rol'] == 7) { ?>
-                          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal1">Nueva queja</button> 
+                          <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal1">Nueva Queja</button> 
                           <?php include('Modal_quejas.php'); ?>
                       <?php } ?>
                   </div>
@@ -256,11 +260,11 @@
 							    <tbody>
                     <?php foreach ($data4 as $que) { ?>
 							      	<tr>
-                        <td><?php echo $que['descripcion']; ?></td>
+                        <td><?php echo ucfirst(strtolower($que['descripcion'])); ?></td>
                         <td><?php echo $que['piezas']; ?></td>
                         <td><?php echo $que['abreviacion']; ?></td>
                         <td><?php echo $que['receta']; ?></td>
-                        <td><?php echo $que['fecha'];?></td>
+                        <td><?php echo substr($que['fecha'],0,10);?></td>
                         <?php if ($que['estado'] == 1) { ?>
                           <td>
                             <span class="badge bg-warning">Atendido</span>
@@ -317,6 +321,9 @@
                 <hr style="margin: 0;">
               <?php } ?>
             </div><!--//app-card-body-->
+            <div class="app-card-footer">
+              <span style="font-size:12px;"class="text-muted px-3">*Actualizado al <?= $data5[0]['fecha']?></span>
+            </div><!--//app-card footer-->
           </div><!--//app-card-->
         </div><!--//col-12 col-lg-6-->
 
@@ -352,7 +359,7 @@
                                 <tbody>
                                     <tr>
                                       <?php foreach($data7 as $despachos){?>
-                                        <td class="text-success"><?= $despachos['unidad'];?></td>
+                                        <td class="text-success"><?= $despachos['abreviacion'];?></td>
                                         <td class="stat-cell" style="text-align: center"><?= $despachos['remision'];?></td>
                                         <td class="stat-cell" style="text-align: center"><?= $despachos['archivo'];?></td>
                                         <td class="stat-cell" style="text-align: center"><?= substr($despachos['fecha_entrega'],10,6);?></td>
@@ -465,11 +472,13 @@
                 </div><!--//app-card app-card-basic d-flex flex-column align-items-start shadow-sm-->
             </div><!--//col-lg-4-->
         </div><!--//row g-4 mb-4-->
-
+        <span style="font-size:12px;"class="text-muted">*Indicadores actualizados al <?= $data1[0]['fecha']?></span>
     </div><!--//content tab-content-->
 </div><!--//container-xl-->
 
 </div><!--app-content pt-3 p-md-3 p-lg-4-->  
+
+
 <script>
   window.addEventListener("load", function() {
     BarrasAtencion();  

@@ -11,13 +11,13 @@
 	    <title>MARYS OOARD Colima</title>
 
 	    <!-- theme stylesheet-->
-		<link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/bootstrap.min.css">
-		<link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/carga.css">
-	    <link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/dataTables.bootstrap4.min.css">
-		<link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">
+		<link rel="stylesheet" href="<?= base_url(); ?>Assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="<?= base_url(); ?>Assets/css/carga.css">
+	    <link rel="stylesheet" href="<?= base_url(); ?>Assets/css/dataTables.bootstrap4.min.css">
+		<link id="theme-style" rel="stylesheet" href="<?= base_url(); ?>Assets/css/portal.css">
 
 	    <!-- Favicon-->
-	    <link rel="shortcut icon" href="<?php echo base_url(); ?>Assets/img/favicon.ico">
+	    <link rel="shortcut icon" href="<?= base_url(); ?>Assets/img/favicon.ico">
 
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
     	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -26,48 +26,17 @@
 		<!-- URL-->
 		<?php 
 			$link = $_SERVER['REQUEST_URI'];
-			$linkShort = substr($link, 0, strrpos($link, "/")); ?>
-	    
-		<?php
-		// Configuración de la conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "imss";
-
-try {
-    // Crear una nueva conexión PDO
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    
-    // Configurar el modo de error de PDO para mostrar excepciones
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Ejecutar la consulta
-    $sql = "SELECT * FROM contratos";
-    $result = $conn->query($sql);
-
-    $sql1 = "SELECT * FROM contrataciones";
-    $result1 = $conn->query($sql1);
-
-	$sql2 = "SELECT * FROM validar_cont";
-    $result2 = $conn->query($sql2);
-
-	$sql3 = "SELECT * FROM validar_contrata";
-    $result3 = $conn->query($sql3);
-
-	$sql4 = "SELECT * FROM detalle_cont";
-    $result4 = $conn->query($sql4);
-
-	$sql5 = "SELECT * FROM detalle_contrata";
-    $result5 = $conn->query($sql5);
-?>
+			$linkShort = substr($link, 0, strrpos($link, "/")); 
+		?>
+	
 	</head>
 
 	<body class="app">
 		<div id="contenedor_carga">
-			<div id="carga"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/carga.gif" height="150px" alt="logo"></div>
+			<div id="carga"><img class="logo-icon mr-2" src="<?= base_url(); ?>Assets/img/carga.gif" height="150px" alt="logo"></div>
 		</div>
-		<input type="hidden" id="url" value="<?php echo base_url(); ?>">
+		
+		<input type="hidden" id="url" value="<?= base_url(); ?>">
 	    <header class="app-header fixed-top">
 	        <div class="app-header-inner">
 		        <div class="container-fluid py-2">
@@ -80,160 +49,27 @@ try {
 										<path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
 									</svg>
 						        </a>
-					        </div><!--//TELEFONO-->
+					        </div>
+							<!--//TELEFONO-->
 			                <div class="search-mobile-trigger d-sm-none col">
-				                <i class="search-mobile-trigger-icon font-normal"><?php echo utf8_encode(strftime('%d/%B/%Y')); ?></i>
-				            </div><!--//TABLET Y PC-->
+				                <i class="search-mobile-trigger-icon font-normal"><?= utf8_encode(strftime('%d/%B/%Y')); ?></i>
+				            </div>
+							<!--//TABLET Y PC-->
 		            		<div class="app-search-box col">
-								<i class="search-mobile-trigger-icon font-normal"><?php echo utf8_encode(strftime('%A %d de %B de %Y, %H:%M')); ?></i>
-		            		</div><!--//NOTIFICACIONES-->
+								<i class="search-mobile-trigger-icon font-normal"><?= utf8_encode(strftime('%A %d de %B de %Y, %H:%M'));?></i>
+		            		</div>
+							<!--//NOTIFICACIONES-->
 			            	<div class="app-utilities col-auto">
 				            	<div class="app-utility-item app-notifications-dropdown dropdown">
-					            	<a href="<?php echo base_url(); ?>Inicio/Notificaciones"    role="button" aria-expanded="false" title="Notificaciones">
+									<a  href="<?=base_url();?>Inicio/Notificaciones" title="Notificaciones">
 						            	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 										  	<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
 										  	<path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
 										</svg>
-										<?php
-										
-
-
-	if($_SESSION['rol']==7){
-   while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-$fechaPasada = new DateTime($row['fecha_validado']); 
-$fechaActual = new DateTime(); 
-$intervalo = $fechaActual->diff($fechaPasada); 
-$diasTranscurridos = $intervalo->days; 							
-	if($diasTranscurridos>2 && $row['estado']==3 && $row['visto']==2){
-		echo "<span class=icon-badge>!</span>";
-		}else{
-		echo "<span class=icon-badge>X</span>";
-		}
-}
-while ($row1 = $result1->fetch(PDO::FETCH_ASSOC)) {		
-$fechaPasada2 = new DateTime($row1['fecha_validado']); 
-$fechaActual2 = new DateTime(); 
-$intervalo2 = $fechaActual2->diff($fechaPasada2); 
-$diasTranscurridos2 = $intervalo2->days; 		
-	if($diasTranscurridos2>2 && $row1['estado']==3 && $row1['visto']==2){
-		echo "<span class=icon-badge>!</span>";
-	}else{
-	echo "<span class=icon-badge>X</span>";
-	}
-	}
-	while ($row = $result->fetch(PDO::FETCH_ASSOC)) { 							
-			if($row['estado']==3 && $row['visto']==2){
-				echo "<span class=icon-badge>!</span>";
-				}else{
-				echo "<span class=icon-badge>X</span>";
-				}
-		}
-		while ($row1 = $result1->fetch(PDO::FETCH_ASSOC)) {					
-			if($dow1['estado']==3 && $row1['visto']==2){
-				echo "<span class=icon-badge>!</span>";
-			}else{
-			echo "<span class=icon-badge>X</span>";
-			}
-			}
-   while ($row1 = $result1->fetch(PDO::FETCH_ASSOC)) {			
-	if($row1['estado']==3 && $row1['visto']==1){
-		echo "<span class=icon-badge>!</span>";
-		}else{
-		echo "<span class=icon-badge>X</span>";
-		}
-}
-while ($row = $result->fetch(PDO::FETCH_ASSOC)) {							
-	if($row['estado']==3 && $row['visto']==1){
-	echo "<span class=icon-badge>!</span>";
-	}else{
-	echo "<span class=icon-badge>X</span>";
-	}
-}
-	}
-
-	if($_SESSION['rol']==4){
-while ($row2 = $result2->fetch(PDO::FETCH_ASSOC)) {
-	if($row2['id_validador']==$_SESSION['id'] && $row2['visto']==0){	
-		echo "<span class=icon-badge>!</span>";
-		}else{
-		echo "<span class=icon-badge>X</span>";
-		}
-}	
-while ($row3 = $result3->fetch(PDO::FETCH_ASSOC)) {
-	if($row3['id_validador']==$_SESSION['id'] && $row3['visto']==0){	
-		echo "<span class=icon-badge>!</span>";
-		}else{
-		echo "<span class=icon-badge>X</span>";
-		}
-}
-}
-
-if($_SESSION['rol']==3 || $_SESSION['rol']==4){
-	while ($row4 = $result4->fetch(PDO::FETCH_ASSOC)) {
-		if($row4['id_responde']!=$_SESSION['id'] && $row4['visto']==0){	
-			echo "<span class=icon-badge>!</span>";
-			}else{
-			echo "<span class=icon-badge>X</span>";
-			}
-	}	
-	while ($row5 = $result5->fetch(PDO::FETCH_ASSOC)) {
-		if($row5['id_responde']!=$_SESSION['id'] && $row5['visto']==0){	
-			echo "<span class=icon-badge>!</span>";
-			}else{
-			echo "<span class=icon-badge>X</span>";
-			}
-	}
-	}
-
-   ?>
-
-<?php										  
-   // Cerrar la conexión
-   $conn = null;
-} catch (PDOException $e) {
-   echo "Error de conexión: " . $e->getMessage();
-}
-										?>
+										<span class=icon-badge><?=notificaciones();?></span>
 						        	</a><!--//dropdown-toggle-->
-						        	<div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
-						        	    <div class="dropdown-menu-header p-3">
-							    	        <h5 class="dropdown-menu-title mb-0">Notificaciones</h5>
-							    	    </div><!--//AQUÍ VAN LAS NOTIFICACIONES-->
-							    	    <div class="dropdown-menu-content">
-											<!--//NOTIFICACIÓN CON IMÁGEN-->
-									       <div class="item p-3">
-										        <div class="row gx-2 justify-content-between align-items-center">
-											        <div class="col-auto">
-												       <img class="profile-image" src="assets/images/profiles/profile-1.png" alt="">
-											        </div><!--//col-->
-											        <!-- <div class="col">
-												        <div class="info"> 
-													        <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
-													        <div class="meta"> 2 hrs ago</div>
-												        </div>
-											        </div> --><!--//col--> 
-										        </div><!--//row-->
-										        <a class="link-mask" href="#"></a>
-									       	</div><!--//item-->
-											<!--//NOTIFICACIÓN CON NOTA-->
-									       	<div class="item p-3">
-										        <div class="row gx-2 justify-content-between align-items-center">
-											        <div class="col-auto">
-												        <div class="app-icon-holder">
-													        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-															  	<path fill-rule="evenodd" d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
-															  	<path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
-															</svg>
-											        	</div>
-										        	</div><!--//col-->										        	
-									        	</div><!--//row-->									        	
-									      	</div><!--//item-->
-									   		<!--//NOTIFICACIÓN CON GRÁFICA-->
-								       		
-							        	</div><!--//dropdown-menu-content-->
-							        				
-									</div><!--//dropdown-menu-->					        
 					        	</div><!--//app-utility-item-->
+								<!--//PERFIL-->
 				            	<div class="app-utility-item app-user-dropdown dropdown">
 					        	    <a class="dropdown-toggle" id="user-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="<?php echo base_url(); ?>Assets/img/users/<?php echo $_SESSION['perfil'] ?>" alt="user profile"></a>
 					        	    <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
@@ -248,12 +84,13 @@ if($_SESSION['rol']==3 || $_SESSION['rol']==4){
 		            </div><!--//app-header-content-->
 		        </div><!--//container-fluid-->
 	        </div>
+
 	        <div id="app-sidepanel" class="app-sidepanel">
 		        <div id="sidepanel-drop" class="sidepanel-drop"></div>
 		        <div class="sidepanel-inner d-flex flex-column">
 			        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 			        <div class="app-branding">
-			            <a class="app-logo" href="<?php echo base_url(); ?>Inicio/Home"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/app-logo.svg" alt="logo"><span class="logo-text">MARYS</span></a>
+			            <a class="app-logo text-decoration-none" href="<?= base_url(); ?>Inicio/Home"><img class="logo-icon mr-2" src="<?= base_url(); ?>Assets/img/app-logo.svg" alt="logo"><span class="logo-text">MARYS</span></a>
 			        </div><!--//app-branding-->
 				    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
 					    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
@@ -337,9 +174,9 @@ if($_SESSION['rol']==3 || $_SESSION['rol']==4){
 							<li class="nav-item">
 						        <a class="nav-link <?php if ($link == "/IMSS/Despachos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Despachos/Registro">
 							    	<span class="nav-icon">
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
-  <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
-</svg>
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+										  <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+										</svg>
 							        </span>
 			                        <span class="nav-link-text">Despachos</span>
 						        </a><!--//nav-link-->

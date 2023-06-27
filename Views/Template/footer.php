@@ -183,7 +183,10 @@
 					"sortAscending": ": Activar orden de columna ascendente",
 					"sortDescending": ": Activar orden de columna desendente"
 				}
-			}
+			},
+                "drawCallback": function( settings ) {
+                 $('#Table_paginate').addClass("app-pagination");
+            }
 		});
     });
     $(document).ready(function() {
@@ -212,7 +215,10 @@
 					"sortAscending": ": Activar orden de columna ascendente",
 					"sortDescending": ": Activar orden de columna desendente"
 				}
-			}
+			},
+                "drawCallback": function( settings ) {
+                 $('#Table2_paginate').addClass("app-pagination");
+            }
 		});
     });
     $(document).ready(function() {
@@ -241,7 +247,10 @@
 					"sortAscending": ": Activar orden de columna ascendente",
 					"sortDescending": ": Activar orden de columna desendente"
 				}
-			}
+			},
+                "drawCallback": function( settings ) {
+                 $('#Table3_paginate').addClass("app-pagination");
+            }
 		});
     });
     $(document).ready(function() {
@@ -270,7 +279,10 @@
 					"sortAscending": ": Activar orden de columna ascendente",
 					"sortDescending": ": Activar orden de columna desendente"
 				}
-			}
+			},
+                "drawCallback": function( settings ) {
+                 $('#Table4_paginate').addClass("app-pagination");
+            }
 		});
     });
     $(document).ready(function() {
@@ -299,7 +311,10 @@
 					"sortAscending": ": Activar orden de columna ascendente",
 					"sortDescending": ": Activar orden de columna desendente"
 				}
-			}
+			},
+                "drawCallback": function( settings ) {
+                 $('#Table5_paginate').addClass("app-pagination");
+            }
 		});
     });
     $(document).ready(function() {

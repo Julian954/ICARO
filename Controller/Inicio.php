@@ -1,5 +1,5 @@
 <?php
-class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
+class Inicio extends Controllers 
 {
     public function __construct()
     {
@@ -9,6 +9,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         }
         parent::__construct();
     }
+
     
     //Muestra la vista HOME
     public function Home()
@@ -18,7 +19,7 @@ class Inicio extends Controllers //Aquí se debe llamas igual que el archivo
         $data3 = $this->model->top15negadas();
         $data4 = $this->model->quejas();
         $data5 = $this->model->pedidos();
-        $data6 = $this->model->selectquejas_final();
+        $data6 = $this->model->unidades();
         $data7 = $this->model->despachos();
         $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
         die();
