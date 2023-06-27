@@ -261,7 +261,7 @@
                     <?php foreach ($data4 as $que) { ?>
 							      	<tr>
                         <td><?php echo ucfirst(strtolower($que['descripcion'])); ?></td>
-                        <td><?php echo $que['piezas'].notificaciones(); ?></td>
+                        <td><?php echo $que['piezas']; ?></td>
                         <td><?php echo $que['abreviacion']; ?></td>
                         <td><?php echo $que['receta']; ?></td>
                         <td><?php echo substr($que['fecha'],0,10);?></td>

@@ -56,6 +56,14 @@
                          <?php } ?>
                       </select>
                   </div>
+                    <div class="mb-3">
+                      <label for="area" class="form-label">Funcionario Requirente</label>
+                      <select class="form-control" id="area" name="area" required>
+                        <?php foreach ($data4 as $per) { ?>
+                          <option value="<?php echo $per['id']?>"><?php echo $per['nombre'] ?></option>
+                         <?php } ?>
+                      </select>
+                  </div>
                   <div class="mb-3">
                       <label for="tipo" class="form-label">Tipo del Contrato</label>
                       <select class="form-control" id="tipo" name="tipo" required>
