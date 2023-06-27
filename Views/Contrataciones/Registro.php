@@ -79,12 +79,16 @@
                   <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="Termino" name="Termino" value="" require>
                 </div>
                 <div class="form-group">
+                  <label for="setting-input-3" class="form-label" style="color:#000000;">No. Dictamen</label>
+                  <select class="form-control" id="Dictamen" name="Dictamen" required>
+                    <?php foreach ($data5 as $dictamen) { ?>
+                    <option> <?php echo $dictamen['dictamen']; ?></option>
+                    <?php } ?>
+                  </select> 
+                </div>  
+                <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">Monto Máximo $</label>
                   <input type="number" min="0" class="form-control" id="Maximo" name="Maximo" value="" required>
-                </div>
-                <div class="form-group">
-                  <label for="setting-input-3" class="form-label" style="color:#000000;">No. Dictamen</label>
-                  <input type="text" class="form-control" id="Dictamen" name="Dictamen" value="" required>
                 </div>
                 <div class="form-group">
                   <label for="setting-input-2" class="form-label">Comentarios</label>
