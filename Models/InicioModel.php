@@ -63,6 +63,14 @@ class InicioModel extends Mysql{
             return $res;
     }
 
+    //Selecciona la suma de negadas y manuales de los ultimos dos días
+    public function rankingdiario()
+    {
+        $sql = "SELECT AVG(surtida) AS colima, AVG(atencion) AS nacional, fecha AS dia FROM (SELECT fecha, surtida, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS surtida, atencion FROM nacional) AS datos_totales GROUP BY dia;";
+        $res = $this->select_all($sql); 
+        return $res;
+    }
+
     //Selecciona las negadas actuales por clínica
     public function Gpastelnegadas()
     {
@@ -309,13 +317,7 @@ class InicioModel extends Mysql{
         return $return;
     }
 
-    //Selecciona la suma de negadas y manuales de los ultimos dos días
-    public function rankingdiario()
-    {
-        $sql = "SELECT AVG(surtida) AS colima, AVG(atencion) AS nacional, fecha AS dia FROM (SELECT fecha, surtida, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS surtida, atencion FROM nacional) AS datos_totales GROUP BY dia;";
-        $res = $this->select_all($sql); 
-        return $res;
-    }
+
 
     //Selecciona las áreas
     public function SelectAreas()

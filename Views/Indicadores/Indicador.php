@@ -6,12 +6,12 @@
 		    <div class="container-xl">
 			    <div class="row mb-4">
 				    <div class="col-12 col-lg-6">
-					    <div class="app-card app-card-stat shadow-sm h-100" style="background-color:#F7F9F9;">
+					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1">Acumulado<span style="color:#FF0000;">Negadas</span> <span style="font-weight: bold; color:#000000;">Hoy</span></h4>
-							    <div class="stats-figure">76<span>&nbsp;recetas</span></div>
+							    <h4 class="stats-type mb-1">Acumulado<span style="color:#FF0000;"> Negadas</span> <span style="font-weight: bold; color:#000000;">Ayer</span></h4>
+							    <div class="stats-figure"><?=$data3[0]['negadas']?><span>&nbsp;recetas</span></div>
 							    <div class="stats-meta text-danger">
-									<span style="font-weight:bold;">389</span>&nbsp;"negadas ayer"
+									<span style="font-weight:bold;"><?=$data3[1]['negadas']?></span>&nbsp;Día anterior
 								</div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
@@ -24,7 +24,7 @@
 							    <h4 class="stats-type mb-1"><span style="color:#FF0000;">Negadas</span> <span style="font-weight: bold; color:#000000;"><?=date('Y')?></span></h4>
 							    <div class="stats-figure"><?=$data1['negada']?><span></span></div>
 							    <div class="stats-meta text-warning">
-								   <span style="font-weight:bold;">540</span>&nbsp;"máximo diairo"</div>
+								   <span style="font-weight:bold;"><?=formatok($data6['nega']);?></span>&nbsp;Máximo diairo</div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -34,7 +34,7 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1"><span style="color:#FF0000;">Negadas</span> <span style="font-weight: bold; color:#000000;">Diario</span></h4>
-							    <div class="stats-figure"><?=number_format($data1['negadap'],2)?></div>
+							    <div class="stats-figure"><?=number_format($data7['promedio'],0)?></div>
 							    <div class="stats-meta text-success">Promedio</div>
 						   		 </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
@@ -47,7 +47,7 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4" style="background-color:#2ECC71;">
 							    <h4 class="stats-type mb-1" style="color:#FFFFFF;">Nivel de Atención</h4>
-							    <div class="stats-figure" style="color:#FFFFFF;"><?=number_format($data1['surtida'],2)?><span>%</span></div>
+							    <div class="stats-figure" style="color:#FFFFFF;"><?=number_format($data4['colima'],2)?><span>%</span></div>
 							    <div class="stats-meta" style="color:#FFFFFF"> OOADR <span style="font-weight: bold;">COLIMA <?=date('Y')?></span></div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
@@ -58,7 +58,7 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4" style="background-color:#F39C12;">
 							    <h4 class="stats-type mb-1" style="color:#FFFFFF;">Nivel de Atención</h4>
-							    <div class="stats-figure" style="color:#FFFFFF;">96.70<span>%</span></div>
+							    <div class="stats-figure" style="color:#FFFFFF;"><?=number_format($data4['nacional'],2)?><span>%</span></div>
 							    <div class="stats-meta" style="color:#FFFFFF;">Media <span style="font-weight: bold;">Nacional <?=date('Y')?></span></div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
@@ -68,12 +68,10 @@
             <div class="col-12 col-lg-6">
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
-							    <h4 class="stats-type mb-1 text-success">Ranking NACIONAL <span class="text-warning" style="font-weight:bold;">HOY</span></h4>
-							    <div class="stats-figure"><span style="font-weight:bold;">4</span> &nbsp <span>lugar</span></div>
+							    <h4 class="stats-type mb-1 text-success">Ranking NACIONAL <span class="text-warning" style="font-weight:bold;">AYER</span></h4>
+							    <div class="stats-figure"><span style="font-weight:bold;"><?=number_format($data5['ultimo'],0)?></span><span>° lugar</span></div>
 							    <div class="stats-meta text-success">
-								    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  			<path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
-		</svg> <span>5</span>&nbsp<span>lugar Historico</span>  </div>
+<span><?=number_format($data5['maximo'],0)?></span>&nbsp<span>° Mejor lugar</span>  </div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -85,9 +83,8 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1"><span class="text-success"></span>Eletrónicas</h4>
-							    <div class="stats-figure"><?=$data1['electronica']?><span></span></div>
-							    <div class="stats-meta text-success">
-		<span class="text-danger">160</span>&nbsp<span class="text-danger">Ayer</span></div>
+							    <div class="stats-figure"><?=formatok($data1['electronica']);?><span></span></div>
+							    <div class="stats-meta text-success">Ayer <?=miles($data2['electronica'])?></div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -97,8 +94,8 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Manuales</h4>
-							    <div class="stats-figure"><?=$data1['manuals']?></div>
-							    <div class="stats-meta text-success">Ayer</div>
+							    <div class="stats-figure"><?=formatok($data1['manuals']);?></div>
+							    <div class="stats-meta text-success">Ayer <?=miles($data2['manuals'])?></div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -108,8 +105,8 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">Emitidas</h4>
-							    <div class="stats-figure">5,117</div>
-                  <div class="stats-meta text-success">Ayer</div>
+							    <div class="stats-figure"><?=formatok($data1['presen']);?></div>
+                  <div class="stats-meta text-success">Ayer <?=miles($data2['presen']);?></div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -119,9 +116,9 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">$ Receta</h4>
-							    <div class="stats-figure">$<?=number_format($data1['costor'],2)?></div>
+							    <div class="stats-figure">$<?=formatokdecimal($data1['costor'])?></div>
                   <div class="stats-meta text-success">
-		<span class="text-success">Ayer</span>  </div>
+		<span class="text-success">Ayer $<?=decimales($data2['costor'])?></span>  </div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -131,9 +128,9 @@
 					    <div class="app-card app-card-stat shadow-sm h-100">
 						    <div class="app-card-body p-3 p-lg-4">
 							    <h4 class="stats-type mb-1">$ Paciente</h4>
-							    <div class="stats-figure">$<?=number_format($data1['costop'],2)?></div>
+							    <div class="stats-figure">$<?=formatokdecimal($data1['costop'])?></div>
                   <div class="stats-meta text-success">
-		<span class="text-succes">Ayer</span>  </div>
+		<span class="text-succes">Ayer $<?=decimales($data2['costop'])?></span>  </div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
 					    </div><!--//app-card app-card-stat shadow-sm h-100-->
@@ -143,7 +140,7 @@
 					  		  	<div class="app-card app-card-stat shadow-sm h-100">
 						   			 <div class="app-card-body p-3 p-lg-4">
 							   	 	 <h4 class="stats-type mb-1">Pacientes</h4>
-							   		 <div class="stats-figure">1,963</div>
+							   		 <div class="stats-figure"><?=formatok($data1['atend']);?></div>
                   				<div class="stats-meta text-warning">Atendidos</div>
 						    </div><!--//app-card-body p-3 p-lg-4-->
 						    <!--<a class="app-card-link-mask" href="#"></a>-->
@@ -165,6 +162,7 @@
             			</div><!--//app-card app-card-chart shadow-sm-->
             		</div><!--//col-24 col-lg-12-->
            		</div><!--row g-1 mb-1-->
+				<br><span style="font-size:12px;"class="text-muted">*Indicadores actualizados al <?= $data3[0]['fecha']?></span>
 		    </div><!--//container-xl-->
 	    </div><!--//app-content p-md-3 p-lg-4-->
 	</div><!--//app-wrapper-->

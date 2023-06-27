@@ -619,7 +619,7 @@ function barrasrankig() {
       var ventas = [];
       var compras = [];
       for (var i = 0; i < data.length; i++) {
-        nombre.push(data[i]["mes"]);
+        nombre.push(data[i]["mname"]);
         ventas.push(data[i]["colima"]);
         compras.push(data[i]["nacional"]);
       }

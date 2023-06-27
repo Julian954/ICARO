@@ -183,7 +183,17 @@ function formatoK($dato) {
     if ($dato >= 1000) {
         $dato = number_format($dato / 1000, 1) . 'k';
     } else {
-        $dato = $dato;
+        $dato = number_format($dato,0,'.',',');
+    }
+    return $dato;
+}
+
+//FORMATO K decimal
+function formatokdecimal($dato) {
+    if ($dato >= 1000) {
+        $dato = number_format($dato / 1000, 1) . 'k';
+    } else {
+        $dato = number_format($dato,1,'.',',');
     }
     return $dato;
 }
