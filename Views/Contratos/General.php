@@ -37,7 +37,7 @@
                     if ($alert == "registrado") { ?>
                         <div class="alert alert-success" role="alert">
 	                        <h3 class="notification-title">REGISTRADO</h3>
-	                        <div class="notification-subtitle"">El Contrato se registró con éxito.</div>
+	                        <div class="notification-subtitle">El Contrato se registró con éxito.</div>
                         </div>
                     <?php } else if ($alert == "error") { ?>
                         <div class="alert alert-danger" role="alert">
@@ -58,10 +58,10 @@
 					      <div class="row justify-content-between align-items-center">
 					        <div class="col-auto">
 					          <h4 class="app-card-title">
-                      <svg width="1em" height="1em"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="red">
-                        <path d="M396.8 352h22.4c6.4 0 12.8-6.4 12.8-12.8V108.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v230.4c0 6.4 6.4 12.8 12.8 12.8zm-192 0h22.4c6.4 0 12.8-6.4 12.8-12.8V140.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v198.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h22.4c6.4 0 12.8-6.4 12.8-12.8V204.8c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v134.4c0 6.4 6.4 12.8 12.8 12.8zM496 400H48V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16zm-387.2-48h22.4c6.4 0 12.8-6.4 12.8-12.8v-70.4c0-6.4-6.4-12.8-12.8-12.8h-22.4c-6.4 0-12.8 6.4-12.8 12.8v70.4c0 6.4 6.4 12.8 12.8 12.8z"/>
-                      </svg>
-                      Estadísticas de la Oficina
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+  <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
+</svg>
+                       Estadísticas de la Oficina
                     </h4>
 					        </div><!--//col-->
 					      </div><!--//row-->
@@ -69,35 +69,48 @@
 					    <div class="app-card-body p-3 p-lg-4">
                 <div class="row g-4 mb-4" style="padding-top:10px; font-size:14px;">
                   <div class="col-12 col-lg-12" style="color:#000000;">
-                    <div class="item-data">En general tenemos</div>
+                    <div class="item-data"><strong style="font-size:20px">En general tenemos</strong></div>
 										<div class="item-label mb-2">
-                      <strong>
-                        <span style="text-decoration:solid underline #5B99EA 2px;"><?php echo $data3['total']; ?></span>
+                      <br>
+                        <span style="text-decoration:solid underline #5B99EA 2px;"><strong><?php echo $data3['total']; ?></strong></span>
                          Instrumentos, lo cual nos da un ascendente de
-                        <span style="text-decoration:solid underline #5B99EA 2px;">$<?php echo number_format($data3['maximo'], 2); ?> MXN.</span>
-                      </strong>
+                        <span style="text-decoration:solid underline #5B99EA 2px;"><strong>$<?php echo number_format($data3['maximo'], 0); ?> MXN.</span></strong>
+                     
                     </div>
-                    <div class="item-data">De los <?php echo $data3['total']; ?> Instrumentos</div>
+                    <div class="item-data"><br>De los <strong><?php echo $data3['total']; ?></strong> Instrumentos</div>
 										<div class="item-label mb-2">
-                      <strong>
+                     
                         <?php foreach ($data4 as $ctr) { ?>
-                          <span style="text-decoration:solid underline #5B99EA 2px;"><?= $ctr['total']; ?></span>
-                          <?=' son '.$ctr['categoria'].'s: ';?>
+                          <strong><span style="text-decoration:solid underline #5B99EA 2px;"><?= $ctr['total']; ?></span>
+                          <?=' son '.$ctr['categoria'].'s: ';?><br></strong>
                           <?php foreach ($data5 as $cov) { 
                             if ($cov['categoria'] == $ctr['categoria']) {?>
-                            <span style="font-weight:lighter; color:#ff0000; font-size:12px;">(<?= $cov['tipo'].': '.$cov['total'].'.';?>)</span>
-                          <?php }} ?>
+                            <strong><span style="font-weight:lighter; color:#2980B9; font-size:12px;">(<?= $cov['tipo'].': '.$cov['total'];?>)</span></strong>
+                          <?php }} ?><br>
                         <?php } ?>
-                      </strong>
+                      </strong><br>
                     </div>
-                    <div class="item-data">Los estados de los Instrumentos son:</div>
-										<div class="item-label mb-2">
+                    <div class="item-data"><strong>Los estados de los Instrumentos son:</strong></div>
+										<div class="item-label mb-2">   
+                    <div class="table-responsive">                                  
+                  <table>
+			  				    <thead>
+			  					    <tr>
+                        <th scope="col" style="text_align:center; width:1%;"></th>    
+                        <th scope="col" style="text_align:center; width:1%;"></th>
+                        <th scope="col" style="text_align:center; width:1%;"></th>
+                        <th scope="col" style="text_align:center; width:1%;"></th>                     
+			  					    </tr>
+			  				    </thead>
+                    <tbody>
                       <strong>
-                        <?php foreach ($data2 as $cn) {
-                          if ($cn['estado'] == 1) { ?>
+                        <?php foreach ($data2 as $cn) { ?>
+                          <tr>
+                            <td>
+                        <?php if ($cn['estado'] == 1) { ?>                                                    
                             <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
                               <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" />
-                            </svg>
+                            </svg>                            
                           <?php } elseif ($cn['estado'] == 2) { ?>
                             <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
                               <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z" />
@@ -109,14 +122,27 @@
                           <?php } elseif ($cn['estado'] == 4) { ?>
                             <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
                               <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z" />
-                            </svg>
+                            </svg>                            
                           <?php } ?>
+                          </td>
+                          <td>
                           <?php echo $cn['nombre']; ?>
+                          </td>
+                          <td>
                           <span style="text-decoration:solid underline #5B99EA 2px;"><?php echo $cn['total'] ?></span>
-                          <span style="font-weight:semibold; color:#ff0000; font-size:12px;">(<?php echo number_format($cn['total']*100/$data3['total'],2); ?>%)</span><br>
-                        <?php } ?>
+                          </td>
+                          <td>
+                          <strong><span style="font-weight:semibold; color:#E74C3C; font-size:12px;">(<?php echo number_format($cn['total']*100/$data3['total'],2); ?>%)</span></strong><br>
+                          </td>
+                        </tr>                        
+                          <?php } ?>
                       </strong>
-                    </div>
+                      </tbody>
+                      </table>                          
+                          </div>
+                          </div>
+                          
+                   
                   </div>
                 </div><!--//app-card-body-->
 					    </div><!--//app-card-body-->

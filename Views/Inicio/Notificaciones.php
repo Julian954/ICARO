@@ -1,6 +1,4 @@
-<?php if($_SESSION['rol'] >=2){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
-
-
+<?php if($_SESSION['rol'] !=0){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
 
 <?php encabezado() ?> <!-- Poner el header -->
 <?php
