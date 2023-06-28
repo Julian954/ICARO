@@ -19,7 +19,7 @@
 			    <div class="position-relative mb-3">
 				    <div class="row g-3 justify-content-between">
 					    <div class="col-auto">
-					        <h1 class="app-page-title mb-0">Notifications</h1>
+					        <h1 class="app-page-title mb-0"><?=notificaciones();?> Notificaciones</h1>
 					    </div>				
 				    </div>
 			    </div>

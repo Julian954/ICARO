@@ -128,7 +128,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="cl">Codigo del Articulo</label>
-                                <input id="id" class="form-control" type="text" name="id" placeholder="Ingresa los 14 digitos" required>
+                                <input id="id" class="form-control" type="hidden" name="id" placeholder="Ingresa los 14 digitos" required>
                                 <input id="cl" class="form-control" type="text" name="clave" placeholder="Ingresa los 14 digitos" required>
                             </div>
                             <div class="form-group">

@@ -56,116 +56,149 @@ function notificaciones() {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Ejecutar la consulta
-        $sql = "SELECT * FROM contratos";
-        $result = $conn->query($sql);
+        $sql = "SELECT * FROM detalle_cont INNER JOIN validar_cont ON validar_cont.id_contrato = detalle_cont.contrato INNER JOIN usuarios ON detalle_cont.id_responde = usuarios.id";
+        $querry = $conn->prepare($sql);
+        $querry->execute();
+        $data1 = $querry->fetchAll(PDO::FETCH_ASSOC);
 
-        $sql1 = "SELECT * FROM contrataciones";
-        $result1 = $conn->query($sql1);
+        $sql1 = "SELECT * FROM detalle_contrata INNER JOIN validar_contrata ON validar_contrata.id_contrato = detalle_contrata.contrato INNER JOIN usuarios ON detalle_contrata.id_responde = usuarios.id";
+        $querry1 = $conn->prepare($sql1);
+        $querry1->execute();
+        $data2 = $querry1->fetchAll(PDO::FETCH_ASSOC);
 
-    	$sql2 = "SELECT * FROM validar_cont";
-        $result2 = $conn->query($sql2);
+    	$sql2 = "SELECT * FROM contrataciones";
+        $querry2 = $conn->prepare($sql2);
+        $querry2->execute();
+        $data3 = $querry2->fetchAll(PDO::FETCH_ASSOC);
 
-    	$sql3 = "SELECT * FROM validar_contrata";
-        $result3 = $conn->query($sql3);
+    	$sql3 = "SELECT * FROM contratos";
+        $querry3 = $conn->prepare($sql3);
+        $querry3->execute();
+        $data4 = $querry3->fetchAll(PDO::FETCH_ASSOC);
 
-    	$sql4 = "SELECT * FROM detalle_cont";
-        $result4 = $conn->query($sql4);
+    	$sql4 = "SELECT * FROM validar_cont";
+        $querry4 = $conn->prepare($sql4);
+        $querry4->execute();
+        $data5 = $querry4->fetchAll(PDO::FETCH_ASSOC);
 
     	$sql5 = "SELECT * FROM detalle_contrata";
-        $result5 = $conn->query($sql5);
+        $querry5 = $conn->prepare($sql5);
+        $querry5->execute();
+        $data6 = $querry5->fetchAll(PDO::FETCH_ASSOC);
 
         $i = 0;
-    	if($_SESSION['rol']==7){
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                $fechaPasada = new DateTime($row['fecha_validado']); 
+
+        if($_SESSION['rol'] ==4 || $_SESSION['rol'] ==3){
+            foreach($data1 as $contratos){ 
+            	if($contratos['id_responde']!=$_SESSION['id']  && $contratos['visto']==0){ 
+                    $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==4 || $_SESSION['rol'] ==3){
+            foreach($data2 as $contrata){ 
+            	if($contrata['id_responde']!=$_SESSION['id']  && $contrata['visto']==0){
+                    $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==7){
+            foreach($data3 as $requerimiento){ 
+            	if($requerimiento['estado']==3 && $requerimiento['visto']==0){
+                    $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==7){
+            foreach($data3 as $requerimiento2){ 
+            	if($requerimiento2['estado']==3 && $requerimiento2['visto']==1){
+                $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==7){
+            foreach($data4 as $contratacion){ 
+            	if($contratacion['estado']==3 && $contratacion['visto']==0){
+                    $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==7){
+            foreach($data4 as $rcontratacion2){ 
+            	if($rcontratacion2['estado']==3 && $rcontratacion2['visto']==1){
+                    $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==7){
+            foreach($data4 as $vencer){ 
+                $fechaActual = new DateTime($vencer['termino']); 
+                $fechaPasada = new DateTime('-1 year'); 
+                $intervalo = $fechaActual->diff($fechaPasada); 
+                $diasFaltantes = $intervalo->days; 
+            	if($diasFaltantes==15 && $vencer['visto']!=3){
+                    $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==7){
+            foreach($data3 as $vence2){ 
+                $fechaActual = new DateTime($vence2['termino']); 
+                $fechaPasada = new DateTime('-1 year'); 
+                $intervalo = $fechaActual->diff($fechaPasada); 
+                $diasFaltantes = $intervalo->days; 
+            	if($diasFaltantes==15 && $vence2['visto']!=3){
+                    $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==3){
+            foreach($data5 as $asignar){ 
+            	if($asignar['id_validador']==$_SESSION['id'] && $asignar['visto']==0){
+                    $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==3){
+            foreach($data6 as $asignar2){ 
+            	if($asignar2['id_validador']==$_SESSION['id'] && $asignar2['visto']==0){
+                    $i++;
+            	}
+            }
+        }
+
+        if($_SESSION['rol'] ==7){
+            foreach($data4 as $tercer_dia){ 
+                $fechaPasada = new DateTime($tercer_dia['fecha_validado']); 
                 $fechaActual = new DateTime(); 
                 $intervalo = $fechaActual->diff($fechaPasada); 
-                $diasTranscurridos = $intervalo->days; 		
-
-        	    if($diasTranscurridos>2 && $row['estado']==3 && $row['visto']==2){
-        	    	echo "<span class=icon-badge>!</span>";
-        	    }else{
-        	    	echo "<span class=icon-badge>X</span>";
-        	    }
-            }
-            while ($row1 = $result1->fetch(PDO::FETCH_ASSOC)) {		
-                $fechaPasada2 = new DateTime($row1['fecha_validado']); 
-                $fechaActual2 = new DateTime(); 
-                $intervalo2 = $fechaActual2->diff($fechaPasada2); 
-                $diasTranscurridos2 = $intervalo2->days; 
-
-    	        if($diasTranscurridos2>2 && $row1['estado']==3 && $row1['visto']==2){
-    	        	echo "<span class=icon-badge>!</span>";
-    	        }else{
-    	            echo "<span class=icon-badge>X</span>";
-    	        }
-    	    }
-    	        
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) { 							
-    			if($row['estado']==3 && $row['visto']==2){
-    				echo "<span class=icon-badge>!</span>";
-    			}else{
-    				echo "<span class=icon-badge>X</span>";
-    			}
-    		}
-
-    		while ($row1 = $result1->fetch(PDO::FETCH_ASSOC)) {					
-    			if($dow1['estado']==3 && $row1['visto']==2){
-    				echo "<span class=icon-badge>!</span>";
-    			}else{
-    			    echo "<span class=icon-badge>X</span>";
-    			}
-    		}
-
-            while ($row1 = $result1->fetch(PDO::FETCH_ASSOC)) {			
-            	if($row1['estado']==3 && $row1['visto']==1){
-            		echo "<span class=icon-badge>!</span>";
-            	}else{
-            		echo "<span class=icon-badge>X</span>";
+                $diasTranscurridos = $intervalo->days; 
+            	if($diasTranscurridos==3 && $tercer_dia['visto']!=3 && $tercer_dia['estado']==3){
+                    $i++;
             	}
             }
+        }
 
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {							
-            	if($row['estado']==3 && $row['visto']==1){
-            	    echo "<span class=icon-badge>!</span>";
-            	}else{
-            	    echo "<span class=icon-badge>X</span>";
+        if($_SESSION['rol'] ==7){
+            foreach($data3 as $tercer_dia2){ 
+                $fechaPasada = new DateTime($tercer_dia2['fecha_validado']); 
+                $fechaActual = new DateTime(); 
+                $intervalo = $fechaActual->diff($fechaPasada); 
+                $diasTranscurridos = $intervalo->days; 
+            	if($diasTranscurridos==3 && $tercer_dia2['visto']!=3 && $tercer_dia2['estado']==3){
+                    $i++;
             	}
             }
-
-    	} elseif ($_SESSION['rol']==4){ 
-            while ($row2 = $result2->fetch(PDO::FETCH_ASSOC)) {
-            	if($row2['id_validador']==$_SESSION['id'] && $row2['visto']==0){	
-            		echo "<span class=icon-badge>!</span>";
-            	}else{
-            		echo "<span class=icon-badge>X</span>";
-            	}
-            }
-
-            while ($row3 = $result3->fetch(PDO::FETCH_ASSOC)) {
-            	if($row3['id_validador']==$_SESSION['id'] && $row3['visto']==0){	
-            		echo "<span class=icon-badge>!</span>";
-            	}else{
-            		echo "<span class=icon-badge>X</span>";
-            	}
-            }
-
-        } elseif ($_SESSION['rol']==3 || $_SESSION['rol']==4){
-    	    while ($row4 = $result4->fetch(PDO::FETCH_ASSOC)) {
-    	    	if($row4['id_responde']!=$_SESSION['id'] && $row4['visto']==0){	
-    	    		echo "<span class=icon-badge>!</span>";
-    	    	}else{
-    	    		echo "<span class=icon-badge>X</span>";
-    	    	}
-    	    }	
-    	    while ($row5 = $result5->fetch(PDO::FETCH_ASSOC)) {
-    	    	if($row5['id_responde']!=$_SESSION['id'] && $row5['visto']==0){	
-    	    		echo "<span class=icon-badge>!</span>";
-    	    	}else{
-    	    		echo "<span class=icon-badge>X</span>";
-    	    	}
-    	    }
-    	}
+        }
 
        // Cerrar la conexión
        $conn = null;
@@ -174,7 +207,7 @@ function notificaciones() {
     }
 										
     //VARIABLES GLOBALES
-    $dato = '8';
+    $dato = $i;
     return $dato;
 }
 
