@@ -181,55 +181,27 @@ foreach ($data1 as $pedi2){
 			  	  <div class="app-card app-card-orders-table shadow-sm mb-5">
 			  	    <div class="app-card-body p-3">
 			  		    <div class="table-responsive">
-          <table class="table app-table-hover mb-0 text-left" id="Table" >
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col"><span></span>No. Pedido</th>
-                <th scope="col">GPO</th>
-                <th scope="col">Clave</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">ETA</th>
-                <th scope="col">Top 15</th>
-                <th scope="col">$ IVA precio</th>
-                <th scope="col">Alta</th>
-                <th scope="col"></th>
-</tr>
-            </thead>
-            <tbody >
-              <?php $i=0; foreach($data1 as $pedidos) { $i++;/*if($i<=15){*/ ?>
-              <?php //while($pedidos){ $i++; /*$final=$final+$pedidos['cantidad'];*/if($i<=15){  ?> 
-                <div style="display:none;">
-              <tr>
-                <td><?= $pedidos['id'] ?></td>
-                <td><span style="font-weight:bold;"><?= $pedidos['nopedido'] ?></span></td>
-                <td><?= $pedidos['tipo'] ?></td>
-                <td><?= $pedidos['clave'] ?></td>
-                <td><?= $pedidos['cantidad'] ?></td>
-                <td><?= $pedidos['eta'] ?></td>
-                <td><?php if($pedidos['negadas']!=null){?>SI<?php }elseif($pedidos['negadas']==null){?>NO<?php }?></td>
-                <td>$<?=number_format($pedidos['monto'])?> MXN</td>
-                <td><?= $pedidos['fecha'] ?></td>
-                <?php if($pedidos['monto2']==0){?>
-                <td><button  type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>
-                <?php }else{?>
-                  <td>Enlazado!<button style="display:none" type="button" class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal<?php echo $pedidos['id'];?>" >Enlazar</button></td>
-                  <?php }?>
-              </tr>  </div>
-              <?php include('modal.php');    ?>
-              <?php }; ?>  
-            </tbody>
-          </table>
+                  <table class="table app-table-hover mb-0 text-left" id="TablePedidos" >
+                    <thead>
+                      <tr>
+                        <th class="cell">Id</th>
+                        <th class="cell"><span></span>No. Pedido</th>
+                        <th class="cell">GPO</th>
+                        <th class="cell">Clave</th>
+                        <th class="cell">Cantidad</th>
+                        <th class="cell">ETA</th>
+                        <th class="cell">Top 15</th>
+                        <th class="cell">$ IVA precio</th>
+                        <th class="cell">Alta</th>
+                        <th class="cell">Enlazar</th>
+                      </tr>
+                    </thead>
+                  </table>
                 </div>
               </div>
             </div>
           </div><!--//app-card-body-->
 			</div><!--//app-wrapper-->
-
-
-
-    
-
 
     <!-- Javascript -->
     <script src="assets/plugins/popper.min.js"></script>
@@ -239,6 +211,6 @@ foreach ($data1 as $pedi2){
     <!-- Page Specific JS -->
     <script src="assets/js/app.js"></script>
 	
-	<?php } ?>
+	<?php include('modal.php'); } ?>
 
 <?php pie() ?>

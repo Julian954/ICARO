@@ -44,11 +44,12 @@
         }
 
         // Agrega un nuevo contrato a la base de datos.
-        public function agregarContrato(string $numero, string $descripcion, string $area, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $plataforma, string $fecha_termina, string $devengo, string $categoria) {
+        public function agregarContrato(string $numero, string $descripcion, string $area, string $requiriente, string $administrador, string $tipo, string $termino, string $maximo, string $fianza, string $plataforma, string $fecha_termina, string $devengo, string $categoria) {
             $return = "";
             $this->numero = $numero;
             $this->descripcion = $descripcion;
             $this->area = $area;
+            $this->requiriente = $requiriente;
             $this->administrador = $administrador;
             $this->tipo = $tipo;
             $this->termino = $termino;
@@ -65,8 +66,8 @@
 
             if (empty($result)) {
                 // Si el contrato no existe, se inserta en la base de datos
-                $query = "INSERT INTO contratos(numero, descripcion, area, administrador, tipo, termino, maximo, devengo, fianza, plataforma, fecha_eliminar, categoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-                $data = array($this->numero, $this->descripcion, $this->area, $this->administrador, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->plataforma, $this->fecha_termina, $this->categoria);
+                $query = "INSERT INTO contratos(numero, descripcion, area, requiriente, administrador, tipo, termino, maximo, devengo, fianza, plataforma, fecha_eliminar, categoria) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                $data = array($this->numero, $this->descripcion, $this->area,$this->requiriente, $this->administrador, $this->tipo, $this->termino, $this->maximo, $this->devengo, $this->fianza, $this->plataforma, $this->fecha_termina, $this->categoria);
                 $resul = $this->insert($query, $data);
                 $return = $resul;
             } else {

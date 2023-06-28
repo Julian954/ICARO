@@ -36,6 +36,7 @@
             $numero = limpiarInput($_POST['numero']);
             $descripcion = limpiarInput($_POST['descripcion']);
             $area = limpiarInput($_POST['area']);
+            $requiriente = limpiarInput($_POST['requiriente']);
             $administrador = limpiarInput($_SESSION['id']);
             $tipo = limpiarInput($_POST['tipo']);
             $termino = limpiarInput($_POST['termino']);
@@ -45,7 +46,7 @@
             $fecha_termina = date("Y-m-d", strtotime("+1 year"));
             $devengo = 0; // default
 
-            $insert = $this->model->agregarContrato($numero, $descripcion, $area, $administrador, $tipo, $termino, $maximo, $fianza, $plataforma, $fecha_termina, $devengo, $categoria);
+            $insert = $this->model->agregarContrato($numero, $descripcion, $area, $requiriente, $administrador, $tipo, $termino, $maximo, $fianza, $plataforma, $fecha_termina, $devengo, $categoria);
             if ($insert == 'existe') {
                 $alert = 'existe';
                 header("location: " . base_url() . "Contratos/Registro?msg=$alert");
