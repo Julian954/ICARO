@@ -80,15 +80,15 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">No. Dictamen</label>
-                  <select class="form-control" id="Dictamen" name="Dictamen" required>
+                  <select class="form-control" id="Dictamen" name="Dictamen" required onchange="actualizarMontoMaximo()">
                     <?php foreach ($data5 as $dictamen) { ?>
-                    <option> <?php echo $dictamen['dictamen']; $dictamen['monto'] ?></option>
+                    <option data-monto="<?php echo $dictamen['montomax']; ?>"><?php echo $dictamen['dictamen']; ?></option>
                     <?php } ?>
                   </select> 
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">Monto Máximo $</label>
-                  <input type="number" min="0" max="100000" class="form-control" id="Maximo" name="Maximo" value="" required>
+                  <input type="number" class="form-control" id="Maximo" name="Maximo" value="" required>
                 </div>
                 <div class="form-group">
                   <label for="setting-input-2" class="form-label">Comentarios</label>

@@ -206,7 +206,12 @@
       });
     });
 
-
+    function actualizarMontoMaximo() {
+      var select = document.getElementById('Dictamen');
+      var montoMaximo = select.options[select.selectedIndex].dataset.monto;
+      var inputMonto = document.getElementById('Maximo');
+      inputMonto.max = montoMaximo;
+    }
 
 
     $(document).ready(function() {
