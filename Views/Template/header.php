@@ -61,13 +61,18 @@
 							<!--//NOTIFICACIONES-->
 			            	<div class="app-utilities col-auto">
 				            	<div class="app-utility-item app-notifications-dropdown dropdown">
-									<a  href="<?=base_url();?>Inicio/Notificaciones" title="Notificaciones">
+									<?php if($_SESSION['rol']==2 || $_SESSION['rol']==3 || $_SESSION['rol']==4 || $_SESSION['rol']==7){?>
+										<a  href="<?=base_url();?>Inicio/Notificaciones" title="Notificaciones">
 						            	<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 										  	<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
 										  	<path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
 										</svg>
-										<span class=icon-badge><?=notificaciones();?></span>
+										<?php if (notificaciones() != 0) { ?>
+											<span class=icon-badge><?=notificaciones();?></span>
+										<?php } ?>
+										
 						        	</a><!--//dropdown-toggle-->
+									<?php }?>
 					        	</div><!--//app-utility-item-->
 								<!--//PERFIL-->
 				            	<div class="app-utility-item app-user-dropdown dropdown">
@@ -108,6 +113,7 @@
 						        </a><!--//nav-link-->
 						    </li><!--//nav-item-->
 
+<?php if($_SESSION['rol']==7 || $_SESSION['rol']==4 || $_SESSION['rol']==5 || $_SESSION['rol']==3){?>
 							<li class="nav-item has-submenu">
 						        <a class="nav-link submenu-toggle <?php if ($linkShort == "/IMSS/Contratos") { echo 'active" aria-expanded="true"'; } else { echo '" aria-expanded="false"';} ?> href="#" data-toggle="collapse" data-target="#submenu-1"  aria-controls="submenu-1">
 							        <span class="nav-icon">
@@ -125,13 +131,20 @@
 						        </a><!--//nav-link-->
 						        <div id="submenu-1" class="collapse submenu submenu-1 <?php if ($linkShort == "/IMSS/Contratos") { echo "show"; } ?>" data-parent="#menu-accordion">
 							        <ul class="submenu-list list-unstyled">
+										<?php if($_SESSION['rol']==7 || $_SESSION['rol']==4){?>
 									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Registro">Nuevo Contrato</a></li>
-								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/General">Seguimiento</a></li>
-								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Validando">Flujo de Revisión</a></li>
-							        </ul>
+								    <?php }?>
+									<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5 || $_SESSION['rol']==4){?>
+									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/General">Seguimiento</a></li>
+								    <?php }?>
+									<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5 || $_SESSION['rol']==4 || $_SESSION['rol']==3){?>
+									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contratos/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contratos/Validando">Flujo de Revisión</a></li>
+							        <?php }?>
+								</ul>
 						        </div>
 						    </li><!--//nav-item-->
-
+<?php }?>
+<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5 || $_SESSION['rol']==2 || $_SESSION['rol']==4){?>
 							<li class="nav-item has-submenu">
 						        <a class="nav-link submenu-toggle <?php if ($linkShort == "/IMSS/Contrataciones") { echo 'active" aria-expanded="true"'; } else { echo '" aria-expanded="false"';} ?> href="#" data-toggle="collapse" data-target="#submenu-2"  aria-controls="submenu-2">
 							        <span class="nav-icon">
@@ -148,13 +161,20 @@
 						        </a><!--//nav-link-->
 						        <div id="submenu-2" class="collapse submenu submenu-2 <?php if ($linkShort == "/IMSS/Contrataciones") { echo "show"; } ?>" data-parent="#menu-accordion">
 							        <ul class="submenu-list list-unstyled">
+										<?php if($_SESSION['rol']==7 || $_SESSION['rol']==2){?>
 									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/Registro">Nuevo Requerimiento</a></li>
-								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/General">Seguimiento</a></li>
-								        <li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/Validando">Flujo de Revisión</a></li>
-							        </ul>
+								    <?php }?>
+									<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5 || $_SESSION['rol']==2){?>
+									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/General") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/General">Seguimiento</a></li>
+								    <?php }?>
+									<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5 || $_SESSION['rol']==4 || $_SESSION['rol']==2){?>
+									<li class="submenu-item"><a class="submenu-link <?php if ($link == "/IMSS/Contrataciones/Validando") { echo "active"; } ?>" href="<?php echo base_url(); ?>Contrataciones/Validando">Flujo de Revisión</a></li>
+							        <?php }?>
+								</ul>
 						        </div>
 						    </li><!--//nav-item-->
-
+<?php }?>
+<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5){?>
 						    <li class="nav-item">
 						        <a class="nav-link <?php if ($link == "/IMSS/Pedidos/Compras") { echo "active"; } ?>" href="<?php echo base_url(); ?>Pedidos/Compras">
 							    	<span class="nav-icon">
@@ -169,7 +189,8 @@
 			                        <span class="nav-link-text">Pedidos</span>
 						        </a><!--//nav-link-->
 						    </li><!--//nav-item-->
-
+<?php }?>
+<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5 || $_SESSION['rol']==1){?>
 							<li class="nav-item">
 						        <a class="nav-link <?php if ($link == "/IMSS/Despachos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Despachos/Registro">
 							    	<span class="nav-icon">
@@ -180,7 +201,8 @@
 			                        <span class="nav-link-text">Despachos</span>
 						        </a><!--//nav-link-->
 						    </li><!--//nav-item-->
-
+<?php }?>
+<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5){?>
 	              			<li class="nav-item">
 						        <a class="nav-link <?php if ($link == "/IMSS/Indicadores/Indicador") { echo "active"; } ?>" href="<?php echo base_url(); ?>Indicadores/Indicador">
 							        <span class="nav-icon">
@@ -191,7 +213,8 @@
 			                        <span class="nav-link-text">Indicadores</span>
 						        </a><!--//nav-link-->
 						    </li><!--//nav-item-->
-
+<?php }?>
+<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5){?>
 							<li class="nav-item">
 						        <a class="nav-link <?php if ($link == "/IMSS/Usuarios/Listar") { echo "active"; } ?>" href="<?php echo base_url(); ?>Usuarios/Listar">
 							        <span class="nav-icon">
@@ -232,7 +255,8 @@
 			                        <span class="nav-link-text">Unidades</span>
 						        </a><!--//nav-link-->
 						    </li><!--//nav-item-->
-
+<?php }?>
+<?php if($_SESSION['rol']==7){?>
 							<li class="nav-item">
 						        <a class="nav-link <?php if ($link == "/IMSS/Excel/Subir") { echo "active"; } ?>" href="<?php echo base_url(); ?>Excel/Subir">
 								<span class="nav-icon">
@@ -263,7 +287,7 @@
 				                        <span class="nav-link-text">Configuración</span>
 							        </a><!--//nav-link-->
 							    </li><!--//nav-item-->
-
+<?php }?>
 						    </ul><!--//footer-menu-->
 					    </nav>
 				    </div><!--//app-sidepanel-footer-->

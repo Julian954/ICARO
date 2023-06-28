@@ -20,6 +20,13 @@
             return $res;
         }
 
+        public function usuario()
+        {
+            $sql = "SELECT * FROM usuarios WHERE rol = 2";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
         //Selecciona los tipos
         public function SelectTipo()
         {

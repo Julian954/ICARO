@@ -201,7 +201,7 @@ foreach ($data1 as $pedi2){
               <?php //while($pedidos){ $i++; /*$final=$final+$pedidos['cantidad'];*/if($i<=15){  ?> 
                 <div style="display:none;">
               <tr>
-                <td><?= $i ?></td>
+                <td><?= $pedidos['id'] ?></td>
                 <td><span style="font-weight:bold;"><?= $pedidos['nopedido'] ?></span></td>
                 <td><?= $pedidos['tipo'] ?></td>
                 <td><?= $pedidos['clave'] ?></td>

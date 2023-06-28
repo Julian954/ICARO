@@ -21,6 +21,19 @@
 								<?php //var_dump($data2); ?>
 									<h6>Ultima fecha de modificacion : <?= $data2[0];?></h6>	
 									<div class="app-card-body text-center">											
+            					<div class="app-card-header">
+            					  <div class="row justify-content-between align-items-center">
+            					    <div class="col-auto">
+            					      <h4 class="app-card-title">Indicadores</h4>
+            					    </div><!--//col-->
+            					    <div class="col-auto">
+            					      <div class="card-header-acti3on">
+            					        <span style="font-weight: normal;font-size: 12px">Actualizado el <?= $data1['fecha'];?></span>
+            					      </div><!--//card-header-action-->
+            					    </div><!--//col-auto-->
+            					  </div><!--//row justify-content-between align-items-center-->
+            					</div><!--//app-card-header p-3-->
+									<div class="app-card-body mt-3">											
 										<form action="<?php echo base_url(); ?>Indicadores/procesarArchivo" method="post" enctype="multipart/form-data">
                     						<div class="form-group">
                     						    <label for="date">Fecha</label>
@@ -40,7 +53,6 @@
 											<?php } ?>
 										</form>
 									</div><!--//app-card-body-->
-								</div>	
 							</div><!--//app-card-->
 						</div>
 					</div><!--//row-->
@@ -53,9 +65,19 @@
 						</div>
 						<div class="col-12 col-md-8">
 							<div class="app-card app-card-settings shadow-sm p-4">
-								<label for="negadas" class="form-label">Negadas</label>
-								<div class="mb-3">
-									<div class="app-card-body text-center">
+            					<div class="app-card-header">
+            					  <div class="row justify-content-between align-items-center">
+            					    <div class="col-auto">
+            					      <h4 class="app-card-title">Negadas</h4>
+            					    </div><!--//col-->
+            					    <div class="col-auto">
+            					      <div class="card-header-acti3on">
+            					        <span style="font-weight: normal;font-size: 12px">Actualizado el <?= $data2['fecha'];?></span>
+            					      </div><!--//card-header-action-->
+            					    </div><!--//col-auto-->
+            					  </div><!--//row justify-content-between align-items-center-->
+            					</div><!--//app-card-header p-3-->
+									<div class="app-card-body mt-3">
 										<form action="<?php echo base_url(); ?>Inicio/subir_archivo" method="post" enctype="multipart/form-data">
                     						<div class="form-group">
                     						    <label for="date">Fecha</label>
@@ -76,7 +98,7 @@
 										</form>
 
 									</div><!--//app-card-body-->
-								</div>
+								
 								
 							</div><!--//app-card-->
 						</div>
@@ -85,28 +107,38 @@
 					<hr class="my-4">
 					<div class="row g-4 settings-section">
 						<div class="col-12 col-md-4">
-							<h3 class="section-title">Faltas Nacionales</h3>
+							<h3 class="section-title">Datos Nacionales</h3>
 							<div class="section-intro">Apartado para subir los archivos diarios</div>
 						</div>
 						<div class="col-12 col-md-8">
 							<div class="app-card app-card-settings shadow-sm p-4">
-								<label for="nacional" class="form-label">Faltas Nacionales</label>
-								<div class="mb-3">
-									<div class="app-card-body text-center">
+            					<div class="app-card-header">
+            					  <div class="row justify-content-between align-items-center">
+            					    <div class="col-auto">
+            					      <h4 class="app-card-title">Nacionales</h4>
+            					    </div><!--//col-->
+            					    <div class="col-auto">
+            					      <div class="card-header-acti3on">
+            					        <span style="font-weight: normal;font-size: 12px">Actualizado el <?= $data3['fecha'];?></span>
+            					      </div><!--//card-header-action-->
+            					    </div><!--//col-auto-->
+            					  </div><!--//row justify-content-between align-items-center-->
+            					</div><!--//app-card-header p-3-->
+									<div class="app-card-body mt-3">
 										<form action="<?php echo base_url(); ?>Inicio/subir_rank" method="post">
-											<label for="date" class="form-label" style="color:#000000;">Fecha</label>
+											<label for="date" class="form-control">Fecha</label>
 											<input type="date" class="form-control" id="fecha" name="fecha" value="" require><br>
-											<label for="text" class="form-label" style="color:#000000;">Porcentaje de satisfaccion Nacional %</label>
+											<label for="text" class="form-control">Porcentaje de satisfaccion Nacional %</label>
 											<input type="text" min="0" class="form-control" id="satisf" name="satisf" value="" <?php if($_SESSION['rol']!=7){ "required"; };?>>
-											<label for="text" class="form-label" style="color:#000000;">Ranking Nacional Colima</label>
+											<label for="text" class="form-control">Ranking Nacional Colima</label>
 											<input type="text" min="0" class="form-control" id="rank" name="rank" value="" <?php if($_SESSION['rol']!=7){ "required"; };?>><br>
-											<button class="btn btn-success mb-2" type="submit" id="subir"><i class="fas fa-save"></i> Actualizar Datos</button>
+											<button class="btn btn-success" type="submit" id="subir"><i class="fas fa-save"></i> Actualizar Datos</button>
 											<?php if($_SESSION['rol']==7){ /*duda en dejar o no el eliminar el rank*/?>
-											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i>Eliminar Documento</button>
+											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i> Eliminar Documento</button>
 											<?php } ?>
 										</form>
 									</div>	
-								</div>
+								
 							</div>	
 						</div>
 
@@ -120,9 +152,19 @@
 						</div>
 						<div class="col-12 col-md-8">
 							<div class="app-card app-card-settings shadow-sm p-4">
-								<label for="pedidos" class="form-label">Pedidos</label>
-								<div class="mb-3">
-									<div class="app-card-body text-center">
+            					<div class="app-card-header">
+            					  <div class="row justify-content-between align-items-center">
+            					    <div class="col-auto">
+            					      <h4 class="app-card-title">Pedidos</h4>
+            					    </div><!--//col-->
+            					    <div class="col-auto">
+            					      <div class="card-header-acti3on">
+            					        <span style="font-weight: normal;font-size: 12px">Actualizado el <?= $data4['fecha'];?></span>
+            					      </div><!--//card-header-action-->
+            					    </div><!--//col-auto-->
+            					  </div><!--//row justify-content-between align-items-center-->
+            					</div><!--//app-card-header p-3-->
+									<div class="app-card-body mt-3">
 										<form action="<?php echo base_url(); ?>Pedidos/subirarchivo" method="post" enctype="multipart/form-data">
                     						<div class="form-group">
                     						    <label for="date">Fecha</label>
@@ -142,7 +184,6 @@
 											<?php } ?>
 										</form>
 									</div><!--//app-card-body-->
-								</div>
 							</div><!--//app-card-->
 						</div>
 					</div>
