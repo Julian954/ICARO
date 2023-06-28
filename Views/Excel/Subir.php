@@ -18,6 +18,7 @@
 							<div class="app-card app-card-settings shadow-sm p-4">
 								<label for="indicadores" class="form-label">Indicadores</label>
 								<div class="mb-3"><br>
+								<?php //var_dump($data2); ?>
 									<h6>Ultima fecha de modificacion : <?= $data2[0];?></h6>	
 									<div class="app-card-body text-center">											
 										<form action="<?php echo base_url(); ?>Indicadores/procesarArchivo" method="post" enctype="multipart/form-data">
