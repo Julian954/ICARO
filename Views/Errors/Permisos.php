@@ -5,7 +5,7 @@
 	    <div class="row">
 		    <div class="col-12 col-md-11 col-lg-7 col-xl-6 mx-auto">
 			    <div class="app-branding text-center mb-5">
-		            <a class="app-logo" href="<?php echo base_url(); ?>Inicio/Home"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/app-logo.svg" alt="logo"><span class="logo-text">MARYS</span></a>
+		            <a class="app-logo text-decoration-none" href="<?php echo base_url(); ?>Inicio/Home"><img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/app-logo.svg" alt="logo"><span class="logo-text">MARYS</span></a>
 		        </div><!--//app-branding-->  
 			    <div class="app-card p-5 text-center shadow-sm">
 				    <h1 class="page-title mb-4">403<br><span class="font-weight-light">Sin Autorización</span></h1>
