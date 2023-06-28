@@ -6,14 +6,15 @@ class DespachosModel extends Mysql{ //El archivo se debe llamar igual que el con
         parent::__construct();
     }
 
-    public function agregarDespacho(string $unidad,int $negadas,string $remision,string $entrega,string $archivo,string $fecha_termina) {
+    public function agregarDespacho(string $unidad,int $negadas,string $remision,string $entrega,string $archivo,string $fecha_termina, string $eco) {
         $return = "";
         $this->unidad = $unidad;
         $this->negadas = $negadas;
         $this->remision = $remision;
         $this->entrega = $entrega;
         $this->archivo = $archivo;
-        $this->fecha_termina = $fecha_termina;    
+        $this->fecha_termina = $fecha_termina;   
+        $this->eco = $eco;    
 
         // Verifica si el contrato ya existe en la base de datos
         $sql = "SELECT * FROM despachos WHERE remision= '{$this->remision}'";
@@ -21,8 +22,8 @@ class DespachosModel extends Mysql{ //El archivo se debe llamar igual que el con
 
         if (empty($result)) {
             // Si el contrato no existe, se inserta en la base de datos
-            $query = "INSERT INTO despachos(unidad, negadas, remision, fecha_entrega, archivo, fecha_termina) VALUES (?,?,?,?,?,?)";
-            $data = array($this->unidad, $this->negadas, $this->remision, $this->entrega, $this->archivo, $this->fecha_termina);
+            $query = "INSERT INTO despachos(unidad, negadas, remision, fecha_entrega, archivo, fecha_termina, eco) VALUES (?,?,?,?,?,?,?)";
+            $data = array($this->unidad, $this->negadas, $this->remision, $this->entrega, $this->archivo, $this->fecha_termina, $this->eco);
             $resul = $this->insert($query, $data);
             $return = $resul;
         } else {

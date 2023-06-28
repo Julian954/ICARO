@@ -361,7 +361,7 @@
                                       <?php foreach($data7 as $despachos){?>
                                         <td class="text-success"><?= $despachos['abreviacion'];?></td>
                                         <td class="stat-cell" style="text-align: center"><?= $despachos['remision'];?></td>
-                                        <td class="stat-cell" style="text-align: center"><?= $despachos['archivo'];?></td>
+                                        <td class="stat-cell" style="text-align: center"><a href="<?= base_url().'Assets/Documentos/Despachos/'.$despachos['archivo'];?>" Target="_blank"><?= $despachos['eco'];?></a></td>
                                         <td class="stat-cell" style="text-align: center"><?= substr($despachos['fecha_entrega'],10,6);?></td>
                                         <td class="stat-cell" style="text-align: center">
                                         <?php if($despachos['negadas']==0){?>

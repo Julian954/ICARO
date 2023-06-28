@@ -10,7 +10,6 @@ let Part = URLactual.slice(Posicion, Final);
 var fila; //captura la fila, para editar o eliminar
 
 $(document).ready(function () {
-
   //MENSAJE DE CARGA
   if (document.getElementById("formulario1") !== null) {
     const formulario1 = document.getElementById("formulario1");
@@ -188,6 +187,24 @@ $(document).ready(function () {
     e.preventDefault();
     Swal.fire({
       title: "¿Está seguro de atender la queja?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#28a745",
+      cancelButtonColor: "#dc3545",
+      confirmButtonText: "Si",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submit();
+      }
+    });
+  });
+
+  //Mensaje de alerta al restablecer contraseña
+  $(".subir").submit(function (e) {
+    e.preventDefault();
+    Swal.fire({
+      title: "¿Está seguro de eliminar los registros  del día señalado?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#28a745",

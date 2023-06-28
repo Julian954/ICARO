@@ -14,13 +14,14 @@ class Inicio extends Controllers
     //Muestra la vista HOME
     public function Home()
     {
+        $hoy = date('Y-m-d');
         $data1 = $this->model->nivelatencionycosto();
         $data2 = $this->model->negadasymanuales();
         $data3 = $this->model->top15negadas();
         $data4 = $this->model->quejas();
         $data5 = $this->model->pedidos();
         $data6 = $this->model->unidades();
-        $data7 = $this->model->despachos();
+        $data7 = $this->model->despachos($hoy);
         $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
         die();
     }

@@ -57,8 +57,9 @@ class InicioModel extends Mysql{
         return $res;
     }
 
-    public function despachos(){        
-        $sql = "SELECT despachos.*, unidades.abreviacion FROM despachos, unidades WHERE despachos.unidad = unidades.id";
+    public function despachos(string $hoy){   
+        $this->hoy=$hoy;     
+        $sql = "SELECT despachos.*, unidades.abreviacion FROM despachos, unidades WHERE despachos.unidad = unidades.id AND cast(fecha_entrega AS DATE) = '{$this->hoy}'";
         $res = $this->select_all($sql);
             return $res;
     }

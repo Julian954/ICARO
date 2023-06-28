@@ -28,7 +28,7 @@
 	          <div class="col-12 col-md-8">
 	            <div class="app-card app-card-settings shadow-sm p-4">
 					      <div class="app-card-body">
-                  <form method="POST" action="<?php echo base_url(); ?>Despachos/agregar" autocomplete="off">
+                  <form method="POST" action="<?php echo base_url(); ?>Despachos/agregar" autocomplete="off" enctype="multipart/form-data">
                     <div class="mb-3">
                       <label for="numero" class="form-label" style="color:#000000;">Destino<span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresar la unidad a la que sera entregado el despacho"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" style="color:#FF0000;" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="mb-3">
-                    <label class="form-label" style="color:#000000;">Contiene Negadas?</label>
+                    <label class="form-label" style="color:#000000;">¿Contiene Negadas?</label>
                     			<div class="form-check form-switch" style="padding: 0px;">
                         <label class="form-check-label" style="padding: 0 40px 0 0;">NO</label>
 										    <input class="form-check-input" type="checkbox" id="negadas" name="negadas" checked>
@@ -54,6 +54,10 @@
                       <label for="number" class="form-label" style="color:#000000;">Numero de Remision</label>
                       <input type="text"  class="form-control" id="remision" name="remision" value="" required>
                   </div>
+                  <div class="mb-3">
+                      <label for="eco" class="form-label" style="color:#000000;">ECO</label>
+                      <input type="text"  class="form-control" id="eco" name="eco" value="" required>
+                  </div>
 
                   <div class="mb-3">
                    <label for="date" class="form-label" style="color:#000000;">Fecha de Entrega</label>
@@ -62,7 +66,8 @@
                   
                 <label for="img"><strong>Selecciona Archivo</strong></label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="file-input" name="archivo" required>
+                  
+                    <input type="file" class="custom-file-input" name="archivo" required>
                     <label class="custom-file-label" for="customFile"></label>
                     <label><br><strong>Nota:</strong> Solo se permiten archivos PDF, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
                 </div>            

@@ -28,22 +28,41 @@ class Despachos extends Controllers //Aquí se debe llamas igual que el archivo
         $unidad = limpiarInput($_POST['unidad']);
         $remision = limpiarInput($_POST['remision']);
         $entrega = limpiarInput($_POST['entrega']);
-        //$administrador = limpiarInput($_SESSION['id']);
-        $archivo = limpiarInput($_POST['archivo']);          
+        $eco = limpiarInput($_POST['eco']);
+        //$administrador = limpiarInput($_SESSION['id']);          
         $fecha_termina = date("Y-m-d", strtotime("+2 month"));
         
-        $insert = $this->model->agregarDespacho($unidad, $negadas, $remision, $entrega, $archivo, $fecha_termina);
-        if ($insert == 'existe') {
-            $alert = 'existe';
-            header("location: " . base_url() . "Despachos/Registro?msg=$alert");
-        } else if ($insert > 0) {
-            //Si se agrega te redirige a la vista "General" con un mensaje de alerta.
-            $alert = 'registrado';
-            header("location: " . base_url() . "Despachos/Registro?msg=$alert");
+        $name = pathinfo($_FILES["archivo"]["name"]);
+        $nombre_archivo = $_FILES["archivo"]["name"];
+        $nombre_nuevo = $remision.".".$name["extension"];
+        $tipo_archivo = $_FILES["archivo"]["type"];
+        $tamano_archivo = $_FILES["archivo"]["size"];
+        $ruta_temporal = $_FILES["archivo"]["tmp_name"];
+        $error_archivo = $_FILES["archivo"]["error"];
+        $tmaximo = 20 * 1024 * 1024;
+        if(($tamano_archivo < $tmaximo && $tamano_archivo != 0) && ($name["extension"] == "pdf")){
+            if ($error_archivo == UPLOAD_ERR_OK) {
+                $ruta_destino = 'Assets/Documentos/Despachos/'.$nombre_nuevo;
+                if (move_uploaded_file($ruta_temporal, $ruta_destino)) {
+                   $insert = $this->model->agregarDespacho($unidad, $negadas, $remision, $entrega, $nombre_nuevo, $fecha_termina, $eco);
+                    if ($insert == 'existe') {
+                        $alert = 'existe';
+                    } else if ($insert > 0) {
+                        //Si se agrega te redirige a la vista "General" con un mensaje de alerta.
+                        $alert = 'registrado';
+                    } else {
+                        $alert = 'error';
+                    }
+                } else {
+                   $alert =  'noformato1';
+                }
+            } else {
+            $alert =  'noformato2';
+            }
         } else {
-            $alert = 'error';
-            header("location: " . base_url() . "Despachos/Registro?msg=$alert");
+            $alert =  'noformato3';
         }
+        header("location: " . base_url() . "Despachos/Registro?msg=$alert");
         die();
     }
 }
