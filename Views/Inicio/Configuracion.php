@@ -142,37 +142,34 @@
                 <hr class="my-4">
                 <div class="row g-4 settings-section">
 	                <div class="col-12 col-md-4">
-		                <h3 class="section-title">Notifications</h3>
-		                <div class="section-intro">Settings section intro goes here. Duis velit massa, faucibus non hendrerit eget.</div>
+		                <h3 class="section-title">Dictamen</h3>
 	                </div>
 	                <div class="col-12 col-md-8">
 		                <div class="app-card app-card-settings shadow-sm p-4">						    
 						    <div class="app-card-body">
-							    <form class="settings-form">
-								    <div class="form-check form-switch mb-3">
-										<input class="form-check-input" type="checkbox" id="settings-switch-1" checked>
-										<label class="form-check-label" for="settings-switch-1">Project notifications</label>
-									</div>
-									<div class="form-check form-switch mb-3">
-										<input class="form-check-input" type="checkbox" id="settings-switch-2">
-										<label class="form-check-label" for="settings-switch-2">Web browser push notifications</label>
-									</div>
-									<div class="form-check form-switch mb-3">
-										<input class="form-check-input" type="checkbox" id="settings-switch-3" checked>
-										<label class="form-check-label" for="settings-switch-3">Mobile push notifications</label>
-									</div>
-									<div class="form-check form-switch mb-3">
-										<input class="form-check-input" type="checkbox" id="settings-switch-4">
-										<label class="form-check-label" for="settings-switch-4">Lorem ipsum notifications</label>
-									</div>
-									<div class="form-check form-switch mb-3">
-										<input class="form-check-input" type="checkbox" id="settings-switch-5">
-										<label class="form-check-label" for="settings-switch-5">Lorem ipsum notifications</label>
-									</div>
-									<div class="mt-3">
-									    <button type="submit" class="btn app-btn-primary" >Save Changes</button>
-									</div>
-							    </form>
+                                <div class="col-lg-8 mb-2 py-2">
+                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#nuevo_dictamen"><i class="fas fa-plus-circle"></i> Nuevo</button>
+                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#archivoDictamen"><i class="fas fa-plus-circle"></i> Subir Archivo</button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left" id="Table5">
+			  					        <thead>
+			  						        <tr>
+                                              <th scope="col">Dictamen</th>
+                                              <th scope="col">Monto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($data5 as $us) { ?>
+                                               <tr>
+                                                 <td><?php echo $us['dictamen']; ?></td>
+                                                 <td><?php echo $us['montomax']; ?></td>
+                                                
+                                                    <?php } ?>
+                                                </tr>
+                                        </tbody>
+                                    </table>  
+                                </div>
 						    </div><!--//app-card-body-->						    
 						</div><!--//app-card-->
 	                </div>
@@ -180,7 +177,61 @@
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
 	    
-    </div><!--//app-wrapper-->    					
+    </div><!--//app-wrapper-->
+
+    <div id="nuevo_dictamen" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="my-modal-title"> Nuevo Dictamen</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="<?php echo base_url(); ?>Inicio/insertar" autocomplete="off">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="dictamen">No.Dictamen</label>
+                            <input id="dictamen" class="form-control" type="text" name="dictamen" placeholder="No.Dictamen" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="monto">Monto</label>
+                            <input id="monto" class="form-control" type="text" name="monto" placeholder="Monto Maximo" required>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Registrar</button>
+                        <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="archivoDictamen" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Nuevos Dictamenes</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="<?php echo base_url(); ?>Inicio/procesarArchivo" method="post" enctype="multipart/form-data" id="formulario">
+						<div class="form-group">
+                    	    <label for="img">Selecciona Archivo</label>
+                    	    <div class="custom-file">
+                    	      <input type="file" class="custom-file-input" id="file-input" accept="csv" name="archivo_csv" required>
+                    	      <label class="custom-file-label" for="customFile"></label>
+                    	      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
+                    	    </div>
+                    	</div>
+						<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
+					</form>
+                </div>
+            </div>
+        </div>
+    </div>   					
 
 <?php } ?>
 

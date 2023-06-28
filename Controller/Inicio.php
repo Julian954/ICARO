@@ -357,11 +357,67 @@ class Inicio extends Controllers
         $data2 = $this->model->SelectTipo();
         $data3 = $this->model->SelectPlataforma();
         $data4 = $this->model->SelectTipoContratacion();
+        $data5 = $this->model->selectDictamen();
 
-        $this->views->getView($this, "Configuracion", "", $data1, $data2, $data3, $data4);
+        $this->views->getView($this, "Configuracion", "", $data1, $data2, $data3, $data4, $data5);
         die();
     }
 
+    public function insertar()
+    {
+        $dictamen = limpiarInput($_POST['dictamen']);
+        $monto = limpiarInput($_POST['monto']);
+        $insert = $this->model->insertarDictamen($dictamen, $monto);
+        if ($insert == 'existe') {
+            // Si el artículo ya existe, muestra una alerta
+            $alert = 'existe';
+        } elseif ($insert) {
+            // Si el artículo se registra correctamente, muestra una alerta de éxito
+            $alert = 'registrado';
+        } else {
+            // Si ocurre un error en el registro, muestra una alerta de error
+            $alert = 'error';
+        }
+        // Pasa la alerta como parámetro GET en la redirección
+        header("location: " . base_url() . "Inicio/Configuracion?msg=" . urlencode($alert));
+        die();
+    }
+
+
+
+    public function eliminar()
+    {
+        $id = $_POST['id'];
+        $eliminar = $this->model->eliminarDictamen($id);
+        $alert = 'Eliminado';
+        $data1 = $this->model->selectDictamen();
+        header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
+        print json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function procesarArchivo() {
+        if (!empty($_FILES['archivo_csv']['name'])) {
+            $archivo_tmp = $_FILES['archivo_csv']['tmp_name'];
+            
+            // Procesar el archivo CSV y obtener los datos
+            $datos = [];
+            if (($gestor = fopen($archivo_tmp, 'r')) !== false) {
+              while (($fila = fgetcsv($gestor, 1000, ',')) !== false) {
+                $datos[] = $fila;
+              }
+              fclose($gestor);
+            }
+        
+            // Pasar los datos al modelo para su inserción en la base de datos
+            $this->model->procesarArchivos($datos);
+            $alert =  'DocumentoActualizado';
+        }
+          
+          // Redirigir a la página deseada después de la carga del archivo
+          header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
+          die();
+    }
     //Agregar Area
     public function AgregarArea()
     {

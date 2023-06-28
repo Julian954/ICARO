@@ -82,13 +82,13 @@
                   <label for="setting-input-3" class="form-label" style="color:#000000;">No. Dictamen</label>
                   <select class="form-control" id="Dictamen" name="Dictamen" required>
                     <?php foreach ($data5 as $dictamen) { ?>
-                    <option> <?php echo $dictamen['dictamen']; ?></option>
+                    <option> <?php echo $dictamen['dictamen']; $dictamen['monto'] ?></option>
                     <?php } ?>
                   </select> 
-                </div>  
+                </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">Monto Máximo $</label>
-                  <input type="number" min="0" class="form-control" id="Maximo" name="Maximo" value="" required>
+                  <input type="number" min="0" max="100000" class="form-control" id="Maximo" name="Maximo" value="" required>
                 </div>
                 <div class="form-group">
                   <label for="setting-input-2" class="form-label">Comentarios</label>
