@@ -202,7 +202,7 @@ foreach ($data1 as $pedi2){
             </div>
           </div><!--//app-card-body-->
 			</div><!--//app-wrapper-->
-
+      
     <!-- Javascript -->
     <script src="assets/plugins/popper.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>

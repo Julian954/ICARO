@@ -81,6 +81,17 @@ $(document).ready(function () {
     $("#modalCRUD").modal("show");
   });
 
+  $(document).on("click", ".btnEditarP", function () {
+    fila = $(this).closest("tr");
+    id = parseInt(fila.find("td:eq(0)").text()); //capturo el ID
+    contrato = fila.find("td:eq(1)").text();
+    monto = fila.find("td:eq(7)").text();
+    $("#id").val(id);
+    $("#contrato").val(contrato);
+    $("#monto2").val(monto);
+    $("#VentanaModalP").modal("show");
+  });
+
   //Mensaje de alerta al inactivar algo
   $(".elim").submit(function (e) {
     e.preventDefault();

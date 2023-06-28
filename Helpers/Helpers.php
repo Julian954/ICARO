@@ -5,27 +5,27 @@ function base_url()
 }
 function encabezado($data="")
 {
-    $VistaH = "Views/Template/header.php";
+    $VistaH = 'Views/Template/header.php';
     require_once($VistaH);
 }
 function permisos($data="")
 {
-    $VistaPe = "Views/Errors/Permisos.php";
+    $VistaPe = 'Views/Errors/Permisos.php';
     require_once($VistaPe);
 }
 function links($data="")
 {
-    $VistaL = "Views/Template/links.php";
+    $VistaL = 'Views/Template/links.php';
     require_once($VistaL);
 }
 function pie($data="")
 {
-    $VistaP = "Views/Template/footer.php";
+    $VistaP = 'Views/Template/footer.php';
     require_once($VistaP);
 }
 function referencias($data="")
 {
-    $VistaP = "Views/Template/referencias.php";
+    $VistaP = 'Views/Template/referencias.php';
     require_once($VistaP);
 }
 

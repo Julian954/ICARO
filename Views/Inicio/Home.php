@@ -346,7 +346,7 @@
 
                     <div class="app-card-body p-3 p-lg-4"> 
                         <div class="table-responsive">
-                            <table class="table table-borderless mb-0">
+                            <table class="table table-borderless mb-0" id="TableA">
                                 <thead>
                                     <tr>
                                         <th class="meta">Destino</th>

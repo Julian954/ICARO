@@ -166,7 +166,7 @@
         {
           targets: -1,
           defaultContent:
-            "<div><button type='button' class='btn app-btn-primary enlazar-btn'>Enlazar</button></div>",
+          "<div class='text-center'><div class='btn-group'><button class='btn btn-primary btn-sm btnEditarP'>ENLAZAR</button></div></div>",
         }
       ],
       language: {
@@ -405,6 +405,41 @@
 			},
         "drawCallback": function( settings ) {
          $('#TableN_paginate').addClass("app-pagination");
+    }
+		});
+    });
+    $(document).ready(function() {
+        $('#TableA').DataTable({
+            responsive: true,
+            "lengthChange": false,
+            "searching": false,
+            info: false,
+			language: {
+				"decimal": "",
+				"emptyTable": "No hay datos",
+				"info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+				"infoEmpty": "Mostrando 0 a 0 de 0 registros",
+				"infoFiltered": "(Filtro de _MAX_ total registros)",
+				"infoPostFix": "",
+				"thousands": ",",
+				"lengthMenu": "Mostrar _MENU_ registros",
+				"loadingRecords": "Cargando...",
+				"processing": "Procesando...",
+				"search": "Buscar:",
+				"zeroRecords": "No se encontraron coincidencias",
+				"paginate": {
+					"first": "Primero",
+					"last": "Ultimo",
+					"next": "Próximo",
+					"previous": "Anterior"
+				},
+				"aria": {
+					"sortAscending": ": Activar orden de columna ascendente",
+					"sortDescending": ": Activar orden de columna desendente"
+				}
+			},
+        "drawCallback": function( settings ) {
+         $('#TableA_paginate').addClass("app-pagination");
     }
 		});
     });

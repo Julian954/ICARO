@@ -1,7 +1,7 @@
 <?php
-require_once("Config/Config.php");
-require_once("Helpers/Helpers.php");
-$url = isset($_GET['url']) ? $_GET['url'] : "Login/login";
+require_once('Config/Config.php');
+require_once('Helpers/Helpers.php');
+$url = isset($_GET['url']) ? $_GET['url'] : 'Login/login';
 $arrUrl = explode("/", $url);
 $controller = $arrUrl[0];
 $methop = $arrUrl[0];
@@ -19,6 +19,6 @@ if (isset($arrUrl[2])) {
         $params = trim($params, ',');
     }
 }
-require_once("Libraries/Core/Autoload.php");
-require_once("Libraries/Core/Load.php");
+require_once('Libraries/Core/Autoload.php');
+require_once('Libraries/Core/Load.php');
 ?>
