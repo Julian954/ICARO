@@ -545,6 +545,62 @@ class InicioModel extends Mysql{
         return $return;
     }
 
+    public function selectDictamen()
+    {
+        $sql = "SELECT * FROM dictamen";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+
+    //Registra un nuevo usuario
+    public function insertarDictamen(string $dictamen, string $monto)
+    {
+        $return = "";
+        $this->dictamen = $dictamen;
+        $this->monto = $monto;
+        $sql = "SELECT * FROM dictamen WHERE dictamen = '{$this->dictamen}'";
+        $result = $this->select_all($sql);
+        if (empty($result)) {
+            $query = "INSERT INTO dictamen( dictamen, montomax) VALUES (?,?)";
+            $data = array($this->dictamen, $this->monto);
+            $resul = $this->insert($query, $data);
+            $return = $resul;
+        }else {
+            $return = "existe";
+        }
+        return $return;
+    }
+
+    
+    public function eliminarDictamen(int $id)
+    {
+        $return = "";
+        $this->id = $id;
+        $query = "DELETE FROM catalogo WHERE id=?";
+        $data = array($this->id);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;
+    }
+
+    public function procesarArchivos($datos)
+    {
+        array_splice($datos, 0,1);
+        foreach ($datos as $fila) {
+          $dictamen = $fila[0] ?? ''; // Valor de la columna "GPO" en el archivo CSV
+          $monto= $fila[1] ?? ''; // Valor de la columna "ESP" en el archivo CSV
+        
+            if (!empty($monto) && !empty($dictamen)) {
+            $query = "INSERT INTO dictamen (dictamen, montomax) VALUES (?,?)";
+            $data = array($dictamen, $monto);
+            $resul = $this->insert($query, $data); //insert es para agregar un registro
+        }
+
+        }
+    
+        return $return;
+    }
+
     public function insertar_datos($datos, string $fecha) {
         array_splice($datos, 0, 3);
 

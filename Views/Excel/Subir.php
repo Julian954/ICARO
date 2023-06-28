@@ -16,6 +16,11 @@
 						</div>
 						<div class="col-12 col-md-8">
 							<div class="app-card app-card-settings shadow-sm p-4">
+								<label for="indicadores" class="form-label">Indicadores</label>
+								<div class="mb-3"><br>
+								<?php //var_dump($data2); ?>
+									<h6>Ultima fecha de modificacion : <?= $data2[0];?></h6>	
+									<div class="app-card-body text-center">											
             					<div class="app-card-header">
             					  <div class="row justify-content-between align-items-center">
             					    <div class="col-auto">
