@@ -80,12 +80,26 @@ $(document).ready(function () {
     $("#cor").val(corta);
     $("#modalCRUD").modal("show");
   });
-
+    //este es el tuyo
   $(document).on("click", ".btnEditarP", function () {
     fila = $(this).closest("tr");
     id = parseInt(fila.find("td:eq(0)").text()); //capturo el ID
     contrato = fila.find("td:eq(1)").text();
     monto = fila.find("td:eq(7)").text();
+    $("#id").val(id);
+    $("#contrato").val(contrato);
+    $("#monto2").val(monto);
+    $("#VentanaModalP").modal("show");
+  });
+
+  //ESTA ME LA DIO CHAT PERO NO ME JALO ME DIO ERROR aparte me dio juntos el del datatable y este "DataTables warning: table id=TablePedidos - Invalid JSON response. For more information about this error, please see http://datatables.net/tn/1"
+  $(document).on("click", ".btnEditarP", function() {
+    var data = table.row($(this).closest("tr")).data(); // Obtenemos los datos de la fila correspondiente al botón "ENLAZAR"
+
+    var id = data[0];
+    var contrato = data[1];
+    var monto = data[7];
+
     $("#id").val(id);
     $("#contrato").val(contrato);
     $("#monto2").val(monto);
