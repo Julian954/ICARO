@@ -7,18 +7,10 @@
     	<meta name="description" content="">
     	<meta name="author" content="">
     	<link rel="shortcut icon" href="<?php echo base_url(); ?>Assets/img/favicon.ico">
-    	<title>Login | MARYS BOARD Colima</title>
-	
-    	<!-- FontAwesome JS-->
-    	<script defer src="<?php echo base_url(); ?>Assets/css/fontawesome/js/all.min.js"></script>
+    	<title>Login | ICARO OOARD</title>
 
     	<!-- App CSS -->  
     	<link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">
-    	<link rel="preconnect" href="https://fonts.googleapis.com">
-    	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&display=swap" rel="stylesheet">
-    	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"> 
-    	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
   	</head> 
 
   	<body class="app app-login p-0">    	
@@ -26,47 +18,42 @@
   		  	<div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
   		    	<div class="d-flex flex-column align-content-end">
   			    	<div class="app-auth-body mx-auto">	
-  				    	<div class="app-auth-branding mb-4"><a class="app-logo" href=""><img class="logo-icon mr-2" src="<?= base_url();?>Assets/img/app-logo.svg" alt="logo"></a></div>
-  					  	<h2 class="auth-heading text-center mb-5">Ingresar al portal</h2>
+  				    	<div class="app-auth-branding mb-4"><a class="app-logo" href="<?php echo base_url(); ?>"><img class="logo-icon mr-2" src="<?= base_url();?>Assets/img/app-logo.svg" alt="logo"></a></div>
+  					  	<h2 class="auth-heading text-center mb-5">Ingresar al Portal</h2>
   			      		<div class="auth-form-container text-left">
   						  	<form class="auth-form login-form" id="user" action="<?php echo base_url(); ?>Usuarios/login" method="POST" autocomplete="off">         
   						    	<div class="email mb-3">
-  							    	<label class="sr-only" for="usuario">Email</label>
   							    	<input id="usuario" name="usuario" type="email" class="form-control signin-email" placeholder="Dirección de correo" required="required">
   						    	</div><!--//form-group-->
   						    	<div class="password mb-3">
-  				    				<label class="sr-only" for="clave">Password</label>
   				    				<input id="clave" name="clave" type="password" class="form-control signin-password" placeholder="Contraseña" required="required">
   				    				<div class="extra mt-3 row justify-content-between">
-  				    					<div class="col-6">
-  				    						<div class="form-check">
-  				    							<input class="form-check-input" type="checkbox" value="" id="RememberPassword">
-  				    							<label class="form-check-label" for="RememberPassword">Recuerdame</label>
-  				    						</div>
-  				    					</div><!--//col-6-->
-  				    					<div class="col-6">
-  				    						<div class="forgot-password text-right">
-  				    							<a href="<?php echo base_url(); ?>Login/reset">¿Olvidate la contraseña?</a>
-  				    						</div>
-  				    					</div><!--//col-6-->
-										  <div class="text-center">
-								  <div style="display: none;">
-									<input id="fecha_elimina" name="fecha_elimina" type="text" value="<?php echo date('Y-m-d', strtotime('-1 year'));?>" readonly>
-								</div>
-  				    				</div><!--//extra-->
-  				    			</div><!--//form-group-->
-								
-  				    			
+  				    				</div><!--//form-group-->
   				    				<button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto" >Ingresar</button>
-  				    			</div><br>
-  	              				<?php if (isset($_GET['msg'])) { ?>
-  	              				  	<div class="alert alert-danger" role="alert">
-  	              				    	<strong>Usuario o Contraseña Incorrecta</strong>
-  	              				  	</div>
-  	              				<?php } ?>
+  				    			</div>
+                                	<?php if (isset($_GET['msg'])) {
+                                	    $alert = $_GET['msg'];
+                                	    if ($alert == "bien") { ?>
+                                            <br>
+                                	        <div class="alert alert-success" role="alert">
+                                	            <strong>La contraseña se cambio con éxito.</strong>
+                                	        </div>
+                                	    <?php } else { ?>
+                                            <br>
+                                	        <div class="alert alert-danger" role="alert">
+                                	            <strong>Error. Contacte a soporte.</strong>
+                                	        </div>
+                                	    <?php }
+                                	} ?>
   				    		</form>
+							<div class="auth-option text-center pt-5"><a href="<?php echo base_url(); ?>Login/reset">¿Olvidaste la contraseña?</a></div>
   				    	</div><!--//auth-form-container-->	    
   			    	</div><!--//auth-body-->
+			    	<footer class="app-auth-footer">
+					    <div class="container text-center py-3">
+			    	    	<small class="copyright">Diseño y Desarrollo por OOADR. Coordinación de Abastecimiento y Equipamiento.</small>
+					    </div>
+			    	</footer><!--//app-auth-footer-->	
   		   	 	</div><!--//flex-column-->   
   		  	</div><!--//auth-main-col-->
   		  	<div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">

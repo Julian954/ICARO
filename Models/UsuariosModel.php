@@ -108,38 +108,15 @@ class UsuariosModel extends Mysql{
         $res = $this->select($sql);
         return $res;
     }
-    //Elimina los contratos de un a;o de antiguedad
-    public function eliminarContratos(string $fecha_elimina)
+
+    //Selecciona datos de usuario por correo
+    public function selectUsuarioC(string $usuario)
     {
-        $return = "";
-        $this->fecha_elimina = $fecha_elimina;        
-        $query = "DELETE FROM contratos WHERE fecha<=?";
-        $data = array($this->fecha_elimina);
-        $resul = $this->update($query, $data);
-        $return = $resul;
-        return $return;    
+        $this->usuario = $usuario;
+        $sql = "SELECT * FROM usuarios WHERE correo = '{$this->usuario}' AND estado=1";
+        $res = $this->select($sql);
+        return $res;
     }
-    public function eliminarContratos1(string $fecha_elimina)
-    {
-        $return = "";
-        $this->fecha_elimina = $fecha_elimina;        
-        $query = "DELETE FROM validar_cont WHERE fecha<=?";
-        $data = array($this->fecha_elimina);
-        $resul = $this->update($query, $data);
-        $return = $resul;
-        return $return;    
-    }
-    public function eliminarContratos2(string $fecha_elimina)
-    {
-        $return = "";
-        $this->fecha_elimina = $fecha_elimina;        
-        $query = "DELETE FROM detalle_cont WHERE fecha<=?";
-        $data = array($this->fecha_elimina);
-        $resul = $this->update($query, $data);
-        $return = $resul;
-        return $return;    
-    }
-    //hasta aqui elimina los contratos
     
     //reingresa un usuario
     public function reingresarUsuarios(int $id)
@@ -184,5 +161,39 @@ class UsuariosModel extends Mysql{
         $resul = $this->update($query, $data);
         return $resul;
     }
+
+   //Elimina los contratos de un a;o de antiguedad
+    public function eliminarContratos(string $fecha_elimina)
+    {
+        $return = "";
+        $this->fecha_elimina = $fecha_elimina;        
+        $query = "DELETE FROM contratos WHERE fecha<=?";
+        $data = array($this->fecha_elimina);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;    
+    }
+    public function eliminarContratos1(string $fecha_elimina)
+    {
+        $return = "";
+        $this->fecha_elimina = $fecha_elimina;        
+        $query = "DELETE FROM validar_cont WHERE fecha<=?";
+        $data = array($this->fecha_elimina);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;    
+    }
+    public function eliminarContratos2(string $fecha_elimina)
+    {
+        $return = "";
+        $this->fecha_elimina = $fecha_elimina;        
+        $query = "DELETE FROM detalle_cont WHERE fecha<=?";
+        $data = array($this->fecha_elimina);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;    
+    }
+    //hasta aqui elimina los contratos
+
 }
 ?>

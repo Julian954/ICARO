@@ -13,7 +13,7 @@
         <footer class="app-footer">
             <hr class="my-1">
 		    <div class="container text-center py-3">
-                <small class="copyright">Diseño y Desarrollo <i class="" style="color: #fb866a;"></i> por la OOADR. Coordinación de Abastecimiento y Equipamiento</small>
+                <small class="copyright">Diseño y Desarrollo por OOADR. Coordinación de Abastecimiento y Equipamiento.</small>
 		    </div>
 	    </footer><!--//app-footer-->
     </div><!--//app-wrapper-->
@@ -156,33 +156,36 @@
         },
       },
     });
-    
-        $("#TablePedidos").DataTable({
-      processing: true,
-      responsive: true,
-      serverSide: true,
-      sAjaxSource: "../ServerSide/serversidePedidos.php",
-      columnDefs: [
-        {
-          targets: -1,
-          defaultContent:
-          "<div class='text-center'><div class='btn-group'><button class='btn btn-primary btn-sm btnEditarP'>ENLAZAR</button></div></div>",
-        }
-      ],
-      language: {
-        decimal: "",
-        emptyTable: "No hay datos",
-        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        infoEmpty: "Mostrando 0 a 0 de 0 registros",
-        infoFiltered: "(Filtro de _MAX_ total registros)",
-        infoPostFix: "",
-        thousands: ",",
-        lengthMenu: "Mostrar _MENU_ registros",
-        loadingRecords: "Cargando...",
-        processing: "Procesando...",
-        search: "Buscar:",
-        zeroRecords: "No se encontraron coincidencias",
-        paginate: {
+
+
+        $(document).ready(function() {
+        var table = $("#TablePedidos").DataTable({
+        processing: true,
+        responsive: true,
+        serverSide: true,
+        sAjaxSource: "../ServerSide/serversidePedidos.php",
+        columnDefs: [
+          {
+            targets: -1,
+            render: function(data, type, row) {
+              return data; // No se necesita formateo adicional, ya que ya hemos formateado el botón o la etiqueta en el código PHP
+            }
+          }
+        ],
+        language: {
+            decimal: "",
+          emptyTable: "No hay datos",
+          info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+          infoEmpty: "Mostrando 0 a 0 de 0 registros",
+          infoFiltered: "(Filtro de _MAX_ total registros)",
+          infoPostFix: "",
+          thousands: ",",
+          lengthMenu: "Mostrar _MENU_ registros",
+          loadingRecords: "Cargando...",
+          processing: "Procesando...",
+          search: "Buscar:",
+          zeroRecords: "No se encontraron coincidencias",
+          paginate: {
           first: "Primero",
           last: "Ultimo",
           next: "Próximo",
@@ -192,8 +195,23 @@
           sortAscending: ": Activar orden de columna ascendente",
           sortDescending: ": Activar orden de columna desendente",
         },
-      },
+        }
+      });
+      //ESTE ME LOS DIO JUNTOS PERO EN LA DE FUNCIONES DE JS ESTA TAMBIEN POR SI LA QUIERES QUITAR DE AQUI 
+      $(document).on("click", ".btnEditarP", function() {
+        var data = table.row($(this).closest("tr")).data(); // Obtenemos los datos de la fila correspondiente al botón "ENLAZAR"
+
+        var id = data[0];
+        var contrato = data[1];
+        var monto = data[7];
+
+        $("#id").val(id);
+        $("#contrato").val(contrato);
+        $("#monto2").val(monto);
+        $("#VentanaModalP").modal("show");
+      });
     });
+
 
     // Escucha el evento clic en el botón "Enlazar"
     $("#TablePedidos").on("click", ".enlazar-btn", function () {

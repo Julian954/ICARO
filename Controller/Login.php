@@ -21,5 +21,14 @@
             $this->views->getView($this, "reset");
         }
 
+        public function Change()
+        {
+            if(isset($_GET['id'])){
+                $this->views->getView($this, "change");
+            } else {
+                header('location: ' . base_url());
+            }
+        }
+
     }
 ?>
