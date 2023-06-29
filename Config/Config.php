@@ -1,6 +1,6 @@
 <?php
     //CREA CONEXION CON LA BASE DE DATOS
-    const BASE_URL = "http://localhost/IMSS/";
+    const BASE_URL = "http://localhost/icaro/";
     const HOST ="localhost";
     const BD = "imss";
     const DB_USER = "root";
