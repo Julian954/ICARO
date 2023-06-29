@@ -21,7 +21,7 @@
   				    	<div class="app-auth-branding mb-4"><a class="app-logo" href="<?php echo base_url(); ?>"><img class="logo-icon mr-2" src="<?= base_url();?>Assets/img/app-logo.svg" alt="logo"></a></div>
   					  	<h2 class="auth-heading text-center mb-5">Ingresar al Portal</h2>
   			      		<div class="auth-form-container text-left">
-  						  	<form class="auth-form login-form" id="user" action="<?php echo base_url(); ?>Usuarios/login" method="POST" autocomplete="off">         
+  						  	<form class="auth-form login-form" id="user" action="<?php echo base_url(); ?>Iniciar/login" method="POST" autocomplete="off">         
   						    	<div class="email mb-3">
   							    	<input id="usuario" name="usuario" type="email" class="form-control signin-email" placeholder="Dirección de correo" required="required">
   						    	</div><!--//form-group-->
