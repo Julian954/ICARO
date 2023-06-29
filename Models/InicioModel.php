@@ -36,6 +36,17 @@ class InicioModel extends Mysql{
         $res = $this->select_all($sql);
         return $res;
     }
+    public function contratos3(){
+        $sql = "SELECT numero, descripcion, termino, maximo, devengo, contratos.estado, nombre FROM contratos INNER JOIN usuarios ON contratos.administrador = usuarios.id";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+    //poner aqui la direccion del devengo
+  /*  public function devengo(){
+        $sql = "SELECT * FROM "nombre de la tabla devengo"";
+        $res = $this->select_all($sql);
+        return $res;
+    }*/
     //Selecciona las quejas
     public function quejas()
     {
@@ -88,7 +99,19 @@ class InicioModel extends Mysql{
         return $res;
     }
 
-
+    public function chart_pie()
+    {
+        $sql = "SELECT SUM(contratos.devengo) AS total FROM contratos";
+        $res = $this->select_all($sql);
+        return $res;
+    }
+   
+    public function chart_pieotros()
+    {
+        $sql = "SELECT SUM(contratos.maximo) AS total_max FROM contratos WHERE estado=4";
+        $res = $this->select($sql);
+        return $res;
+    }
 
 
 
