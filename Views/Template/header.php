@@ -95,7 +95,7 @@
 		        <div class="sidepanel-inner d-flex flex-column">
 			        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 			        <div class="app-branding">
-			            <a class="app-logo text-decoration-none" href="<?= base_url(); ?>Inicio/Home"><img class="logo-icon mr-2" src="<?= base_url(); ?>Assets/img/app-logo.svg" alt="logo"><span class="logo-text">MARYS</span></a>
+			            <a class="app-logo text-decoration-none" href="<?= base_url(); ?>Inicio/Home"><img class="logo-icon mr-2" src="<?= base_url(); ?>Assets/img/app-logo.svg" alt="logo"><span class="logo-text">ICARO</span></a>
 			        </div><!--//app-branding-->
 				    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
 					    <ul class="app-menu list-unstyled accordion" id="menu-accordion">

@@ -1,4 +1,5 @@
 <?php
+
 class Inicio extends Controllers 
 {
     public function __construct()
@@ -9,7 +10,14 @@ class Inicio extends Controllers
         }
         parent::__construct();
     }
+    
+    public function Mail(){
 
+        $msg = 'HOLA';
+        $asunto = 'FUNCIONA';
+        echo correo($msg, $asunto);
+
+    }
     
     //Muestra la vista HOME
     public function Home()
