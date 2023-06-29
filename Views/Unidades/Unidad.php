@@ -17,7 +17,7 @@
                             <div class="app-card-body p-3">
                                 <div class="row">
                                     <div class="col-lg-8 mb-2 py-2">
-                                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#nuevo_cliente"><i class="fas fa-plus-circle"></i> Nuevo</button>
+                                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal1"><i class="fas fa-plus-circle"></i> Nuevo</button>
                                     </div>
                                     <div class="col-lg-4">
                                         <?php if (isset($_GET['msg'])) {
@@ -56,7 +56,7 @@
                                                     <td><?php echo $us['abreviacion']; ?></td>
                                                     <td>
                                                         <a title="Editar" href="<?php echo base_url() ?>Unidades/Unidades_Editar?id=<?php echo $us['id']; ?>" class="btn btn-primary mb-2"><i class="fas fa-edit"></i></a>
-                                                        <form action="<?php echo base_url() ?>Unidades/eliminarper?id=<?php echo $us['id']; ?>" method="post" class="d-inline elimper">
+                                                        <form id="formulario2" action="<?php echo base_url() ?>Unidades/eliminarper?id=<?php echo $us['id']; ?>" method="post" class="d-inline elimper">
                                                             <button title="Eliminar" type="submit" class="btn btn-danger mb-2"><i class="fas fa-trash-alt"></i></button>
                                                         </form>            
                                                     </td>
@@ -73,16 +73,16 @@
         </div>
     </div><!--//app-wrapper-->
 
-    <div id="nuevo_cliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div id="modal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                 <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i>Agregar Unidad</h5>
+                 <h5 class="modal-title" id="my-modal-title">Agregar Unidad</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                     </button>
               </div>
-             <form method="post" action="<?php echo base_url(); ?>Unidades/insertar" autocomplete="off">
+             <form id="formulario1" method="post" action="<?php echo base_url(); ?>Unidades/insertar" autocomplete="off">
                   <div class="modal-body">
                      <div class="form-group">
                          <label for="nombre">Nombre</label>

@@ -63,10 +63,10 @@
                                                         echo "Responsable";
                                                     } ?> </td>
                                                 <td>
-                                                    <form action="<?php echo base_url() ?>Usuarios/reingresar?id=<?php echo $us['id']; ?>" method="post" class="d-inline confirmar">
+                                                    <form id="formulario1" action="<?php echo base_url() ?>Usuarios/reingresar?id=<?php echo $us['id']; ?>" method="post" class="d-inline reingresar">
                                                         <button title="Reingresar" type="submit" class="btn btn-success"><i class="fas fa-user"></i></button>
                                                     </form>
-                                                    <form action="<?php echo base_url() ?>Usuarios/eliminarper?id=<?php echo $us['id']; ?>" method="post" class="d-inline elimper">
+                                                    <form id="formulario2" action="<?php echo base_url() ?>Usuarios/eliminarper?id=<?php echo $us['id']; ?>" method="post" class="d-inline elimper">
                                                         <button title="Eliminar" type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                                     </form>
                                                 </td>

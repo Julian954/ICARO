@@ -3,14 +3,14 @@
     
 <!-- Begin Page Content -->
 <div class="app-wrapper">
-    <section>
+    <section class="py-5">
         <div class="row">
             <div class="col-lg-3 mt-auto">
             </div>
             <div class="col-lg-6 mt-auto">
                 <div class="card container-fluid2">
                     <h5 class="card-header"><i class="fa fa-edit"></i> <strong>Editar Unidad</strong></h5>
-                    <form method="post" action="<?php echo base_url(); ?>Unidades/actualizar" autocomplete="off"> 
+                    <form id="formulario1" method="post" action="<?php echo base_url(); ?>Unidades/actualizar" autocomplete="off"> 
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>

@@ -12,6 +12,24 @@
         }
 
         //VISTA REGISTRO
+        //Selecciona datos de usuario
+        public function selectUsuarioC(string $usuario)
+        {
+            $this->usuario = $usuario;
+            $sql = "SELECT * FROM usuarios WHERE id = '{$this->usuario}' AND estado=1";
+            $res = $this->select($sql);
+            return $res;
+        }
+
+        //Selecciona datos de usuario
+        public function selectContratoC(string $usuario)
+        {
+            $this->usuario = $usuario;
+            $sql = "SELECT * FROM contratos WHERE numero = '{$this->usuario}'";
+            $res = $this->select($sql);
+            return $res;
+        }
+
         //Selecciona las áreas
         public function SelectAreas()
         {

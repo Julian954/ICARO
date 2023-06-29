@@ -52,8 +52,20 @@
                 header("location: " . base_url() . "Contratos/Registro?msg=$alert");
             } else if ($insert > 0) {
                 //Si se agrega te redirige a la vista "General" con un mensaje de alerta.
+
+                $data = $this->model->selectUsuario($requiriente);
+                $asunto = 'Creación de Contrato';
+                $correo = $data['correo'];
+                $nombre = $data['nombre'];
+                $msg = $_SESSION['nombre'].' HA CREADO EL CONTRATO '.$numero.' Y TE PUSO COMO REQUIRIENTE. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
+                if (correo($msg, $asunto, $correo, $nombre) == 'bien') {
+                    $correo =  'enviado';
+                } else {
+                    $correo =  'error';
+                }
+
                 $alert = 'registrado';
-                header("location: " . base_url() . "Contratos/General?msg=$alert");
+                header("location: " . base_url() . "Contratos/General?msg=$alert&correo=$correo");
             } else {
                 $alert = 'error';
                 header("location: " . base_url() . "Contratos/Registro?msg=$alert");
@@ -97,6 +109,18 @@
             $yo = $_SESSION['id'];
             $number =limpiarInput($_POST['miSelect2']);
             $insert = $this->model->agregar_validar( $number, $descripcion, $yo, $tu);
+
+            $data = $this->model->selectUsuario($tu);
+            $asunto = 'Validación de Contrato';
+            $correo = $data['correo'];
+            $nombre = $data['nombre'];
+            $msg = $_SESSION['nombre'].' TE HA SOLICITADO LA VALIDACIÓN DEL CONTRATO '.$numero.'. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'].' O EN EL FORO DEL CONTRATO.';
+            if (correo($msg, $asunto, $correo, $nombre) == 'bien') {
+                $correo =  'enviado';
+            } else {
+                $correo =  'error';
+            }
+
             if ($insert == 'existe') {
                 $alert = 'existe';
                 header("location: " . base_url() . "Contratos/Validando?msg=$alert");
@@ -205,11 +229,35 @@
             die();
         }
 
-        public function validar(){
+        public function validar(){ 
             $number = limpiarInput($_GET['contrato']);
             $fecha_valida=$_POST['fecha_valida'];
             $estado = 3;
             $actualizar = $this->model->actualizaEstado($estado, $number, $fecha_valida);
+
+            $usuario = $this->model->selectContratoC($number);
+            $data = $this->model->selectUsuario($data['administrador']);
+            $asunto = 'Validación de Contrato';
+            $correo = $data['correo'];
+            $nombre = $data['nombre'];
+            $msg = $_SESSION['nombre'].' HA VALIDADO EL CONTRATO '.$numero.'. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'].' O EN EL FORO DEL CONTRATO.';
+            if (correo($msg, $asunto, $correo, $nombre) == 'bien') {
+                $correo =  'enviado';
+            } else {
+                $correo =  'error';
+            }
+
+            $data = $this->model->selectUsuario($data['requiriente']);
+            $asunto = 'Validación de Contrato';
+            $correo = $data['correo'];
+            $nombre = $data['nombre'];
+            $msg = $_SESSION['nombre'].' HA VALIDADO EL CONTRATO '.$numero.'. EN EL QUE ESTÁS COMO REQUIRIENTE.<br><br>';
+            if (correo($msg, $asunto, $correo, $nombre) == 'bien') {
+                $correo =  'enviado';
+            } else {
+                $correo =  'error';
+            }
+
             header("location: " . base_url() . "Contratos/Foro?contrato=$number");
             die();
         }
@@ -218,6 +266,30 @@
             $number = limpiarInput($_GET['contrato']);
             $estado = 4;
             $actualizar = $this->model->actualizaEstado($estado, $number);
+
+            $usuario = $this->model->selectContratoC($number);
+            $data = $this->model->selectUsuario($data['administrador']);
+            $asunto = 'Validación de Contrato';
+            $correo = $data['correo'];
+            $nombre = $data['nombre'];
+            $msg = $_SESSION['nombre'].' HA FORMALIZADO EL CONTRATO '.$numero.'. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'].' O EN EL FORO DEL CONTRATO.';
+            if (correo($msg, $asunto, $correo, $nombre) == 'bien') {
+                $correo =  'enviado';
+            } else {
+                $correo =  'error';
+            }
+
+            $data = $this->model->selectUsuario($data['requiriente']);
+            $asunto = 'Validación de Contrato';
+            $correo = $data['correo'];
+            $nombre = $data['nombre'];
+            $msg = $_SESSION['nombre'].' HA FORMALIZADO EL CONTRATO '.$numero.'. EN EL QUE ESTÁS COMO REQUIRIENTE.<br><br>';
+            if (correo($msg, $asunto, $correo, $nombre) == 'bien') {
+                $correo =  'enviado';
+            } else {
+                $correo =  'error';
+            }
+
             header("location: " . base_url() . "Contratos/Foro?contrato=$number");
             die();
         }

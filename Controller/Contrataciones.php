@@ -51,6 +51,8 @@
             $comentario = limpiarInput($_POST['comentario']);
             $fecha_termina = date("Y-m-d", strtotime("+1 year"));
 
+
+            
             $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $fecha_termina, $categoria);
             $validar = $this->model->agregar_validar($oficio, $comentario, $administrador);
             if ($insert == 'existe') {
