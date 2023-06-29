@@ -13,7 +13,7 @@
         <footer class="app-footer">
             <hr class="my-1">
 		    <div class="container text-center py-3">
-                <small class="copyright">Diseño y Desarrollo <i class="" style="color: #fb866a;"></i> por la OOADR. Coordinación de Abastecimiento y Equipamiento</small>
+                <small class="copyright">Diseño y Desarrollo por OOADR. Coordinación de Abastecimiento y Equipamiento.</small>
 		    </div>
 	    </footer><!--//app-footer-->
     </div><!--//app-wrapper-->

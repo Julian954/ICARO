@@ -248,7 +248,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-function correo($msg, $asunto){
+function correo($msg, $asunto, $correo, $nombre){
         /* Clase para tratar con excepciones y errores */
         require 'Assets/PHPMailer/src/Exception.php';
         /* Clase PHPMailer */
@@ -273,15 +273,15 @@ function correo($msg, $asunto){
 
         // Establecer otros parámetros del correo
         $mail->setFrom('miguel20010807@gmail.com', 'ICARO');
-        $mail->addAddress('mrodriguez74@ucol.mx', 'Jordán Rodríguez');
+        $mail->addAddress($correo, $nombre);
         $mail->Subject = $asunto;
-        $mail->Body = $msg."<br><br>".'MENSAJE GENERADO AUTOMATICAMENTE, FAVOR DE NO RESPONDER EL CORREO';
+        $mail->Body = $msg."<br><br>".'Mensaje generado automaticamente, favor de no responder.';
 
         // Enviar el correo
         if ($mail->send()) {
-            $mensaje = 'El correo ha sido enviado correctamente.';
+            $mensaje = 'bien';
         } else {
-             $mensaje ='Hubo un error al enviar el correo: ' . $mail->ErrorInfo;
+             $mensaje ='mal';
         }
 
         return $mensaje;
