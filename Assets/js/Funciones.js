@@ -451,6 +451,53 @@ function pastelnegadas() {
   });
 }
 
+function chart_pie() {
+  $.ajax({
+    url: base + "Inicio/chart_pie",
+    type: "POST",
+    success: function (response) {
+      var data = JSON.parse(response);
+      var nombre = ["devengo","contratos"];
+      var devengo = [];
+      var total = [];
+      for (var i = 0; i < data.length; i++) {
+        
+        devengo.push(data[i]["total"]);
+        total.push(data[i]["total_max"]);
+      }
+      // Set new default font family and font color to mimic Bootstrap's default styling
+      Chart.defaults.global.defaultFontFamily =
+        'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+      Chart.defaults.global.defaultFontColor = "#292b2c";
+      // Pie Chart Example
+      var ctx = document.getElementById("chart_pie");
+      var myPieChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: nombre,
+          datasets: [
+            {
+              data: total,
+              backgroundColor: [
+                "green",
+                "blue"                                        
+              ],
+            },      
+          ],
+        },
+        options: {
+          responsive: true,
+          legend: {
+            display: true,
+            position: "right",
+            align: "center",
+          },
+        },
+      });
+    },
+  });
+}
+
 function GeneralContratos() {
   $.ajax({
     url: base + "Contratos/GeneralContratos",

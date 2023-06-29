@@ -30,7 +30,9 @@ class Inicio extends Controllers
         $data5 = $this->model->pedidos();
         $data6 = $this->model->unidades();
         $data7 = $this->model->despachos($hoy);
-        $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
+        $data8 = $this->model->contratos3();
+        //$data9 = $this->model->devengo();
+    $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7, $data8/*, $data9*/);
         die();
     }
 
@@ -111,6 +113,15 @@ class Inicio extends Controllers
     {
         $data = $this->model->Gpastelnegadas();
         $otros = $this->model->Gpastelnegadasotros();
+        array_push($data, $otros);
+        echo json_encode($data);
+        die();
+    }
+
+    public function chart_pie()
+    {
+        $data = $this->model->chart_pie();
+        $otros = $this->model->chart_pieotros();
         array_push($data, $otros);
         echo json_encode($data);
         die();

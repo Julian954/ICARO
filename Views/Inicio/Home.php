@@ -143,6 +143,106 @@
           </div><!--//card-header-action-->
         </div><!--//col-auto-->
       </div><!--//row-auto-->
+              </div>
+      
+                      
+                                <a  data-toggle="collapse" href="#contenido-colapsable" role="button" aria-expanded="false" aria-controls="contenido-colapsable">
+                                  Indicadores del Devengo<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                  </svg>
+                                </a>
+                        
+                        <div class="collapse" id="contenido-colapsable">                          
+                            <div class="row g-4 mb-4">
+                                <div class="col-12 col-lg-6">
+                                  <div class="app-card app-card-chart h-100 shadow-sm">
+                                    <div class="app-card-header p-3">
+                                      <div class="row justify-content-between align-items-center">
+                                        <div class="col-auto">
+                                              <h4 class="app-card-title">Devengo vs. Presupuesto Global</h4>
+                                        </div><!--//col-->
+
+                                      </div><!--//row-->
+                                    </div><!--//app-card-header-->
+                                    <div class="app-card-body p-3 p-lg-4">
+                                      <div class="chart-container">
+                                      <canvas id="chart_pie2" width="100%" height="75"></canvas>  
+                                      </div>
+                                    </div><!--//app-card-body-->
+                                  </div><!--//app-card-->
+                                </div><!--//col-->
+                                <div class="col-12 col-lg-6">
+                                  <div class="app-card app-card-chart h-100 shadow-sm">
+                                    <div class="app-card-header p-3">
+                                      <div class="row justify-content-between align-items-center">
+                                        <div class="col-auto">
+                                              <h4 class="app-card-title">Devengo vs. Instrumentos Formalizados</h4>
+                                        </div><!--//col-->
+                                      </div><!--//row-->
+                                    </div><!--//app-card-header-->
+                                    <div class="app-card-body p-3 p-lg-4">
+                                  <div class="chart-container">
+                                    <canvas id="chart_pie" width="100%" height="75"></canvas>
+                                  </div><!-- //chart-container -->
+                                </div><!--//app-card-body p-3 p-lg-4-->
+                                  </div><!--//app-card-->
+                                </div><!--//col-->
+              </div>
+                            </div>
+              
+      <h1 class="app-page-title mb-4">Inventario 2021</h1>
+      
+
+      <div class="tab-pane fade show" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
+            <div class="app-card app-card-orders-table shadow-sm mb-5">
+              <div class="app-card-body p-3">
+                <div class="table-responsive">
+                  <table class="table app-table-hover mb-0 text-left" id="Table2">
+			  				    <thead>
+			  					    <tr>
+                        <th scope="col"></th>    
+                        <th scope="col">Numero</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Administrador</th>
+                        <th scope="col">Termino</th>                 
+                        <th scope="col">Maximo</th>
+                        <th scope="col">Devengado</th>
+			  					    </tr>
+			  				    </thead>
+			  				    <tbody>
+                      <?php foreach ($data8 as $datos_contratos) { ?>
+                        
+			  				      	<tr>
+                          <td>
+                            <?php if ($datos_contratos['estado'] == 2) { ?>
+                              <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z" /></svg>
+                            <?php } elseif ($datos_contratos['estado'] == 3) { ?>
+                              <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z" /></svg>
+                            <?php } elseif ($datos_contratos['estado'] == 4) { ?>
+                              <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z" /></svg>
+                            <?php } elseif ($datos_contratos['estado'] == 1) { ?>
+                              <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" /></svg>
+                            <?php } ?>
+                          </td>
+                          <td><?php echo $datos_contratos['numero'];?></td>
+                          <td><?php echo $datos_contratos['descripcion']; ?></td>
+                          <td><?php echo $datos_contratos['nombre']; ?></td>
+                          <td><?php echo $datos_contratos['termino']; ?></td>
+                          <td><?php echo $datos_contratos['maximo']; ?></td>
+                          <td><?php echo $datos_contratos['devengo'];?></td>
+                          
+                        <?php } ?>
+                      
+			  				    </tbody>
+			  			    </table>
+                </div><!--//table-responsive-->
+              </div><!--//app-card-body-->
+            </div><!--//app-card app-card-orders-table shadow-sm mb-5-->
+          </div><!--//tab-pane fade show active-->
 
       <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
         <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">15 NEGADAS</a>
@@ -477,12 +577,14 @@
 </div><!--//container-xl-->
 
 </div><!--app-content pt-3 p-md-3 p-lg-4-->  
-
+</div>
+</div>
 
 <script>
   window.addEventListener("load", function() {
     BarrasAtencion();  
     pastelnegadas();
+    chart_pie();
   })
 </script>
 
