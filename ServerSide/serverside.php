@@ -1,13 +1,15 @@
 <?php
-include 'serversideConexion.php';
+
+include '../Config/Config.php';
+
 class TableData { 
  	private $_db;
 	public function __construct() {
 		try {			
-			$host		= HOST_SS;
-			$database	= DATABASE_SS;
-			$user		= USER_SS;
-			$passwd		= PASSWORD_SS;
+			$host		= HOST;
+			$database	= BD;
+			$user		= DB_USER;
+			$passwd		= PASS;
 			
 		    $this->_db = new PDO('mysql:host='.$host.';dbname='.$database, $user, $passwd, array(
 				PDO::ATTR_PERSISTENT => true, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
