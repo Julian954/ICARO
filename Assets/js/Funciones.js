@@ -491,7 +491,7 @@ function chart_pie() {
     type: "POST",
     success: function (response) {
       var data = JSON.parse(response);
-      var nombre = ["devengo","contratos"];
+      var nombre = ["Devengo","Contratos"];
       var devengo = [];
       devengo.push(data[0]["devengo"]);
       devengo.push(data[0]["total"]);
@@ -508,7 +508,47 @@ function chart_pie() {
           datasets: [
             {
               data: devengo,
-              backgroundColor: ["green", "blue"],
+              backgroundColor: ["#1E8449", "#2980B9" ],
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          legend: {
+            display: true,
+            position: "right",
+            align: "center",
+          },
+        },
+      });
+    },
+  });
+}
+
+function chart_pie2() {
+  $.ajax({
+    url: base + "Inicio/chart_pie2",
+    type: "POST",
+    success: function (response) {
+      var data = JSON.parse(response);
+      var nombre = ["Devengo","Presupuesto Global"];
+      var global = [];
+      global.push(data[0]["devengo"]);
+      global.push(data[0]["total"]);
+      // Set new default font family and font color to mimic Bootstrap's default styling
+      Chart.defaults.global.defaultFontFamily =
+        'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+      Chart.defaults.global.defaultFontColor = "#292b2c";
+      // Pie Chart Example
+      var ctx = document.getElementById("chart_pie2");
+      var myPieChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: nombre,
+          datasets: [
+            {
+              data: global,
+              backgroundColor: ["#1E8449", "#6C3483"],
             },
           ],
         },

@@ -117,6 +117,12 @@ class Inicio extends Controllers
         die();
     }
 
+    public function chart_pie2()
+    {
+        $data = $this->model->chart_pie2();
+        echo json_encode($data);
+        die();
+    }
     public function DescargarNegadas(){
         $data = $this->model->negadas();
 

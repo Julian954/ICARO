@@ -145,14 +145,15 @@
       </div><!--//row-auto-->
               </div>
       
-                      
-                                <a  data-toggle="collapse" href="#contenido-colapsable" role="button" aria-expanded="false" aria-controls="contenido-colapsable">
+
+
+                                <!-- <a  data-toggle="collapse" href="#contenido-colapsable" role="button" aria-expanded="false" aria-controls="contenido-colapsable">
                                   Indicadores del Devengo<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                                   </svg>
                                 </a>
                         
-                        <div class="collapse" id="contenido-colapsable">                          
+                        <div class="collapse" id="contenido-colapsable"> -->                          
                             <div class="row g-4 mb-4">
                                 <div class="col-12 col-lg-6">
                                   <div class="app-card app-card-chart h-100 shadow-sm">
@@ -182,13 +183,13 @@
                                     </div><!--//app-card-header-->
                                     <div class="app-card-body p-3 p-lg-4">
                                   <div class="chart-container">
-                                    <canvas id="chart_pie" width="100%" height="75"></canvas>
+                                  <canvas id="chart_pie" width="100%" height="75"></canvas>
                                   </div><!-- //chart-container -->
                                 </div><!--//app-card-body p-3 p-lg-4-->
                                   </div><!--//app-card-->
                                 </div><!--//col-->
               </div>
-                            </div>
+                            <!--</div>-->
               
       <h1 class="app-page-title mb-4">Inventario 2021</h1>
       
@@ -585,6 +586,7 @@
     BarrasAtencion();  
     pastelnegadas();
     chart_pie();
+    chart_pie2();
   })
 </script>
 
