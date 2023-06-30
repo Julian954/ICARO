@@ -158,8 +158,7 @@
     });
 
 
-        $(document).ready(function() {
-        var table = $("#TablePedidos").DataTable({
+        $("#TablePedidos").DataTable({
         processing: true,
         responsive: true,
         serverSide: true,
@@ -167,9 +166,8 @@
         columnDefs: [
           {
             targets: -1,
-            render: function(data, type, row) {
-              return data; // No se necesita formateo adicional, ya que ya hemos formateado el botón o la etiqueta en el código PHP
-            }
+          defaultContent:
+            "<div class='btn-group'><button class='btn btn-primary btn-sm btnEditarP'>ENLAZAR</button></div>",
           }
         ],
         language: {
@@ -197,21 +195,6 @@
         },
         }
       });
-      //ESTE ME LOS DIO JUNTOS PERO EN LA DE FUNCIONES DE JS ESTA TAMBIEN POR SI LA QUIERES QUITAR DE AQUI 
-      $(document).on("click", ".btnEditarP", function() {
-        var data = table.row($(this).closest("tr")).data(); // Obtenemos los datos de la fila correspondiente al botón "ENLAZAR"
-
-        var id = data[0];
-        var contrato = data[1];
-        var monto = data[7];
-
-        $("#id").val(id);
-        $("#contrato").val(contrato);
-        $("#monto2").val(monto);
-        $("#VentanaModalP").modal("show");
-      });
-    });
-
 
     // Escucha el evento clic en el botón "Enlazar"
     $("#TablePedidos").on("click", ".enlazar-btn", function () {
