@@ -113,8 +113,6 @@ class Inicio extends Controllers
     public function chart_pie()
     {
         $data = $this->model->chart_pie();
-        $otros = $this->model->chart_pieotros();
-        array_push($data, $otros);
         echo json_encode($data);
         die();
     }

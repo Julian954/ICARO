@@ -493,12 +493,8 @@ function chart_pie() {
       var data = JSON.parse(response);
       var nombre = ["devengo","contratos"];
       var devengo = [];
-      var total = [];
-      for (var i = 0; i < data.length; i++) {
-        
-        devengo.push(data[i]["total"]);
-        total.push(data[i]["total_max"]);
-      }
+      devengo.push(data[0]["devengo"]);
+      devengo.push(data[0]["total"]);
       // Set new default font family and font color to mimic Bootstrap's default styling
       Chart.defaults.global.defaultFontFamily =
         'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -511,12 +507,9 @@ function chart_pie() {
           labels: nombre,
           datasets: [
             {
-              data: total,
-              backgroundColor: [
-                "green",
-                "blue"                                        
-              ],
-            },      
+              data: devengo,
+              backgroundColor: ["green", "blue"],
+            },
           ],
         },
         options: {

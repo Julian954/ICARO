@@ -101,17 +101,11 @@ class InicioModel extends Mysql{
 
     public function chart_pie()
     {
-        $sql = "SELECT SUM(contratos.devengo) AS total FROM contratos";
+        $sql = "SELECT SUM(contratos.devengo) AS devengo, (SUM(contratos.maximo)-devengo) AS total FROM contratos WHERE contratos.estado = 4;;";
         $res = $this->select_all($sql);
         return $res;
     }
-   
-    public function chart_pieotros()
-    {
-        $sql = "SELECT SUM(contratos.maximo) AS total_max FROM contratos WHERE estado=4";
-        $res = $this->select($sql);
-        return $res;
-    }
+
 
 
 
