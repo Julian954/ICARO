@@ -163,13 +163,27 @@
         responsive: true,
         serverSide: true,
         sAjaxSource: "../ServerSide/serversidePedidos.php",
-        columnDefs: [
-          {
-            targets: -1,
-          defaultContent:
-            "<div class='btn-group'><button class='btn btn-primary btn-sm btnEditarP'>ENLAZAR</button></div>",
-          }
-        ],
+    columns: [
+        { table_data: 'id' },
+        { table_data: 'nopedido' },
+        { table_data: 'tipo' },
+        { table_data: 'clave' },
+        { table_data: 'cantidad' },
+        { table_data: 'eta' },
+        { table_data: 'topn' },
+        { table_data: 'monto' },
+        { table_data: 'fecha_alta' },
+        {
+            table_data: 'monto2',
+            render: function(table_data, type, row) {
+                if (table_data > 0) {
+                    return 'Enlazado';
+                } else {
+                    return "<div class='btn-group'><button class='btn btn-primary btn-sm btnEditarP'>ENLAZAR</button></div>";
+                }
+            }
+        }
+    ],
         language: {
             decimal: "",
           emptyTable: "No hay datos",

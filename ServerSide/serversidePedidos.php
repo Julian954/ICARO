@@ -11,5 +11,7 @@ $table_data->get('vista_pedidos', 'id', array(
   'topn',
   'monto',
   'fecha_alta',
+  'monto2',
 ));
+
 ?>
