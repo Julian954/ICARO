@@ -51,6 +51,16 @@
   			    	</div><!--//auth-body-->
 			    	<footer class="app-auth-footer">
 					    <div class="container text-center py-3">
+							<?php 
+      $conexion = 'mysql:host='.HOST.';dbname='.BD.';.CHARSET.';  
+      try {
+          $this->conect = new PDO($conexion, DB_USER, PASS);
+          $this->conect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      } catch (PDOException $e) {
+          $this->conect = "Error en la conexion";
+          echo "Error: " . $e->getMessage();
+      }
+							?>
 			    	    	<small class="copyright">Diseño y Desarrollo por OOADR. Coordinación de Abastecimiento y Equipamiento.</small>
 					    </div>
 			    	</footer><!--//app-auth-footer-->	
