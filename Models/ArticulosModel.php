@@ -37,15 +37,16 @@ class ArticulosModel extends Mysql
         return $return;
     }
 
-    public function actualizarArticulos(string $clave, string $descripcion, string $corta, int $id)
+    public function actualizarArticulos(string $clave, string $descripcion, string $corta, int $cantidad, int $id)
     {
         $return = "";
         $this->clave = $clave;
         $this->descripcion = $descripcion;
         $this->corta = $corta;
+        $this->cantidad = $cantidad;
         $this->id = $id;
-        $query = "UPDATE catalogo SET clave=?, descripcion=?, des_corta=? WHERE id=?";
-        $data = array($this->clave, $this->descripcion, $this->corta, $this->id);
+        $query = "UPDATE catalogo SET clave=?, descripcion=?, des_corta=?, cantidad=? WHERE id=?";
+        $data = array($this->clave, $this->descripcion, $this->corta, $this->cantidad, $this->id);
         $resul = $this->update($query, $data);
         $return = $resul;
         return $return;

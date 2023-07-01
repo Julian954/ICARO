@@ -124,13 +124,31 @@
       responsive: true,
       serverSide: true,
       sAjaxSource: "../ServerSide/serversideArticulos.php",
-      columnDefs: [
-        {
-          targets: -1,
-          defaultContent:
-            "<div class='text-center'><div class='btn-group'><button class='btn btn-primary btn-sm btnEditar'><i class='fas fa-edit'></i></button><form class='d-inline elimart'><button class='btn btn-danger btn-sm btnBorrar'><i class='fas fa-trash'></i></button></form></div></div>",
-        },
-      ],
+        columns: [
+            { table_data: 'id',
+                createdCell: function (td, cellData, rowData, row, col) {
+                    $(td).attr('style', 'visibility:collapse; display:none;');
+                }
+            },
+            { table_data: 'clave' },
+            { table_data: 'descripcion',
+                render: function(table_data, type, row) {
+                    if (table_data.length > 50) {
+                        return table_data.substr(0, 50) + '...';
+                    } else {
+                        return table_data;
+                    }
+                }
+            },
+            { table_data: 'des_corta' },
+            { table_data: 'cantidad' },
+            { 
+                data: null,
+                render: function(data, type, row) {
+                    return "<button class='btn btn-primary mx-1 mb-2 btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-danger mx-1 mb-2 btnBorrar'><i class='fas fa-trash'></i></button>";
+                }
+            },
+        ],
       language: {
         decimal: "",
         emptyTable: "No hay datos",
@@ -163,27 +181,32 @@
         responsive: true,
         serverSide: true,
         sAjaxSource: "../ServerSide/serversidePedidos.php",
-    columns: [
-        { table_data: 'id' },
-        { table_data: 'nopedido' },
-        { table_data: 'tipo' },
-        { table_data: 'clave' },
-        { table_data: 'cantidad' },
-        { table_data: 'eta' },
-        { table_data: 'topn' },
-        { table_data: 'monto' },
-        { table_data: 'fecha_alta' },
-        {
-            table_data: 'monto2',
-            render: function(table_data, type, row) {
-                if (table_data > 0) {
-                    return 'Enlazado';
-                } else {
-                    return "<div class='btn-group'><button class='btn btn-primary btn-sm btnEditarP'>ENLAZAR</button></div>";
+        columns: [
+            { table_data: 'id',
+                createdCell: function (td, cellData, rowData, row, col) {
+                     $(td).attr('style', 'visibility:collapse; display:none;');
+                }
+            
+            },
+            { table_data: 'nopedido' },
+            { table_data: 'tipo' },
+            { table_data: 'clave' },
+            { table_data: 'cantidad' },
+            { table_data: 'eta' },
+            { table_data: 'topn' },
+            { table_data: 'monto' },
+            { table_data: 'fecha_alta' },
+            {
+                table_data: 'monto2',
+                render: function(table_data, type, row) {
+                    if (table_data > 0) {
+                        return 'Enlazado';
+                    } else {
+                        return "<div class='btn-group'><button class='btn btn-primary btn-sm btnEditarP'>ENLAZAR</button></div>";
+                    }
                 }
             }
-        }
-    ],
+        ],
         language: {
             decimal: "",
           emptyTable: "No hay datos",

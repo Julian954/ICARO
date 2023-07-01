@@ -39,7 +39,7 @@
                                     <table class="table app-table-hover mb-0 text-left" id="TableArticulos">
     							        <thead>
                                             <tr>
-                                            <th class="cell" >Numero de Articulo</th>
+                                            <th class="cell" style="visibility:collapse; display:none;">Numero de Articulo</th>
                                             <th class="cell" >Clave de Articulo</th>
                                             <th class="cell" >Descripcion</th>
                                             <th class="cell" >Descripcion corta</th>
@@ -139,6 +139,10 @@
                                 <label for="cor">Clave corta</label>
                                 <input id="cor" class="form-control" type="text" name="corta" placeholder="Descripcion corta" required>
                             </div>
+                            <div class="form-group">
+                                <label for="cantidad">Cantidad</label>
+                                <input id="cantidad" class="form-control" type="number" name="cantidad" placeholder="Cantidad" required>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Registrar</button>
@@ -149,6 +153,39 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalCRUDE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="my-modal-title">Eliminar Articulo</h5>
+                    <button class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="formUsuarios" method="post" action="<?php echo base_url(); ?>Articulos/eliminar" autocomplete="off" class="elimper">    
+                    <div class="modal-body">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="cle">Codigo del Articulo</label>
+                                <input id="ide" class="form-control" type="hidden" name="ide" placeholder="Ingresa los 14 digitos" required>
+                                <input id="cle" class="form-control" type="text" name="clavee" placeholder="Ingresa los 14 digitos" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dese">Descripcion</label>
+                                <input id="dese" class="form-control" type="text" name="desce" placeholder="Descripcion" required>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Eliminar</button>
+                            <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
+                        </div>             
+                    </div>
+                </form>    
+            </div>
+        </div>
+    </div>
+
 
 <?php }  else { ?> <!-- En caso de ser valido -->
   <?php permisos() ?> <!-- Poner el mensaje de erro -->

@@ -67,21 +67,34 @@ $(document).ready(function () {
     });
   }
 
-  //Editar
+  //Editar Articulo
   $(document).on("click", ".btnEditar", function () {
     fila = $(this).closest("tr");
     id = parseInt(fila.find("td:eq(0)").text()); //capturo el ID
     clave = fila.find("td:eq(1)").text();
     desc = fila.find("td:eq(2)").text();
     corta = fila.find("td:eq(3)").text();
+    cantidad = fila.find("td:eq(4)").text();
     $("#id").val(id);
     $("#cl").val(clave);
     $("#des").val(desc);
     $("#cor").val(corta);
+    $("#cantidad").val(cantidad);
     $("#modalCRUD").modal("show");
   });
 
-
+  //Eliminar Articulo
+  $(document).on("click", ".btnBorrar", function () {
+    fila = $(this).closest("tr");
+    id = parseInt(fila.find("td:eq(0)").text()); //capturo el ID
+    clave = fila.find("td:eq(1)").text();
+    desc = fila.find("td:eq(2)").text();
+    corta = fila.find("td:eq(3)").text();
+    $("#ide").val(id);
+    $("#cle").val(clave);
+    $("#dese").val(desc);
+    $("#modalCRUDE").modal("show");
+  });
 
   //este es el tuyo
   $(document).on("click", ".btnEditarP", function () {

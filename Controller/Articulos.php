@@ -56,7 +56,8 @@ class Articulos extends Controllers
         $clave = limpiarInput($_POST['clave']);
         $descripcion = limpiarInput($_POST['desc']);
         $corta = limpiarInput($_POST['corta']);
-        $actualizar = $this->model->actualizarArticulos($clave, $descripcion, $corta, $id);     
+        $cantidad = limpiarInput($_POST['cantidad']);
+        $actualizar = $this->model->actualizarArticulos($clave, $descripcion, $corta, $cantidad, $id);     
             if ($actualizar == 1) {
                 $alert = 'modificado';
             } else {
@@ -68,7 +69,7 @@ class Articulos extends Controllers
 
     public function eliminar()
     {
-        $id = $_POST['id'];
+        $id = $_POST['ide'];
         $eliminar = $this->model->eliminarArticulo($id);
         $alert = 'Eliminado';
         $data1 = $this->model->selectArticulos();

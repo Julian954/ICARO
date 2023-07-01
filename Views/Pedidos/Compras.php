@@ -184,7 +184,7 @@ foreach ($data1 as $pedi2){
                   <table class="table app-table-hover mb-0 text-left" id="TablePedidos" >
                     <thead>
                       <tr>
-                        <th class="cell">Id</th>
+                        <th class="cell" style="visibility:collapse; display:none;">Id</th>
                         <th class="cell"><span></span>No. Pedido</th>
                         <th class="cell">GPO</th>
                         <th class="cell">Clave</th>
