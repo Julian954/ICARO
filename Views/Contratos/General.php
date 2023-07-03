@@ -218,85 +218,43 @@
               </div><!--//app-card footer-->
             </div><!--//app-card-->
           </div><!--//col-12 col-lg-6-->
-
-
-			    <div class="col-12 col-lg-6">
-				    <div class="app-card app-card-chart shadow-sm">
-					    <div class="app-card-header p-3">
-					      <div class="row justify-content-between align-items-center">
-					        <div class="col-auto">
-					          <h4 class="app-card-title">Flujo de Formalización</h4>
-					        </div><!--//col-->
-					      </div><!--//row-->
-					    </div><!--//app-card-header-->
-					    <div class="app-card-body ">
-                <?php foreach ($data6 as $bar) { ?>
-							    <div class="item p-3">
-								    <div class="row align-items-center">
-									    <div class="col">
-										    <div class="title " style="color:#000000;"><?php echo $bar['area'].' ('.$bar['form'].'/'.$bar['total'].')';?></div>
-										    <div class="progress">
-                          <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($bar['form']*100/$bar['total'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($bar['form']*100/$bar['total'],2);?>%</div>
-                        </div>
-									    </div><!--//col-->
-								    </div><!--//row-->
-							    </div><!--//item-->
-                  <hr style="margin: 0;">
-                <?php } ?>
-					    </div><!--//app-card-body-->
-				    </div><!--//app-card-->
-			    </div><!--//col-->
-        </div><!--//row-->
-
-              </div>
-      
-
-
-                                <!-- <a  data-toggle="collapse" href="#contenido-colapsable" role="button" aria-expanded="false" aria-controls="contenido-colapsable">
-                                  Indicadores del Devengo<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                                  </svg>
-                                </a>
-                        
-                        <div class="collapse" id="contenido-colapsable"> -->                          
-                            <div class="row g-4 mb-4">
-                                <div class="col-12 col-lg-6">
-                                  <div class="app-card app-card-chart h-100 shadow-sm">
-                                    <div class="app-card-header p-3">
-                                      <div class="row justify-content-between align-items-center">
-                                        <div class="col-auto">
-                                              <h4 class="app-card-title">Devengo vs. Presupuesto Global</h4>
-                                        </div><!--//col-->
-
-                                      </div><!--//row-->
-                                    </div><!--//app-card-header-->
-                                    <div class="app-card-body p-3 p-lg-4">
-                                      <div class="chart-container">
-                                      <canvas id="chart_pie2" width="100%" height="75"></canvas>  
-                                      </div>
-                                    </div><!--//app-card-body-->
-                                  </div><!--//app-card-->
-                                </div><!--//col-->
-                                <div class="col-12 col-lg-6">
-                                  <div class="app-card app-card-chart h-100 shadow-sm">
-                                    <div class="app-card-header p-3">
-                                      <div class="row justify-content-between align-items-center">
-                                        <div class="col-auto">
-                                              <h4 class="app-card-title">Devengo vs. Instrumentos Formalizados</h4>
-                                        </div><!--//col-->
-                                      </div><!--//row-->
-                                    </div><!--//app-card-header-->
-                                    <div class="app-card-body p-3 p-lg-4">
-                                  <div class="chart-container">
-                                  <canvas id="chart_pie" width="100%" height="75"></canvas>
-                                  </div><!-- //chart-container -->
-                                </div><!--//app-card-body p-3 p-lg-4-->
-                                  </div><!--//app-card-->
-                                </div><!--//col-->
-              </div>
-                            <!--</div>-->
+              
+          <div class="col-12 col-lg-6">
+            <div class="app-card app-card-chart h-100 shadow-sm">
+              <div class="app-card-header p-3">
+                <div class="row justify-content-between align-items-center">
+                  <div class="col-auto">
+                    <h4 class="app-card-title">Devengo vs. Presupuesto Global</h4>
+                  </div><!--//col-->
+                </div><!--//row-->
+              </div><!--//app-card-header-->
+              <div class="app-card-body p-3 p-lg-4">
+                <div class="chart-container">
+                  <canvas id="chart_pie2" width="100%" height="75"></canvas>  
+                </div>
+              </div><!--//app-card-body-->
+            </div><!--//app-card-->
+          </div><!--//col-->
+          <div class="col-12 col-lg-6">
+            <div class="app-card app-card-chart h-100 shadow-sm">
+              <div class="app-card-header p-3">
+                <div class="row justify-content-between align-items-center">
+                  <div class="col-auto">
+                    <h4 class="app-card-title">Devengo vs. Instrumentos Formalizados</h4>
+                  </div><!--//col-->
+                </div><!--//row-->
+              </div><!--//app-card-header-->
+              <div class="app-card-body p-3 p-lg-4">
+            <div class="chart-container">
+              <canvas id="chart_pie" width="100%" height="75"></canvas>
+            </div><!-- //chart-container -->
+          </div><!--//app-card-body p-3 p-lg-4-->
+          </div><!--//app-card-->
+          </div><!--//col-->
+        </div>
+                      
  
-        
+      
         <div class="position-relative mb-3">
             <div class="row g-3 justify-content-between">
                 <div class="col-auto">

@@ -25,7 +25,7 @@
     					<h2 class="auth-heading text-center mb-4">Cambiar Contraseña</h2>	
 
 					    <div class="auth-form-container text-start mx-auto">
-					    	<form class="auth-form auth-signup-form" id="user" action="<?php echo base_url(); ?>Usuarios/cambiarolvidada" method="POST" autocomplete="off">         
+					    	<form class="auth-form auth-signup-form" id="user" action="<?php echo base_url(); ?>Iniciar/cambiarolvidada" method="POST" autocomplete="off">         
 					    		<div class="email mb-3">
                                     <input id="id" name="id" type="hidden" class="form-control signup-name" value="<?= $_GET['id']; ?>" required="required">
 					    			<input id="actual" name="actual" type="hidden" class="form-control signup-name" value="<?= $_GET['hash']; ?>" required="required">

@@ -55,6 +55,8 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
 
     public function ranking()
     {
+        $query = "SET lc_time_names = 'es_MX'";
+        $this->select($query);
         $sql = "SELECT AVG(surtida) AS colima, AVG(atencion) AS nacional,  MONTHNAME(fecha) AS mname, MONTH(fecha) AS mes FROM (SELECT fecha, surtida, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS surtida, atencion FROM nacional) AS datos_totales GROUP BY mes";
         $res = $this->select_all($sql); 
         return $res;

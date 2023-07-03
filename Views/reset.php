@@ -22,7 +22,7 @@
 						<h2 class="auth-heading text-center mb-4">Restablecer Contraseña</h2>
 						<div class="auth-intro mb-4 text-center">Ingresa tu correo y te enviaremos un link para restablecer tu contraseña.</div>
 						<div class="auth-form-container text-left">
-							<form class="auth-form resetpass-form" id="user" action="<?php echo base_url(); ?>Usuarios/reset" method="POST" autocomplete="off">                
+							<form class="auth-form resetpass-form" id="user" action="<?php echo base_url(); ?>Iniciar/reset" method="POST" autocomplete="off">                
 								<div class="email mb-3">
 									<input id="correo" name="correo" type="email" class="form-control login-email" placeholder="Dirección de correo" required="required">
 								</div><!--//form-group-->
