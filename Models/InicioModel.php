@@ -41,12 +41,14 @@ class InicioModel extends Mysql{
         $res = $this->select_all($sql);
         return $res;
     }
+
     //poner aqui la direccion del devengo
   /*  public function devengo(){
         $sql = "SELECT * FROM "nombre de la tabla devengo"";
         $res = $this->select_all($sql);
         return $res;
     }*/
+
     //Selecciona las quejas
     public function quejas()
     {
@@ -56,6 +58,8 @@ class InicioModel extends Mysql{
     }
     public function pedidos()
     {
+        $query = "SET lc_time_names = 'es_MX'";
+        $this->select($query);
         $ordenar ="SELECT fecha, SUM(monto) AS monto, SUM(pagado) AS pagado, MONTHNAME(fecha_inicio) AS mes, MONTH(fecha_inicio) AS nom FROM pedidos GROUP BY nom;";
         $res= $this->select_all($ordenar);
         return $res;

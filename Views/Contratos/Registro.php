@@ -28,7 +28,7 @@
 	          <div class="col-12 col-md-8">
 	            <div class="app-card app-card-settings shadow-sm p-4">
 					      <div class="app-card-body">
-                  <form method="POST" action="<?php echo base_url(); ?>Contratos/agregar" autocomplete="off">
+                  <form id="formulario1" method="POST" action="<?php echo base_url(); ?>Contratos/agregar" autocomplete="off">
                     <div class="mb-3">
                       <label for="numero" class="form-label" style="color:#000000;">Número de Contrato<span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresar el número del Contrato y/o Convenio tal cual fue registrado en SAI y plasmado en el documento impreso"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" style="color:#FF0000;" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>

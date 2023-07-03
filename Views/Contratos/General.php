@@ -26,7 +26,7 @@
                 <ul class="notification-meta list-inline mb-0">
                   <li class="list-inline-item"><?php echo $_SESSION['correo'] ?></li>
                   <li class="list-inline-item">|</li>
-                  <li class="list-inline-item"><?php echo $_SESSION['telefono'] ?></li>
+                  <li class="list-inline-item"><?php echo telefono($_SESSION['telefono']) ?></li>
                 </ul>
               </div><!--//col-->
               <div class="col-3 col-sm-auto text-center text-lg-right">
@@ -53,46 +53,65 @@
 
         <div class="row g-4 mb-4">
 			    <div class="col-12 col-lg-6">
-				    <div class="app-card app-card-chart shadow-sm mb-4">
+				    <div class="app-card app-card-orders-table shadow-sm mb-4">
 					    <div class="app-card-header p-3">
 					      <div class="row justify-content-between align-items-center">
 					        <div class="col-auto">
-					          <h4 class="app-card-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-  <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
-</svg>
-                       Estadísticas de la Oficina
-                    </h4>
+					          <h4 class="app-card-title">Estadísticas de la Oficina</h4>
 					        </div><!--//col-->
 					      </div><!--//row-->
 					    </div><!--//app-card-header-->
 					    <div class="app-card-body p-3 p-lg-4">
-                <div class="row g-4 mb-4" style="padding-top:10px; font-size:14px;">
-                  <div class="col-12 col-lg-12" style="color:#000000;">
-                    <div class="item-data"><strong style="font-size:20px">En general tenemos</strong></div>
-										<div class="item-label mb-2">
-                      <br>
-                        <span style="text-decoration:solid underline #5B99EA 2px;"><strong><?php echo $data3['total']; ?></strong></span>
-                         Instrumentos, lo cual nos da un ascendente de
-                        <span style="text-decoration:solid underline #5B99EA 2px;"><strong>$<?php echo number_format($data3['maximo'], 0); ?> MXN.</span></strong>
-                     
-                    </div>
-                    <div class="item-data"><br>De los <strong><?php echo $data3['total']; ?></strong> Instrumentos</div>
-										<div class="item-label mb-2">
-                     
+                <div class="table-responsive">
+                  <table class="table app-table-hover mb-0 text-center">   
+			  				    <thead>
+			  				      <tr>
+                        <th class="cell">Instrumentos</th>    
+                        <th class="cell">Monto</th>                   
+			  				      </tr>
+			  				    </thead>
+                    <tbody>
+                      <td><span style="text-decoration:solid underline #5B99EA 2px;"><strong><?php echo $data3['total']; ?></strong></span></td>
+                      <td><span style="text-decoration:solid underline #5B99EA 2px;"><strong>$<?php echo number_format($data3['maximo'], 0); ?> MXN.</span></strong></td>
+                    </tbody>
+                  </table>                          
+                </div>
+                <div class="table-responsive">
+                  <table class="table app-table-hover mb-0 text-center">   
+			  				    <thead>
+			  				      <tr>
                         <?php foreach ($data4 as $ctr) { ?>
-                          <strong><span style="text-decoration:solid underline #5B99EA 2px;"><?= $ctr['total']; ?></span>
-                          <?=' son '.$ctr['categoria'].'s: ';?><br></strong>
-                          <?php foreach ($data5 as $cov) { 
-                            if ($cov['categoria'] == $ctr['categoria']) {?>
-                            <strong><span style="font-weight:lighter; color:#2980B9; font-size:12px;">(<?= $cov['tipo'].': '.$cov['total'];?>)</span></strong>
-                          <?php }} ?><br>
+                          <th class="cell"><?=$ctr['categoria'].'s';?></th> 
+                        <?php } ?>                
+			  				      </tr>
+			  				    </thead>
+                    <tbody>
+                        <?php foreach ($data4 as $ctr) { ?>
+                          <td><span style="text-decoration:solid underline #5B99EA 2px;"><strong><?= $ctr['total']; ?></strong></span></td> 
+                        <?php } ?>  
+                    </tbody>
+                  </table>                          
+                </div>
+                <div class="table-responsive">
+                  <table class="table app-table-hover mb-0 text-center">   
+			  				    <thead>
+			  				      <tr>
+                        <?php foreach ($data5 as $cov) { ?> 
+                          <th class="cell"><span style="font-size:12px;"><?= $cov['tipo'];?></span></th> 
+                        <?php } ?>            
+			  				      </tr>
+			  				    </thead>
+                    <tbody>
+                        <?php foreach ($data5 as $cov) { ?>
+                          <td><span style="color:#000000; font-size:12px;"><?= $cov['total'];?></span></td> 
                         <?php } ?>
-                      </strong><br>
-                    </div>
-                    <div class="item-data"><strong>Los estados de los Instrumentos son:</strong></div>
-										<div class="item-label mb-2">   
-                    <div class="table-responsive">                                  
+                    </tbody>
+                  </table>                          
+                </div>
+                <br>
+                <div class="item-data"><strong>Los estados de los Instrumentos son:</strong></div>
+								<div class="item-label mb-2">   
+                  <div class="table-responsive">                                  
                   <table>
 			  				    <thead>
 			  					    <tr>
@@ -143,8 +162,7 @@
                           </div>
                           
                    
-                  </div>
-                </div><!--//app-card-body-->
+
 					    </div><!--//app-card-body-->
 				    </div><!--//app-card-->
 
@@ -164,8 +182,46 @@
 				    </div><!--//app-card-->
 			    </div><!--//col-->
 
+        
+          <div class="col-12 col-lg-6">
+            <div class="app-card app-card-progress-list shadow-sm">
+              <div class="app-card-header p-3">
+                <div class="row justify-content-between align-items-center">
+                  <div class="col-auto">
+                    <h4 class="app-card-title">Flujo de Formalización
+                      <span style="font-weight: normal; font-size: 12px;">(Creados / Formalizados)</span>
+                    </h4>
+                  </div><!--//col-auto-->
+                  <div class="col-auto">
+                    <div class="card-header-action">
+                    </div><!--//card-header-action-->
+                  </div><!--//col-auto-->
+                </div><!--//row justify-content-between align-items-center-->
+              </div><!--//app-card-header-->
+              <div class="app-card-body">
+                <?php foreach ($data6 as $bar) { ?>
+	  		  			  <div class="item p-3">
+				  			    <div class="row align-items-center">
+				  				    <div class="col">
+                        <div class="title " style="color:#000000;"><span class="font-weight-bold"><?php echo $bar['area'].'</span><span style="font-weight: normal; font-size: 12px;"> ('.$bar['form'].'/'.$bar['total'].')</span>';?></div>
+				  					    <div class="progress" style="height: 0.9rem;">
+                          <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($bar['form']*100/$bar['total'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($bar['form']*100/$bar['total'],2);?>%</div>
+                        </div>
+				  				    </div>
+				  			    </div>
+				  			  </div>
+                  <hr style="margin: 0;">
+                <?php } ?>
+              </div><!--//app-card-body-->
+              <div class="app-card-footer">
+                <span style="font-size:12px;"class="text-muted px-3">*Actualizado al <?= date('Y-m-d')?></span>
+              </div><!--//app-card footer-->
+            </div><!--//app-card-->
+          </div><!--//col-12 col-lg-6-->
+
+
 			    <div class="col-12 col-lg-6">
-				    <div class="app-card app-card-chart h-100 shadow-sm">
+				    <div class="app-card app-card-chart shadow-sm">
 					    <div class="app-card-header p-3">
 					      <div class="row justify-content-between align-items-center">
 					        <div class="col-auto">
@@ -191,6 +247,55 @@
 				    </div><!--//app-card-->
 			    </div><!--//col-->
         </div><!--//row-->
+
+              </div>
+      
+
+
+                                <!-- <a  data-toggle="collapse" href="#contenido-colapsable" role="button" aria-expanded="false" aria-controls="contenido-colapsable">
+                                  Indicadores del Devengo<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                                  </svg>
+                                </a>
+                        
+                        <div class="collapse" id="contenido-colapsable"> -->                          
+                            <div class="row g-4 mb-4">
+                                <div class="col-12 col-lg-6">
+                                  <div class="app-card app-card-chart h-100 shadow-sm">
+                                    <div class="app-card-header p-3">
+                                      <div class="row justify-content-between align-items-center">
+                                        <div class="col-auto">
+                                              <h4 class="app-card-title">Devengo vs. Presupuesto Global</h4>
+                                        </div><!--//col-->
+
+                                      </div><!--//row-->
+                                    </div><!--//app-card-header-->
+                                    <div class="app-card-body p-3 p-lg-4">
+                                      <div class="chart-container">
+                                      <canvas id="chart_pie2" width="100%" height="75"></canvas>  
+                                      </div>
+                                    </div><!--//app-card-body-->
+                                  </div><!--//app-card-->
+                                </div><!--//col-->
+                                <div class="col-12 col-lg-6">
+                                  <div class="app-card app-card-chart h-100 shadow-sm">
+                                    <div class="app-card-header p-3">
+                                      <div class="row justify-content-between align-items-center">
+                                        <div class="col-auto">
+                                              <h4 class="app-card-title">Devengo vs. Instrumentos Formalizados</h4>
+                                        </div><!--//col-->
+                                      </div><!--//row-->
+                                    </div><!--//app-card-header-->
+                                    <div class="app-card-body p-3 p-lg-4">
+                                  <div class="chart-container">
+                                  <canvas id="chart_pie" width="100%" height="75"></canvas>
+                                  </div><!-- //chart-container -->
+                                </div><!--//app-card-body p-3 p-lg-4-->
+                                  </div><!--//app-card-->
+                                </div><!--//col-->
+              </div>
+                            <!--</div>-->
+ 
         
         <div class="position-relative mb-3">
             <div class="row g-3 justify-content-between">
@@ -576,6 +681,8 @@
   <script>
     window.addEventListener("load", function() {
         GeneralContratos();
+        chart_pie();
+        chart_pie2();
     })
   </script>
 

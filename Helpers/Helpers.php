@@ -211,6 +211,30 @@ function notificaciones() {
     return $dato;
 }
 
+//FORMATO TEXTO MAYUSCULAS
+function mayusculas($dato) {
+
+    $dato = strtoupper($dato);
+
+    return $dato;
+}
+
+//FORMATO TEXTO MAYUSCULAS
+function telefono($dato) {
+
+    $dato = "(".substr($dato,0,3).")"." ".substr($dato,5,3)."-".substr($dato,6,4);
+
+    return $dato;
+}
+
+//FORMATO TEXTO
+function string($dato) {
+
+    $dato = ucfirst(strtolower($dato));
+
+    return $dato;
+}
+
 //FORMATO K NUMERO
 function formatoK($dato) {
     if ($dato >= 1000) {

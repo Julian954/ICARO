@@ -143,108 +143,8 @@
           </div><!--//card-header-action-->
         </div><!--//col-auto-->
       </div><!--//row-auto-->
-              </div>
-      
 
-
-                                <!-- <a  data-toggle="collapse" href="#contenido-colapsable" role="button" aria-expanded="false" aria-controls="contenido-colapsable">
-                                  Indicadores del Devengo<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                                  </svg>
-                                </a>
-                        
-                        <div class="collapse" id="contenido-colapsable"> -->                          
-                            <div class="row g-4 mb-4">
-                                <div class="col-12 col-lg-6">
-                                  <div class="app-card app-card-chart h-100 shadow-sm">
-                                    <div class="app-card-header p-3">
-                                      <div class="row justify-content-between align-items-center">
-                                        <div class="col-auto">
-                                              <h4 class="app-card-title">Devengo vs. Presupuesto Global</h4>
-                                        </div><!--//col-->
-
-                                      </div><!--//row-->
-                                    </div><!--//app-card-header-->
-                                    <div class="app-card-body p-3 p-lg-4">
-                                      <div class="chart-container">
-                                      <canvas id="chart_pie2" width="100%" height="75"></canvas>  
-                                      </div>
-                                    </div><!--//app-card-body-->
-                                  </div><!--//app-card-->
-                                </div><!--//col-->
-                                <div class="col-12 col-lg-6">
-                                  <div class="app-card app-card-chart h-100 shadow-sm">
-                                    <div class="app-card-header p-3">
-                                      <div class="row justify-content-between align-items-center">
-                                        <div class="col-auto">
-                                              <h4 class="app-card-title">Devengo vs. Instrumentos Formalizados</h4>
-                                        </div><!--//col-->
-                                      </div><!--//row-->
-                                    </div><!--//app-card-header-->
-                                    <div class="app-card-body p-3 p-lg-4">
-                                  <div class="chart-container">
-                                  <canvas id="chart_pie" width="100%" height="75"></canvas>
-                                  </div><!-- //chart-container -->
-                                </div><!--//app-card-body p-3 p-lg-4-->
-                                  </div><!--//app-card-->
-                                </div><!--//col-->
-              </div>
-                            <!--</div>-->
-              
-      <h1 class="app-page-title mb-4">Inventario 2021</h1>
-      
-
-      <div class="tab-pane fade show" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
-            <div class="app-card app-card-orders-table shadow-sm mb-5">
-              <div class="app-card-body p-3">
-                <div class="table-responsive">
-                  <table class="table app-table-hover mb-0 text-left" id="Table2">
-			  				    <thead>
-			  					    <tr>
-                        <th scope="col"></th>    
-                        <th scope="col">Numero</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Administrador</th>
-                        <th scope="col">Termino</th>                 
-                        <th scope="col">Maximo</th>
-                        <th scope="col">Devengado</th>
-			  					    </tr>
-			  				    </thead>
-			  				    <tbody>
-                      <?php foreach ($data8 as $datos_contratos) { ?>
-                        
-			  				      	<tr>
-                          <td>
-                            <?php if ($datos_contratos['estado'] == 2) { ?>
-                              <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z" /></svg>
-                            <?php } elseif ($datos_contratos['estado'] == 3) { ?>
-                              <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z" /></svg>
-                            <?php } elseif ($datos_contratos['estado'] == 4) { ?>
-                              <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="green" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z" /></svg>
-                            <?php } elseif ($datos_contratos['estado'] == 1) { ?>
-                              <svg width="0.95em" height="0.95em" viewBox="0 0 512 512" fill="blue" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z" /></svg>
-                            <?php } ?>
-                          </td>
-                          <td><?php echo $datos_contratos['numero'];?></td>
-                          <td><?php echo $datos_contratos['descripcion']; ?></td>
-                          <td><?php echo $datos_contratos['nombre']; ?></td>
-                          <td><?php echo $datos_contratos['termino']; ?></td>
-                          <td><?php echo $datos_contratos['maximo']; ?></td>
-                          <td><?php echo $datos_contratos['devengo'];?></td>
-                          
-                        <?php } ?>
-                      
-			  				    </tbody>
-			  			    </table>
-                </div><!--//table-responsive-->
-              </div><!--//app-card-body-->
-            </div><!--//app-card app-card-orders-table shadow-sm mb-5-->
-          </div><!--//tab-pane fade show active-->
-
+    
       <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
         <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">15 NEGADAS</a>
         <a class="flex-sm-fill text-sm-center nav-link"  id="orders-cont-tab" data-toggle="tab" href="#orders-cont" role="tab" aria-controls="orders-cont" aria-selected="false">QUEJAS</a>
@@ -361,7 +261,7 @@
 							    <tbody>
                     <?php foreach ($data4 as $que) { ?>
 							      	<tr>
-                        <td><?php echo ucfirst(strtolower($que['descripcion'])); ?></td>
+                        <td><?php echo string($que['descripcion']); ?></td>
                         <td><?php echo $que['piezas']; ?></td>
                         <td><?php echo $que['abreviacion']; ?></td>
                         <td><?php echo $que['receta']; ?></td>
@@ -412,7 +312,7 @@
 	  					  <div class="item p-3">
 							    <div class="row align-items-center">
 								    <div class="col">
-									    <div class="title" style="color:black;"><span class="font-weight-bold"><?=ucfirst($bar['mes'])?></span><span style="font-weight: normal; font-size: 12px;"><?= ' ($'.number_format($bar['monto'],2,'.',',').' / $'.number_format($bar['pagado'],2,'.',',').')';?></span></div>
+									    <div class="title" style="color:#000000;"><span class="font-weight-bold"><?=ucfirst($bar['mes'])?></span><span style="font-weight: normal; font-size: 12px;"><?= ' ($'.number_format($bar['monto'],2,'.',',').' / $'.number_format($bar['pagado'],2,'.',',').')';?></span></div>
 									    <div class="progress" style="height: 0.9rem;">
                         <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($bar['pagado']*100/$bar['monto'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($bar['pagado']*100/$bar['monto'],2);?>%</div>
                       </div>
@@ -429,59 +329,58 @@
         </div><!--//col-12 col-lg-6-->
 
             <div class="col-12 col-lg-6">
-                <div class="app-card app-card-stats-table h-100 shadow-sm">
+                <div class="app-card app-card-orders-table shadow-sm mb-4">
                     <div class="app-card-header p-3">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
-                                <h4 class="app-card-title">Despachos</h4> <!--FALTA REVIAR-->
+                              <h4 class="app-card-title">Despachos
+                                <span style="font-weight: normal; font-size: 12px;">(Remisiones del día)</span>
+                              </h4>
                             </div><!--//col-auto-->
-
                             <div class="col-auto">
                                 <div class="card-header-action">
-                                <h6>Remisiones del Día</h6>
-                                    <!--<a href="#">Remisiones del Día</a>-->
                                 </div><!--//card-header-action-->
                             </div><!--//col-auto-->
                         </div><!--//row justify-content-between align-items-center-->
                     </div><!--//app-card-header p-3-->
-
-                    <div class="app-card-body p-3 p-lg-4"> 
-                        <div class="table-responsive">
-                            <table class="table table-borderless mb-0" id="TableA">
-                                <thead>
-                                    <tr>
-                                        <th class="meta">Destino</th>
-                                        <th class="meta stat-cell" style="text-align: center; width: 100%;">No. Remision</th>
-                                        <th class="meta stat-cell" style="text-align: center">ECO</th>
-                                        <th class="meta stat-cell" style="text-align: center">ETA</th>
-                                        <th class="meta stat-cell" style="text-align: center"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                      <?php foreach($data7 as $despachos){?>
-                                        <td class="text-success"><?= $despachos['abreviacion'];?></td>
-                                        <td class="stat-cell" style="text-align: center"><?= $despachos['remision'];?></td>
-                                        <td class="stat-cell" style="text-align: center"><a href="<?= base_url().'Assets/Documentos/Despachos/'.$despachos['archivo'];?>" Target="_blank"><?= $despachos['eco'];?></a></td>
-                                        <td class="stat-cell" style="text-align: center"><?= substr($despachos['fecha_entrega'],10,6);?></td>
-                                        <td class="stat-cell" style="text-align: center">
-                                        <?php if($despachos['negadas']==0){?>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-  <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-</svg>
-<?php }elseif($despachos['negadas']==1){?>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-</svg></td>
-<?php }?>
-
-                                    </tr>
-                                    <?php }?>
-                                    
-                                </tbody>
-                            </table>
-                        </div><!--//table-responsive-->
+                    <div class="app-card-body px-3 pb-3">
+                      <div class="table-responsive">
+                        <table class="table app-table-hover mb-0" id="TableA">
+                          <thead>
+                            <tr>
+                              <th class="cell" >Destino</th>
+                              <th class="cell" >No. Remision</th>
+                              <th class="cell" >ECO</th>
+                              <th class="cell" >ETA</th>
+                              <th class="cell" ></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                <?php foreach($data7 as $despachos){?>
+                                  <td><?= $despachos['abreviacion'];?></td>
+                                  <td><?= $despachos['remision'];?></td>
+                                  <td><span class="badge bg-success"><a class="text-decoration-none text-white" href="<?= base_url().'Assets/Documentos/Despachos/'.$despachos['archivo'];?>" Target="_blank"><?= $despachos['eco'];?></a></span></td>
+                                  <td><?= substr($despachos['fecha_entrega'],10,6);?></td>
+                                  <td>
+                                  <?php if($despachos['negadas']==0){?>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                                    <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                                  </svg>
+                                  <?php }elseif($despachos['negadas']==1){?>
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                  </svg></td>
+                                  <?php }?>
+                              </tr>
+                              <?php }?>
+                          </tbody>
+                        </table>
+                      </div><!--//table-responsive-->
                     </div><!--//app-card-body p-3-->
+                    <div class="app-card-footer">
+                      <span style="font-size:12px;"class="text-muted px-3">*Pedidos del día <?= date('Y-m-d');?></span>
+                    </div><!--//app-card footer-->
                 </div><!--//app-card app-card-stats-table h-100 shadow-sm-->
             </div><!--//col-12 col-lg-6-->
         </div><!--//row g-4 mb-4-->
@@ -494,9 +393,9 @@
                             <div class="col-auto">
                                 <div class="app-icon-holder">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
-<path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
-</svg>
+                                      <path fill-rule="evenodd" d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
+                                      <path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
                                 </div><!--//app icon-holder-->
                             </div><!--//col-auto-->
 
@@ -523,9 +422,9 @@
                             <div class="col-auto">
                                 <div class="app-icon-holder">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-code-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-<path fill-rule="evenodd" d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0zm2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0z"/>
-</svg>
+                                      <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                      <path fill-rule="evenodd" d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0zm2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0z"/>
+                                    </svg>
                                 </div><!--//app icon-holder-->
                             </div><!--//col-auto-->
 
@@ -552,8 +451,8 @@
                             <div class="col-auto">
                                 <div class="app-icon-holder">
                                     <svg width="1em" height="1em" viewBox="0 0 448 512" class="bi bi-tools" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
-</svg>
+                                      <path fill-rule="evenodd" d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/>
+                                    </svg>
                                 </div><!--//app icon-holder-->
                             </div><!--//col-auto-->
 
@@ -579,14 +478,12 @@
 
 </div><!--app-content pt-3 p-md-3 p-lg-4-->  
 </div>
-</div>
+
 
 <script>
   window.addEventListener("load", function() {
     BarrasAtencion();  
     pastelnegadas();
-    chart_pie();
-    chart_pie2();
   })
 </script>
 
