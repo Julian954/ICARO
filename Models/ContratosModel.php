@@ -22,11 +22,28 @@
         }
 
         //Selecciona datos de usuario
-        public function selectAdmin(string $usuario)
+        public function selectAdmin()
+        {
+            $sql = "SELECT * FROM usuarios WHERE estado=1 AND  rol =7";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        //Selecciona datos de usuario
+        public function selectReq(string $usuario)
         {
             $this->usuario = $usuario;
-            $sql = "SELECT * FROM usuarios WHERE id = '{$this->usuario}' AND estado=1 AND  rol =7";
-            $res = $this->select_all($sql);
+            $sql = "SELECT * FROM validar_cont WHERE id_contrato = '{$this->usuario}'";
+            $res = $this->select($sql);
+            return $res;
+        }
+
+        //Selecciona datos de usuario
+        public function cont(string $usuario)
+        {
+            $this->usuario = $usuario;
+            $sql = "SELECT * FROM contratos WHERE numero = '{$this->usuario}'";
+            $res = $this->select($sql);
             return $res;
         }
 
@@ -211,14 +228,13 @@
         }
 
         //actualizar estado de contrato
-        public function actualizaEstado(int $estado, string $id, string $fecha_valida)
+        public function actualizaEstado(int $estado, string $id)
         {
             $return = "";
             $this->id = $id;
             $this->estado = $estado;
-            $this->fecha_valida=$fecha_valida;
-            $query = "UPDATE contratos SET contratos.fecha_validado=?, contratos.estado = ? WHERE numero=?";       
-            $data = array($this->fecha_valida, $this->estado, $this->id);
+            $query = "UPDATE contratos SET contratos.estado = ? WHERE numero=?";       
+            $data = array($this->estado, $this->id);
             $resul = $this->update($query, $data);
             $return = $resul;
             return $return;

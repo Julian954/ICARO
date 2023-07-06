@@ -273,13 +273,15 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+/* Clase para tratar con excepciones y errores */
+require 'Assets/PHPMailer/src/Exception.php';
+/* Clase PHPMailer */
+require 'Assets/PHPMailer/src/PHPMailer.php';
+/*Clase SMTP necesaria para conectarte a un servidor SMTP */
+require 'Assets/PHPMailer/src/SMTP.php';
+
 function correo($msg, $asunto, $correo, $nombre){
-        /* Clase para tratar con excepciones y errores */
-        require 'Assets/PHPMailer/src/Exception.php';
-        /* Clase PHPMailer */
-        require 'Assets/PHPMailer/src/PHPMailer.php';
-        /*Clase SMTP necesaria para conectarte a un servidor SMTP */
-        require 'Assets/PHPMailer/src/SMTP.php';
+
 
         // Crear una instancia de PHPMailer
         $mail = new PHPMailer(true);
@@ -301,17 +303,8 @@ function correo($msg, $asunto, $correo, $nombre){
         $mail->addAddress($correo, $nombre);
         $mail->Subject = $asunto;
         $mail->Body = $msg."<br><br>".'Mensaje generado automaticamente, favor de no responder.';
+        $mail->send();
 
-        // Enviar el correo
-        if ($mail->send()) {
-            $mensaje = 'bien';
-            echo 'bien';
-        } else {
-             $mensaje ='mal';
-             echo 'mal';
-        }
-
-        return $mensaje;
 }
 
 
