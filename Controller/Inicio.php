@@ -22,9 +22,7 @@ class Inicio extends Controllers
         $data5 = $this->model->pedidos();
         $data6 = $this->model->unidades();
         $data7 = $this->model->despachos($hoy);
-        $data8 = $this->model->contratos3();
-        //$data9 = $this->model->devengo();
-    $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7, $data8/*, $data9*/);
+    $this->views->getView($this, "Home", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
         die();
     }
 
@@ -104,8 +102,6 @@ class Inicio extends Controllers
     public function pastelnegadas()
     {
         $data = $this->model->Gpastelnegadas();
-        $otros = $this->model->Gpastelnegadasotros();
-        array_push($data, $otros);
         echo json_encode($data);
         die();
     }

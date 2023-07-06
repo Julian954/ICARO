@@ -58,10 +58,8 @@ class InicioModel extends Mysql{
     }
     public function pedidos()
     {
-        $query = "SET lc_time_names = 'es_MX'";
-        $this->select($query);
-        $ordenar ="SELECT fecha, SUM(monto) AS monto, SUM(pagado) AS pagado, MONTHNAME(fecha_inicio) AS mes, MONTH(fecha_inicio) AS nom FROM pedidos GROUP BY nom;";
-        $res= $this->select_all($ordenar);
+        $ordenar ="SELECT SUM(monto) AS monto, SUM(pagado) AS pagado, MONTHNAME(fecha_inicio) AS mes, MONTH(fecha_inicio) AS nom FROM pedidos GROUP BY mes, nom;";
+        $res = $this->select_all($ordenar);
         return $res;
     }
 

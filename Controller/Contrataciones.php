@@ -94,6 +94,7 @@
                         $documento = 'formato';
                     }
                 }
+
                 $alert = 'registrado';
                 header("location: " . base_url() . "Contrataciones/General?msg=$alert&documento=$documento");
             } else {
