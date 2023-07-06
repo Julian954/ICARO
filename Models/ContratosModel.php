@@ -13,11 +13,20 @@
 
         //VISTA REGISTRO
         //Selecciona datos de usuario
-        public function selectUsuarioC(string $usuario)
+        public function selectUsuario(string $usuario)
         {
             $this->usuario = $usuario;
             $sql = "SELECT * FROM usuarios WHERE id = '{$this->usuario}' AND estado=1";
             $res = $this->select($sql);
+            return $res;
+        }
+
+        //Selecciona datos de usuario
+        public function selectAdmin(string $usuario)
+        {
+            $this->usuario = $usuario;
+            $sql = "SELECT * FROM usuarios WHERE id = '{$this->usuario}' AND estado=1 AND  rol =7";
+            $res = $this->select_all($sql);
             return $res;
         }
 

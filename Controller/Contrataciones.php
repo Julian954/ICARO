@@ -94,7 +94,18 @@
                         $documento = 'formato';
                     }
                 }
-
+                $data = $this->model->selectUsuario($administrador);
+                $asunto = 'Creación de Requerimiento';
+                foreach ($data as $admin) {
+                    $correo = $data['correo'];
+                    $nombre = $data['nombre'];
+                    $msg = $_SESSION['nombre'].' HA CREADO EL REQUERIMIENTO '.$oficio.' Y ESTÁ ESPERANDO A QUE LE ASIGNES UN RESPONSABLE. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
+                    if (correo($msg, $asunto, $correo, $nombre) == 'bien') {
+                        $correo =  'enviado';
+                    } else {
+                        $correo =  'error';
+                    }
+                }
                 $alert = 'registrado';
                 header("location: " . base_url() . "Contrataciones/General?msg=$alert&documento=$documento");
             } else {

@@ -342,7 +342,18 @@ class InicioModel extends Mysql{
         return $return;
     }
 
-
+        //actualizar devengo
+        public function actualizadevengo(string $estado, string $id)
+        {
+            $return = "";
+            $this->id = $id;
+            $this->estado = $estado;
+            $query = "UPDATE contratos SET contratos.devengo = ? WHERE numero=?";       
+            $data = array($this->estado, $this->id);
+            $resul = $this->update($query, $data);
+            $return = $resul;
+            return $return;
+        }
 
     //Selecciona las áreas
     public function SelectAreas()

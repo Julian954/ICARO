@@ -13,7 +13,7 @@
 
         //VISTA REGISTRO
         //Selecciona datos de usuario
-        public function selectUsuarioC(string $usuario)
+        public function selectUsuario(string $usuario)
         {
             $this->usuario = $usuario;
             $sql = "SELECT * FROM usuarios WHERE id = '{$this->usuario}' AND estado=1";
@@ -22,11 +22,11 @@
         }
 
         //Selecciona datos de usuario
-        public function selectContratoC(string $usuario)
+        public function selectAdmin(string $usuario)
         {
             $this->usuario = $usuario;
-            $sql = "SELECT * FROM contratos WHERE numero = '{$this->usuario}'";
-            $res = $this->select($sql);
+            $sql = "SELECT * FROM usuarios WHERE id = '{$this->usuario}' AND estado=1 AND  rol =7";
+            $res = $this->select_all($sql);
             return $res;
         }
 
