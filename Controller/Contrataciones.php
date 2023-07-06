@@ -51,14 +51,12 @@
             $comentario = limpiarInput($_POST['comentario']);
             $fecha_termina = date("Y-m-d", strtotime("+1 year"));
 
-
-            
             $insert = $this->model->agregarContratacion($oficio, $administrador, $descripcion, $contratacion, $area, $contrato, $termino, $maximo, $dictamen, $fecha_termina, $categoria);
-            $validar = $this->model->agregar_validar($oficio, $comentario, $administrador);
             if ($insert == 'existe') {
                 $alert = 'existe';
                 header("location: " . base_url() . "Contrataciones/Registro?msg=$alert");
             } else if ($insert > 0) {
+                $validar = $this->model->agregar_validar($oficio, $comentario, $administrador);
                 //Si se agrega te redirige a la vista "General" con un mensaje de alerta y se agrega documentos.
                 //ESTA ES LA PARTE DE AGREGAR EL DOCUMENTO
                 $i = 0;
@@ -94,17 +92,13 @@
                         $documento = 'formato';
                     }
                 }
-                $data = $this->model->selectUsuario($administrador);
+                $data = $this->model->selectAdmin();
                 $asunto = 'Creación de Requerimiento';
                 foreach ($data as $admin) {
-                    $correo = $data['correo'];
-                    $nombre = $data['nombre'];
+                    $correo = $admin['correo'];
+                    $nombre = $admin['nombre'];
                     $msg = $_SESSION['nombre'].' HA CREADO EL REQUERIMIENTO '.$oficio.' Y ESTÁ ESPERANDO A QUE LE ASIGNES UN RESPONSABLE. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
-                    if (correo($msg, $asunto, $correo, $nombre) == 'bien') {
-                        $correo =  'enviado';
-                    } else {
-                        $correo =  'error';
-                    }
+                    correo($msg, $asunto, $correo, $nombre);
                 }
                 $alert = 'registrado';
                 header("location: " . base_url() . "Contrataciones/General?msg=$alert&documento=$documento");
@@ -153,6 +147,23 @@
             $estado = $this->model->actualizaEstado($estadoN, $number);
             $responsable = $this->model->actualizaResp($tu, $number);
             $alert = "agregado";
+
+            //VALIDADOR
+            $requerimiento = $this->model->selectReq($number);
+            $VALIDA = $this->model->selectUsuario($requerimiento['id_validador']);
+            $REQ = $this->model->selectUsuario($requerimiento['id_creador']);
+            $asunto = 'Validador Asignado';
+            $correo = $VALIDA['correo'];
+            $nombre = $VALIDA['nombre'];
+            $msg = 'TE HAN ASIGNADO COMO VALIDADOR DEL REQUERIMIENTO '.$number.'.<br><br>';
+            correo($msg, $asunto, $correo, $nombre);
+            //REQUIRIENTE
+            $asunto2 = 'Validador Asignado';
+            $correo2 = $REQ['correo'];
+            $nombre2 = $REQ['nombre'];
+            $msg2 = 'SE HA ASIGNADO A '.$VALIDA['nombre'].' COMO VALIDADOR DEL REQUERIMIENTO '.$number.'. EN EL QUE ESTÁS COMO REQUIRIENTE.<br><br>';
+            correo($msg2, $asunto2, $correo2, $nombre2);
+
             header("location: " . base_url() . "Contrataciones/Validando?msg=$alert");
             die();
         }
@@ -209,7 +220,23 @@
                 } else {
                     $alert =  'NoArchivo';
                 }
-            }          
+            }
+            if ($contrato['id_creador'] == $yo) {
+                $data = $this->model->selectUsuario($contrato['id_validador']);
+                $msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+            } elseif ($contrato['id_validador'] == $yo) {
+                $data = $this->model->selectUsuario($contrato['id_creador']);
+                $msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+            } else {
+                $data = $this->model->selectUsuario($contrato['id_creador']);
+                $msg = 'UN ADMINISTRADOR TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+            }
+                $asunto = 'Respuesta Foro';
+                $correo = $data['correo'];
+                $nombre = $data['nombre'];
+                correo($msg, $asunto, $correo, $nombre);
+            
+            
             $alert =  'Registrado';              
             header("location: " . base_url() . "Contrataciones/Foro?contrato=$number&msg=$alert");
             die();
@@ -219,7 +246,25 @@
             $number = limpiarInput($_GET['contrato']);
             $fecha_valida=$_POST['fecha_valida'];
             $estado = 3;
-            $actualizar = $this->model->actualizaEstado($estado, $number, $fecha_valida);
+            $actualizar = $this->model->actualizaEstado($estado, $number);
+
+                $requerimiento = $this->model->selectReq($number);
+                $data = $this->model->selectUsuario($requerimiento['id_creador']);
+                $msg = 'SE HA VALIDADO EL REQUERIMIENTO '.$number.'.<br><br>';
+                $asunto = 'Validadción de Rquerimiento';
+                $correo = $data['correo'];
+                $nombre = $data['nombre'];
+                correo($msg, $asunto, $correo, $nombre);
+
+                $data = $this->model->selectAdmin();
+                $asunto = 'Requerimiento por Formalizar';
+                foreach ($data as $admin) {
+                    $correo = $admin['correo'];
+                    $nombre = $admin['nombre'];
+                    $msg = $_SESSION['nombre'].' HA VALIDADO EL REQUERIMIENTO '.$oficio.' Y ESTÁ ESPERANDO A QUE LO FORMALICES. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
+                    correo($msg, $asunto, $correo, $nombre);
+                }
+
             header("location: " . base_url() . "Contrataciones/Foro?contrato=$number");
             die();
         }
@@ -228,6 +273,15 @@
             $number = limpiarInput($_GET['contrato']);
             $estado = 4;
             $actualizar = $this->model->actualizaEstado($estado, $number);
+
+                $requerimiento = $this->model->selectReq($number);
+                $data = $this->model->selectUsuario($requerimiento['id_creador']);
+                $msg = 'SE HA FORMALIZADO EL REQUERIMIENTO '.$number.'.<br><br>';
+                $asunto = 'Formalización de Rquerimiento';
+                $correo = $data['correo'];
+                $nombre = $data['nombre'];
+                correo($msg, $asunto, $correo, $nombre);
+
             header("location: " . base_url() . "Contrataciones/Foro?contrato=$number");
             die();
         }
