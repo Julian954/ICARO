@@ -23,7 +23,8 @@ class Articulos extends Controllers
         $clave = limpiarInput($_POST['clave']);
         $descripcion = limpiarInput($_POST['desc']);
         $corta = limpiarInput($_POST['corta']);
-        $insert = $this->model->insertarArticulos($clave, $descripcion, $corta);
+        $cantidad = limpiarInput($_POST['cant']);
+        $insert = $this->model->insertarArticulos($clave, $descripcion, $corta , $cantidad);
         if ($insert == 'existe') {
             // Si el artículo ya existe, muestra una alerta
             $alert = 'existe';

@@ -3,7 +3,7 @@
 class ArticulosModel extends Mysql
 {
 
-    public $id, $clave, $descripcion, $descorta;
+    public $id, $clave, $descripcion, $descorta , $cantidad;
     public function __construct()
     {
         parent::__construct();
@@ -18,17 +18,18 @@ class ArticulosModel extends Mysql
     }
 
     //Registra un nuevo usuario
-    public function insertarArticulos(string $clave, string $descripcion, string $corta)
+    public function insertarArticulos(string $clave, string $descripcion, string $corta ,string $cantidad)
     {
         $return = "";
         $this->clave = $clave;
         $this->descripcion = $descripcion;
         $this->corta = $corta;
+        $this->cantidad = $cantidad;
         $sql = "SELECT * FROM catalogo WHERE clave = '{$this->clave}'";
         $result = $this->selecT($sql);
         if (empty($result)) {
-            $query = "INSERT INTO catalogo( clave, descripcion, des_corta) VALUES (?,?,?)";
-            $data = array($this->clave, $this->descripcion, $this->corta);
+            $query = "INSERT INTO catalogo( clave, descripcion, des_corta, cantidad) VALUES (?,?,?,?)";
+            $data = array($this->clave, $this->descripcion, $this->corta, $this->cantidad);
             $resul = $this->insert($query, $data);
             $return = $resul;
         }else {
@@ -37,7 +38,7 @@ class ArticulosModel extends Mysql
         return $return;
     }
 
-    public function actualizarArticulos(string $clave, string $descripcion, string $corta, int $cantidad, int $id)
+    public function actualizarArticulos(string $clave, string $descripcion, string $corta,string $cantidad, int $id)
     {
         $return = "";
         $this->clave = $clave;
@@ -81,11 +82,20 @@ class ArticulosModel extends Mysql
           $clave = $fila[2] ?? ''; // Valor de la columna "GPO" en el archivo CSV
           $descripcion = $fila[8] ?? ''; // Valor de la columna "ESP" en el archivo CSV
           $cantidad = $fila[10]??''; //valor de la columna cantidad
-        
-          // Insertar los datos en la base de datos
-          $query = "INSERT INTO catalogo (clave, descripcion, cantidad) VALUES (?,?,?)";
-          $data = array($clave, $descripcion, $cantidad);
-          $resul = $this->insert($query, $data); //insert es para agregar un registro
+
+            // Verifica si el contrato ya existe en la base de datos
+            $sql = "SELECT * FROM catalogo WHERE clave = '{$this->clave}'";
+            $result = $this->select($sql);
+
+            if (!empty($result)) {
+                
+            }else{
+                // Insertar los datos en la base de datos
+              $query = "INSERT INTO catalogo (clave, descripcion, cantidad) VALUES (?,?,?)";
+              $data = array($clave, $descripcion, $cantidad);
+              $resul = $this->insert($query, $data); //insert es para agregar un registro
+            }
+         
         }
     
         return $return;

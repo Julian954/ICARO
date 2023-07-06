@@ -80,6 +80,10 @@
                             <label for="corta">Clave corta</label>
                             <input id="corta" class="form-control" type="text" name="corta" placeholder="Descripcion corta" required>
                         </div>
+                        <div class="form-group">
+                            <label for="cant">Cantidad</label>
+                            <input id="cant" class="form-control" type="text" name="cant" placeholder="Cantidad" required>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Registrar</button>
@@ -141,11 +145,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="cantidad">Cantidad</label>
-                                <input id="cantidad" class="form-control" type="number" name="cantidad" placeholder="Cantidad" required>
+                                <input id="cantidad" class="form-control" type="text" name="cantidad" placeholder="Cantidad" required>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Registrar</button>
+                            <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Actualizar </button>
                             <button class="btn btn-danger" type="button" data-dismiss="modal"><i class="fas fa-window-close"></i> Cancelar</button>
                         </div>             
                     </div>

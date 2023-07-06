@@ -25,7 +25,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="clave">Descripcion corta</label>
-                                        <input id="descorta"  class="form-control" type="text" name="descorta" placeholder="Matrícula" value="<?php echo $data1['des_corta']; ?>" required>
+                                        <input id="descorta"  class="form-control" type="text" name="descorta" placeholder="Descripcion_corta" value="<?php echo $data1['des_corta']; ?>" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="clave">Cantidad</label>
+                                        <input id="cantidad"  class="form-control" type="text" name="cantidad" placeholder="Cantidad" value="<?php echo $data1['cantidad']; ?>" required>
                                     </div>
                                 </div>
                             </div>
