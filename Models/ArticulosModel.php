@@ -77,29 +77,40 @@ class ArticulosModel extends Mysql
 
     public function procesarArchivos($datos)
     {
-        array_splice($datos, 0,5);
+        array_splice($datos, 0, 5);
         foreach ($datos as $fila) {
-          $clave = $fila[2] ?? ''; // Valor de la columna "GPO" en el archivo CSV
-          $descripcion = $fila[8] ?? ''; // Valor de la columna "ESP" en el archivo CSV
-          $cantidad = $fila[10]??''; //valor de la columna cantidad
-
-            // Verifica si el contrato ya existe en la base de datos
-            $sql = "SELECT * FROM catalogo WHERE clave = '{$this->clave}'";
-            $result = $this->select($sql);
-
-            if (!empty($result)) {
-                
-            }else{
-                // Insertar los datos en la base de datos
-              $query = "INSERT INTO catalogo (clave, descripcion, cantidad) VALUES (?,?,?)";
-              $data = array($clave, $descripcion, $cantidad);
-              $resul = $this->insert($query, $data); //insert es para agregar un registro
+            $clave = $fila[2] ?? ''; // Valor de la columna "GPO" en el archivo CSV
+            $descripcion = $fila[8] ?? ''; // Valor de la columna "ESP" en el archivo CSV
+            $cantidad = $fila[10] ?? ''; // Valor de la columna cantidad
+        
+            // Verificar si los campos clave y descripción están vacíos
+            if (empty($clave) || empty($descripcion)) {
+                continue; // Si alguno de los campos está vacío, se pasa a la siguiente fila sin agregar el registro
             }
-         
+        
+            // Verificar si el registro ya existe en la base de datos
+            $query = "SELECT * FROM catalogo WHERE clave = ?";
+            $data = array($clave);
+            $resul = $this->select($query, $data);
+        
+            if (!empty($resul)) { // Si ya existe un registro con la misma clave, se actualiza la cantidad
+                $query = "UPDATE catalogo SET cantidad = ? WHERE clave = ?";
+                $data = array($cantidad, $clave);
+                $resul = $this->update($query, $data); // update es para actualizar un registro
+            } else { // Si no existe, se inserta un nuevo registro
+                $query = "INSERT INTO catalogo (clave, descripcion, cantidad) VALUES (?,?,?)";
+                $data = array($clave, $descripcion, $cantidad);
+                $resul = $this->insert($query, $data); // insert es para agregar un registro
+            }
         }
     
         return $return;
     }
+
+    
+
+
+
 
 }
 ?>

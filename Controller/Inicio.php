@@ -435,14 +435,17 @@ public function ActualizaeDevengo(){
 
 
 
-    public function eliminar()
+    public function eliminardictamen()
     {
-        $id = $_POST['id'];
+        $id = $_GET['id'];
         $eliminar = $this->model->eliminarDictamen($id);
-        $alert = 'Eliminado';
-        $data1 = $this->model->selectDictamen();
+        $alert =  'DictamenElim';
+        $data1 = $this->model->SelectAreas();
+        $data2 = $this->model->SelectTipo();
+        $data3 = $this->model->SelectPlataforma();
+        $data4 = $this->model->SelectTipoContratacion();
+        $data5 = $this->model->selectDictamen();
         header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
-        print json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
 

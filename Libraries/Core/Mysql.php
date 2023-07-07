@@ -22,13 +22,37 @@ class Mysql extends Conexion{
         }
         return $lastInsert;
     }
-    public function select(string $query){
+    public function select(string $query, array $arrvalues = [])
+    {
+        $this->strquery = $query;
+        $result = $this->conexion->prepare($this->strquery);
+
+        if (!empty($arrvalues)) {
+            $result->execute($arrvalues); // Pasa los valores de los parámetros en execute()
+        } else {
+            $result->execute();
+        }
+
+        $data = $result->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    }
+    /* public function select(string $query){
         $this->strquery = $query;
         $result = $this->conexion->prepare($this->strquery);
         $result->execute();
         $data = $result->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
+
+    public function select(string $query, array $arrvalues)
+    {
+        $this->strquery = $query;
+        $result = $this->conexion->prepare($this->strquery);
+        $result->execute($arrvalues); // Pasa los valores de los parámetros en execute()
+        $data = $result->fetch(PDO::FETCH_ASSOC);
+        return $data;
+    } */
+
     public function select_all(string $query){
         $this->strquery = $query;
         $result = $this->conexion->prepare($this->strquery);

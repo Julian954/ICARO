@@ -39,7 +39,7 @@
 							    <form class="settings-form" action="<?php echo base_url() ?>Inicio/AgregarArea" method="post">
 								    <div class="mb-3">
 									    <label for="area" class="form-label">Áreas Requirientes
-                                            <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Lorem Ipsum Ltd.">
+                                            <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresa las áreas requirientes">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                                     <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
@@ -69,7 +69,7 @@
 							    <form class="settings-form" action="<?php echo base_url() ?>Inicio/AgregarTipo" method="post">
 								    <div class="mb-3">
 									    <label for="tipo" class="form-label">Tipos de Contrato
-                                            <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Lorem Ipsum Ltd.">
+                                            <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresa los tipos de contrato">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                                     <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
@@ -99,7 +99,7 @@
 							    <form class="settings-form" action="<?php echo base_url() ?>Inicio/AgregarPlataforma" method="post">
 								    <div class="mb-3">
 									    <label for="plataforma" class="form-label">Plataformas
-                                            <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Lorem Ipsum Ltd.">
+                                            <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresa la plataforma">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                                     <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
@@ -129,7 +129,7 @@
 							    <form class="settings-form" action="<?php echo base_url() ?>Inicio/AgregarTipoContratacion" method="post">
 								    <div class="mb-3">
 									    <label for="tipocontrata" class="form-label">Tipo de Contrataciones
-                                            <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Lorem Ipsum Ltd.">
+                                            <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresa los tipos de contratacion">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                                     <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
@@ -171,18 +171,24 @@
                                     <button class="btn btn-success" type="button" data-toggle="modal" data-target="#archivoDictamen"><i class="fas fa-plus-circle"></i> Subir Archivo</button>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table app-table-hover mb-0 text-left" id="Table5">
+                                    <table class="table app-table-hover mb-0 text-center" id="Table5">
 			  					        <thead>
 			  						        <tr>
                                               <th scope="col">Dictamen</th>
                                               <th scope="col">Monto</th>
+                                              <th scope="col">Accion</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($data5 as $us) { ?>
                                                <tr>
                                                  <td><?php echo $us['dictamen']; ?></td>
-                                                 <td><?php echo $us['montomax']; ?></td>
+                                                 <td>$<?php echo $us['montomax']; ?> mxn</td>
+                                                 <td>
+                                                    <form id="formulario2" action="<?php echo base_url() ?>Inicio/eliminardictamen?id=<?php echo $us['id']; ?>" method="post" class="d-inline elimper">
+                                                        <button title="Eliminar" type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                 </td>
                                                 
                                                     <?php } ?>
                                                 </tr>

@@ -612,12 +612,12 @@ class InicioModel extends Mysql{
     {
         $return = "";
         $this->id = $id;
-        $query = "DELETE FROM catalogo WHERE id=?";
-        $data = array($this->id);
-        $resul = $this->update($query, $data);
+        $query = "DELETE FROM dictamen WHERE id= '{$this->id}'";
+        $resul = $this->delete($query);
         $return = $resul;
         return $return;
     }
+
 
     public function procesarArchivos($datos)
     {
