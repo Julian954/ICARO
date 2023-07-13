@@ -343,13 +343,13 @@ class InicioModel extends Mysql{
     }
 
         //actualizar devengo
-        public function actualizadevengo(string $estado, string $id)
+        public function actualizadevengo(int $devengo, string $contrato)
         {
             $return = "";
-            $this->id = $id;
-            $this->estado = $estado;
-            $query = "UPDATE contratos SET contratos.devengo = ? WHERE numero=?";       
-            $data = array($this->estado, $this->id);
+            $this->contrato = $contrato;
+            $this->devengo = $devengo;
+            $query = "UPDATE contratos SET devengo = ? WHERE numero=?";       
+            $data = array($this->devengo, $this->contrato);
             $resul = $this->update($query, $data);
             $return = $resul;
             return $return;

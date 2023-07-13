@@ -56,14 +56,8 @@
             $correo = $data['correo'];
             $nombre = $data['nombre'];
             $msg = 'PARA RECUPERAR TU CONTRASEÑA INGRESA AL ENLACE <br><br>'."<a href='".base_url()."Login/change?id=$id&hash=$hash&nombre=$nombre"."'> CAMBIAR </a>";
-            if (correo($msg, $asunto, $correo, $nombre) == 'bien') {
-                $alert =  'enviado';
-            } else {
-                $alert =  'error';
-            }
-                header('location: ' . base_url() . "Login/reset?msg=$alert");  
-                die();
-        }  else {
+            correo($msg, $asunto, $correo, $nombre);
+        } else {
             $alert =  'noexiste';
         }
         header('location: ' . base_url() . "Login/reset?msg=$alert");

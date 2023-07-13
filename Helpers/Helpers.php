@@ -271,7 +271,7 @@ function decimales($dato) {
 // Utilizar los espacios de nombres necesarios
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\Exception; 
 
 /* Clase para tratar con excepciones y errores */
 require 'Assets/PHPMailer/src/Exception.php';

@@ -1,6 +1,32 @@
+
 <!DOCTYPE html>
+<?php
+	if (class_exists('COM')) {
+		echo 'ass';
+	}else {
+		echo'pp';
+	}
+	// Crea una instancia de la aplicación Outlook
+	$outlook = new COM('Outlook.Application') or die('No se pudo crear una instancia de Outlook.');
+	
+	// Crea una instancia del objeto MailItem
+	$mail = $outlook->CreateItem(0);
+	
+	// Configura los campos del correo
+	$mail->Subject = 'Asunto del correo';
+	$mail->Body = 'Contenido del correo';
+	$mail->To = 'mrodriguez74@ucol.mx';
+	
+	// Envía el correo
+	$mail->Send();
+	
+	// Muestra un mensaje de confirmación
+	echo 'Correo enviado correctamente.';
+	?>	
 <html lang="es"> 
-	<head>
+	
+<head>
+	
     	<meta charset="utf-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width" />

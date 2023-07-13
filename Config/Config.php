@@ -4,7 +4,7 @@
     const HOST ="localhost:3306";
     const BD = "icaro";
     const DB_USER = "root";
-    const PASS = "";
+    const PASS = "Julian2502";
     const CHARSET = "charset=utf8";
 
     //DEVENGO
