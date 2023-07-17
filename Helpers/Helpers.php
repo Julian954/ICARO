@@ -282,30 +282,31 @@ require 'Assets/PHPMailer/src/SMTP.php';
 
 function correo($msg, $asunto, $correo, $nombre){
 
+        // Verificar si Outlook está en ejecución
+        $command = 'tasklist /FI "IMAGENAME eq OUTLOOK.EXE" /NH';
+        $output = shell_exec($command);
 
-        // Crear una instancia de PHPMailer
-        $mail = new PHPMailer(true);
+        if (strpos($output, 'OUTLOOK.EXE') !== false) {
+            // Outlook está en ejecución, cerrarlo antes de continuar
+            $command = 'taskkill /F /IM OUTLOOK.EXE';
+            shell_exec($command);
+        }
 
-        // Configurar el servidor SMTP externo
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 465; // Puerto SMTP (puede variar según el proveedor)
-        $mail->SMTPAuth = true;
-        $mail->Username = 'icaroooard@gmail.com';
-        $mail->Password = 'awrnsqgtshsaxlie';
-        $mail->SMTPSecure = 'ssl';
-        $mail->CharSet = 'UTF-8';
-        $mail->isHTML(true);
-
-
-        // Establecer otros parámetros del correo
-        $mail->setFrom('icaroooard@gmail.com', 'ICARO');
-        $mail->addAddress($correo, $nombre);
-        $mail->Subject = $asunto;
-        $mail->Body = $msg."<br><br>".'Mensaje generado automaticamente, favor de no responder.';
-        $mail->send();
-
+        try {
+            $objApp = new COM("Outlook.Application") or die("No se pudo cargar Outlook.Application");
+            $namespace = $objApp->GetNamespace("MAPI");
+            $namespace->Logon();
+            $myItem = $objApp->CreateItem(0);
+            $myItem->To = $correo;
+            $myItem->SentOnBehalfOfName = "jordanrodriguezreyes@hotmail.com"; //CORREO Outlook
+            $myItem->Subject = $asunto;
+            $myItem->HTMLBody = '<html><body>'.$msg.'<br><br>'.'Mensaje generado automaticamente, favor de no responder.</body></html>';
+            $myItem->Send();
+            $objApp->Quit(); // Cierra la aplicación Outlook
+            $objApp = null; // Libera el objeto COM
+        } catch (Exception $e) {
+            
+        }
 }
-
 
 ?>

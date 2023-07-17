@@ -1,10 +1,10 @@
 <?php
     //CREA CONEXION CON LA BASE DE DATOS
     const BASE_URL = "http://localhost/icaro/";
-    const HOST ="localhost:3306";
-    const BD = "icaro";
+    const HOST ="localhost";
+    const BD = "imss";
     const DB_USER = "root";
-    const PASS = "Julian2502";
+    const PASS = "";
     const CHARSET = "charset=utf8";
 
     //DEVENGO

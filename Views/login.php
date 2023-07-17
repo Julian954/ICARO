@@ -1,32 +1,3 @@
-<?php
-// Verificar si Outlook está en ejecución
-$command = 'tasklist /FI "IMAGENAME eq OUTLOOK.EXE" /NH';
-$output = shell_exec($command);
-
-if (strpos($output, 'OUTLOOK.EXE') !== false) {
-    // Outlook está en ejecución, cerrarlo antes de continuar
-    $command = 'taskkill /F /IM OUTLOOK.EXE';
-    shell_exec($command);
-}
-
-try {
-    $objApp = new COM("Outlook.Application") or die("No se pudo cargar Outlook.Application");
-    $namespace = $objApp->GetNamespace("MAPI");
-    $namespace->Logon();
-    $myItem = $objApp->CreateItem(0);
-    $myItem->To = "miguel20010807@gmail.com";
-    $myItem->SentOnBehalfOfName = "jordanrodriguezreyes@hotmail.com";
-    $myItem->Subject = "Esto es una prueba";
-    $myItem->Body = "¡Esto es una sección del cuerpo ahora...!";
-    $myItem->Send();
-    $objApp->Quit(); // Cierra la aplicación Outlook
-    $objApp = null; // Libera el objeto COM
-    echo "Correo enviado correctamente.";
-} catch (Exception $e) {
-    echo 'Hubo un error al enviar el correo: ' . $e->getMessage();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es"> 
 	
