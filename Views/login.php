@@ -1,28 +1,26 @@
+<?php
+
+
+try {
+    $objApp = new COM ( "Outlook.Application" ) or die ( "Cannot Load Outlook.Application" );
+    $namespace = $objApp->GetNamespace("MAPI");  // or MAPI.Session
+    $namespace->Logon();
+    $myItem = $objApp->CreateItem(0);
+    $myItem->To = "miguel20010807@gmail.com";
+    $myItem->SentOnBehalfOfName = "jordanrodriguezreyes@hotmail.com";
+    $myItem->Subject = "This is a test";
+    $myItem->Body = "This is a Body Section now…..!";
+    $myItem->Send ();
+} catch (Exception $e) {
+    echo 'Hubo un error al enviar el correo: ' . $e->getMessage();
+}
+
+
+?>
+
+
 
 <!DOCTYPE html>
-<?php
-	if (class_exists('COM')) {
-		echo 'ass';
-	}else {
-		echo'pp';
-	}
-	// Crea una instancia de la aplicación Outlook
-	$outlook = new COM('Outlook.Application') or die('No se pudo crear una instancia de Outlook.');
-	
-	// Crea una instancia del objeto MailItem
-	$mail = $outlook->CreateItem(0);
-	
-	// Configura los campos del correo
-	$mail->Subject = 'Asunto del correo';
-	$mail->Body = 'Contenido del correo';
-	$mail->To = 'mrodriguez74@ucol.mx';
-	
-	// Envía el correo
-	$mail->Send();
-	
-	// Muestra un mensaje de confirmación
-	echo 'Correo enviado correctamente.';
-	?>	
 <html lang="es"> 
 	
 <head>
