@@ -303,101 +303,22 @@ public function ActualizaeDevengo(){
 
 
 
-    public function Visto(){
-        $id=$_POST['id'];
-        $visto= 1;
-        $actualiza = $this->model->visto($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto2(){
-        $id=$_POST['id2'];
-        $visto= 1;
-        $actualiza = $this->model->visto2($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto3(){
-        $id=$_POST['id3'];
-        $visto= 1;
-        $actualiza = $this->model->visto3($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto4(){
-        $id=$_POST['id4'];
-        $visto= 1;
-        $actualiza = $this->model->visto4($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto3_2(){
-        $id=$_POST['id3'];
-        $visto= +2;
-        $actualiza = $this->model->visto3_2($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto4_2(){
-        $id=$_POST['id4'];
-        $visto= +2;
-        $actualiza = $this->model->visto4_2($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto6(){
-        $id=$_POST['id6'];
-        $visto= 3;
-        $actualiza = $this->model->visto6($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto7(){
-        $id=$_POST['id7'];
-        $visto= 3;
-        $actualiza = $this->model->visto7($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto8(){
-        $id=$_POST['id8'];
-        $visto= 1;
-        $actualiza = $this->model->visto8($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto9(){
-        $id=$_POST['id9'];
-        $visto= 1;
-        $actualiza = $this->model->visto9($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto10(){
-        $id=$_POST['id10'];
-        $visto= 3;
-        $actualiza = $this->model->visto10($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
-    public function Visto11(){
-        $id=$_POST['id11'];
-        $visto= 3;
-        $actualiza = $this->model->visto11($id, $visto);
-        header("location: " . base_url() . "Inicio/Notificaciones");
-        die();
-    }
+
+
     public function Notificaciones()
     {
-        //$id=$_GET['id'];
-    $data1 = $this->model->datos_de_foro_para_noti();
-    $data2 = $this->model->datos_de_foro_para_noti2();
-    $data3 = $this->model->datos_notifica();
-    $data4 = $this->model->datos_notifica2();
-    $data5 = $this->model->notificacion_asigna_contrato();
-    $data6 = $this->model->notificacion_asigna_requieri();
-    $this->views->getView($this, "Notificaciones", "", $data1, $data2, $data3, $data4, $data5, $data6);
-        die();
+    $data1 = $this->model->notifica();
+    $this->views->getView($this, "Notificaciones", "", $data1);
+    die();
+    }
+
+    public function Visto()
+    {
+    $id = $_GET['id'];
+    $estado = 0;
+    $this->model->elimnoti($estado, $id);
+    header("location: " . base_url() . "Inicio/Notificaciones");
+    die();
     }
 
     //Vista Configuración
@@ -634,7 +555,8 @@ public function ActualizaeDevengo(){
         die();
       }
       
-    
+
+        
 }                       
 ?>
 

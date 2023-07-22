@@ -93,13 +93,14 @@
                     }
                 }
                 $data = $this->model->selectAdmin();
-                /* $asunto = 'Creación de Requerimiento';
+                $asunto = 'Creación de Requerimiento';
                 foreach ($data as $admin) {
                     $correo = $admin['correo'];
                     $nombre = $admin['nombre'];
                     $msg = $_SESSION['nombre'].' HA CREADO EL REQUERIMIENTO '.$oficio.' Y ESTÁ ESPERANDO A QUE LE ASIGNES UN RESPONSABLE. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
                     correo($msg, $asunto, $correo, $nombre);
-                } */
+                    $noti = $this->model->notifica($asunto, $msg, $admin['id']);
+                }
                 $alert = 'registrado';
                 header("location: " . base_url() . "Contrataciones/General?msg=$alert&documento=$documento");
             } else {
@@ -152,17 +153,20 @@
             $requerimiento = $this->model->selectReq($number);
             $VALIDA = $this->model->selectUsuario($requerimiento['id_validador']);
             $REQ = $this->model->selectUsuario($requerimiento['id_creador']);
-      /*       $asunto = 'Validador Asignado';
+            $asunto = 'Validador Asignado';
             $correo = $VALIDA['correo'];
             $nombre = $VALIDA['nombre'];
-            $msg = 'TE HAN ASIGNADO COMO VALIDADOR DEL REQUERIMIENTO '.$number.'.<br><br>'; */
-            //correo($msg, $asunto, $correo, $nombre);
+            $msg = 'TE HAN ASIGNADO COMO VALIDADOR DEL REQUERIMIENTO '.$number.'.<br><br>';
+            correo($msg, $asunto, $correo, $nombre);
+            $noti = $this->model->notifica($asunto, $msg, $requerimiento['id_validador']);
+
             //REQUIRIENTE
-           /*  $asunto2 = 'Validador Asignado';
+            $asunto2 = 'Validador Asignado';
             $correo2 = $REQ['correo'];
             $nombre2 = $REQ['nombre'];
             $msg2 = 'SE HA ASIGNADO A '.$VALIDA['nombre'].' COMO VALIDADOR DEL REQUERIMIENTO '.$number.'. EN EL QUE ESTÁS COMO REQUIRIENTE.<br><br>';
-            correo($msg2, $asunto2, $correo2, $nombre2); */
+            correo($msg2, $asunto2, $correo2, $nombre2);
+            $noti = $this->model->notifica($asunto, $msg, $requerimiento['id_creador']);
 
             header("location: " . base_url() . "Contrataciones/Validando?msg=$alert");
             die();
@@ -223,19 +227,23 @@
             }
             if ($contrato['id_creador'] == $yo) {
                 $data = $this->model->selectUsuario($contrato['id_validador']);
-                //$msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+                $usuario = $contrato['id_validador'];
             } elseif ($contrato['id_validador'] == $yo) {
                 $data = $this->model->selectUsuario($contrato['id_creador']);
-                //$msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+                $usuario = $contrato['id_creador'];
             } else {
                 $data = $this->model->selectUsuario($contrato['id_creador']);
-                //$msg = 'UN ADMINISTRADOR TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = 'UN ADMINISTRADOR TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+                $usuario = $contrato['id_creador'];
             }
-                /* $asunto = 'Respuesta Foro';
+                $asunto = 'Respuesta Foro';
                 $correo = $data['correo'];
                 $nombre = $data['nombre'];
                 correo($msg, $asunto, $correo, $nombre);
-             */
+                $noti = $this->model->notifica($asunto, $msg, $usuario);
+            
             
             $alert =  'Registrado';              
             header("location: " . base_url() . "Contrataciones/Foro?contrato=$number&msg=$alert");
@@ -250,20 +258,22 @@
 
                 $requerimiento = $this->model->selectReq($number);
                 $data = $this->model->selectUsuario($requerimiento['id_creador']);
-                /* $msg = 'SE HA VALIDADO EL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = 'SE HA VALIDADO EL REQUERIMIENTO '.$number.'.<br><br>';
                 $asunto = 'Validadción de Rquerimiento';
                 $correo = $data['correo'];
                 $nombre = $data['nombre'];
-                correo($msg, $asunto, $correo, $nombre); */
+                correo($msg, $asunto, $correo, $nombre);
+                $noti = $this->model->notifica($asunto, $msg, $requerimiento['id_creador']);
 
                 $data = $this->model->selectAdmin();
-                /* $asunto = 'Requerimiento por Formalizar';
+                $asunto = 'Requerimiento por Formalizar';
                 foreach ($data as $admin) {
                     $correo = $admin['correo'];
                     $nombre = $admin['nombre'];
                     $msg = $_SESSION['nombre'].' HA VALIDADO EL REQUERIMIENTO '.$oficio.' Y ESTÁ ESPERANDO A QUE LO FORMALICES. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
                     correo($msg, $asunto, $correo, $nombre);
-                } */
+                    $noti = $this->model->notifica($asunto, $msg, $admin['id']);
+                }
 
             header("location: " . base_url() . "Contrataciones/Foro?contrato=$number");
             die();
@@ -276,11 +286,12 @@
 
                 $requerimiento = $this->model->selectReq($number);
                 $data = $this->model->selectUsuario($requerimiento['id_creador']);
-                /* $msg = 'SE HA FORMALIZADO EL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = 'SE HA FORMALIZADO EL REQUERIMIENTO '.$number.'.<br><br>';
                 $asunto = 'Formalización de Rquerimiento';
                 $correo = $data['correo'];
                 $nombre = $data['nombre'];
-                correo($msg, $asunto, $correo, $nombre); */
+                correo($msg, $asunto, $correo, $nombre);
+                $noti = $this->model->notifica($asunto, $msg, $requerimiento['id_creador']);
 
             header("location: " . base_url() . "Contrataciones/Foro?contrato=$number");
             die();

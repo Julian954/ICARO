@@ -313,6 +313,21 @@
             return $return;
         }
 
+        // Agrega un nuevo contrato a la base de datos.
+        public function notifica(string $asunto, string $mensaje, string $usuario) {
+            $return = "";
+            $this->asunto = $asunto;
+            $this->mensaje = $mensaje;
+            $this->usuario = $usuario;
+
+            $query = "INSERT INTO notificaciones(asunto, mensaje, usuario) VALUES (?,?,?)";
+            $data = array($this->asunto, $this->mensaje, $this->usuario);
+            $resul = $this->insert($query, $data);
+            $return = $resul;
+
+            return $return;
+        }
+
     }
 ?>
 

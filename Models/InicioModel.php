@@ -42,13 +42,6 @@ class InicioModel extends Mysql{
         return $res;
     }
 
-    //poner aqui la direccion del devengo
-  /*  public function devengo(){
-        $sql = "SELECT * FROM "nombre de la tabla devengo"";
-        $res = $this->select_all($sql);
-        return $res;
-    }*/
-
     //Selecciona las quejas
     public function quejas()
     {
@@ -667,11 +660,28 @@ class InicioModel extends Mysql{
                 $resul = $this->insert($query, $data); // insert es para agregar un registro
             }
         }
-
-        
-
-
     }     
+
+
+        public function notifica()
+        {
+            $sql = "SELECT * FROM notificaciones WHERE usuario = '{$_SESSION['id']}' AND estado = 1";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        //actualizar intento de validar
+        public function elimnoti(string $estado, string $id)
+        {
+            $return = "";
+            $this->id = $id;
+            $this->estado = $estado;
+            $query = "UPDATE notificaciones SET estado = ? WHERE id = ?";
+            $data = array($this->estado, $this->id);
+            $resul = $this->update($query, $data);
+            $return = $resul;
+            return $return;
+        }
     
     
 }
