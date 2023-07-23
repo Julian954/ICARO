@@ -17,19 +17,35 @@
                             <div class="app-card-body p-3">
                                 <div class="row">
                                     <div class="col-lg-8 mb-2 py-2">
-                                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#nuevo_cliente"><i class="fas fa-plus-circle"></i> Nuevo</button>
-                                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#archivoArticulos"><i class="fas fa-plus-circle"></i> Subir Archivo</button>
+                                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal1"><i class="fas fa-plus-circle"></i> Nuevo</button>
+                                        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modal2"><i class="fas fa-upload"></i> Subir Archivo</button>
                                     </div>
                                     <div class="col-lg-4">
                                         <?php if (isset($_GET['msg'])) {
                                             $alert = $_GET['msg'];
-                                            if ($alert == "eliminado") { ?>
-                                                <div class="alert alert-danger" role="alert">
+                                            if ($alert == "Eliminado") { ?>
+                                                <div class="alert alert-success" role="alert">
                                                     <strong>El artículo fue eliminado.</strong>
                                                 </div>
-                                            <?php } else { ?>
+                                            <?php } elseif ($alert == "existe") { ?>
+                                                <div class="alert alert-warning" role="alert">
+                                                    <strong>El artículo ya existe.</strong>
+                                                </div>
+                                            <?php } elseif ($alert == "registrado") { ?>
                                                 <div class="alert alert-success" role="alert">
                                                     <strong>El artículo fue registrado.</strong>
+                                                </div>
+                                            <?php } elseif ($alert == "modificado") { ?>
+                                                <div class="alert alert-success" role="alert">
+                                                    <strong>El artículo fue modificado.</strong>
+                                                </div>
+                                            <?php } elseif ($alert == "catalogo") { ?>
+                                                <div class="alert alert-success" role="alert">
+                                                    <strong><?=$_GET['total']?> Artículos del catalogo fueron actualizado.</strong>
+                                                </div>
+                                            <?php } else { ?>
+                                                <div class="alert alert-danger" role="alert">
+                                                    <strong>Error, intente de nuevo.</strong>
                                                 </div>
                                             <?php }
                                         } ?>
@@ -57,7 +73,7 @@
         </div>
     </div><!--//app-wrapper-->
 
-    <div id="nuevo_cliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div id="modal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -66,7 +82,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="<?php echo base_url(); ?>Articulos/insertar" autocomplete="off">
+                <form id="formulario1" method="post" action="<?php echo base_url(); ?>Articulos/insertar" autocomplete="off">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="clave">Codigo del Articulo</label>
@@ -93,7 +109,7 @@
             </div>
         </div>
     </div>
-    <div id="archivoArticulos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div id="modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -103,7 +119,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo base_url(); ?>Articulos/procesarArchivo" method="post" enctype="multipart/form-data" id="formulario">
+                    <form action="<?php echo base_url(); ?>Articulos/procesarArchivo" method="post" enctype="multipart/form-data" id="formulario2">
 						<div class="form-group">
                     	    <label for="img">Selecciona Archivo</label>
                     	    <div class="custom-file">
@@ -118,7 +134,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -127,7 +143,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="formUsuarios" method="post" action="<?php echo base_url(); ?>Articulos/actualizar" autocomplete="off">    
+                <form id="formulario3" method="post" action="<?php echo base_url(); ?>Articulos/actualizar" autocomplete="off">    
                     <div class="modal-body">
                         <div class="modal-body">
                             <div class="form-group">
@@ -158,7 +174,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalCRUDE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -167,17 +183,17 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="formUsuarios" method="post" action="<?php echo base_url(); ?>Articulos/eliminar" autocomplete="off" class="elimper">    
+                <form id="formulario4" method="post" action="<?php echo base_url(); ?>Articulos/eliminar" autocomplete="off" class="elimper">    
                     <div class="modal-body">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="cle">Codigo del Articulo</label>
                                 <input id="ide" class="form-control" type="hidden" name="ide" placeholder="Ingresa los 14 digitos" required>
-                                <input id="cle" class="form-control" type="text" name="clavee" placeholder="Ingresa los 14 digitos" required>
+                                <input id="cle" class="form-control" type="text" name="clavee" placeholder="Ingresa los 14 digitos" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="dese">Descripcion</label>
-                                <input id="dese" class="form-control" type="text" name="desce" placeholder="Descripcion" required>
+                                <textarea id="dese" class="form-control" type="text" name="desce" placeholder="Descripcion" readonly cols="auto" rows="auto"></textarea>
                             </div>
                         </div>
                         <div class="card-footer">

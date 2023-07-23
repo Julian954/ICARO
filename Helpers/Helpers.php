@@ -156,7 +156,7 @@ function correo($msg, $asunto, $correo, $nombre){
         try {
             $objApp = new COM("Outlook.Application") or die("No se pudo cargar Outlook.Application");
             $namespace = $objApp->GetNamespace("MAPI");
-            $namespace->Logon();
+            $namespace->Logon("Outlook");
             $myItem = $objApp->CreateItem(0);
             $myItem->To = $correo;
             $myItem->SentOnBehalfOfName = "jordanrodriguezreyes@hotmail.com"; //CORREO Outlook

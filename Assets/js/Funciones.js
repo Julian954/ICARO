@@ -15,55 +15,95 @@ $(document).ready(function () {
     const formulario1 = document.getElementById("formulario1");
     formulario1.addEventListener("submit", function (event) {
       if (document.getElementById("modal1") !== null) {
-        $("#modal1").on("hidden.bs.modal", function () {
-          var contenedor = document.getElementById("pantalla-carga");
-          contenedor.style.visibility = "visible";
+        const modal = document.getElementById("modal1");
+        modal.style.display = "none";
+        modal.setAttribute("aria-hidden", "true");
+        modal.classList.remove("show");
+        // Obtener todos los elementos <div> con la clase "modal-backdrop"
+        const elementosBackdrop = document.querySelectorAll(".modal-backdrop");
+        // Recorrer y eliminar cada elemento <div> con la clase "modal-backdrop"
+        elementosBackdrop.forEach((elemento) => {
+          elemento.remove();
         });
       }
+      var contenedor = document.getElementById("pantalla-carga");
+      contenedor.style.visibility = "visible";
     });
   }
   if (document.getElementById("formulario2") !== null) {
     const formulario2 = document.getElementById("formulario2");
     formulario2.addEventListener("submit", function (event) {
       if (document.getElementById("modal2") !== null) {
-        $("#modal2").on("hidden.bs.modal", function () {
-          var contenedor = document.getElementById("pantalla-carga");
-          contenedor.style.visibility = "visible";
+        const modal = document.getElementById("modal2");
+        modal.style.display = "none";
+        modal.setAttribute("aria-hidden", "true");
+        modal.classList.remove("show");
+        // Obtener todos los elementos <div> con la clase "modal-backdrop"
+        const elementosBackdrop = document.querySelectorAll(".modal-backdrop");
+        // Recorrer y eliminar cada elemento <div> con la clase "modal-backdrop"
+        elementosBackdrop.forEach((elemento) => {
+          elemento.remove();
         });
       }
+      var contenedor = document.getElementById("pantalla-carga");
+      contenedor.style.visibility = "visible";
     });
   }
   if (document.getElementById("formulario3") !== null) {
     const formulario3 = document.getElementById("formulario3");
     formulario3.addEventListener("submit", function (event) {
       if (document.getElementById("modal3") !== null) {
-        $("#modal3").on("hidden.bs.modal", function () {
-          var contenedor = document.getElementById("pantalla-carga");
-          contenedor.style.visibility = "visible";
+        const modal = document.getElementById("modal3");
+        modal.style.display = "none";
+        modal.setAttribute("aria-hidden", "true");
+        modal.classList.remove("show");
+        // Obtener todos los elementos <div> con la clase "modal-backdrop"
+        const elementosBackdrop = document.querySelectorAll(".modal-backdrop");
+        // Recorrer y eliminar cada elemento <div> con la clase "modal-backdrop"
+        elementosBackdrop.forEach((elemento) => {
+          elemento.remove();
         });
       }
+      var contenedor = document.getElementById("pantalla-carga");
+      contenedor.style.visibility = "visible";
     });
   }
   if (document.getElementById("formulario4") !== null) {
     const formulario4 = document.getElementById("formulario4");
     formulario4.addEventListener("submit", function (event) {
       if (document.getElementById("modal4") !== null) {
-        $("#modal4").on("hidden.bs.modal", function () {
-          var contenedor = document.getElementById("pantalla-carga");
-          contenedor.style.visibility = "visible";
+        const modal = document.getElementById("modal4");
+        modal.style.display = "none";
+        modal.setAttribute("aria-hidden", "true");
+        modal.classList.remove("show");
+        // Obtener todos los elementos <div> con la clase "modal-backdrop"
+        const elementosBackdrop = document.querySelectorAll(".modal-backdrop");
+        // Recorrer y eliminar cada elemento <div> con la clase "modal-backdrop"
+        elementosBackdrop.forEach((elemento) => {
+          elemento.remove();
         });
       }
+      var contenedor = document.getElementById("pantalla-carga");
+      contenedor.style.visibility = "visible";
     });
   }
   if (document.getElementById("formulario5") !== null) {
     const formulario5 = document.getElementById("formulario5");
     formulario5.addEventListener("submit", function (event) {
       if (document.getElementById("modal5") !== null) {
-        $("#modal5").on("hidden.bs.modal", function () {
-          var contenedor = document.getElementById("pantalla-carga");
-          contenedor.style.visibility = "visible";
+        const modal = document.getElementById("modal5");
+        modal.style.display = "none";
+        modal.setAttribute("aria-hidden", "true");
+        modal.classList.remove("show");
+        // Obtener todos los elementos <div> con la clase "modal-backdrop"
+        const elementosBackdrop = document.querySelectorAll(".modal-backdrop");
+        // Recorrer y eliminar cada elemento <div> con la clase "modal-backdrop"
+        elementosBackdrop.forEach((elemento) => {
+          elemento.remove();
         });
       }
+      var contenedor = document.getElementById("pantalla-carga");
+      contenedor.style.visibility = "visible";
     });
   }
 
@@ -80,7 +120,7 @@ $(document).ready(function () {
     $("#des").val(desc);
     $("#cor").val(corta);
     $("#cantidad").val(cantidad);
-    $("#modalCRUD").modal("show");
+    $("#modal3").modal("show");
   });
 
   //Eliminar Articulo
@@ -93,7 +133,7 @@ $(document).ready(function () {
     $("#ide").val(id);
     $("#cle").val(clave);
     $("#dese").val(desc);
-    $("#modalCRUDE").modal("show");
+    $("#modal4").modal("show");
   });
 
   //este es el tuyo

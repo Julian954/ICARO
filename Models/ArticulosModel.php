@@ -78,10 +78,14 @@ class ArticulosModel extends Mysql
     public function procesarArchivos($datos)
     {
         array_splice($datos, 0, 5);
+        $return = 0; 
+        $startTime = time();
+
         foreach ($datos as $fila) {
             $clave = $fila[2] ?? ''; // Valor de la columna "GPO" en el archivo CSV
             $descripcion = $fila[8] ?? ''; // Valor de la columna "ESP" en el archivo CSV
             $cantidad = $fila[10] ?? ''; // Valor de la columna cantidad
+            $corta = substr($descripcion, 0, 20);
         
             // Verificar si los campos clave y descripción están vacíos
             if (empty($clave) || empty($descripcion)) {
@@ -98,9 +102,13 @@ class ArticulosModel extends Mysql
                 $data = array($cantidad, $clave);
                 $resul = $this->update($query, $data); // update es para actualizar un registro
             } else { // Si no existe, se inserta un nuevo registro
-                $query = "INSERT INTO catalogo (clave, descripcion, cantidad) VALUES (?,?,?)";
-                $data = array($clave, $descripcion, $cantidad);
+                $query = "INSERT INTO catalogo (clave, descripcion, des_corta, cantidad) VALUES (?,?,?,?)";
+                $data = array($clave, $descripcion, $corta, $cantidad);
                 $resul = $this->insert($query, $data); // insert es para agregar un registro
+            }
+            $return++;
+            if (time() - $startTime >= 550) {
+                break; // Salir del bucle si ha pasado el tiempo límite.
             }
         }
     

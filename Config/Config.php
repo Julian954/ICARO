@@ -1,10 +1,10 @@
 <?php
     //CREA CONEXION CON LA BASE DE DATOS
-    const BASE_URL = "http://11.1.6.103/icaro/";
+    const BASE_URL = "http://localhost/icaro/";
     const HOST ="localhost";
     const BD = "icaro";
     const DB_USER = "root";
-    const PASS = "icaro";
+    const PASS = "";
     const CHARSET = "charset=utf8";
 
     //DEVENGO
@@ -16,5 +16,8 @@
     //AJUSTA EL HORARIO AL LOCAL
     date_default_timezone_set('America/Mexico_City'); 
 	setlocale(LC_ALL,'es_ES', 'Spanish_Spain', 'Spanish');
-    error_reporting(0); 
+    //error_reporting(0); 
+
+    // Establecer un nuevo límite de tiempo de ejecución a 600 segundos (10 minutos)
+    set_time_limit(600);
 ?>

@@ -2,7 +2,7 @@
         
         <div style="visibility: hidden;" id="pantalla-carga">
             <div class="mensaje-carga">
-                <a href="#" class="btn-flotante">
+                <a href="" style="text-decoration: none;" class="btn-flotante">
                     <span>
                         <img class="logo-icon mr-2" src="<?php echo base_url(); ?>Assets/img/carga.gif" height="50px" alt="logo">
                         cargando...
