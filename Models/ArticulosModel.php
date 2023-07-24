@@ -16,6 +16,24 @@ class ArticulosModel extends Mysql
         $res = $this->select_all($sql);
         return $res;
     }
+    
+    //Selecciona fecha
+    public function selectfecha()
+    {
+        $sql = "SELECT * FROM configuracion WHERE id=2";
+        $res = $this->select($sql);
+        return $res;
+    }
+
+    public function actfecha(string $fecha)
+    {
+        $this->fecha = $fecha;
+        $query = "UPDATE configuracion SET fecha=? WHERE id=2";
+        $data = array($this->fecha);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;
+    }
 
     //Registra un nuevo usuario
     public function insertarArticulos(string $clave, string $descripcion, string $corta ,string $cantidad)
@@ -53,17 +71,6 @@ class ArticulosModel extends Mysql
         return $return;
     }
 
-    public function editarArticulo(int $id)
-    {
-        $this->id = $id;
-        $sql = "SELECT * FROM catalogo WHERE id = '{$this->id}'";
-        $res = $this->select($sql);
-        if (empty($res)) {
-            $res = 0;
-        }
-        return $res;
-    }
-
     public function eliminarArticulo(int $id)
     {
         $return = "";
@@ -85,17 +92,18 @@ class ArticulosModel extends Mysql
             $clave = $fila[2] ?? ''; // Valor de la columna "GPO" en el archivo CSV
             $descripcion = $fila[8] ?? ''; // Valor de la columna "ESP" en el archivo CSV
             $cantidad = $fila[10] ?? ''; // Valor de la columna cantidad
+            $cantidad = intval($cantidad);
             $corta = substr($descripcion, 0, 20);
         
             // Verificar si los campos clave y descripción están vacíos
             if (empty($clave) || empty($descripcion)) {
                 continue; // Si alguno de los campos está vacío, se pasa a la siguiente fila sin agregar el registro
             }
-        
+
             // Verificar si el registro ya existe en la base de datos
-            $query = "SELECT * FROM catalogo WHERE clave = ?";
-            $data = array($clave);
-            $resul = $this->select($query, $data);
+            $this->clave = $clave;
+            $query = "SELECT * FROM catalogo WHERE clave = '{$this->clave}'";
+            $resul = $this->select($query);
         
             if (!empty($resul)) { // Si ya existe un registro con la misma clave, se actualiza la cantidad
                 $query = "UPDATE catalogo SET cantidad = ? WHERE clave = ?";

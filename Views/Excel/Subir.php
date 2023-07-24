@@ -22,7 +22,7 @@
             					      <h4 class="app-card-title">Indicadores</h4>
             					    </div><!--//col-->
             					    <div class="col-auto">
-            					      <div class="card-header-acti3on">
+            					      <div class="card-header-action">
             					        <span style="font-weight: normal;font-size: 12px">Actualizado el <?= $data1['fecha'];?></span>
             					      </div><!--//card-header-action-->
             					    </div><!--//col-auto-->

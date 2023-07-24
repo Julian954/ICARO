@@ -118,63 +118,16 @@
         contenedor.style.opacity = '0';
 
     }
-    
-    $("#TableArticulos").DataTable({
-      processing: true,
-      responsive: true,
-      serverSide: true,
-      sAjaxSource: "../ServerSide/serversideArticulos.php",
-        columns: [
-            { table_data: 'id',
-                createdCell: function (td, cellData, rowData, row, col) {
-                    $(td).attr('style', 'visibility:collapse; display:none;');
-                }
-            },
-            { table_data: 'clave' },
-            { table_data: 'descripcion',
-                render: function(table_data, type, row) {
-                    if (table_data.length > 50) {
-                        return table_data.substr(0, 50) + '...';
-                    } else {
-                        return table_data;
-                    }
-                }
-            },
-            { table_data: 'des_corta' },
-            { table_data: 'cantidad' },
-            { 
-                data: null,
-                render: function(data, type, row) {
-                    return "<button class='btn btn-primary mx-1 mb-2 btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-danger mx-1 mb-2 btnBorrar'><i class='fas fa-trash'></i></button>";
-                }
-            },
-        ],
-      language: {
-        decimal: "",
-        emptyTable: "No hay datos",
-        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        infoEmpty: "Mostrando 0 a 0 de 0 registros",
-        infoFiltered: "(Filtro de _MAX_ total registros)",
-        infoPostFix: "",
-        thousands: ",",
-        lengthMenu: "Mostrar _MENU_ registros",
-        loadingRecords: "Cargando...",
-        processing: "Procesando...",
-        search: "Buscar:",
-        zeroRecords: "No se encontraron coincidencias",
-        paginate: {
-          first: "Primero",
-          last: "Ultimo",
-          next: "Próximo",
-          previous: "Anterior",
-        },
-        aria: {
-          sortAscending: ": Activar orden de columna ascendente",
-          sortDescending: ": Activar orden de columna desendente",
-        },
-      },
-    });
 
+    function actualizarMontoMaximo() {
+      var select = document.getElementById('Dictamen');
+      var montoMaximo = select.options[select.selectedIndex].dataset.monto;
+      var inputMonto = document.getElementById('Maximo');
+      inputMonto.max = montoMaximo;
+    }
+
+
+    $(document).ready(function() {
 
         $("#TablePedidos").DataTable({
         processing: true,
@@ -226,33 +179,67 @@
           next: "Próximo",
           previous: "Anterior",
         },
-        aria: {
-          sortAscending: ": Activar orden de columna ascendente",
-          sortDescending: ": Activar orden de columna desendente",
+				"aria": {
+					"sortAscending": ": Activar orden de columna ascendente",
+					"sortDescending": ": Activar orden de columna desendente"
+				}
+			},
+                "drawCallback": function( settings ) {
+                 $('#TablePedidos_paginate').addClass("app-pagination");
+            }
+      });
+
+    $("#TableArticulos").DataTable({
+      processing: true,
+      responsive: true,
+      serverSide: true,
+      sAjaxSource: "../ServerSide/serversideArticulos.php",
+        columns: [
+            { table_data: 'id',
+                createdCell: function (td, cellData, rowData, row, col) {
+                    $(td).attr('style', 'visibility:collapse; display:none;');
+                }
+            },
+            { table_data: 'clave' },
+            { table_data: 'descripcion'},
+            { table_data: 'des_corta' },
+            { table_data: 'cantidad' },
+            { 
+                data: null,
+                render: function(data, type, row) {
+                    return "<?php if($_SESSION['rol'] != 5){ ?><button class='btn btn-primary mx-1 mb-2 btnEditar'><i class='fas fa-edit'></i></button><button class='btn btn-danger mx-1 mb-2 btnBorrar'><i class='fas fa-trash'></i></button><?php } ?>";
+                }
+            },
+        ],
+      language: {
+        decimal: "",
+        emptyTable: "No hay datos",
+        info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        infoEmpty: "Mostrando 0 a 0 de 0 registros",
+        infoFiltered: "(Filtro de _MAX_ total registros)",
+        infoPostFix: "",
+        thousands: ",",
+        lengthMenu: "Mostrar _MENU_ registros",
+        loadingRecords: "Cargando...",
+        processing: "Procesando...",
+        search: "Buscar:",
+        zeroRecords: "No se encontraron coincidencias",
+        paginate: {
+          first: "Primero",
+          last: "Ultimo",
+          next: "Próximo",
+          previous: "Anterior",
         },
-        }
-      });
-
-    // Escucha el evento clic en el botón "Enlazar"
-    $("#TablePedidos").on("click", ".enlazar-btn", function () {
-      var table = $("#TablePedidos").DataTable();
-      var data = table.row($(this).parents("tr")).data();
-
-      // Realizar una solicitud POST al servidor para redireccionar
-      $.post("../ServerSide/serversidePedidos.php", function () {
-        window.location.href = "modal.php";
-      });
+				"aria": {
+					"sortAscending": ": Activar orden de columna ascendente",
+					"sortDescending": ": Activar orden de columna desendente"
+				}
+			},
+                "drawCallback": function( settings ) {
+                 $('#TableArticulos_paginate').addClass("app-pagination");
+            }
     });
 
-    function actualizarMontoMaximo() {
-      var select = document.getElementById('Dictamen');
-      var montoMaximo = select.options[select.selectedIndex].dataset.monto;
-      var inputMonto = document.getElementById('Maximo');
-      inputMonto.max = montoMaximo;
-    }
-
-
-    $(document).ready(function() {
         $('#Table').DataTable({
             responsive: true,
 			language: {
@@ -441,9 +428,9 @@
 					"sortDescending": ": Activar orden de columna desendente"
 				}
 			},
-        "drawCallback": function( settings ) {
-         $('#TableN_paginate').addClass("app-pagination");
-    }
+            "drawCallback": function( settings ) {
+             $('#TableN_paginate').addClass("app-pagination");
+            }
 		});
     });
     $(document).ready(function() {

@@ -1,4 +1,4 @@
-<?php if($_SESSION['rol'] == 7){ ?> <!-- Si es Admin-->
+<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 6 || $_SESSION['rol'] == 5){ ?> <!-- Si es Admin, jefatura u operador-->
     <?php encabezado() ?> <!-- Poner el header -->
 
     <div class="app-wrapper">
@@ -17,8 +17,10 @@
                             <div class="app-card-body p-3">
                                 <div class="row">
                                     <div class="col-lg-8 mb-2 py-2">
-                                        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal1"><i class="fas fa-plus-circle"></i> Nuevo</button>
-                                        <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modal2"><i class="fas fa-upload"></i> Subir Archivo</button>
+                                        <?php if($_SESSION['rol'] != 5){ ?>
+                                            <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal1"><i class="fas fa-plus-circle"></i> Nuevo</button>
+                                            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#modal2"><i class="fas fa-upload"></i> Subir Archivo</button>
+                                        <?php } ?>
                                     </div>
                                     <div class="col-lg-4">
                                         <?php if (isset($_GET['msg'])) {
@@ -51,6 +53,7 @@
                                         } ?>
                                     </div>
                                 </div>
+                                <span style="font-weight: normal;font-size: 12px">Artículos actualizados el <?= $data1['fecha'];?></span>
                                 <div class="table-responsive">
                                     <table class="table app-table-hover mb-0 text-left" id="TableArticulos">
     							        <thead>
@@ -60,7 +63,7 @@
                                             <th class="cell" >Descripcion</th>
                                             <th class="cell" >Descripcion corta</th>
                                             <th class="cell" >Cantidad</th>
-                                            <th class="cell" >Acciones</th>
+                                            <th class="cell" <?php if($_SESSION['rol'] == 5){ ?>style="visibility:collapse; display:none;"<?php } ?>>Acciones</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -86,7 +89,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="clave">Codigo del Articulo</label>
-                            <input id="clave" class="form-control" type="text" name="clave" placeholder="Ingresa los 14 digitos" required>
+                            <input id="clave" class="form-control" type="text" name="clave" placeholder="Ingresa los 14 digitos" minlength="14" maxlength="14" required>
                         </div>
                         <div class="form-group">
                             <label for="desc">Descripcion</label>
@@ -113,7 +116,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Nuevos Articulos</h5>
+                    <h5 class="modal-title" id="my-modal-title"><i class="fas fa-plus-circle"></i> Actualizar Catalogo</h5>
                     <button class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -149,11 +152,11 @@
                             <div class="form-group">
                                 <label for="cl">Codigo del Articulo</label>
                                 <input id="id" class="form-control" type="hidden" name="id" placeholder="Ingresa los 14 digitos" required>
-                                <input id="cl" class="form-control" type="text" name="clave" placeholder="Ingresa los 14 digitos" required>
+                                <input id="cl" class="form-control" type="text" name="clave" placeholder="Ingresa los 14 digitos" minlength="14" maxlength="14" required>
                             </div>
                             <div class="form-group">
                                 <label for="des">Descripcion</label>
-                                <input id="des" class="form-control" type="text" name="desc" placeholder="Descripcion" required>
+                                <textarea id="des" class="form-control" type="text" name="desc" placeholder="Descripcion" required cols="auto" rows="auto"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="cor">Clave corta</label>

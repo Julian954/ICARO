@@ -136,6 +136,17 @@ $(document).ready(function () {
     $("#modal4").modal("show");
   });
 
+  // Escucha el evento clic en el botón "Enlazar"
+  $("#TablePedidos").on("click", ".enlazar-btn", function () {
+    var table = $("#TablePedidos").DataTable();
+    var data = table.row($(this).parents("tr")).data();
+
+    // Realizar una solicitud POST al servidor para redireccionar
+    $.post("../ServerSide/serversidePedidos.php", function () {
+      window.location.href = "modal.php";
+    });
+  });
+
   //este es el tuyo
   $(document).on("click", ".btnEditarP", function () {
     fila = $(this).closest("tr");
