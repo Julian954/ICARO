@@ -555,7 +555,7 @@ class InicioModel extends Mysql{
     {
         $return = "";
         $this->id = $id;
-        $query = "DELETE usuarios WHERE id= '{$this->id}'";
+        $query = "DELETE FROM usuarios WHERE id= '{$this->id}'";
         $resul = $this->delate($query); //DELATE es para ELIMINAR un registro
         $return = $resul;
         return $return;
@@ -573,7 +573,24 @@ class InicioModel extends Mysql{
             $return = $resul;        
         return $return;
     }
-
+    public function eliminarank(string $fecha)
+    {
+        $return = "";        
+        $this->fecha = $fecha;                
+            $query = "DELETE FROM nacional WHERE fecha = '{$this->fecha}'";            
+            $resul = $this->delete($query);
+            $return = $resul;        
+        return $return;
+    }
+    public function eliminarchivo(string $fecha)
+    {
+        $return = "";        
+        $this->fecha = $fecha;                
+            $query = "DELETE FROM  negadas WHERE fecha = '{$this->fecha}'";            
+            $resul = $this->delete($query);
+            $return = $resul;        
+        return $return;
+    }
     public function selectDictamen()
     {
         $sql = "SELECT * FROM dictamen";

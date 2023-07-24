@@ -1,4 +1,4 @@
-<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 5){ ?> <!-- Si es Admin o de Jefatura-->
+<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 5 || $_SESSION['rol']==6){ ?> <!-- Si es Admin o de Jefatura-->
   <?php encabezado() ?> <!-- Poner el header -->
 
 	<div class="app-wrapper">

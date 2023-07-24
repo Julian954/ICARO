@@ -1,4 +1,4 @@
-	<?php if($_SESSION['rol'] <= 1){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
+	<?php if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 3 || $_SESSION['rol'] == 4 || $_SESSION['rol'] == 5 ){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
 	<?php permisos() ?> <!-- Poner el mensaje de erro -->
 	<?php }  else { ?> <!-- En caso de ser valido -->
 	<?php encabezado() ?> <!-- Poner el header -->
@@ -29,7 +29,7 @@
             					  </div><!--//row justify-content-between align-items-center-->
             					</div><!--//app-card-header p-3-->
 									<div class="app-card-body mt-3">											
-										<form action="<?php echo base_url(); ?>Indicadores/procesarArchivo" method="post" enctype="multipart/form-data" class="subir">
+										<form action="<?php echo base_url(); ?>Indicadores/procesarArchivo" method="post" enctype="multipart/form-data" class="subirank">
                     						<div class="form-group">
                     						    <label for="date">Fecha</label>
 												<input type="date" class="form-control" id="fecha" name="fecha" required>
@@ -42,11 +42,20 @@
                     						      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
                     						    </div>
                     						</div>
-											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
+											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>											
+										</form>		
+										<form action="<?php echo base_url(); ?>Indicadores/elimina_Archivo" method="post" class="subir" style="position: relative;">											
+											<script>
+document.getElementById("fecha").addEventListener("input", function() {
+  var valorFecha1 = document.getElementById("fecha").value;
+  document.getElementById("fecha2").value = valorFecha1;
+});
+											</script>
+											<input type="date"  id="fecha2" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
 											<?php if($_SESSION['rol']==7){ ?>
-											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i> Eliminar Documento</button>
+											<button class="btn btn-danger" type="submit" id="eliminararchivo" style="position: absolute;bottom: 24px;left: 180px;"><i class="fas fa-trash"></i> Eliminar Documento</button>
 											<?php } ?>
-										</form>
+										</form>								
 									</div><!--//app-card-body-->
 							</div><!--//app-card-->
 						</div>
@@ -73,7 +82,7 @@
             					  </div><!--//row justify-content-between align-items-center-->
             					</div><!--//app-card-header p-3-->
 									<div class="app-card-body mt-3">
-										<form action="<?php echo base_url(); ?>Inicio/subir_archivo" method="post" enctype="multipart/form-data" class="subir">
+										<form action="<?php echo base_url(); ?>Inicio/subir_archivo" method="post" enctype="multipart/form-data" class="subirank">
                     						<div class="form-group">
                     						    <label for="date">Fecha</label>
 												<input type="date" class="form-control" id="fechas" name="fechas" required>
@@ -86,12 +95,20 @@
                     						      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
                     						    </div>
                     						</div>
-											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
-											<?php if($_SESSION['rol']==7){ ?>
-											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i> Eliminar Documento</button>
+											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>											
+										</form>
+										<form action="<?php echo base_url(); ?>Inicio/elimina_archivo" method="post" class="subir" style="position: relative;">											
+											<script>
+document.getElementById("fechas").addEventListener("input", function() {
+  var valorFecha1 = document.getElementById("fechas").value;
+  document.getElementById("fecha2").value = valorFecha1;
+});
+											</script>
+											<input type="date"  id="fecha2" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
+											<?php if($_SESSION['rol']==7){ /*duda en dejar o no el eliminar el rank*/?>
+											<button class="btn btn-danger" type="submit" id="eliminararchivo" style="position: absolute;bottom: 24px;left: 180px;"><i class="fas fa-trash"></i> Eliminar Documento</button>
 											<?php } ?>
 										</form>
-
 									</div><!--//app-card-body-->
 								
 								
@@ -120,16 +137,25 @@
             					  </div><!--//row justify-content-between align-items-center-->
             					</div><!--//app-card-header p-3-->
 									<div class="app-card-body mt-3">
-										<form action="<?php echo base_url(); ?>Inicio/subir_rank" method="post" class="subir">
+										<form action="<?php echo base_url(); ?>Inicio/subir_rank" method="post" class="subirank" style="flex-direction: row;">
 											<label for="date" class="">Fecha</label>
-											<input type="date" class="form-control" id="fecha" name="fecha" value="" require><br>
+											<input type="date"  id="fecha1" class="form-control" name="fecha1" value="" require><br>
 											<label for="text" class="">Porcentaje de satisfaccion Nacional %</label>
 											<input type="text" min="0" class="form-control" id="satisf" name="satisf" value="" <?php if($_SESSION['rol']!=7){ "required"; };?>>
 											<label for="text" class="">Ranking Nacional Colima</label>
 											<input type="text" min="0" class="form-control" id="rank" name="rank" value="" <?php if($_SESSION['rol']!=7){ "required"; };?>><br>
-											<button class="btn btn-success" type="submit" id="subir"><i class="fas fa-save"></i> Actualizar Datos</button>
+											<button class="btn btn-success" type="submit" ><i class="fas fa-save"></i> Actualizar Datos</button>											
+										</form>
+										<form action="<?php echo base_url(); ?>Inicio/elimina_rank" method="post" class="subir" style="position: relative;">											
+											<script>
+document.getElementById("fecha1").addEventListener("input", function() {
+  var valorFecha1 = document.getElementById("fecha1").value;
+  document.getElementById("fecha2").value = valorFecha1;
+});
+											</script>
+											<input type="date"  id="fecha2" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
 											<?php if($_SESSION['rol']==7){ /*duda en dejar o no el eliminar el rank*/?>
-											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i> Eliminar Documento</button>
+											<button class="btn btn-danger" type="submit" id="eliminararchivo" style="position: absolute;bottom: 23px;left: 170px;"><i class="fas fa-trash"></i> Eliminar Documento</button>
 											<?php } ?>
 										</form>
 									</div>	
@@ -160,7 +186,7 @@
             					  </div><!--//row justify-content-between align-items-center-->
             					</div><!--//app-card-header p-3-->
 									<div class="app-card-body mt-3">
-										<form action="<?php echo base_url(); ?>Pedidos/subirarchivo" class="subir" method="post" enctype="multipart/form-data">
+										<form action="<?php echo base_url(); ?>Pedidos/subirarchivo" class="subirank" method="post" enctype="multipart/form-data">
                     						<div class="form-group">
                     						    <label for="date">Fecha</label>
 												<input type="date" class="form-control" id="fechaId" name="fechaId" required>
@@ -173,11 +199,20 @@
                     						      <label><br><strong>Nota:</strong> Solo se permiten archivos CSV, con un tamaño máximo de 20MB, en caso de que el archivo no cumpla con alguna de estas indicaciones no se subirá.</label>
                     						    </div>
                     						</div>
-											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>
-											<?php if($_SESSION['rol']==7){ ?>
-											<button class="btn btn-danger" type="submit" id="eliminararchivo"><i class="fas fa-trash"></i> Eliminar Documento</button>
-											<?php } ?>
+											<button class="btn btn-success" type="submit" id="subirarchivo"><i class="fas fa-save"></i> Subir Documento</button>											
 										</form>
+										<form action="<?php echo base_url(); ?>Pedidos/elimina_archivo" method="post" class="subir" style="position: relative;">											
+											<script>
+document.getElementById("fechaId").addEventListener("input", function() {
+  var valorFecha1 = document.getElementById("fechaId").value;
+  document.getElementById("fecha2").value = valorFecha1;
+});
+											</script>
+											<input type="date"  id="fecha2" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
+											<?php if($_SESSION['rol']==7){ ?>
+											<button class="btn btn-danger" type="submit" id="eliminararchivo" style="position: absolute;bottom: 24px;left: 180px;"><i class="fas fa-trash"></i> Eliminar Documento</button>
+											<?php } ?>
+										</form>	
 									</div><!--//app-card-body-->
 							</div><!--//app-card-->
 						</div>

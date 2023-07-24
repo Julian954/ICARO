@@ -303,6 +303,23 @@ $(document).ready(function () {
   });
 });
 
+$(".subirank").submit(function (e) {
+  e.preventDefault();
+  Swal.fire({
+    title: "¿Está seguro de agregar la nueva informacion del día señalado?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#28a745",
+    cancelButtonColor: "#dc3545",
+    confirmButtonText: "Si",
+    cancelButtonText: "No",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.submit();
+    }
+  });
+});
+
 
 
 "use strict";

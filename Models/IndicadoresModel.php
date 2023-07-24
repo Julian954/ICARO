@@ -21,7 +21,15 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
         $res = $this->select($sql); 
         return $res;
     }
-
+    public function eliminarchivo(string $fecha)
+    {
+        $return = "";        
+        $this->fecha = $fecha;                
+            $query = "DELETE FROM indicadores WHERE fecha = '{$this->fecha}'";            
+            $resul = $this->delete($query);
+            $return = $resul;        
+        return $return;
+    }
     public function negadas()
     {
         $sql = "SELECT fecha, SUM(negadas) AS negadas FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";

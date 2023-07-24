@@ -512,12 +512,25 @@ public function ActualizaeDevengo(){
         {
         $satisfaccion = $_POST['satisf'];
         $rank = $_POST['rank'];
-        $fecha = $_POST['fecha'];          
+        $fecha = $_POST['fecha1'];          
         $insert = $this->model->insertarrank($satisfaccion, $rank, $fecha);        
         header("location: " . base_url() . "Excel/Subir?msg=$alert");
         die();   
         }
-
+        public function elimina_rank()
+        {
+        $fecha = $_POST['fecha2'];          
+        $insert = $this->model->eliminarank($fecha);        
+        header("location: " . base_url() . "Excel/Subir?msg=$alert");
+        die();   
+        }
+        public function elimina_archivo()
+        {
+        $fecha = $_POST['fecha2'];          
+        $insert = $this->model->eliminarchivo($fecha);        
+        header("location: " . base_url() . "Excel/Subir?msg=$alert");
+        die();   
+        }
     public function subir_archivo() {
         // Verificar si se ha enviado un archivo
         $fecha = limpiarInput($_POST['fechas']);

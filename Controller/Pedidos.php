@@ -80,6 +80,13 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
         die();
     }
     //hasta aqui son las unidades
+    public function elimina_archivo()
+    {
+    $fecha = $_POST['fecha2'];          
+    $insert = $this->model->eliminarchivo($fecha);        
+    header("location: " . base_url() . "Excel/Subir?msg=$alert");
+    die();   
+    }
     
     public function subir_archivo() {
         // Verificar si se ha enviado un archivo

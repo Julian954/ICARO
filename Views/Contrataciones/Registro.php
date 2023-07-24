@@ -22,8 +22,12 @@
 	                        <h3 class="section-title">ERROR</h3>
 	                        <div class="section-intro">No se pudo registrar el Requerimiento, intente de nuevo o cantacte a soporte.</div>
                         </div>
-                    <?php }
-                } ?>
+                    <?php }else if ($alert == "registrado") { ?>
+                        <div class="alert alert-success" role="alert">
+	                        <h3 class="section-title">EXITOSO</h3>
+	                        <div class="section-intro">El Requerimiento se agrego exitosamente.</div>
+                        </div>
+                <?php } }?>
 	          </div>
 	          <div class="col-12 col-md-8">
 	            <div class="app-card app-card-settings shadow-sm p-4">
@@ -35,7 +39,7 @@
                   <path style="color:#FF0000;" d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
                   <circle cx="8" cy="4.5" r="1"/>
                   </svg></span></label>
-                  <input type="text" class="form-control" id="NoOficio" name="NoOficio" value="" required>
+                  <input type="text" class="form-control" id="NoOficio" name="NoOficio" value="" required="required">
                 </div>
                 <div class="form-group">
                   <div class="mb-3">
@@ -48,11 +52,11 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-2" class="form-label">Descripción del Requerimiento</label>
-                  <textarea name="Descripcion" id="Descripcion" class="form-control" cols="auto" rows="auto"></textarea>
+                  <textarea name="Descripcion" id="Descripcion" class="form-control" cols="auto" rows="auto" value="" required="required"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label">Tipo de Contratacion</label>
-                  <select class="form-control" id="tipocontrata" name="tipocontrata" required>
+                  <select class="form-control" id="tipocontrata" name="tipocontrata" required="required">
                     <?php foreach ($data4 as $tipocontrata) { ?>
                     <option> <?php echo $tipocontrata['tipoco']; ?></option>
                     <?php } ?>
@@ -60,7 +64,7 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label">Area Requirente</label>
-                  <select class="form-control" id="Area" name="Area" required>
+                  <select class="form-control" id="Area" name="Area" required="required">
                     <?php foreach ($data1 as $area) { ?>
                     <option> <?php echo $area['area']; ?></option>
                     <?php } ?>
@@ -68,7 +72,7 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label">Tipo de Contrato</label>
-                  <select class="form-control" id="Contrato" name="Contrato" required>
+                  <select class="form-control" id="Contrato" name="Contrato" required="required">
                     <?php foreach ($data2 as $tipo) { ?>
                     <option> <?php echo $tipo['tipo']; ?></option>
                     <?php } ?>
@@ -76,11 +80,11 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">Término</label>
-                  <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="Termino" name="Termino" value="" require>
+                  <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="Termino" name="Termino" value="" required="required">
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">No. Dictamen</label>
-                  <select class="form-control" id="Dictamen" name="Dictamen" required onchange="actualizarMontoMaximo()">
+                  <select class="form-control" id="Dictamen" name="Dictamen" required="required" onchange="actualizarMontoMaximo()">
                     <?php foreach ($data5 as $dictamen) { ?>
                     <option data-monto="<?php echo $dictamen['montomax']; ?>"><?php echo $dictamen['dictamen']; ?></option>
                     <?php } ?>
@@ -88,15 +92,15 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">Monto Máximo $</label>
-                  <input type="number" class="form-control" id="Maximo" name="Maximo" value="" required>
+                  <input type="number" class="form-control" id="Maximo" name="Maximo" value="" required="required">
                 </div>
                 <div class="form-group">
                   <label for="setting-input-2" class="form-label">Comentarios</label>
-                  <textarea name="comentario" id="comentario" class="form-control" cols="auto" rows="auto"></textarea>
+                  <textarea name="comentario" id="comentario" class="form-control" cols="auto" value="" rows="auto"></textarea>
                 </div>
                 <div class="form-group">
                   <div class="container2">
-                    <input style="display: none;" type="file" id="file-input" multiple name="archivo[]" required/>
+                    <input style="display: none;" type="file" id="file-input" multiple name="archivo[]" required="required"/>
                     <label id="fileup" for="file-input">
                       <i class="fa-solid fa-arrow-up-from-bracket"></i>
                       Selecciona los archivos

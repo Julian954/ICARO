@@ -45,7 +45,7 @@
         </div><!--//app-card-->
         <div style="margin: 20px 0;">    
           <?php if ($_SESSION['rol'] != 5 && ($data4['estado'] <= 2)) {?>  
-            <button class="btn app-btn-secondary" data-toggle="modal" data-target="#VentanaModal">Responder</button>
+            
             <?php if ($_SESSION['rol'] == 3) {?>
               <form action="<?php echo base_url() ?>Contratos/validar?contrato=<?php echo $data1['id_contrato']; ?>" method="post" class="d-inline validar">
               <input type="text" id="fecha_valida" name="fecha_valida" value="<?= date('Y-m-d')?>" style="display:none;" readonly>
@@ -109,6 +109,7 @@
         </div>
       </div>
     </div><!--//tab-content-->
+    <button class="btn app-btn-secondary" data-toggle="modal" data-target="#VentanaModal" style="margin-left:35px; margin-bottom:15px;">Responder</button><br>
   </div><!--//app-wrapper-->
   <div id="VentanaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog" role="document">

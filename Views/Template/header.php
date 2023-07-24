@@ -190,7 +190,7 @@
 						        </a><!--//nav-link-->
 						    </li><!--//nav-item-->
 <?php }?>
-<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5 || $_SESSION['rol']==1){?>
+<?php if($_SESSION['rol']==7 || $_SESSION['rol']==1 || $_SESSION['rol'] == 4){?>
 							<li class="nav-item">
 						        <a class="nav-link <?php if ($link == "/IMSS/Despachos/Registro") { echo "active"; } ?>" href="<?php echo base_url(); ?>Despachos/Registro">
 							    	<span class="nav-icon">
@@ -202,7 +202,7 @@
 						        </a><!--//nav-link-->
 						    </li><!--//nav-item-->
 <?php }?>
-<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5){?>
+<?php if($_SESSION['rol']==7 || $_SESSION['rol']==5 || $_SESSION['rol']==6){?>
 	              			<li class="nav-item">
 						        <a class="nav-link <?php if ($link == "/IMSS/Indicadores/Indicador") { echo "active"; } ?>" href="<?php echo base_url(); ?>Indicadores/Indicador">
 							        <span class="nav-icon">
@@ -256,7 +256,7 @@
 						        </a><!--//nav-link-->
 						    </li><!--//nav-item-->
 <?php }?>
-<?php if($_SESSION['rol']==7){?>
+<?php if($_SESSION['rol']==7 || $_SESSION['rol']==6){?>
 							<li class="nav-item">
 						        <a class="nav-link <?php if ($link == "/IMSS/Excel/Subir") { echo "active"; } ?>" href="<?php echo base_url(); ?>Excel/Subir">
 								<span class="nav-icon">
@@ -271,11 +271,12 @@
 
 					    </ul><!--//app-menu-->
 				    </nav><!--//app-nav-->
-
+					<?php }?>
+							<?php if($_SESSION['rol']==7){?>
 				    <div class="app-sidepanel-footer">
 					    <nav class="app-nav app-nav-footer">
 						    <ul class="app-menu footer-menu list-unstyled">
-
+							
 							    <li class="nav-item">
 							        <a class="nav-link <?php if ($link == "/IMSS/Inicio/Configuracion") { echo "active"; } ?>" href="<?php echo base_url(); ?>Inicio/Configuracion">
 								        <span class="nav-icon">

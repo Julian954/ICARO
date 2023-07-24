@@ -13,7 +13,15 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         $res = $this->select_all($sql); //select_all es para seleccionar cuando el resultado puede arrojar muchas filas
         return $res;
     }
-
+    public function eliminarchivo(string $fecha)
+    {
+        $return = "";        
+        $this->fecha = $fecha;                
+            $query = "DELETE FROM pedidos WHERE fecha = '{$this->fecha}'";            
+            $resul = $this->delete($query);
+            $return = $resul;        
+        return $return;
+    }
     //Registra un nuevo usuario
     public function insertarUsuarios(string $nombre, string $usuario, string $clave, string $rol, string $correo)
     {

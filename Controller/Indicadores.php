@@ -41,7 +41,13 @@ class Indicadores extends Controllers //Aquí se debe llamas igual que el archiv
         header("location: " . base_url() . "Pedidos/Unidades?msg=$alert");
         die();   
     }
-
+    public function elimina_Archivo()
+    {
+    $fecha = $_POST['fecha2'];          
+    $insert = $this->model->eliminarchivo($fecha);        
+    header("location: " . base_url() . "Excel/Subir?msg=$alert");
+    die();   
+    }
     public function procesarArchivo() {
 
         $fechad = limpiarInput($_POST['fecha']);
