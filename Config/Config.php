@@ -18,6 +18,8 @@
 	setlocale(LC_ALL,'es_ES', 'Spanish_Spain', 'Spanish');
     //error_reporting(0); 
 
+    //PONE EL DOMINIO PARA EL SIDEBAR
+    const DOM = "icaro";
     // Establecer un nuevo límite de tiempo de ejecución a 600 segundos (10 minutos)
     set_time_limit(600);
 ?>

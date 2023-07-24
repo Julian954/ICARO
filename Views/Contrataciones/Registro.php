@@ -28,7 +28,7 @@
 	          <div class="col-12 col-md-8">
 	            <div class="app-card app-card-settings shadow-sm p-4">
 					      <div class="app-card-body">
-              <form method="POST" action="<?php echo base_url(); ?>Contrataciones/agregar" autocomplete="off" enctype="multipart/form-data">
+              <form id="formulario1" method="POST" action="<?php echo base_url(); ?>Contrataciones/agregar" autocomplete="off" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="oficio" class="form-label" style="color:#000000;">Numero de Oficio<span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresar el número del Contrato y/o Convenio tal cual fue registrado en SAI y plasmado en el documento impreso"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" style="color:#FF0000;" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-2" class="form-label">Descripción del Requerimiento</label>
-                  <textarea name="Descripcion" id="Descripcion" class="form-control" cols="auto" rows="auto"></textarea>
+                  <textarea name="Descripcion" id="Descripcion" class="form-control" cols="auto" rows="auto" required></textarea>
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label">Tipo de Contratacion</label>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">Término</label>
-                  <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="Termino" name="Termino" value="" require>
+                  <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="Termino" name="Termino" value="" required>
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">No. Dictamen</label>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-2" class="form-label">Comentarios</label>
-                  <textarea name="comentario" id="comentario" class="form-control" cols="auto" rows="auto"></textarea>
+                  <textarea name="comentario" id="comentario" class="form-control" cols="auto" rows="auto" required></textarea>
                 </div>
                 <div class="form-group">
                   <div class="container2">
@@ -107,7 +107,7 @@
                     <div><strong>Nota:</strong> Solo se permiten archivos PDF, WORD, EXCEL y ZIP, con un tamaño máximo de 20MB, en caso de no cumplir con alguna de estas indicaciones no se subirá.</div>
                   </div>
                 </div>
-                <button type="submit" class="btn app-btn-primary mb-2">Solicitar Requerimiento</button>
+                <button type="submit" class="btn app-btn-primary mb-2"<?php if($_SESSION['rol'] == 7){ ?>disabled<?php } ?>>Solicitar Requerimiento</button>
               </form>
 					    </div><!--//app-card-body-->
 					  </div><!--//app-card-->

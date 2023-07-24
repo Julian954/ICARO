@@ -13,7 +13,7 @@ class Articulos extends Controllers
     //Vista de usuarios
     public function Listarart()
     {
-        $data1 = $this->model->selectArticulos();
+        $data1 = $this->model->selectfecha();
         $this->views->getView($this, "Listarart", "", $data1);
     }
 
@@ -38,17 +38,6 @@ class Articulos extends Controllers
         // Pasa la alerta como parámetro GET en la redirección
         header("location: " . base_url() . "Articulos/Listarart?msg=" . urlencode($alert));
         die();
-    }
-
-    public function editar()
-    {
-        $id = $_GET['id'];
-        $data1 = $this->model->editarArticulo($id);
-        if ($data1 == 0) {
-            $this->Listarart();
-        } else {
-            $this->views->getView($this, "Editarart","", $data1);
-        }
     }
 
     public function actualizar()
@@ -94,6 +83,9 @@ class Articulos extends Controllers
         
             // Pasar los datos al modelo para su inserción en la base de datos
             $total = $this->model->procesarArchivos($datos);
+            $hoy = date('Y-m-d');
+            $this->model->actfecha($hoy);
+            
             $alert = 'catalogo';
         }
           
