@@ -9,7 +9,7 @@ class InicioModel extends Mysql{
     //Selecciona el promedio de atencion y costo de los ultimos dos días
     public function nivelatencionycosto()
     {
-        $sql = "SELECT fecha, AVG(surtida) AS surtida, AVG(costo_receta) AS costo FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
+        $sql = "SELECT fecha, (SUM(presentadas)-SUM(negadas))/SUM(presentadas)*100 AS surtida, SUM(importe)/SUM(presentadas) AS costo FROM indicadores GROUP BY fecha ORDER BY fecha DESC LIMIT 2";
         $res = $this->select_all($sql); 
         return $res;
     }
@@ -56,6 +56,13 @@ class InicioModel extends Mysql{
         return $res;
     }
 
+    public function pedidosfecha()
+    {
+        $ordenar ="SELECT * FROM pedidos;";
+        $res = $this->select_all($ordenar);
+        return $res;
+    }
+
     public function unidades()
     {        
         $sql ="SELECT * FROM unidades";
@@ -72,8 +79,8 @@ class InicioModel extends Mysql{
 
     //Selecciona la suma de negadas y manuales de los ultimos dos días
     public function rankingdiario()
-    {
-        $sql = "SELECT AVG(surtida) AS colima, AVG(atencion) AS nacional, fecha AS dia FROM (SELECT fecha, surtida, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS surtida, atencion FROM nacional) AS datos_totales GROUP BY dia;";
+    {  
+        $sql = "SELECT (SUM(presentadas)-SUM(negadas))/SUM(presentadas)*100 AS colima, AVG(atencion) AS nacional, fecha AS dia FROM (SELECT fecha, surtida, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS surtida, atencion FROM nacional) AS datos_totales GROUP BY dia;";
         $res = $this->select_all($sql); 
         return $res;
     }
@@ -136,7 +143,7 @@ class InicioModel extends Mysql{
     public function atencioncolima(string $fechaN)
     {
         $this->fecha = $fechaN;
-        $ordenar ="SELECT AVG(surtida) AS colima FROM indicadores WHERE fecha = '{$this->fecha}' GROUP BY fecha";
+        $ordenar ="SELECT (SUM(presentadas)-SUM(negadas))/SUM(presentadas)*100 AS colima FROM indicadores WHERE fecha = '{$this->fecha}' GROUP BY fecha";
         $res= $this->select($ordenar);
         return $res;
     }
@@ -163,150 +170,6 @@ class InicioModel extends Mysql{
         return $return;
     }
 
-    public function visto($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE detalle_cont SET visto=? WHERE id1=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto2($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE detalle_contrata SET visto=? WHERE id1=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto3($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE contrataciones SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto4($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE contratos SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto3_2($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE contrataciones SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto4_2($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE contratos SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto6($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE contratos SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto7($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE contratos SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto8($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE validar_cont SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto9($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE validar_contrata SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto10($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE contratos SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function visto11($id, $visto){
-        $return = "";       
-        $this->visto=$visto;
-        $this->id = $id;        
-        $query = "UPDATE contrataciones SET visto=? WHERE id=?";
-        $data = array($this->visto, $this->id);
-        $resul = $this->update($query, $data); //Update es para actualizar un registro
-        $return = $resul;
-        return $return;
-    }
-    public function datos_notifica2()
-    {        
-        $sql ="SELECT * FROM contratos";
-        $res= $this->select_all($sql);
-        return $res;
-    }
-    public function datos_notifica()
-    {        
-        $sql ="SELECT * FROM contrataciones";
-        $res= $this->select_all($sql);
-        return $res;
-    }
-    public function notificacion_asigna_contrato()
-    {        
-        $sql ="SELECT * FROM validar_cont";
-        $res= $this->select_all($sql);
-        return $res;
-    }
-    public function notificacion_asigna_requieri()
-    {        
-        $sql ="SELECT * FROM validar_contrata";
-        $res= $this->select_all($sql);
-        return $res;
-    }
 
 
 
@@ -322,18 +185,7 @@ class InicioModel extends Mysql{
         return $return;
     }
 
-        //actualizar devengo
-        public function actualizadevengo(int $devengo, string $contrato)
-        {
-            $return = "";
-            $this->contrato = $contrato;
-            $this->devengo = $devengo;
-            $query = "UPDATE contratos SET devengo = ? WHERE numero=?";       
-            $data = array($this->devengo, $this->contrato);
-            $resul = $this->update($query, $data);
-            $return = $resul;
-            return $return;
-        }
+
 
     //Selecciona las áreas
     public function SelectAreas()

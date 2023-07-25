@@ -9,7 +9,7 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
    //Selecciona el promedio de atencion y costo de los ultimos dos días
     public function historico()
     {
-        $sql = "SELECT AVG(surtida) AS surtida, AVG(costo_receta) AS costor, SUM(negadas) AS negada, AVG(negadas) AS negadap, SUM(mnuales) AS manuals, AVG(costo_paciente) AS costop, SUM(electronicas) AS electronica,  SUM(atendidos) AS atend, SUM(presentadas) AS presen FROM indicadores";
+        $sql = "SELECT (SUM(presentadas)-SUM(negadas))/SUM(presentadas)*100 AS surtida, SUM(importe)/SUM(presentadas) AS costor, SUM(negadas) AS negada, AVG(negadas) AS negadap, SUM(mnuales) AS manuals, SUM(importe)/SUM(atendidos) AS costop, SUM(electronicas) AS electronica,  SUM(atendidos) AS atend, SUM(presentadas) AS presen FROM indicadores";
         $res = $this->select($sql); 
         return $res;
     }
@@ -17,7 +17,7 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
     //Selecciona la suma de negadas y manuales de los ultimos dos días
     public function ayer()
     {
-        $sql = "SELECT AVG(surtida) AS surtida, AVG(costo_receta) AS costor, SUM(negadas) AS negada, AVG(negadas) AS negadap, SUM(mnuales) AS manuals, AVG(costo_paciente) AS costop, SUM(electronicas) AS electronica, SUM(presentadas) AS presen FROM indicadores WHERE fecha = (SELECT MAX(fecha) FROM indicadores)";
+        $sql = "SELECT (SUM(presentadas)-SUM(negadas))/SUM(presentadas)*100 AS surtida, SUM(importe)/SUM(presentadas) AS costor, SUM(negadas) AS negada, AVG(negadas) AS negadap, SUM(mnuales) AS manuals, SUM(importe)/SUM(atendidos) AS costop, SUM(electronicas) AS electronica, SUM(presentadas) AS presen FROM indicadores WHERE fecha = (SELECT MAX(fecha) FROM indicadores)";
         $res = $this->select($sql); 
         return $res;
     }
@@ -40,7 +40,7 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
     //Selecciona la suma de negadas y manuales de los ultimos dos días
     public function rankingdiario()
     {
-        $sql = "SELECT AVG(surtida) AS colima, AVG(atencion) AS nacional FROM (SELECT surtida, NULL AS atencion FROM indicadores UNION ALL SELECT NULL AS surtida, atencion FROM nacional) AS datos_totales;";
+        $sql = "SELECT (SUM(presentadas)-SUM(negadas))/SUM(presentadas)*100 AS colima, AVG(atencion) AS nacional FROM (SELECT presentadas, negadas, NULL AS atencion FROM indicadores UNION ALL SELECT NULL AS presentadas, NULL AS negadas, atencion FROM nacional) AS datos_totales;";
         $res = $this->select($sql); 
         return $res;
     }
@@ -63,7 +63,7 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
 
     public function ranking()
     {
-        $sql = "SELECT AVG(surtida) AS colima, AVG(atencion) AS nacional,  MONTHNAME(fecha) AS mname, MONTH(fecha) AS mes FROM (SELECT fecha, surtida, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS surtida, atencion FROM nacional) AS datos_totales GROUP BY mes";
+        $sql = "SELECT (SUM(presentadas)-SUM(negadas))/SUM(presentadas)*100 AS colima, AVG(atencion) AS nacional,  MONTHNAME(fecha) AS mname, MONTH(fecha) AS mes FROM (SELECT fecha, negadas, presentadas, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS negadas, NULL AS presentadas, atencion FROM nacional) AS datos_totales GROUP BY mes";
         $res = $this->select_all($sql); 
         return $res;
     }
@@ -92,19 +92,20 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
     foreach ($datos as $fila) {
         $unidad = $fila[2] ?? '';
         $presentadas = $fila[9] ?? '';
-        $surtida = $fila[5] ?? '';
+        $surtida = $fila[4] ?? '';
         $negadas = $fila[7] ?? '';
         $electronicas = $fila[10] ?? '';
         $mnuales = $fila[11] ?? '';
-        $atendidos = $fila[11] ?? '';
+        $atendidos = $fila[12] ?? '';
         $costo_receta = $fila[14] ?? '';
+        $importe = $fila[13] ?? '';
         $costo_paciente = $fila[15] ?? '';
         $this->fechad = $fechad;
 
         if (!empty($unidad)) {
             // Insertar los datos en la base de datos
-            $query = "INSERT INTO indicadores (unidad, surtida, presentadas, negadas, mnuales, atendidos, costo_receta, costo_paciente, electronicas, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
-            $data = array($unidad, $presentadas, $surtida, $negadas, $mnuales, $atendidos, $costo_receta, $costo_paciente, $electronicas, $this->fechad);
+            $query = "INSERT INTO indicadores (unidad, surtida, presentadas, negadas, mnuales, atendidos, costo_receta, importe, costo_paciente, electronicas, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+            $data = array($unidad, $presentadas, $surtida, $negadas, $mnuales, $atendidos, $costo_receta, $importe, $costo_paciente, $electronicas, $this->fechad);
             $resul = $this->insert($query, $data); //insert es para agregar un registro
         }
     }

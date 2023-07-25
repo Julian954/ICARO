@@ -1,6 +1,4 @@
-<?php if($_SESSION['rol'] != 7){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
-  <?php permisos() ?> <!-- Poner el mensaje de erro -->
-<?php }  else { ?> <!-- En caso de ser valido -->
+<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 6){ ?> <!-- Si es Admin o de Jefatura-->
   <?php encabezado() ?> <!-- Poner el header -->
 
     <div class="app-wrapper">
@@ -11,29 +9,9 @@
                 <div class="row g-4 settings-section">
 	                <div class="col-12 col-md-4">
 		                <h3 class="section-title">Contratos</h3>
-		                <div class="section-intro">Ponga en el input la categoría que desea agregar y oprima el botón. Para eliminar presione la categoría que desea eliminar. <a href="#">Ayuda</a></div>
+		                <div class="section-intro">Ponga en el input la categoría que desea agregar y oprima el botón. Para eliminar presione la categoría que desea eliminar.</div>
 	                </div>
-
-	                <div class="col-12 col-md-8">
-                        <div class="app-card app-card-settings shadow-sm p-4">
-						    <div class="app-card-body">
-							        <form class="settings-form" action="<?php echo base_url() ?>Inicio/ActualizaeDevengo" method="post">
-								        <div class="mb-3 d-flex justify-content-between align-items-center">
-								    	    <label for="area" class="form-label">Actualizar Devengo
-                                                <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Presiona el boton para actualizar el devengo">
-                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                                        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                                                        <circle cx="8" cy="4.5" r="1"/>
-                                                    </svg>
-                                                </span>
-                                            </label>
-                                            <button class="btn app-btn-primary" type="submit" id="button-addon2">Actualizar</button>
-								    	</div>
-                                    </form> 
-						    </div><!--//app-card-body-->  
-						</div><br><!--//app-card-->
-
+                    <div class="col-12 col-md-8">
 		                <div class="app-card app-card-settings shadow-sm p-4">
 						    <div class="app-card-body">
 							    <form class="settings-form" action="<?php echo base_url() ?>Inicio/AgregarArea" method="post">
@@ -48,7 +26,7 @@
                                             </span>
                                         </label>
                                         <div class="input-group mb-3">
-                                          <input type="text" class="form-control" id="area" name="area" placeholder="Area" required">
+                                          <input type="text" class="form-control" id="area" name="area" placeholder="Area" value="" required">
                                           <button class="btn app-btn-primary" type="submit" id="button-addon2">Agregar</button>
                                         </div>
 									</div>
@@ -168,7 +146,7 @@
 						    <div class="app-card-body">
                                 <div class="col-lg-8 mb-2 py-2">
                                     <button class="btn btn-success" type="button" data-toggle="modal" data-target="#nuevo_dictamen"><i class="fas fa-plus-circle"></i> Nuevo</button>
-                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#archivoDictamen"><i class="fas fa-plus-circle"></i> Subir Archivo</button>
+                                    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#modal1"><i class="fas fa-plus-circle"></i> Subir Archivo</button>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table app-table-hover mb-0 text-center" id="Table5">
@@ -232,7 +210,7 @@
             </div>
         </div>
     </div>
-    <div id="archivoDictamen" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div id="modal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -242,7 +220,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?php echo base_url(); ?>Inicio/procesarArchivo" method="post" enctype="multipart/form-data" id="formulario">
+                    <form id="formulario1" action="<?php echo base_url(); ?>Inicio/procesarArchivo" method="post" enctype="multipart/form-data" id="formulario">
 						<div class="form-group">
                     	    <label for="img">Selecciona Archivo</label>
                     	    <div class="custom-file">
@@ -258,6 +236,7 @@
         </div>
     </div>   					
 
+<?php }  else { ?> <!-- En caso de ser valido -->
+  <?php permisos() ?> <!-- Poner el mensaje de erro -->
 <?php } ?>
-
 <?php pie() ?> <!-- Pone el fotter -->

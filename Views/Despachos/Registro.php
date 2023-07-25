@@ -1,4 +1,4 @@
-<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 1 || $_SESSION['rol'] == 4){ ?> <!-- Si es Admin o Interno Juridico -->
+<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 1){ ?> <!-- Si es Admin o Almacén -->
   <?php encabezado() ?> <!-- Poner el header -->
 
   <div class="app-wrapper">
@@ -10,25 +10,30 @@
 	          <div class="col-12 col-md-4">
 	            <h3 class="section-title">Nuevo Despacho</h3>
 	            <div class="section-intro">Favor de llenar toda la información del Despacho que desea registrar.</div><br>
-                <!-- <?php// if (isset($_GET['msg'])) {
-                    //$alert = $_GET['msg'];
-                   // if ($alert == "existe") { ?>
+                <?php if (isset($_GET['msg'])) {
+                    $alert = $_GET['msg'];
+                    if ($alert == "existe") { ?>
                         <div class="alert alert-warning" role="alert">
 	                        <h3 class="section-title">ATENCIÓN</h3>
-	                        <div class="section-intro">Ya existe un Contrato con ese número.</div>
+	                        <div class="section-intro">Ya existe un Despacho con ese número.</div>
                         </div>
-                    <?php// } else if ($alert == "error") { ?>
+                    <?php } else if ($alert == "error") { ?>
                         <div class="alert alert-danger" role="alert">
 	                        <h3 class="section-title">ERROR</h3>
-	                        <div class="section-intro">No se pudo registrar el Contrato, intente de nuevo o cantacte a soporte.</div>
+	                        <div class="section-intro">No se pudo registrar el Despacho, intente de nuevo o cantacte a soporte.</div>
                         </div>
-                    <?php //}
-                //} ?> -->
+                    <?php } else if ($alert == "registrado") { ?>
+                        <div class="alert alert-success" role="alert">
+	                        <h3 class="section-title">REALIZADO</h3>
+	                        <div class="section-intro">El despacho se creó con éxito.</div>
+                        </div>
+                    <?php }
+                } ?>
 	          </div>
 	          <div class="col-12 col-md-8">
 	            <div class="app-card app-card-settings shadow-sm p-4">
 					      <div class="app-card-body">
-                  <form method="POST" action="<?php echo base_url(); ?>Despachos/agregar" autocomplete="off" enctype="multipart/form-data">
+                  <form id="formulario1" method="POST" action="<?php echo base_url(); ?>Despachos/agregar" autocomplete="off" enctype="multipart/form-data">
                     <div class="mb-3">
                       <label for="numero" class="form-label" style="color:#000000;">Destino<span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Ingresar la unidad a la que sera entregado el despacho"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" style="color:#FF0000;" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -61,10 +66,10 @@
 
                   <div class="mb-3">
                    <label for="date" class="form-label" style="color:#000000;">Fecha de Entrega</label>
-                   <input type="datetime-local" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="entrega" name="entrega" value="" require>
+                   <input type="datetime-local" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="entrega" name="entrega" value="" required>
                   </div>
                   
-                <label for="img"><strong>Selecciona Archivo</strong></label>
+                <label for="img" style="color:#000000;"><strong>Selecciona Archivo</strong></label>
                 <div class="custom-file">
                   
                     <input type="file" class="custom-file-input" name="archivo" required>

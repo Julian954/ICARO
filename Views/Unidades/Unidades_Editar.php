@@ -1,4 +1,4 @@
-<?php if($_SESSION['rol'] == 7){ ?> <!-- Si es Admin-->
+<?php if($_SESSION['rol'] == 7 || $_SESSION['rol'] == 6){ ?> <!-- Si es Admin-->
     <?php encabezado() ?> <!-- Poner el header -->
     
 <!-- Begin Page Content -->
