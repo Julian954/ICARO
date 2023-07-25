@@ -97,7 +97,7 @@
                 foreach ($data as $admin) {
                     $correo = $admin['correo'];
                     $nombre = $admin['nombre'];
-                    $msg = $_SESSION['nombre'].' HA CREADO EL REQUERIMIENTO '.$oficio.' Y ESTÁ ESPERANDO A QUE LE ASIGNES UN RESPONSABLE. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
+                    $msg = $_SESSION['nombre'].' ha creado el requerimiento '.$oficio.' y está esperando a que le asignes un responsable. Puedes contactarte con el usuario mediante el siguiente correo: '.$_SESSION['correo'];
                     correo($msg, $asunto, $correo, $nombre);
                     $noti = $this->model->notifica($asunto, $msg, $admin['id']);
                 }
@@ -148,6 +148,7 @@
             $estado = $this->model->actualizaEstado($estadoN, $number);
             $responsable = $this->model->actualizaResp($tu, $number);
             $alert = "agregado";
+            $yo = $_SESSION['nombre'];
 
             //VALIDADOR
             $requerimiento = $this->model->selectReq($number);
@@ -156,7 +157,7 @@
             $asunto = 'Validador Asignado';
             $correo = $VALIDA['correo'];
             $nombre = $VALIDA['nombre'];
-            $msg = 'TE HAN ASIGNADO COMO VALIDADOR DEL REQUERIMIENTO '.$number.'.<br><br>';
+            $msg = $yo.'Te ha asignado como validador del requerimiento '.$number.'.';
             correo($msg, $asunto, $correo, $nombre);
             $noti = $this->model->notifica($asunto, $msg, $requerimiento['id_validador']);
 
@@ -164,7 +165,7 @@
             $asunto2 = 'Validador Asignado';
             $correo2 = $REQ['correo'];
             $nombre2 = $REQ['nombre'];
-            $msg2 = 'SE HA ASIGNADO A '.$VALIDA['nombre'].' COMO VALIDADOR DEL REQUERIMIENTO '.$number.'. EN EL QUE ESTÁS COMO REQUIRIENTE.<br><br>';
+            $msg2 = 'Se ha asignado a '.$VALIDA['nombre'].' como validador del requerimeinto '.$number.'.';
             correo($msg2, $asunto2, $correo2, $nombre2);
             $noti = $this->model->notifica($asunto, $msg, $requerimiento['id_creador']);
 
@@ -227,15 +228,15 @@
             }
             if ($contrato['id_creador'] == $yo) {
                 $data = $this->model->selectUsuario($contrato['id_validador']);
-                $msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = $_SESSION['nombre'].' te ha respondido en el foro del requerimiento '.$number.'.';
                 $usuario = $contrato['id_validador'];
             } elseif ($contrato['id_validador'] == $yo) {
                 $data = $this->model->selectUsuario($contrato['id_creador']);
-                $msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = $_SESSION['nombre'].' te ha respondido en el foro del requerimiento '.$number.'.';
                 $usuario = $contrato['id_creador'];
             } else {
                 $data = $this->model->selectUsuario($contrato['id_creador']);
-                $msg = 'UN ADMINISTRADOR TE HA RESPONDIDO EN EL FORO DEL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = 'Un administrador te ha respondido en el foro del requerimiento '.$number.'.';
                 $usuario = $contrato['id_creador'];
             }
                 $asunto = 'Respuesta Foro';
@@ -258,7 +259,7 @@
 
                 $requerimiento = $this->model->selectReq($number);
                 $data = $this->model->selectUsuario($requerimiento['id_creador']);
-                $msg = 'SE HA VALIDADO EL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = 'Se ha validado el requerimiento '.$number.'.';
                 $asunto = 'Validadción de Rquerimiento';
                 $correo = $data['correo'];
                 $nombre = $data['nombre'];
@@ -270,7 +271,7 @@
                 foreach ($data as $admin) {
                     $correo = $admin['correo'];
                     $nombre = $admin['nombre'];
-                    $msg = $_SESSION['nombre'].' HA VALIDADO EL REQUERIMIENTO '.$oficio.' Y ESTÁ ESPERANDO A QUE LO FORMALICES. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
+                    $msg = $_SESSION['nombre'].' ha validado el requerimiento '.$oficio.' y está esperando a que lo formalices.';
                     correo($msg, $asunto, $correo, $nombre);
                     $noti = $this->model->notifica($asunto, $msg, $admin['id']);
                 }
@@ -286,7 +287,7 @@
 
                 $requerimiento = $this->model->selectReq($number);
                 $data = $this->model->selectUsuario($requerimiento['id_creador']);
-                $msg = 'SE HA FORMALIZADO EL REQUERIMIENTO '.$number.'.<br><br>';
+                $msg = 'Se ha formalizado el requerimiento '.$number.'.';
                 $asunto = 'Formalización de Rquerimiento';
                 $correo = $data['correo'];
                 $nombre = $data['nombre'];

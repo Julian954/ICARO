@@ -18,7 +18,7 @@
                 <?php if ($data4['estado'] == 3) { ?>
                   <span class="badge bg-success">Validado</span>
                 <?php } elseif ($data4['estado'] == 4) { ?>
-                  <span class="badge bg-secondary">Formalizado</span>
+                  <span class="badge bg-success">Formalizado</span>
                 <?php }?>
               </h4>
             </div>
@@ -30,7 +30,7 @@
               if ($arc['intento'] == 0) {?>
                 <a href="<?php echo base_url(); ?>Assets/Documentos/Peticiones/<?php echo $arc['nombre']; ?>" target="_blank" 
                 <?php if (strstr($arc['nombre'], ".") == ".xlsx") {?>
-                  class='btn-sm app-btn-primary'><?php echo strstr($arc['nombre'], "."); ?></a>
+                  class='btn-sm app-btn-primary'><?php echo $arc['nombre']; ?></a>
                 <?php } elseif (strstr($arc['nombre'], ".") == ".zip") { ?>
                   class='btn-sm app-btn-secondary'><?php echo $arc['nombre']; ?></a>
                 <?php } elseif (strstr($arc['nombre'], ".") == ".pdf") { ?>
@@ -43,21 +43,7 @@
             </div>
           </div><!--//app-card-body-->  
         </div><!--//app-card-->
-        <div style="margin: 20px 0;">    
-          <?php if ($_SESSION['rol'] != 5 && ($data4['estado'] <= 2)) {?>  
-            
-            <?php if ($_SESSION['rol'] == 3) {?>
-              <form action="<?php echo base_url() ?>Contratos/validar?contrato=<?php echo $data1['id_contrato']; ?>" method="post" class="d-inline validar">
-              <input type="text" id="fecha_valida" name="fecha_valida" value="<?= date('Y-m-d')?>" style="display:none;" readonly>
-              <button title="Validar" type="submit" class="btn app-btn-primary">Validar</button>
-              </form>
-            <?php }
-          } elseif ($_SESSION['rol'] == 7 && ($data4['estado'] <= 3)) { ?>
-            <form action="<?php echo base_url() ?>Contratos/formalizar?contrato=<?php echo $data1['id_contrato']; ?>" method="post" class="d-inline forma">
-              <button title="Formalizar" type="submit" class="btn app-btn-primary">Formalizar</button>
-            </form>
-          <?php } ?>
-        </div><!--//col-->         
+        <br>
         <div class='app-card shadow-sm h-100'>
           <div class='app-card-body p-3 p-lg-4'>
             <h5>
@@ -87,7 +73,7 @@
                             if ($arcv['intento'] == $validar['intento']) {?>
                               <a href="<?php echo base_url(); ?>Assets/Documentos/Foro/<?php echo $arcv['nombre']; ?>" target="_blank" 
                               <?php if (strstr($arcv['nombre'], ".") == ".xlsx") {?>
-                                class='btn-sm app-btn-primary'><?php echo strstr($arcv['nombre'], "."); ?></a>
+                                class='btn-sm app-btn-primary'><?php echo $arcv['nombre']; ?></a>
                               <?php } elseif (strstr($arcv['nombre'], ".") == ".zip") { ?>
                                 class='btn-sm app-btn-secondary'><?php echo $arcv['nombre']; ?></a>
                               <?php } elseif (strstr($arcv['nombre'], ".") == ".pdf") { ?>
@@ -105,13 +91,27 @@
 		      		  </div><!--//app-card-->
 			  	    </div><!--//app-card-body-->
 			  	  </div><!--//app-card-->
+        <div style="margin: 20px 0 0 0;">    
+          <?php if ($_SESSION['rol'] != 5 && ($data4['estado'] <= 2)) {?>  
+            <button class="btn app-btn-secondary" data-toggle="modal" data-target="#modal1">Responder</button><br>
+            <?php if ($_SESSION['rol'] == 3) {?>
+              <form action="<?php echo base_url() ?>Contratos/validar?contrato=<?php echo $data1['id_contrato']; ?>" method="post" class="d-inline validar">
+              <input type="text" id="fecha_valida" name="fecha_valida" value="<?= date('Y-m-d')?>" style="display:none;" readonly>
+              <button title="Validar" type="submit" class="btn app-btn-primary">Validar</button>
+              </form>
+            <?php }
+          } elseif ($_SESSION['rol'] == 7 && ($data4['estado'] <= 3)) { ?>
+            <form action="<?php echo base_url() ?>Contratos/formalizar?contrato=<?php echo $data1['id_contrato']; ?>" method="post" class="d-inline forma">
+              <button title="Formalizar" type="submit" class="btn app-btn-primary">Formalizar</button>
+            </form>
+          <?php } ?>
+        </div><!--//col--> 
 		      </div><!--//tab-pane-->
         </div>
       </div>
     </div><!--//tab-content-->
-    <button class="btn app-btn-secondary" data-toggle="modal" data-target="#VentanaModal" style="margin-left:35px; margin-bottom:15px;">Responder</button><br>
   </div><!--//app-wrapper-->
-  <div id="VentanaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+  <div id="modal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -120,7 +120,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="post" action="<?php echo base_url(); ?>Contratos/agregar_comentario" autocomplete="off" enctype="multipart/form-data">
+        <form id="formulario1" method="post" action="<?php echo base_url(); ?>Contratos/agregar_comentario" autocomplete="off" enctype="multipart/form-data">
           <div class="modal-body">
             <div class="form-group">
               <label for="setting-input-2" class="form-label">Comentarios</label>

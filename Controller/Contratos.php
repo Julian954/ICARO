@@ -57,7 +57,7 @@
                 $asunto = 'Creación de Contrato';
                 $correo = $data['correo'];
                 $nombre = $data['nombre'];
-                $msg = $_SESSION['nombre'].' HA CREADO EL CONTRATO '.$numero.' Y TE PUSO COMO REQUIRIENTE. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
+                $msg = $_SESSION['nombre'].' Ha creado el contrato '.$numero.' y te puso como requiriente. puedes contactar con el usuario en el siguiente correo: '.$_SESSION['correo'];
                 correo($msg, $asunto, $correo, $nombre);
                 $noti = $this->model->notifica($asunto, $msg, $requiriente);
 
@@ -89,13 +89,28 @@
             die();
         }
 
+        public function chart_pie()
+        {
+            $data = $this->model->chart_pies();
+            echo json_encode($data);
+            die();
+        }
+
+        public function chart_pie2()
+        {
+            $data = $this->model->chart_pie2s();
+            echo json_encode($data);
+            die();
+        }
+
         // Muestra la vista "Validando" con los datos obtenidos de los modelos.
         public function Validando()
         {        
             $data1 =$this->model->selectContratosVal();
             $data2 =$this->model->selectExternoJ();
             $data3 =$this->model->selectContratosEdo1();
-            $this->views->getView($this, "Validando", "", $data1, $data2, $data3);
+            $data4 =$this->model->selectInternoJ();
+            $this->views->getView($this, "Validando", "", $data1, $data2, $data3, $data4);
         }
 
         // Agrega contrato a validación
@@ -103,7 +118,7 @@
         {
             $tu = limpiarInput($_POST['miSelect1']);
             $descripcion = limpiarInput($_POST['descripcion']);        
-            $yo = $_SESSION['id'];
+            $yo = limpiarInput($_POST['yo']); 
             $number =limpiarInput($_POST['miSelect2']);
             $insert = $this->model->agregar_validar( $number, $descripcion, $yo, $tu);
 
@@ -116,7 +131,7 @@
             $asunto = 'Validación de Contrato';
             $correo = $data['correo'];
             $nombre = $data['nombre'];
-            $msg = $_SESSION['nombre'].' TE HA SOLICITADO LA VALIDACIÓN DEL CONTRATO '.$numero.'. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'].' O EN EL FORO DEL CONTRATO.';
+            $msg = $_SESSION['nombre'].' Te ha solicitado la validación del contrato '.$number.'. puedes contactar con el usuario mediante el correo: '.$_SESSION['correo'].' o en el foro del contrato.';
             correo($msg, $asunto, $correo, $nombre);
             $noti = $this->model->notifica($asunto, $msg, $tu);
 
@@ -223,15 +238,15 @@
             if ($contrato['id_creador'] == $yo) {
                 $data = $this->model->selectUsuario($contrato['id_validador']);
                 $usuario = $contrato['id_validador'];
-                $msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DE CONTRATOS '.$number.'.<br><br>';
+                $msg = $_SESSION['nombre'].' Te ha respondido en el foro del contrato '.$number.'.';
             } elseif ($contrato['id_validador'] == $yo) {
                 $data = $this->model->selectUsuario($contrato['id_creador']);
                 $usuario = $contrato['id_creador'];
-                $msg = $_SESSION['nombre'].' TE HA RESPONDIDO EN EL FORO DE CONTRATOS '.$number.'.<br><br>';
+                $msg = $_SESSION['nombre'].' Te ha respondido en el foro del contrato '.$number.'.';
             } else {
                 $data = $this->model->selectUsuario($contrato['id_creador']);
                 $usuario = $contrato['id_creador'];
-                $msg = 'UN ADMINISTRADOR TE HA RESPONDIDO EN EL FORO DE CONTRATOS '.$number.'.<br><br>';
+                $msg = 'Un administrador te ha respondido en el foro del contrato '.$number.'.';
             }
                 $asunto = 'Respuesta Foro';
                 $correo = $data['correo'];
@@ -256,7 +271,7 @@
             $asunto = 'Validación de Contrato';
             $correo = $data['correo'];
             $nombre = $data['nombre'];
-            $msg = $_SESSION['nombre'].' HA VALIDADO EL CONTRATO '.$numero.'. EN EL QUE ESTÁS COMO ADMINISTRADOR.<br><br>';
+            $msg = $_SESSION['nombre'].' Ha validado el contrato '.$numero.'. en el que estás como administrador.';
             correo($msg, $asunto, $correo, $nombre);
             $noti = $this->model->notifica($asunto, $msg, $cont['id_creador']);
 
@@ -265,7 +280,7 @@
             $asunto = 'Validación de Contrato';
             $correo = $data['correo'];
             $nombre = $data['nombre'];
-            $msg = $_SESSION['nombre'].' HA VALIDADO EL CONTRATO '.$numero.'. EN EL QUE ESTÁS COMO REQUIRIENTE.<br><br>';
+            $msg = $_SESSION['nombre'].' Ha validado el contrato '.$numero.'. en el que estás como requiriente.';
             correo($msg, $asunto, $correo, $nombre);
             $noti = $this->model->notifica($asunto, $msg, $cont['requiriente']);
 
@@ -274,7 +289,7 @@
                 foreach ($data as $admin) {
                     $correo = $admin['correo'];
                     $nombre = $admin['nombre'];
-                    $msg = $_SESSION['nombre'].' HA VALIDADO EL CONTRATO '.$oficio.' Y ESTÁ ESPERANDO A QUE LO FORMALICES. <br><br>'.'PUEDES CONTACTARTE CON EL USUARIO MEDIANTE EL SIGUIENTE CORREO: '.$_SESSION['correo'];
+                    $msg = $_SESSION['nombre'].' Ha validado el contrato '.$oficio.' y está esperando que lo formalices.';
                     correo($msg, $asunto, $correo, $nombre);
                     $noti = $this->model->notifica($asunto, $msg, $admin['id']);
                 }
@@ -293,7 +308,7 @@
             $asunto = 'Validación de Contrato';
             $correo = $data['correo'];
             $nombre = $data['nombre'];
-            $msg = $_SESSION['nombre'].' HA VALIDADO EL CONTRATO '.$numero.'. EN EL QUE ESTÁS COMO ADMINISTRADOR.<br><br>';
+            $msg = $_SESSION['nombre'].' ha formalizado el contrato '.$numero.'. en el que estás como administrador.';
             correo($msg, $asunto, $correo, $nombre);
             $noti = $noti = $this->model->notifica($asunto, $msg, $cont['id_creador']);
 
@@ -302,14 +317,14 @@
             $asunto = 'Validación de Contrato';
             $correo = $data['correo'];
             $nombre = $data['nombre'];
-            $msg = $_SESSION['nombre'].' HA VALIDADO EL CONTRATO '.$numero.'. EN EL QUE ESTÁS COMO REQUIRIENTE.<br><br>';
+            $msg = $_SESSION['nombre'].' ha formalizado el contrato '.$numero.'. en el que estás como requiriente.';
             correo($msg, $asunto, $correo, $nombre);
             $noti = $this->model->notifica($asunto, $msg, $cont['requiriente']);
 
             header("location: " . base_url() . "Contratos/Foro?contrato=$number");
             die();
         }
-
+        
         public function eliminarano(){
             
             $data1 =$this->model->select_eliminar_validarcont();

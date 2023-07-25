@@ -20,7 +20,7 @@
           				  <div> Asigna un responsable para validar el contrato creado.</div>
           				</div><!--//col-->
           			  <div class="col-12 col-lg-3">
-                    <button class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal">Asigna un validador al instrumento</button>
+                    <button class="btn app-btn-primary" data-toggle="modal" data-target="#Modal1">Asigna un validador al instrumento</button>
           			  </div><!--//col-->
           			</div><!--//row-->
               </div><!--//app-card-body-->
@@ -212,7 +212,7 @@
     </div><!--//tab-content-->
   </div><!--//app-wrapper-->
 
-  <div id="VentanaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+  <div id="Modal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -221,7 +221,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form method="post" action="<?php echo base_url(); ?>Contrataciones/agregar_validadcont" autocomplete="off" enctype="multipart/form-data"">
+        <form id="formulario1" method="post" action="<?php echo base_url(); ?>Contrataciones/agregar_validadcont" autocomplete="off" enctype="multipart/form-data"">
           <div class="modal-body">
             <div class="form-group">
               <label for="setting-input-3" class="form-label" style="color:#000000;">No.Trabajador y Nombre </label>

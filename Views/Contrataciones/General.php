@@ -26,7 +26,7 @@
                 <ul class="notification-meta list-inline mb-0">
                   <li class="list-inline-item"><?php echo $_SESSION['correo'] ?></li>
                   <li class="list-inline-item">|</li>
-                  <li class="list-inline-item"><?php echo $_SESSION['telefono'] ?></li>
+                  <li class="list-inline-item"><?php echo telefono($_SESSION['telefono']) ?></li>
                 </ul>
               </div><!--//col-->
               <div class="col-3 col-sm-auto text-center text-lg-right">
@@ -60,9 +60,6 @@
 					      <div class="row justify-content-between align-items-center">
 					        <div class="col-auto">
 					          <h4 class="app-card-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line-fill" viewBox="0 0 16 16">
-  <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z"/>
-</svg> 
                       Estadísticas de la Oficina
                     </h4>
 					        </div><!--//col-->
@@ -71,7 +68,7 @@
 					    <div class="app-card-body p-3 p-lg-4">
               <div class="row g-4 mb-4" style="padding-top:10px; font-size:14px;">
                   <div class="col-12 col-lg-12" style="color:#000000;">
-                    <div class="item-data"><strong style="font-size:20px">En general tenemos</strong></div>
+                    <div class="item-data"><strong style="font-size:16px">En general tenemos:</strong></div>
 										<div class="item-label mb-2">
                       <br>
                         <span style="text-decoration:solid underline #5B99EA 2px;"><strong><?php echo $data6['total']; ?></strong></span>
@@ -164,11 +161,13 @@
 			    </div><!--//col-->
 
 			    <div class="col-12 col-lg-6">
-				    <div class="app-card app-card-chart h-100 shadow-sm">
+				    <div class="app-card app-card-chart shadow-sm">
 					    <div class="app-card-header p-3">
 					      <div class="row justify-content-between align-items-center">
 					        <div class="col-auto">
-					          <h4 class="app-card-title">Flujo de Formalización</h4>
+                    <h4 class="app-card-title">Flujo de Formalización
+                      <span style="font-weight: normal; font-size: 12px;">(Creados / Formalizados)</span>
+                    </h4>
 					        </div><!--//col-->
 					      </div><!--//row-->
 					    </div><!--//app-card-header-->
@@ -177,8 +176,8 @@
 							    <div class="item p-3">
 								    <div class="row align-items-center">
 									    <div class="col">
-										    <div class="title " style="color:#000000;"><?php echo $bar['area'].' ('.$bar['form'].'/'.$bar['total'].')';?></div>
-										    <div class="progress">
+                        <div class="title " style="color:#000000;"><span class="font-weight-bold"><?php echo $bar['area'].'</span><span style="font-weight: normal; font-size: 12px;"> ('.$bar['form'].'/'.$bar['total'].')</span>';?></div>
+				  					    <div class="progress" style="height: 0.9rem;">
                           <div class="progress-bar bg-success" role="progressbar" style="width:<?php echo number_format($bar['form']*100/$bar['total'],2);?>%;" aria-valuemin="0" aria-valuemax="100"><?php echo number_format($bar['form']*100/$bar['total'],2);?>%</div>
                         </div>
 									    </div><!--//col-->
@@ -187,6 +186,9 @@
                   <hr style="margin: 0;">
                 <?php } ?>
 					    </div><!--//app-card-body-->
+              <div class="app-card-footer">
+                <span style="font-size:12px;"class="text-muted px-3">*Actualizado al <?= date('Y-m-d')?></span>
+              </div><!--//app-card footer-->
 				    </div><!--//app-card-->
 			    </div><!--//col-->
         </div><!--//row-->
@@ -251,9 +253,6 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
-                        <?php if ($_SESSION['rol'] == 7) { ?>
-                          <th scope="col">Eliminación</th>
-                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -281,13 +280,6 @@
                           <td><?php echo $us['termino']; ?></td>
                           <td><?php echo $us['maximo']; ?></td>
                           <td><?php echo $us['inicio']; ?></td>
-                          <?php if ($_SESSION['rol'] == 7) { 
-                            $eliminar = new  DateTime($us['fecha_eliminar']);
-                            $hoy = new DateTime(date('Y-m-d'));
-                            $intervalo = $hoy->diff($eliminar);
-                            ?>
-                            <td><?php echo "En ".$intervalo->days." días"; ?></td>
-                          <?php } ?>
                           <td><a href="<?php echo base_url(); ?>Contrataciones/Foro?contrato=<?php echo $us['nooficio']; ?>">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
@@ -316,9 +308,6 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
-                        <?php if ($_SESSION['rol'] == 7) { ?>
-                          <th scope="col">Eliminación</th>
-                        <?php } ?>
                       </tr>
                     </thead>
                     <tbody>
@@ -346,13 +335,6 @@
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['inicio']; ?></td>
-                            <?php if ($_SESSION['rol'] == 7) { 
-                              $eliminar = new  DateTime($us['fecha_eliminar']);
-                              $hoy = new DateTime(date('Y-m-d'));
-                              $intervalo = $hoy->diff($eliminar);
-                              ?>
-                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
-                            <?php } ?>
                           </tr>
                         <?php } ?>
                       <?php } ?>
@@ -376,9 +358,6 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
-                        <?php if ($_SESSION['rol'] == 7) { ?>
-                          <th scope="col">Eliminación</th>
-                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -407,13 +386,6 @@
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['inicio']; ?></td>
-                            <?php if ($_SESSION['rol'] == 7) { 
-                              $eliminar = new  DateTime($us['fecha_eliminar']);
-                              $hoy = new DateTime(date('Y-m-d'));
-                              $intervalo = $hoy->diff($eliminar);
-                              ?>
-                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
-                            <?php } ?> 
                             <?php if ($us['estado'] != 1) { ?>
                               <td><a href="<?php echo base_url(); ?>Contrataciones/Foro?contrato=<?php echo $us['nooficio']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
@@ -445,9 +417,6 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
-                        <?php if ($_SESSION['rol'] == 7) { ?>
-                          <th scope="col">Eliminación</th>
-                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -476,13 +445,6 @@
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['inicio']; ?></td>
-                            <?php if ($_SESSION['rol'] == 7) { 
-                              $eliminar = new  DateTime($us['fecha_eliminar']);
-                              $hoy = new DateTime(date('Y-m-d'));
-                              $intervalo = $hoy->diff($eliminar);
-                              ?>
-                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
-                            <?php } ?> 
                             <?php if ($us['estado'] != 1) { ?>
                               <td><a href="<?php echo base_url(); ?>Contrataciones/Foro?contrato=<?php echo $us['nooficio']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">
@@ -514,9 +476,6 @@
                         <th scope="col">Termino</th>
                         <th scope="col">Máximo</th>
                         <th scope="col">Creación</th>
-                        <?php if ($_SESSION['rol'] == 7) { ?>
-                          <th scope="col">Eliminación</th>
-                        <?php } ?>
                         <th scope="col">Foro</th>
                       </tr>
                     </thead>
@@ -545,13 +504,6 @@
                             <td><?php echo $us['termino']; ?></td>
                             <td><?php echo $us['maximo']; ?></td>
                             <td><?php echo $us['inicio']; ?></td>
-                            <?php if ($_SESSION['rol'] == 7) { 
-                              $eliminar = new  DateTime($us['fecha_eliminar']);
-                              $hoy = new DateTime(date('Y-m-d'));
-                              $intervalo = $hoy->diff($eliminar);
-                              ?>
-                              <td><?php echo "En ".$intervalo->days." días"; ?></td>
-                            <?php } ?> 
                             <?php if ($us['estado'] != 1) { ?>
                               <td><a href="<?php echo base_url(); ?>Contrataciones/Foro?contrato=<?php echo $us['nooficio']; ?>">
                               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-up-right-square mr-2" fill="green" xmlns="http://www.w3.org/2000/svg">

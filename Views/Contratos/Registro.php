@@ -45,11 +45,11 @@
 									    </div>
                     </div>
                     <div class="mb-3">
-                      <label for="descripcion" class="form-label">Descripción del Contrato</label>
+                      <label for="descripcion" class="form-label" style="color:#000000;">Descripción del Contrato</label>
                       <textarea class="form-control" name="descripcion" id="descripcion" cols="auto" rows="auto" required></textarea>
                     </div>
                     <div class="mb-3">
-                      <label for="area" class="form-label">Area Requirente</label>
+                      <label for="area" class="form-label" style="color:#000000;">Area Requirente</label>
                       <select class="form-control" id="area" name="area" required>
                         <?php foreach ($data1 as $area) { ?>
                           <option> <?php echo $area['area'] ?></option>
@@ -57,7 +57,7 @@
                       </select>
                   </div>
                     <div class="mb-3">
-                      <label for="requiriente" class="form-label">Funcionario Requirente</label>
+                      <label for="requiriente" class="form-label" style="color:#000000;">Funcionario Requirente</label>
                       <select class="form-control" id="requiriente" name="requiriente" required>
                         <?php foreach ($data4 as $per) { ?>
                           <option value="<?php echo $per['id']?>"><?php echo $per['nombre'] ?></option>
@@ -65,7 +65,7 @@
                       </select>
                   </div>
                   <div class="mb-3">
-                      <label for="tipo" class="form-label">Tipo del Contrato</label>
+                      <label for="tipo" class="form-label" style="color:#000000;">Tipo del Contrato</label>
                       <select class="form-control" id="tipo" name="tipo" required>
                         <?php foreach ($data2 as $tipo) { ?>
                           <option> <?php echo $tipo['tipo'] ?></option>
@@ -74,7 +74,7 @@
                   </div>
                   <div class="mb-3">
                    <label for="date" class="form-label" style="color:#000000;">Término</label>
-                   <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="termino" name="termino" value="" require>
+                   <input type="date" min="<?php echo date('Y-m-d'); ?>" class="form-control" id="termino" name="termino" value="" required>
                   </div>
                   <div class="mb-3">
                       <label for="number" class="form-label" style="color:#000000;">Máximo $</label>

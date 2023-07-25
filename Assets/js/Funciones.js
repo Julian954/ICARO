@@ -554,7 +554,7 @@ function pastelnegadas() {
 
 function chart_pie() {
   $.ajax({
-    url: base + "Inicio/chart_pie",
+    url: base + "Contratos/chart_pie",
     type: "POST",
     success: function (response) {
       var data = JSON.parse(response);
@@ -594,11 +594,11 @@ function chart_pie() {
 
 function chart_pie2() {
   $.ajax({
-    url: base + "Inicio/chart_pie2",
+    url: base + "Contratos/chart_pie2",
     type: "POST",
     success: function (response) {
       var data = JSON.parse(response);
-      var nombre = ["Devengo","Presupuesto Global"];
+      var nombre = ["Devengo", "Presupuesto Global"];
       var global = [];
       global.push(data[0]["devengo"]);
       global.push(data[0]["total"]);

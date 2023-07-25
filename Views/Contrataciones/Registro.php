@@ -51,14 +51,11 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="setting-input-2" class="form-label">Descripción del Requerimiento</label>
-                  
-                  
-                  
+                  <label for="setting-input-2" class="form-label" style="color:#000000;">Descripción del Requerimiento</label>
                   <textarea name="Descripcion" id="Descripcion" class="form-control" cols="auto" rows="auto"></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="setting-input-3" class="form-label">Tipo de Contratacion</label>
+                  <label for="setting-input-3" class="form-label" style="color:#000000;">Tipo de Contratacion</label>
                   <select class="form-control" id="tipocontrata" name="tipocontrata" required="required">
                     <?php foreach ($data4 as $tipocontrata) { ?>
                     <option> <?php echo $tipocontrata['tipoco']; ?></option>
@@ -66,7 +63,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="setting-input-3" class="form-label">Area Requirente</label>
+                  <label for="setting-input-3" class="form-label" style="color:#000000;">Area Requirente</label>
                   <select class="form-control" id="Area" name="Area" required="required">
                     <?php foreach ($data1 as $area) { ?>
                     <option> <?php echo $area['area']; ?></option>
@@ -74,7 +71,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="setting-input-3" class="form-label">Tipo de Contrato</label>
+                  <label for="setting-input-3" class="form-label" style="color:#000000;">Tipo de Contrato</label>
                   <select class="form-control" id="Contrato" name="Contrato" required="required">
                     <?php foreach ($data2 as $tipo) { ?>
                     <option> <?php echo $tipo['tipo']; ?></option>
@@ -98,7 +95,7 @@
                   <input type="number" class="form-control" id="Maximo" name="Maximo" value="" required="required">
                 </div>
                 <div class="form-group">
-                  <label for="setting-input-2" class="form-label">Comentarios</label>
+                  <label for="setting-input-2" class="form-label" style="color:#000000;">Comentarios</label>
                   <textarea name="comentario" id="comentario" class="form-control" cols="auto" rows="auto"></textarea>
                 </div>
                 <div class="form-group">

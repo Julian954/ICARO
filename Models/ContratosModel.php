@@ -137,6 +137,21 @@
             return $res;
         }
 
+        public function chart_pies()
+        {
+            $sql = "SELECT SUM(contratos.devengo) AS devengo, (SUM(contratos.maximo)-devengo) AS total FROM contratos WHERE contratos.estado = 4;";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        public function chart_pie2s()
+        {
+            $sql = "SELECT SUM(contratos.devengo) AS devengo, (SUM(contratos.maximo)-devengo) AS total FROM contratos";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+
         // Obtiene el total de contratos y la suma de los máximos de los contratos.
         public function totalcontratos() {
             $sql = "SELECT COUNT(*) as total, SUM(maximo) as maximo FROM contratos";
@@ -180,6 +195,13 @@
         // Selecciona todos los usuarios externos juridicos
         public function selectExternoJ() {
             $sql = "SELECT * FROM usuarios WHERE rol = 3";
+            $res = $this->select_all($sql);
+            return $res;
+        }
+
+        // Selecciona todos los usuarios externos juridicos
+        public function selectInternoJ() {
+            $sql = "SELECT * FROM usuarios WHERE rol = 4";
             $res = $this->select_all($sql);
             return $res;
         }

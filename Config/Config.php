@@ -2,7 +2,7 @@
     //CREA CONEXION CON LA BASE DE DATOS
     const BASE_URL = "http://localhost/icaro/";
     const HOST ="localhost";
-    const BD = "imss";
+    const BD = "icaro";
     const DB_USER = "root";
     const PASS = "";
     const CHARSET = "charset=utf8";

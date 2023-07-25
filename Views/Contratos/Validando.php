@@ -20,7 +20,7 @@
           				  <div> Asigna un responsable para validar el contrato creado.</div>
           				</div><!--//col-->
           			  <div class="col-12 col-lg-3">
-                    <button class="btn app-btn-primary" data-toggle="modal" data-target="#VentanaModal">Solicita Validación de Contrato</button>
+                    <button class="btn app-btn-primary" data-toggle="modal" data-target="#modal1">Solicita Validación de Contrato</button>
           			  </div><!--//col-->
           			</div><!--//row-->
               </div><!--//app-card-body-->
@@ -157,7 +157,7 @@
     </div>
   </div>
                          
-  <div id="VentanaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+  <div id="modal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -166,10 +166,24 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form method="post" action="<?php echo base_url(); ?>Contratos/agregar_validadcont" autocomplete="off" enctype="multipart/form-data">
+        <form id="formulario1" method="post" action="<?php echo base_url(); ?>Contratos/agregar_validadcont" autocomplete="off" enctype="multipart/form-data">
           <div class="modal-body">
+
             <div class="form-group">
-              <label for="setting-input-3" class="form-label" style="color:#000000;">No.Trabajador y Nombre </label>
+              <label for="setting-input-3" class="form-label" style="color:#000000;">No.Trabajador y Nombre (Interno)</label>
+              <select class="form-control" name="yo" id="yo">
+              <?php if ($_SESSION['rol'] == 7) { ?>
+                <?php foreach ($data4 as $int) { ?>
+                  <option value="<?php echo $int['id']; ?>"><?php echo $int['usuario']." - ".$int['nombre']; ?></option>     
+                <?php } ?>
+              <?php } else {?>
+                  <option value="<?php echo $_SESSION['id']; ?>" readonly><?php echo $_SESSION['usuario']." - ".$_SESSION['nombre']; ?></option>
+              <?php } ?>  
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="setting-input-3" class="form-label" style="color:#000000;">No.Trabajador y Nombre (Externo)</label>
               <select class="form-control" name="miSelect1" id="miSelect1">
                 <?php foreach ($data2 as $fila) { ?>
                   <option value="<?php echo $fila['id']; ?>"><?php echo $fila['usuario']." - ".$fila['nombre']; ?></option>     
