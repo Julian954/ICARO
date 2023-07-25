@@ -162,6 +162,8 @@ function correo($msg, $asunto, $correo, $nombre){
             $myItem->SentOnBehalfOfName = "jordanrodriguezreyes@hotmail.com"; //CORREO Outlook
             $myItem->Subject = $asunto;
             $myItem->HTMLBody = '<html><body>'.$msg.'<br><br>'.'Mensaje generado automáticamente, favor de no responder.</body></html>';
+            $myItem->BodyFormat = 2; // olFormatHTML
+            $myItem->GetInspector->Charset = 'UTF-8';
             $myItem->Send();
             $objApp->Quit(); // Cierra la aplicación Outlook
             $objApp = null; // Libera el objeto COM

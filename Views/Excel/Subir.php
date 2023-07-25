@@ -1,7 +1,5 @@
-	<?php if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 3 || $_SESSION['rol'] == 4 || $_SESSION['rol'] == 5 ){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
-	<?php permisos() ?> <!-- Poner el mensaje de erro -->
-	<?php }  else { ?> <!-- En caso de ser valido -->
-	<?php encabezado() ?> <!-- Poner el header -->
+<?php if($_SESSION['rol'] == 7 || $_SESSION['rol']==6){ ?> <!-- Si es Admin o Operador-->
+  <?php encabezado() ?> <!-- Poner el header -->
 
 		<div class="app-wrapper">
 			<div class="app-content pt-3 p-md-3 p-lg-4">
@@ -46,10 +44,10 @@
 										</form>		
 										<form action="<?php echo base_url(); ?>Indicadores/elimina_Archivo" method="post" class="subir" style="position: relative;">											
 											<script>
-document.getElementById("fecha").addEventListener("input", function() {
-  var valorFecha1 = document.getElementById("fecha").value;
-  document.getElementById("fecha2").value = valorFecha1;
-});
+												document.getElementById("fecha").addEventListener("input", function() {
+												  var valorFecha1 = document.getElementById("fecha").value;
+												  document.getElementById("fecha2").value = valorFecha1;
+												});
 											</script>
 											<input type="date"  id="fecha2" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
 											<?php if($_SESSION['rol']==7){ ?>
@@ -222,6 +220,7 @@ document.getElementById("fechaId").addEventListener("input", function() {
 			</div>
 		</div>
 
-	<?php } ?>
-
-	<?php pie() ?> <!-- Pone el fotter -->
+<?php }  else { ?> <!-- En caso de ser valido -->
+  <?php permisos() ?> <!-- Poner el mensaje de erro -->
+<?php } ?>
+<?php pie() ?> <!-- Pone el fotter -->

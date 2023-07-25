@@ -309,6 +309,8 @@ $(document).ready(function () {
     }).then((result) => {
       if (result.isConfirmed) {
         this.submit();
+      var contenedor = document.getElementById("pantalla-carga");
+      contenedor.style.visibility = "visible";
       }
     });
   });
@@ -327,6 +329,8 @@ $(".subirank").submit(function (e) {
   }).then((result) => {
     if (result.isConfirmed) {
       this.submit();
+      var contenedor = document.getElementById("pantalla-carga");
+      contenedor.style.visibility = "visible";
     }
   });
 });

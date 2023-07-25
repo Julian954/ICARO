@@ -170,9 +170,9 @@
                     <?php foreach ($data3 as $neg) { ?>
                     <tr>
                       <?php if (substr($neg['clave'],0, 3) == "010") { ?>
-                        <td class="font-weight-bold"><?= substr($neg['clave'],0, 3); ?></td>
+                        <td class="font-weight-bold"><?= substr($neg['clave'],6, 4); ?></td>
                       <?php } else {?>
-                        <td class="font-weight-bold text-info"><?= substr($neg['clave'],0, 3); ?></td>
+                        <td class="font-weight-bold text-info"><?= substr($neg['clave'],6, 4); ?></td>
                       <?php } ?>
                       <td><?= ucfirst(strtolower($neg['des_corta'])); ?></td>
                       <td><?= number_format($neg['cmp'],0,'.',','); ?></td>
@@ -292,7 +292,7 @@
 
       <div class="row g-4 mb-4">
         <div class="col-12 col-lg-6">
-          <div class="app-card app-card-progress-list h-100 shadow-sm">
+          <div class="app-card app-card-progress-list shadow-sm">
             <div class="app-card-header p-3">
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
@@ -323,7 +323,7 @@
               <?php } ?>
             </div><!--//app-card-body-->
             <div class="app-card-footer">
-              <span style="font-size:12px;"class="text-muted px-3">*Actualizado al <?= $data5[0]['fecha']?></span>
+              <span style="font-size:12px;"class="text-muted px-3">*Actualizado al <?= $data8[0]['fecha']?></span>
             </div><!--//app-card footer-->
           </div><!--//app-card-->
         </div><!--//col-12 col-lg-6-->

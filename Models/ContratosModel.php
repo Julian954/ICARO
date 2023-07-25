@@ -352,6 +352,34 @@
 
             return $return;
         }
+        //actualizar devengo
+        public function actualizadevengo(int $devengo, string $contrato)
+        {
+            $return = "";
+            $this->contrato = $contrato;
+            $this->devengo = $devengo;
+            $query = "UPDATE contratos SET devengo = ? WHERE numero=?";       
+            $data = array($this->devengo, $this->contrato);
+            $resul = $this->update($query, $data);
+            $return = $resul;
+            return $return;
+        }
+
+    public function actfecha(string $fecha)
+    {
+        $this->fecha = $fecha;
+        $query = "UPDATE configuracion SET fecha=? WHERE id=3";
+        $data = array($this->fecha);
+        $resul = $this->update($query, $data);
+        $return = $resul;
+        return $return;
+    }
+
+        public function devengo(){
+            $sql = "SELECT * FROM configuracion WHERE id=3";
+            $res = $this->select($sql);
+            return $res;
+        }
 
     }
 ?>

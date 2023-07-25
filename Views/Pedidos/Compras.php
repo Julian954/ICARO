@@ -1,6 +1,6 @@
 <?php encabezado() ?> <!-- Poner el header -->
 
-<?php if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 3 || $_SESSION['rol'] == 4 || $_SESSION['rol'] == 6){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
+<?php if($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2 || $_SESSION['rol'] == 3 || $_SESSION['rol'] == 6){ ?> <!-- valida el rol, si no se cumple muestra el mensaje de error -->
 <div class="page-content2">
     <section>
         <div class="card container-fluid2 text-center">

@@ -77,8 +77,9 @@
             $data3 = $this->model->totalcontratos();
             $data4 = $this->model->tipocontrato();
             $data5 = $this->model->tipoplatformaconv();
-            $data6 = $this->model->PgsBarContr();       
-        $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, $data6);
+            $data6 = $this->model->PgsBarContr(); 
+            $data7 = $this->model->devengo();       
+        $this->views->getView($this, "General", "", $data1, $data2, $data3, $data4, $data5, $data6, $data7);
         }
 
         //Datos para la gráfica de contratos
@@ -400,7 +401,49 @@
             $conn->close();
         }
 
-        
+public function ActualizaeDevengo(){ 
+
+	// Configuración de la conexión a la base de datos
+    $servername = HOST2;
+    $username = DB_USER2;
+    $password = PASS2;
+    $dbname = BD2;
+
+    try {
+        // Crear una nueva conexión PDO
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+
+        // Configurar el modo de error de PDO para mostrar excepciones
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Ejecutar la consulta
+        $sql = "SELECT Z.No_Contrato, SUM(Z.Monto) AS total FROM facturas Z LEFT JOIN bd_fusion Y ON Z.No_Factura=Y.facturas_X AND Z.No_Proveedor=Y.no_prov LEFT JOIN bd_chava X ON X.Comprobante=Y.contrarecivo_X  
+            WHERE 
+            (
+            ((Z.SelX2 != '6' OR Z.SelX2 IS NULL) AND X.`Estado Entrada` = 'P' AND X.`Estado Ppto` = 'V' AND  X.`Estado Aprobación` = 'A' AND X.`Fecha Pago` IS NULL)
+            OR
+            ((Z.SelX2 != '6' OR Z.SelX2 IS NULL) AND X.`Estado Entrada` = 'P' AND (X.`Estado Ppto` = 'N' OR X.`Estado Ppto` = 'V') AND  X.`Estado Aprobación` = 'P' AND (Z.SelX2 <> '3' OR Z.SelX2 IS NULL) AND X.`Fecha Prog Pago` >= '2023-07-06')
+            OR
+            ((Z.SelX2 != '6' OR Z.SelX2 IS NULL) AND X.`Estado Entrada` = 'P' AND X.`Estado Ppto` = 'V' AND  X.`Estado Aprobación` = 'A' AND X.`Fecha Pago` IS NOT NULL)
+            )
+             GROUP BY Z.No_Contrato";
+        $querry = $conn->prepare($sql);
+        $querry->execute();
+        $data1 = $querry->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($data1 as $devengo) {
+            $actualiza = $this->model->actualizadevengo($devengo['total'], $devengo['No_Contrato']);
+        }
+       $conn = null;
+    } catch (PDOException $e) {
+       echo "Error de conexión: " . $e->getMessage();
+    }
+        $hoy = date('Y-m-d');
+        $fecha = $this->model->actfecha($hoy);
+        $alert = 'devengo';
+        header("location: " . base_url() . "Contratos/General?msg=$alert");
+        die();
+}
         
     }
 ?>
