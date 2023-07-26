@@ -128,34 +128,6 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
     }
     //hasta aqui son las unidades
 
-    public function insertar_datos($datos, string $fecha) {
-        array_splice($datos, 0, 11);
-        foreach ($datos as $fila) {
-          $nopedido = $fila[4]??'';//E
-          $tipo = $fila[7]??'';//H
-          $gen = $fila[8]??'';//i
-          $clave = $fila[9]??'';//J
-          $dif= $fila[10]??'';//K
-          $var= $fila[11]??'';//L
-          $topn = $tipo . $gen . $clave . $dif . $var; //H-L
-          $cantidad = $fila[25]??'';//Z
-          $proveedor = $fila[28]??'';//AC
-          $noalta = $fila[34]??'';//AI
-          $fechai = $datos[30]??'';//AE
-          $fecha_inicio = DateTime::createFromFormat('m-d-Y', $fechai)->format('Y/m/d');
-          $fecha_alta = $fila[33] ?? ''; //AH
-          $monto = $fila[42] ?? '';//AQ
-          $pagado = $fila[44] ?? '';//AS
-          $this->fecha = $fecha;
-
-          if (!empty($nopedido) && !empty($tipo) && !empty($proveedor) && !empty($topn)) {
-          // Insertar los datos en la base de datos
-          $query = "INSERT INTO pedidos(nopedido, tipo, clave, noalta, proveedor, fecha_inicio,cantidad, topn, fecha_alta, monto, pagado , fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-          $data = array($nopedido, $tipo, $clave, $noalta, $proveedor, $fecha_inicio, $cantidad, $topn, $fecha_alta,$monto, $pagado , $this->fecha);
-          $resul = $this->insert($query, $data); //insert es para agregar un registro
-          }
-        }
-    }
     public function eliminar_datos(string $fecha)
     {
             $this->fecha = $fecha;
@@ -175,14 +147,17 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         return $return;
     }
 
-    public function subir_datos(string $nopedido, string $tipo, string $clave, string $noalta, string $proveedor, string $fecha_inicio ,int $cantidad, string $topn, string $eta,string $fecha_alta, float $monto, float $pagado, string $fecha) {
+    public function subir_datos(string $nopedido, string $tipo, string $clave, string $noalta, string $proveedor, string $fechai ,int $cantidad, string $topn, string $eta,string $fecha_alta, float $monto, float $pagado, string $fecha) {
         $return = "";
         $this->nopedido = $nopedido;
         $this->tipo = $tipo;
         $this->clave = $clave; 
         $this->noalta = $noalta;
         $this->proveedor = $proveedor;
-        $this->fecha_inicio = $fecha_inicio;
+        $fecha_date = DateTime::createFromFormat('m/d/Y', $fechai); // Crear un objeto DateTime a partir de la cadena
+        $fecha_formatted = $fecha_date->format('Y/m/d'); // Formatear la fecha en 'year/month/day'
+
+        $this->fecha_inicio = $fecha_formatted;
         $this->cantidad = $cantidad;
         $this->topn = $topn;
         $this->eta = $eta;

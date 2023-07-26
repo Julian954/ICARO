@@ -149,10 +149,6 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
                 $cantidad = intval($cantidad);
                 $proveedor = $datos[28]??'';//AC
                 $fechai = $datos[30]??'';//AE
-                $fecha_inicio = DateTime::createFromFormat('j/n/Y', $fechai);
-                if ($fecha_inicio) {
-                    $fecha_inicio = $fecha_inicio->format('Y-m-d'); // Imprime: 2023-05-22
-                }
                 $noalta = $datos[34]??'';//AI
                 $eta = $datos[31] ?? ''; //AH
                 $fecha_alta = $datos[33] ?? ''; //AH
@@ -161,7 +157,7 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
                 $pagado = $datos[44] ?? '';//AS 
                 $pagado = floatval($pagado);
                 if ($nopedido != "" && $tipo != "" && $gen != "" && $clave != "" && $dif != "" && $var != "" && $cantidad != "" && $proveedor != "" && $monto != "" && $pagado != "" && $eta != ""){
-                    $insert = $this->model->subir_datos($nopedido, $tipo, $clave, $noalta, $proveedor, $fecha_inicio, $cantidad, $topn, $eta, $fecha_alta, $monto, $pagado, $fecha);
+                    $insert = $this->model->subir_datos($nopedido, $tipo, $clave, $noalta, $proveedor, $fechai, $cantidad, $topn, $eta, $fecha_alta, $monto, $pagado, $fecha);
                     $a++;
                 } else{
                     $e++;

@@ -93,11 +93,11 @@
                     }
                 }
                 $data = $this->model->selectAdmin();
-                $asunto = 'Creación de Requerimiento';
+                $asunto = 'Creacion de Requerimiento';
                 foreach ($data as $admin) {
                     $correo = $admin['correo'];
                     $nombre = $admin['nombre'];
-                    $msg = $_SESSION['nombre'].' ha creado el requerimiento '.$oficio.' y está esperando a que le asignes un responsable. Puedes contactarte con el usuario mediante el siguiente correo: '.$_SESSION['correo'];
+                    $msg = $_SESSION['nombre'].' ha creado el requerimiento '.$oficio.' y esta esperando a que le asignes un responsable. Puedes contactarte con el usuario mediante el siguiente correo: '.$_SESSION['correo'];
                     correo($msg, $asunto, $correo, $nombre);
                     $noti = $this->model->notifica($asunto, $msg, $admin['id']);
                 }
@@ -271,7 +271,7 @@
                 foreach ($data as $admin) {
                     $correo = $admin['correo'];
                     $nombre = $admin['nombre'];
-                    $msg = $_SESSION['nombre'].' ha validado el requerimiento '.$oficio.' y está esperando a que lo formalices.';
+                    $msg = $_SESSION['nombre'].' ha validado el requerimiento '.$oficio.' y esta esperando a que lo formalices.';
                     correo($msg, $asunto, $correo, $nombre);
                     $noti = $this->model->notifica($asunto, $msg, $admin['id']);
                 }
@@ -288,7 +288,7 @@
                 $requerimiento = $this->model->selectReq($number);
                 $data = $this->model->selectUsuario($requerimiento['id_creador']);
                 $msg = 'Se ha formalizado el requerimiento '.$number.'.';
-                $asunto = 'Formalización de Rquerimiento';
+                $asunto = 'Formalizacion de Requerimiento';
                 $correo = $data['correo'];
                 $nombre = $data['nombre'];
                 correo($msg, $asunto, $correo, $nombre);

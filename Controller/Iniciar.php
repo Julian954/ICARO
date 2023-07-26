@@ -50,12 +50,12 @@
         $data = $this->model->selectUsuarioC($correo);
         if ($data != null) {
 
-            $asunto = 'Restablecer Contraseña';
+            $asunto = 'Restablecer Contrasena';
             $id = $data['id'];
             $hash = $data['clave'];
             $correo = $data['correo'];
             $nombre = $data['nombre'];
-            $msg = 'PARA RECUPERAR TU CONTRASEÑA INGRESA AL ENLACE <br><br>'."<a href='".base_url()."Login/change?id=$id&hash=$hash&nombre=$nombre"."'> CAMBIAR </a>";
+            $msg = 'PARA RECUPERAR TU CONTRASENA INGRESA AL ENLACE <br><br>'."<a href='".base_url()."Login/change?id=$id&hash=$hash&nombre=$nombre"."'> CAMBIAR </a>";
             correo($msg, $asunto, $correo, $nombre);
             $alert =  'enviado';
         } else {

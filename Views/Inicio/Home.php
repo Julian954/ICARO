@@ -167,7 +167,11 @@
                     </tr>
                   </thead>
 							    <tbody>
-                    <?php foreach ($data3 as $neg) { ?>
+                    <?php foreach ($data3 as $neg) {
+                    $unidades = number_format($neg['unidades'],0,'.',','); 
+                    $almacen = number_format($neg['almacen'],0,'.',',');
+                    $total = miles($neg['unidades']+$neg['almacen']);
+                     ?>
                     <tr>
                       <?php if (substr($neg['clave'],0, 3) == "010") { ?>
                         <td class="font-weight-bold"><?= substr($neg['clave'],6, 4); ?></td>
@@ -178,9 +182,6 @@
                       <td><?= number_format($neg['cmp'],0,'.',','); ?></td>
                       <td><?= number_format($neg['consumo'],0,'.',','); ?></td>
                       <?php if ($neg['unidades']+$neg['almacen'] < $neg['cmp']) { 
-                        $unidades = number_format($neg['unidades'],0,'.',','); 
-                        $almacen = number_format($neg['almacen'],0,'.',',');
-                        $total = miles($neg['unidades']+$neg['almacen']);
                         ?>
                         <td>
                           <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Unidades: <?=$unidades;?>. Almacén: <?=$almacen;?>.">

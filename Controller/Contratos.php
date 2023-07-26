@@ -54,7 +54,7 @@
                 //Si se agrega te redirige a la vista "General" con un mensaje de alerta.
 
                 $data = $this->model->selectUsuario($requiriente);
-                $asunto = 'Creación de Contrato';
+                $asunto = 'Creacion de Contrato';
                 $correo = $data['correo'];
                 $nombre = $data['nombre'];
                 $msg = $_SESSION['nombre'].' Ha creado el contrato '.$numero.' y te puso como requiriente. puedes contactar con el usuario en el siguiente correo: '.$_SESSION['correo'];
@@ -129,10 +129,10 @@
             } else if ($insert > 0) {
 
             $data = $this->model->selectUsuario($tu);
-            $asunto = 'Validación de Contrato';
+            $asunto = 'Validacion de Contrato';
             $correo = $data['correo'];
             $nombre = $data['nombre'];
-            $msg = $_SESSION['nombre'].' Te ha solicitado la validación del contrato '.$number.'. puedes contactar con el usuario mediante el correo: '.$_SESSION['correo'].' o en el foro del contrato.';
+            $msg = $_SESSION['nombre'].' Te ha solicitado la validacion del contrato '.$number.'. puedes contactar con el usuario mediante el correo: '.$_SESSION['correo'].' o en el foro del contrato.';
             correo($msg, $asunto, $correo, $nombre);
             $noti = $this->model->notifica($asunto, $msg, $tu);
 
@@ -306,7 +306,7 @@
 
             $cont = $this->model->selectReq($number);
             $data = $this->model->selectUsuario($cont['id_creador']);
-            $asunto = 'Validación de Contrato';
+            $asunto = 'Validacion de Contrato';
             $correo = $data['correo'];
             $nombre = $data['nombre'];
             $msg = $_SESSION['nombre'].' ha formalizado el contrato '.$numero.'. en el que estás como administrador.';
@@ -315,7 +315,7 @@
 
             $cont = $this->model->cont($number);
             $data = $this->model->selectUsuario($cont['requiriente']);
-            $asunto = 'Validación de Contrato';
+            $asunto = 'Validacion de Contrato';
             $correo = $data['correo'];
             $nombre = $data['nombre'];
             $msg = $_SESSION['nombre'].' ha formalizado el contrato '.$numero.'. en el que estás como requiriente.';
@@ -432,7 +432,9 @@ public function ActualizaeDevengo(){
         $data1 = $querry->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($data1 as $devengo) {
-            $actualiza = $this->model->actualizadevengo($devengo['total'], $devengo['No_Contrato']);
+            if ($devengo['total'] != null && $devengo['No_Contrato'] != null) {
+                $actualiza = $this->model->actualizadevengo($devengo['total'], $devengo['No_Contrato']);
+            } 
         }
        $conn = null;
     } catch (PDOException $e) {

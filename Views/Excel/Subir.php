@@ -99,10 +99,10 @@
 											<script>
 document.getElementById("fechas").addEventListener("input", function() {
   var valorFecha1 = document.getElementById("fechas").value;
-  document.getElementById("fecha2").value = valorFecha1;
+  document.getElementById("fecha20").value = valorFecha1;
 });
 											</script>
-											<input type="date"  id="fecha2" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
+											<input type="date"  id="fecha20" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
 											<?php if($_SESSION['rol']==7){ /*duda en dejar o no el eliminar el rank*/?>
 											<button class="btn btn-danger" type="submit" id="eliminararchivo" style="position: absolute;bottom: 24px;left: 180px;"><i class="fas fa-trash"></i> Eliminar Documento</button>
 											<?php } ?>
@@ -148,10 +148,10 @@ document.getElementById("fechas").addEventListener("input", function() {
 											<script>
 document.getElementById("fecha1").addEventListener("input", function() {
   var valorFecha1 = document.getElementById("fecha1").value;
-  document.getElementById("fecha2").value = valorFecha1;
+  document.getElementById("fecha22").value = valorFecha1;
 });
 											</script>
-											<input type="date"  id="fecha2" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
+											<input type="date"  id="fecha22" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
 											<?php if($_SESSION['rol']==7){ /*duda en dejar o no el eliminar el rank*/?>
 											<button class="btn btn-danger" type="submit" id="eliminararchivo" style="position: absolute;bottom: 23px;left: 170px;"><i class="fas fa-trash"></i> Eliminar Documento</button>
 											<?php } ?>
@@ -203,10 +203,10 @@ document.getElementById("fecha1").addEventListener("input", function() {
 											<script>
 document.getElementById("fechaId").addEventListener("input", function() {
   var valorFecha1 = document.getElementById("fechaId").value;
-  document.getElementById("fecha2").value = valorFecha1;
+  document.getElementById("fecha24").value = valorFecha1;
 });
 											</script>
-											<input type="date"  id="fecha2" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
+											<input type="date"  id="fecha24" class="form-control" name="fecha2" value="" require style="display:none;" readonly><br>
 											<?php if($_SESSION['rol']==7){ ?>
 											<button class="btn btn-danger" type="submit" id="eliminararchivo" style="position: absolute;bottom: 24px;left: 180px;"><i class="fas fa-trash"></i> Eliminar Documento</button>
 											<?php } ?>
