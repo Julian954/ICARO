@@ -150,7 +150,7 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
 
           if (!empty($nopedido) && !empty($tipo) && !empty($proveedor) && !empty($topn)) {
           // Insertar los datos en la base de datos
-          $query = "INSERT INTO pedidos(nopedido, tipo, clave, noalta, proveedor, fecha_inicio, cantidad, topn, fecha_alta, monto, pagado , fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          $query = "INSERT INTO pedidos(nopedido, tipo, clave, noalta, proveedor, fecha_inicio,cantidad, topn, fecha_alta, monto, pagado , fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
           $data = array($nopedido, $tipo, $clave, $noalta, $proveedor, $fecha_inicio, $cantidad, $topn, $fecha_alta,$monto, $pagado , $this->fecha);
           $resul = $this->insert($query, $data); //insert es para agregar un registro
           }
@@ -175,7 +175,7 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         return $return;
     }
 
-    public function subir_datos(string $nopedido, string $tipo, string $clave, string $noalta, string $proveedor, string $fecha_inicio ,string $cantidad, string $topn, string $eta,string $fecha_alta, string $monto, string $pagado, string $fecha) {
+    public function subir_datos(string $nopedido, string $tipo, string $clave, string $noalta, string $proveedor, string $fecha_inicio ,string $cantidad, string $topn, string $eta,string $fecha_alta, float $monto, float $pagado, string $fecha) {
         $return = "";
         $this->nopedido = $nopedido;
         $this->tipo = $tipo;
