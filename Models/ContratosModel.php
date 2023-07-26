@@ -139,14 +139,14 @@
 
         public function chart_pies()
         {
-            $sql = "SELECT SUM(contratos.devengo) AS devengo, (SUM(contratos.maximo)-devengo) AS total FROM contratos WHERE contratos.estado = 4;";
+            $sql = "SELECT SUM(contratos.devengo) AS devengo, (SUM(contratos.maximo)- SUM(contratos.devengo)) AS total FROM contratos WHERE contratos.estado = 4;";
             $res = $this->select_all($sql);
             return $res;
         }
 
         public function chart_pie2s()
         {
-            $sql = "SELECT SUM(contratos.devengo) AS devengo, (SUM(contratos.maximo)-devengo) AS total FROM contratos";
+            $sql = "SELECT SUM(contratos.devengo) AS devengo, (SUM(contratos.maximo)-SUM(contratos.devengo)) AS total FROM contratos";
             $res = $this->select_all($sql);
             return $res;
         }
