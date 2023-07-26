@@ -175,7 +175,7 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         return $return;
     }
 
-    public function subir_datos(string $nopedido, string $tipo, string $clave, string $noalta, string $proveedor, string $fecha_inicio ,string $cantidad, string $topn, string $eta,string $fecha_alta, float $monto, float $pagado, string $fecha) {
+    public function subir_datos(string $nopedido, string $tipo, string $clave, string $noalta, string $proveedor, string $fecha_inicio ,int $cantidad, string $topn, string $eta,string $fecha_alta, float $monto, float $pagado, string $fecha) {
         $return = "";
         $this->nopedido = $nopedido;
         $this->tipo = $tipo;
