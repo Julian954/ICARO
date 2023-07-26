@@ -4,8 +4,8 @@
     const HOST ="localhost";
     const BD = "icaro";
     const DB_USER = "root";
-    const PASS = "";
-    const CHARSET = "charset=utf8";
+    const PASS = "Julian2502";
+    const CHARSET = "charset=utf8mb4";
 
     //DEVENGO
     const HOST2 ="localhost";

@@ -146,6 +146,7 @@ class Pedidos extends Controllers //Aquí se debe llamas igual que el archivo
                 $var= $datos[11]??'';//L
                 $topn = $tipo . $gen . $clave . $dif . $var; //H-L
                 $cantidad = $datos[25]??'';//Z
+                $cantidad = intval($cantidad);
                 $proveedor = $datos[28]??'';//AC
                 $fechai = $datos[30]??'';//AE
                 $fecha_inicio = DateTime::createFromFormat('j/n/Y', $fechai);
