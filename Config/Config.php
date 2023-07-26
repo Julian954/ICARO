@@ -4,7 +4,7 @@
     const HOST ="localhost";
     const BD = "icaro";
     const DB_USER = "root";
-    const PASS = "";
+    const PASS = "admin";
     const CHARSET = "charset=utf8";
 
     //DEVENGO

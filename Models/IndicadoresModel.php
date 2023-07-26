@@ -63,7 +63,7 @@ class IndicadoresModel extends Mysql{ //El archivo se debe llamar igual que el c
 
     public function ranking()
     {
-        $sql = "SELECT (SUM(presentadas)-SUM(negadas))/SUM(presentadas)*100 AS colima, AVG(atencion) AS nacional,  MONTHNAME(fecha) AS mname, MONTH(fecha) AS mes FROM (SELECT fecha, negadas, presentadas, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS negadas, NULL AS presentadas, atencion FROM nacional) AS datos_totales GROUP BY mes";
+        $sql = "SELECT (SUM(presentadas)-SUM(negadas))/SUM(presentadas)*100 AS colima, AVG(atencion) AS nacional, DATE_FORMAT(fecha, '%M') AS mname, MONTH(fecha) AS mes FROM (SELECT fecha, negadas, presentadas, NULL AS atencion FROM indicadores UNION ALL SELECT fecha, NULL AS negadas, NULL AS presentadas, atencion FROM nacional) AS datos_totales GROUP BY mes, mname;";
         $res = $this->select_all($sql); 
         return $res;
     }
