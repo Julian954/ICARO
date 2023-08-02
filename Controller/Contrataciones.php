@@ -227,25 +227,46 @@
                 }
             }
             if ($contrato['id_creador'] == $yo) {
-                $data = $this->model->selectUsuario($contrato['id_validador']);
-                $msg = $_SESSION['nombre'].' te ha respondido en el foro del requerimiento '.$number.'.';
-                $usuario = $contrato['id_validador'];
+                if ($contrato['id_validador'] != null) {
+                    $data = $this->model->selectUsuario($contrato['id_validador']);
+                    $msg = $_SESSION['nombre'].' te ha respondido en el foro del requerimiento '.$number.'.';
+                    $usuario = $contrato['id_validador'];
+                    $asunto = 'Respuesta Foro';
+                    $correo = $data['correo'];
+                    $nombre = $data['nombre'];
+                    correo($msg, $asunto, $correo, $nombre);
+                    $noti = $this->model->notifica($asunto, $msg, $usuario);
+                } else {
+                    $data = $this->model->selectAdmin();
+                    $asunto = 'Requerimiento por Asignar';
+                    foreach ($data as $admin) {
+                        $correo = $admin['correo'];
+                        $nombre = $admin['nombre'];
+                        $msg = $_SESSION['nombre'].' ha respondido en el foro del requerimiento '.$number.' y aun no asignas un validador.';
+                        correo($msg, $asunto, $correo, $nombre);
+                        $noti = $this->model->notifica($asunto, $msg, $admin['id']);
+                    }
+                }
             } elseif ($contrato['id_validador'] == $yo) {
                 $data = $this->model->selectUsuario($contrato['id_creador']);
                 $msg = $_SESSION['nombre'].' te ha respondido en el foro del requerimiento '.$number.'.';
                 $usuario = $contrato['id_creador'];
-            } else {
-                $data = $this->model->selectUsuario($contrato['id_creador']);
-                $msg = 'Un administrador te ha respondido en el foro del requerimiento '.$number.'.';
-                $usuario = $contrato['id_creador'];
-            }
                 $asunto = 'Respuesta Foro';
                 $correo = $data['correo'];
                 $nombre = $data['nombre'];
                 correo($msg, $asunto, $correo, $nombre);
                 $noti = $this->model->notifica($asunto, $msg, $usuario);
-            
-            
+            } else {
+                $data = $this->model->selectUsuario($contrato['id_creador']);
+                $msg = 'Un administrador te ha respondido en el foro del requerimiento '.$number.'.';
+                $usuario = $contrato['id_creador'];
+                $asunto = 'Respuesta Foro';
+                $correo = $data['correo'];
+                $nombre = $data['nombre'];
+                correo($msg, $asunto, $correo, $nombre);
+                $noti = $this->model->notifica($asunto, $msg, $usuario);
+            }
+        
             $alert =  'Registrado';              
             header("location: " . base_url() . "Contrataciones/Foro?contrato=$number&msg=$alert");
             die();

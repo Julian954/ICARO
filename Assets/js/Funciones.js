@@ -153,6 +153,8 @@ $(document).ready(function () {
     id = parseInt(fila.find("td:eq(0)").text()); //capturo el ID
     contrato = fila.find("td:eq(1)").text();
     monto = fila.find("td:eq(7)").text();
+    input = document.getElementById("monto2");
+    input.max = monto;
     $("#id").val(id);
     $("#contrato").val(contrato);
     $("#monto2").val(monto);

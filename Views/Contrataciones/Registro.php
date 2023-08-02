@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-group">
                   <label for="setting-input-3" class="form-label" style="color:#000000;">Monto Máximo $</label>
-                  <input type="number" class="form-control" id="Maximo" name="Maximo" value="" required="required">
+                  <input type="number" class="form-control" id="Maximo" name="Maximo"  required="required">
                 </div>
                 <div class="form-group">
                   <label for="setting-input-2" class="form-label" style="color:#000000;">Comentarios</label>

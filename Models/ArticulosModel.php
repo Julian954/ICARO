@@ -91,10 +91,16 @@ class ArticulosModel extends Mysql
         foreach ($datos as $fila) {
             $clave = $fila[2] ?? ''; // Valor de la columna "GPO" en el archivo CSV
             $descripcion = $fila[8] ?? ''; // Valor de la columna "ESP" en el archivo CSV
+            if (strlen($descripcion) > 1000) {
+                $descripcion = mb_substr($descripcion, 0, 1000);
+            }
             $cantidad = $fila[10] ?? ''; // Valor de la columna cantidad
             $cantidad = intval($cantidad);
-            $corta = substr($descripcion, 0, 20);
-        
+            if (strlen($descripcion) > 30) {
+                $corta = mb_substr($descripcion, 0, 30);
+            } else {
+                $corta = $descripcion;
+            }
             // Verificar si los campos clave y descripción están vacíos
             if (empty($clave) || empty($descripcion)) {
                 continue; // Si alguno de los campos está vacío, se pasa a la siguiente fila sin agregar el registro
@@ -115,7 +121,7 @@ class ArticulosModel extends Mysql
                 $resul = $this->insert($query, $data); // insert es para agregar un registro
             }
             $return++;
-            if (time() - $startTime >= 550) {
+            if (time() - $startTime >= 850) {
                 break; // Salir del bucle si ha pasado el tiempo límite.
             }
         }

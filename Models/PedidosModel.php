@@ -154,7 +154,7 @@ class PedidosModel extends Mysql{ //El archivo se debe llamar igual que el contr
         $this->clave = $clave; 
         $this->noalta = $noalta;
         $this->proveedor = $proveedor;
-        $fecha_date = DateTime::createFromFormat('m/d/Y', $fechai); // Crear un objeto DateTime a partir de la cadena
+        $fecha_date = DateTime::createFromFormat('d/m/Y', $fechai); // Crear un objeto DateTime a partir de la cadena
         $fecha_formatted = $fecha_date->format('Y/m/d'); // Formatear la fecha en 'year/month/day'
 
         $this->fecha_inicio = $fecha_formatted;

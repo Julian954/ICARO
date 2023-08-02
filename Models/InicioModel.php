@@ -51,7 +51,7 @@ class InicioModel extends Mysql{
     }
     public function pedidos()
     {
-        $ordenar ="SELECT SUM(monto) AS monto, SUM(pagado) AS pagado, MONTHNAME(fecha_inicio) AS mes, MONTH(fecha_inicio) AS nom FROM pedidos GROUP BY mes, nom;";
+        $ordenar ="SELECT SUM(monto) AS monto, SUM(pagado) AS pagado, MONTHNAME(fecha_inicio) AS mes, MONTH(fecha_inicio) AS nom FROM pedidos GROUP BY mes, nom ORDER BY nom ASC;";
         $res = $this->select_all($ordenar);
         return $res;
     }
