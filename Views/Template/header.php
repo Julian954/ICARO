@@ -8,7 +8,7 @@
 	    <meta name="author" content="">
 	    <meta name="robots" content="all,follow">
 
-	    <title>MARYS OOARD Colima</title>
+	    <title>ICARO OOARD Colima</title>
 
 	    <!-- theme stylesheet-->
 		<link rel="stylesheet" href="<?= base_url(); ?>Assets/css/bootstrap.min.css">

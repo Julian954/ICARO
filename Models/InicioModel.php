@@ -25,7 +25,7 @@ class InicioModel extends Mysql{
     //Selecciona las negadas más recientes
     public function top15negadas()
     {
-        $sql = "SELECT negadas.*, catalogo.des_corta FROM negadas, catalogo WHERE negadas.clave = catalogo.clave AND negadas.fecha = (SELECT MAX(fecha) FROM negadas)";
+        $sql = "SELECT negadas.*, catalogo.des_corta FROM negadas, catalogo WHERE negadas.clave = catalogo.clave AND negadas.fecha = (SELECT MAX(fecha) FROM negadas) ORDER BY negadas DESC";
         $res = $this->select_all($sql);
         return $res;
     }
@@ -197,7 +197,7 @@ class InicioModel extends Mysql{
     public function ordenarnegad(string $fechaN)
     {
         $this->fecha = $fechaN;
-        $ordenar ="SELECT * FROM `negadas` WHERE fecha='{$this->fecha}'  ORDER BY `negadas`.`negadas` DESC";
+        $ordenar ="SELECT * FROM negadas WHERE fecha='{$this->fecha}' ORDER BY negadas DESC, clave";
         $res= $this->select_all($ordenar);
         return $res;
     }
@@ -505,8 +505,8 @@ class InicioModel extends Mysql{
             $unops = $fila[53] ?? '';
             $ooad = $fila[54] ?? '';
             $pedidos = $fila[55] ?? '';
-            $transooad = $fila[56] ?? '';
-            $fecha_inc = $fila[82] ?? '';
+            $transooad = $fila[51] ?? '';
+            $fecha_inc = $fila[63] ?? '';
             $fechaN = $fecha;
 
             if(!empty($clave) && !empty($negadas) && ($negadas != 0)){    
@@ -538,7 +538,30 @@ class InicioModel extends Mysql{
             $return = $resul;
             return $return;
         }
+
+        public function selectColores(){
+            $sql = "SELECT * FROM colores";
+            $res = $this->select_all($sql);
+            return $res; 
+        }
     
+        public function AgregarColor(string $color){
+            $return = "";
+            $this->Color = $color;
+            $query = "INSERT INTO colores(codigo) VALUES (?)";
+            $data = array($this->Color);
+            $resul = $this->insert($query, $data);
+            return $resul;
+        }
     
+        public function eliminarColor(int $id)
+        {
+            $return = "";
+            $this->id = $id;
+            $query = "DELETE FROM colores WHERE id= '{$this->id}'";
+            $resul = $this->delete($query);
+            $return = $resul;
+            return $return;
+        }
 }
 ?>

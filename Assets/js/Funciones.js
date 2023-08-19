@@ -233,6 +233,24 @@ $(document).ready(function () {
     });
   });
 
+    //Mensaje de alerta al no formalizar
+    $(".noforma").submit(function (e) {
+      e.preventDefault();
+      Swal.fire({
+        title: "¿Está seguro de No Formalizar el Instrumento?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#28a745",
+        cancelButtonColor: "#dc3545",
+        confirmButtonText: "Si",
+        cancelButtonText: "No",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.submit();
+        }
+      });
+    });
+
   //Mensaje de alerta al validar
   $(".validar").submit(function (e) {
     e.preventDefault();
@@ -417,12 +435,27 @@ function BarrasAtencion() {
     type: "POST",
     success: function (response) {
       var data = JSON.parse(response);
-      var nombre = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+      var fechas = [];
+
+      // Calcular los últimos 5 días hábiles (excluyendo sábados y domingos)
+      var today = new Date();
+      today.setDate(today.getDate() - 1); // Retroceder un día
+      var daysCount = 0;
+      while (daysCount < 5) {
+        if (today.getDay() !== 0 && today.getDay() !== 6) { // Excluir sábado (6) y domingo (0)
+          fechas.push(formatDate(today)); // Agregar la fecha formateada a fechas
+          daysCount++;
+        }
+        today.setDate(today.getDate() - 1); // Retroceder un día
+      }
+      
+      fechas.reverse(); // Invertir el orden para mostrar las fechas más recientes primero
+
       var nacional = [];
       var colima = [];
       for (var i = 0; i < data.length; i++) {
-        nacional.push(data[i]["mnacional"]);
-        colima.push(data[i]["colima"]);
+        nacional.push(parseFloat(data[i]["mnacional"]).toFixed(2));
+        colima.push(parseFloat(data[i]["colima"]).toFixed(2));
       }
       // Set new default font family and font color to mimic Bootstrap's default styling
       Chart.defaults.global.defaultFontFamily =
@@ -442,7 +475,7 @@ function BarrasAtencion() {
         data: nacional,
         borderDash: [3, 5],
         backgroundColor: "rgba(0, 168, 198, 0.0)", // Color de fondo
-        borderColor: "rgba(0, 168, 198, 1)", // Color del borde
+        borderColor: "rgba(255, 0, 0, 1)", // Color del borde
         borderWidth: 1, // Ancho del borde
       };
 
@@ -451,7 +484,7 @@ function BarrasAtencion() {
       var myLineChart = new Chart(ctx, {
         type: "line",
         data: {
-          labels: nombre,
+          labels: fechas,
           datasets: [Nacional, Colima],
         },
         options: {
@@ -505,6 +538,19 @@ function BarrasAtencion() {
   });
 }
 
+// Función para formatear la fecha como "dd/mm/yyyy"
+function formatDate(date) {
+  var dd = String(date.getDate()).padStart(2, "0");
+  var mm = String(date.getMonth() + 1).padStart(2, "0");
+  var yyyy = date.getFullYear();
+  return dd + "/" + mm + "/" + yyyy;
+}
+
+
+
+
+
+
 function pastelnegadas() {
   $.ajax({
     url: base + "Inicio/pastelnegadas",
@@ -517,46 +563,49 @@ function pastelnegadas() {
         nombre.push(data[i]["abreviacion"]);
         total.push(data[i]["negadas"]);
       }
-      // Set new default font family and font color to mimic Bootstrap's default styling
-      Chart.defaults.global.defaultFontFamily =
-        'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-      Chart.defaults.global.defaultFontColor = "#292b2c";
-      // Pie Chart Example
-      var ctx = document.getElementById("pastelnegadas");
-      var myPieChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-          labels: nombre,
-          datasets: [
-            {
-              data: total,
-              backgroundColor: [
-                "#b0c2f2",
-                "#b0f2c2",
-                "#fcb7af",
-                "#d8f8e1",
-                "#ffe4e1",
-                "#fdf9c4",
-                "#ffda9e",
-                "#c5c6c8",
-                "#b2e2f2",
-                "#fabfb7",
+
+      // Ahora realizamos la segunda solicitud AJAX dentro del bloque success de la primera
+      $.ajax({
+        url: base + "Inicio/pastelcolores",
+        type: "POST",
+        success: function (response) {
+          var datac = JSON.parse(response);
+          var colores = [];
+          for (var i = 0; i < datac.length; i++) {
+            colores.push(datac[i]["codigo"]);
+          }
+
+          // Resto del código para generar el gráfico de pastel
+          Chart.defaults.global.defaultFontFamily =
+            'Montserrat,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+          Chart.defaults.global.defaultFontColor = "#292b2c";
+          var ctx = document.getElementById("pastelnegadas");
+          var myPieChart = new Chart(ctx, {
+            type: "pie",
+            data: {
+              labels: nombre,
+              datasets: [
+                {
+                  data: total,
+                  backgroundColor: colores, // Usamos los colores obtenidos
+                },
               ],
             },
-          ],
-        },
-        options: {
-          responsive: true,
-          legend: {
-            display: true,
-            position: "right",
-            align: "center",
-          },
+            options: {
+              responsive: true,
+              legend: {
+                display: true,
+                position: "right",
+                align: "center",
+              },
+            },
+          });
         },
       });
     },
   });
 }
+
 
 function chart_pie() {
   $.ajax({

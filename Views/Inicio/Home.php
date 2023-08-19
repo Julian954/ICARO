@@ -157,7 +157,7 @@
                 <table class="table app-table-hover mb-0 text-left" id="TableN">
 							    <thead>
 								    <tr>
-                      <th class="cell">GPO</th>
+                      <th class="cell">ESP</th>
                       <th class="cell">Descripción</th>
                       <th class="cell">CPM</th>
                       <th class="cell">Consumo</th>
@@ -196,15 +196,15 @@
                         </td>
                       <?php } ?>
                       <td><?php echo $neg['negadas']; ?></td>
-                      <?php if ($neg['fecha_inc'] == null) { ?>
+                      <?php if ($neg['fecha_inc'] == null || $neg['fecha_inc'] == "0" || $neg['fecha_inc'] == " ") { ?>
                         <td>
-                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'].$neg['fecha_inc'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
                             <span class="badge bg-warning"><?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad']+$neg['pedidos'];?></span>
                           </span>
-                        </td>
+                        </td> 
                       <?php } else { ?>
                         <td>
-                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
+                          <span class="ml-2" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Pedidos Vigentes: <?=$neg['pedidos'].$neg['fecha_inc'];?>. Ordenes de reposición: <?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad'];?>.">
                             <span class="badge bg-danger"><?=$neg['copel']+$neg['unops']+$neg['ooad']+$neg['transooad']+$neg['pedidos'];?></span>
                           </span>
                         </td>
@@ -298,7 +298,7 @@
               <div class="row justify-content-between align-items-center">
                 <div class="col-auto">
                   <h4 class="app-card-title">Avance Del Gasto
-                    <span style="font-weight: normal; font-size: 12px;">(Recibido/Atendido)</span>
+                    <span style="font-weight: normal; font-size: 12px;">(Solicitado/Atendido)</span>
                   </h4>
                 </div><!--//col-auto-->
                 <div class="col-auto">
@@ -360,8 +360,8 @@
                               <tr>
                                 <?php foreach($data7 as $despachos){?>
                                   <td><?= $despachos['abreviacion'];?></td>
-                                  <td><?= $despachos['remision'];?></td>
-                                  <td><span class="badge bg-success"><a class="text-decoration-none text-white" href="<?= base_url().'Assets/Documentos/Despachos/'.$despachos['archivo'];?>" Target="_blank"><?= $despachos['eco'];?></a></span></td>
+                                  <td><span class="badge bg-success"><a class="text-decoration-none text-white" href="<?= base_url().'Assets/Documentos/Despachos/'.$despachos['archivo'];?>" Target="_blank"><?= $despachos['remision'];?></a></span></td>
+                                  <td><?= $despachos['eco'];?></td>
                                   <td><?= substr($despachos['fecha_entrega'],10,6);?></td>
                                   <td>
                                   <?php if($despachos['negadas']==0){?>

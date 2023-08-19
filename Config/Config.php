@@ -1,10 +1,10 @@
 ﻿<?php
     //CREA CONEXION CON LA BASE DE DATOS
-    const BASE_URL = "http://11.1.6.103/icaro/";
+    const BASE_URL = "http://localhost/icaro/";
     const HOST ="localhost";
     const BD = "icaro";
     const DB_USER = "root";
-    const PASS = "icaro";
+    const PASS = "Julian2502";
     const CHARSET = "charset=utf8mb4";
 
     //DEVENGO
@@ -21,5 +21,5 @@
     //PONE EL DOMINIO PARA EL SIDEBAR
     const DOM = "icaro";
     // Establecer un nuevo límite de tiempo de ejecución a 600 segundos (10 minutos)
-    set_time_limit(900);
+    set_time_limit(1800);
 ?>

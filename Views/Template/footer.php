@@ -13,7 +13,7 @@
         <footer class="app-footer">
             <hr class="my-1">
 		    <div class="container text-center py-3">
-                <small class="copyright">Diseño y Desarrollo por OOADR. Coordinación de Abastecimiento y Equipamiento.</small>
+                <small class="copyright">Diseño y Desarrollo por la Coordinación de Abastecimiento y Equipamiento del OOADR del IMSS en colima. .</small>
 		    </div>
 	    </footer><!--//app-footer-->
     </div><!--//app-wrapper-->
@@ -401,6 +401,7 @@
     });
     $(document).ready(function() {
         $('#TableN').DataTable({
+            order: [[5,'desc']],
             responsive: true,
             "lengthChange": false,
             "searching": false,

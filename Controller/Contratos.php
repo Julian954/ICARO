@@ -325,6 +325,33 @@
             header("location: " . base_url() . "Contratos/Foro?contrato=$number");
             die();
         }
+
+        public function noformalizar(){
+            $number = limpiarInput($_GET['contrato']);
+            $estado = 5;
+            $actualizar = $this->model->actualizaEstado($estado, $number);
+
+            $cont = $this->model->selectReq($number);
+            $data = $this->model->selectUsuario($cont['id_creador']);
+            $asunto = 'Descarte de Contrato';
+            $correo = $data['correo'];
+            $nombre = $data['nombre'];
+            $msg = $_SESSION['nombre'].' ha puesto el contrato '.$numero.'. en el que estás como administrador como NO FORMALIZADO.';
+            correo($msg, $asunto, $correo, $nombre);
+            $noti = $noti = $this->model->notifica($asunto, $msg, $cont['id_creador']);
+
+            $cont = $this->model->cont($number);
+            $data = $this->model->selectUsuario($cont['requiriente']);
+            $asunto = 'Validacion de Contrato';
+            $correo = $data['correo'];
+            $nombre = $data['nombre'];
+            $msg = $_SESSION['nombre'].' ha formalizado el contrato '.$numero.'. en el que estás como requiriente como NO FORMALIZADO.';
+            correo($msg, $asunto, $correo, $nombre);
+            $noti = $this->model->notifica($asunto, $msg, $cont['requiriente']);
+
+            header("location: " . base_url() . "Contratos/General?contrato=$number");
+            die();
+        }
         
         public function eliminarano(){
             

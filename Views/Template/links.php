@@ -8,7 +8,7 @@
 	    <meta name="author" content="">
 	    <meta name="robots" content="all,follow">
 
-	    <title>MARYS OOARD Colima</title>
+	    <title>ICARO OOARD Colima | ERROR 404</title>
 
 	    <!-- theme stylesheet-->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/bootstrap.min.css">

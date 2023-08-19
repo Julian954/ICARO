@@ -121,14 +121,21 @@ class ArticulosModel extends Mysql
                 $resul = $this->insert($query, $data); // insert es para agregar un registro
             }
             $return++;
-            if (time() - $startTime >= 850) {
+            if (time() - $startTime >= 1750) {
                 break; // Salir del bucle si ha pasado el tiempo límite.
             }
         }
     
         return $return;
     }
-
+    public function EliminarData()
+    {
+        $return = "";        
+        $query = "TRUNCATE catalogo ";
+        $resul = $this->delete($query);
+        $return = $resul;
+        return $return;
+    }
     
 
 

@@ -9,7 +9,7 @@
     	<meta name="description" content="">
     	<meta name="author" content="">
     	<link rel="shortcut icon" href="<?php echo base_url(); ?>Assets/img/favicon.ico">
-    	<title>Login | ICARO OOARD</title>
+    	<title>ICARO OOARD Colima | Login</title>
 
     	<!-- App CSS -->  
     	<link id="theme-style" rel="stylesheet" href="<?php echo base_url(); ?>Assets/css/portal.css">

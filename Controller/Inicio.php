@@ -30,45 +30,49 @@ class Inicio extends Controllers
     //Datos para la gráfica de clinicas
     public function BarrasAtencion()
     {
-        // Si hoy es lunes, nos daría el lunes pasado.
-        if (date("D")=="Mon"){
-            $week_start = date("Y-m-d", strtotime('last Monday', time()));
-            $week_end = date("Y-m-d",strtotime($week_start.'+ 6 days', time()));
-        } else {
-            $week_start = date("Y-m-d", strtotime('last Monday', time()));
-            $week_end = date("Y-m-d",strtotime('next Sunday', time()));
-        }
         $data = [];
-        $datac = [];
-
-        for ($i=0; $i < 5; $i++) {
-            $colima = $this->model->atencioncolima($week_start);
-            $nacional = $this->model->atencionnacional($week_start);
-            if (isset($colima['colima'])) {
-                if (isset($nacional['mnacional'])) {
-                    $array = ["mnacional" => $nacional['mnacional'], "colima" => $colima['colima']];
-                    $data [$i] = $array;
-                }
-                else {
-                    $array = ["mnacional" => "0", "colima" => $colima['colima']];
-                    $data [$i] = $array;    
-                }
+    
+        // Obtener la fecha de hoy
+        $today = date("Y-m-d");
+        $today = date("Y-m-d", strtotime($today . " -1 day"));
+    
+        // Contador para controlar los últimos 5 días hábiles
+        $daysCount = 0;
+    
+        while ($daysCount < 5) {
+            // Obtener el día de la semana de la fecha actual
+            $dayOfWeek = date("N", strtotime($today));
+    
+            // Si el día de la semana es de lunes a viernes (1 a 5), excluyendo sábados (6) y domingos (7)
+            if ($dayOfWeek <= 5) {
+                $colima = $this->model->atencioncolima($today);
+                $nacional = $this->model->atencionnacional($today);
+    
+                // Construir el arreglo de datos
+                $array = [
+                    "mnacional" => isset($nacional['mnacional']) ? $nacional['mnacional'] : "0",
+                    "colima" => isset($colima['colima']) ? $colima['colima'] : "0"
+                ];
+    
+                // Agregar el arreglo al arreglo de datos principal
+                $data[] = $array;
+    
+                // Incrementar el contador
+                $daysCount++;
             }
-            else {
-                if (isset($nacional['mnacional'])) {
-                    $array = ["mnacional" => $nacional['mnacional'], "colima" => "0"];
-                    $data [$i] = $array;
-                }
-                else {
-                    $array = ["mnacional" => "0", "colima" => "0"];
-                    $data [$i] = $array;
-                }   
-            }
-            $week_start = date("Y-m-d",strtotime($week_start.'+ 1 days', time()));
+    
+            // Restar un día a la fecha actual
+            $today = date("Y-m-d", strtotime($today . " -1 day"));
         }
+    
+        // Invertir el arreglo de datos para que quede en orden ascendente
+        $data = array_reverse($data);
+    
+        // Devolver los datos como JSON
         echo json_encode($data);
         die();
     }
+    
 
     public function DescargarAtencion(){
         $data = $this->model->rankingdiario();
@@ -268,8 +272,9 @@ class Inicio extends Controllers
         $data3 = $this->model->SelectPlataforma();
         $data4 = $this->model->SelectTipoContratacion();
         $data5 = $this->model->selectDictamen();
+        $data6 = $this->model->selectColores();
 
-        $this->views->getView($this, "Configuracion", "", $data1, $data2, $data3, $data4, $data5);
+        $this->views->getView($this, "Configuracion", "", $data1, $data2, $data3, $data4, $data5,$data6);
         die();
     }
 
@@ -470,6 +475,7 @@ class Inicio extends Controllers
         header("location: " . base_url() . "Excel/Subir?msg=$alert");
         die();   
         }
+
     public function subir_archivo() {
         // Verificar si se ha enviado un archivo
         $fecha = limpiarInput($_POST['fechas']);
@@ -507,7 +513,31 @@ class Inicio extends Controllers
         die();
       }
       
+      public function AgregarColor()
+    {
+        $Color = $_POST['Color'];
+        $insertar = $this->model->AgregarColor($Color);
+        $alert =  'ColorAgre';
+        header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
+        die();
+    }
 
+    //Eliminar Area
+    public function EliminarColor()
+    {
+        $id = $_GET['id'];
+        $eliminar = $this->model->EliminarColor($id);
+        $alert =  'ColorElim';
+        header("location: " . base_url() . "Inicio/Configuracion?msg=$alert");
+        die();
+    }
+
+    public function pastelcolores()
+    {
+        $data = $this->model->selectColores();
+        echo json_encode($data);
+        die();
+    }
         
 }                       
 ?>

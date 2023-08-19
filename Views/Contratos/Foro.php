@@ -19,13 +19,15 @@
                   <span class="badge bg-success">Validado</span>
                 <?php } elseif ($data4['estado'] == 4) { ?>
                   <span class="badge bg-success">Formalizado</span>
+                <?php } elseif ($data4['estado'] == 5) { ?>
+                  <span class="badge bg-danger">No Formalizado</span>
                 <?php }?>
               </h4>
             </div>
             <div class='sstats-meta text-success'><?php echo $data1['nombre']?></div>
             <div class='sstats-meta intro'><?php echo $data1['descripcion']?></div>
             <div class='sstats-meta' style='color:#000000; font-size:10px;'><?php echo $data1['fecha']?></div>
-            <div style="margin: 15px 0; height:12px !important;">
+            <div class="mb-2"style="margin: 15px 0; !important;">
             <?php foreach ($data3 as $arc) {
               if ($arc['intento'] == 0) {?>
                 <a href="<?php echo base_url(); ?>Assets/Documentos/Peticiones/<?php echo $arc['nombre']; ?>" target="_blank" 
@@ -93,7 +95,7 @@
 			  	  </div><!--//app-card-->
         <div style="margin: 20px 0 0 0;">    
           <?php if ($_SESSION['rol'] != 5 && ($data4['estado'] <= 2)) {?>  
-            <button class="btn app-btn-secondary" data-toggle="modal" data-target="#modal1">Responder</button><br>
+            <button class="btn app-btn-secondary" data-toggle="modal" data-target="#modal1">Responder</button>
             <?php if ($_SESSION['rol'] == 3) {?>
               <form action="<?php echo base_url() ?>Contratos/validar?contrato=<?php echo $data1['id_contrato']; ?>" method="post" class="d-inline validar">
               <input type="text" id="fecha_valida" name="fecha_valida" value="<?= date('Y-m-d')?>" style="display:none;" readonly>

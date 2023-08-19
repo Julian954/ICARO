@@ -82,6 +82,7 @@ class Articulos extends Controllers
             }
         
             // Pasar los datos al modelo para su inserción en la base de datos
+            $this->model->EliminarData();
             $total = $this->model->procesarArchivos($datos);
             $hoy = date('Y-m-d');
             $this->model->actfecha($hoy);

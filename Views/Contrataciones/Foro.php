@@ -25,18 +25,18 @@
             <div class='sstats-meta text-success'><?php echo $data1['nombre']?></div>
             <div class='sstats-meta intro'><?php echo $data1['descripcion']?></div>
             <div class='sstats-meta' style='color:#000000; font-size:10px;'><?php echo $data1['fecha']?></div>
-            <div style="margin: 15px 0; height:12px !important;">
+            <div style="margin: 15px 0; !important;">
             <?php foreach ($data3 as $arc) {
               if ($arc['intento'] == 0) {?>
                 <a href="<?php echo base_url(); ?>Assets/Documentos/Peticiones/<?php echo $arc['nombre']; ?>" target="_blank" 
                 <?php if (strstr($arc['nombre'], ".") == ".xlsx") {?>
-                  class='btn-sm app-btn-primary'><?php echo $arc['nombre']; ?></a>
+                  class='btn-sm app-btn-primary mb-2'><?php echo $arc['nombre']; ?></a>
                 <?php } elseif (strstr($arc['nombre'], ".") == ".zip") { ?>
-                  class='btn-sm app-btn-secondary'><?php echo $arc['nombre']; ?></a>
+                  class='btn-sm app-btn-secondary mb-2'><?php echo $arc['nombre']; ?></a>
                 <?php } elseif (strstr($arc['nombre'], ".") == ".pdf") { ?>
-                  class='btn-sm btn-danger'><?php echo $arc['nombre']; ?></a>
+                  class='btn-sm btn-danger mb-2'><?php echo $arc['nombre']; ?></a>
                 <?php } elseif (strstr($arc['nombre'], ".") == ".docx") { ?>
-                  class='btn-sm btn-info'><?php echo $arc['nombre']; ?></a>
+                  class='btn-sm btn-info mb-2'><?php echo $arc['nombre']; ?></a>
                 <?php }?>
               <?php }
             } ?>
@@ -73,13 +73,13 @@
                             if ($arcv['intento'] == $validar['intento']) {?>
                               <a href="<?php echo base_url(); ?>Assets/Documentos/Foro/<?php echo $arcv['nombre']; ?>" target="_blank" 
                               <?php if (strstr($arcv['nombre'], ".") == ".xlsx") {?>
-                                class='btn-sm app-btn-primary'><?php echo $arcv['nombre']; ?></a>
+                                class='btn-sm app-btn-primary mb-2'><?php echo $arcv['nombre']; ?></a>
                               <?php } elseif (strstr($arcv['nombre'], ".") == ".zip") { ?>
-                                class='btn-sm app-btn-secondary'><?php echo $arcv['nombre']; ?></a>
+                                class='btn-sm app-btn-secondary mb-2'><?php echo $arcv['nombre']; ?></a>
                               <?php } elseif (strstr($arcv['nombre'], ".") == ".pdf") { ?>
-                                class='btn-sm btn-danger'><?php echo $arcv['nombre']; ?></a>
+                                class='btn-sm btn-danger mb-2'><?php echo $arcv['nombre']; ?></a>
                               <?php } elseif (strstr($arcv['nombre'], ".") == ".docx") { ?>
-                                class='btn-sm btn-info'><?php echo $arcv['nombre']; ?></a>
+                                class='btn-sm btn-info mb-2'><?php echo $arcv['nombre']; ?></a>
                               <?php }
                             }
                           } ?>
@@ -91,7 +91,7 @@
 		      		  </div><!--//app-card-->
 			  	    </div><!--//app-card-body-->
 			  	  </div><!--//app-card-->
-        <div style="margin: 20px 0 0 0;">    
+        <div class="mb-2" style="margin: 20px 0 0 0;">    
           <?php if ($_SESSION['rol'] != 5 && ($data4['estado'] <= 2)) {?>  
             <button class="btn app-btn-secondary" data-toggle="modal" data-target="#modal1">Responder</button>
             <?php if ($_SESSION['rol'] == 4 || $_SESSION['rol'] == 7) {?>
